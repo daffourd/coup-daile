@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#2E7D5B">
+<meta name="description" content="Que faire si tu trouves un oiseau ou un oisillon. Gestes d'urgence et secours.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Coup d'Aile">
+<title>Coup d'Aile</title>
+<style>
+  :root{
+    --vert:#2E7D5B;--vert-clair:#3B9C74;--vert-pale:#E7F1EB;--beige:#F7F5EF;
+    --ambre:#E39A2E;--ambre-pale:#FBEFD8;--corail:#D7614F;--corail-pale:#FBE6E1;
+    --texte:#233029;--texte-doux:#5C6B63;--blanc:#FFFFFF;--bord:#E6E3DA;
+    --ombre-douce:0 2px 10px rgba(30,50,40,.06);--rayon:20px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--beige);color:var(--texte);display:flex;flex-direction:column;min-height:100%;}
+  /* Themes et accessibilite */
+  html[data-theme="dark"] body{background:#0f1512;}
+  html[data-theme="dark"]{--beige:#0f1512;--blanc:#1e2823;--texte:#eaf1ec;--texte-doux:#a7b6ac;--bord:#2c3a32;--vert-pale:#20302a;--ambre-pale:#2f2a1c;--corail-pale:#33221f;}
+  html[data-theme="dark"] .tabbar{background:rgba(16,21,18,.96);}
+  html.cda-large .stage{zoom:1.1;}
+  html.cda-dys .stage{font-family:Verdana,Tahoma,Geneva,sans-serif;letter-spacing:.4px;word-spacing:.12em;line-height:1.75;}
+  /* Mode sombre: accents, textes et boutons lisibles */
+  html[data-theme="dark"] .badge,
+  html[data-theme="dark"] .mark.ok,
+  html[data-theme="dark"] .opt .dot,
+  html[data-theme="dark"] .tile .ic{background:#1f2f28;color:#6FD6A6;}
+  html[data-theme="dark"] .btn-ghost,
+  html[data-theme="dark"] .phone-num,
+  html[data-theme="dark"] .callout b,
+  html[data-theme="dark"] .install b,
+  html[data-theme="dark"] .tab.active,
+  html[data-theme="dark"] .topbar .back{color:#6FD6A6;}
+  html[data-theme="dark"] .mark.no,
+  html[data-theme="dark"] .opt.danger .dot{background:#3a2420;color:#F0A08F;}
+  html[data-theme="dark"] .tip .k{color:#E7B15C;}
+  html[data-theme="dark"] .opt .chev{color:#7a8a82;}
+  .app{width:100%;max-width:520px;margin:0 auto;flex:1;display:flex;flex-direction:column;min-height:100%;}
+  .topbar{display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top) + 14px) 18px 12px;position:sticky;top:0;background:var(--beige);z-index:20;}
+  .logo{width:38px;height:38px;border-radius:12px;background:var(--vert);display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+  .logo svg{width:22px;height:22px;}
+  .brand{font-weight:800;font-size:19px;letter-spacing:-.2px;}
+  .brand small{display:block;font-weight:500;font-size:11px;color:var(--texte-doux);}
+  .topbar .back{margin-left:auto;background:none;border:none;color:var(--vert);font-weight:700;font-size:15px;cursor:pointer;padding:8px;display:none;}
+  .stage{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:96px;}
+  .screen{display:none;padding:4px 18px 24px;animation:fade .25s ease;}
+  .screen.active{display:block;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+  h1.title{font-size:23px;line-height:1.22;margin:6px 0 4px;letter-spacing:-.3px;}
+  p.sub{color:var(--texte-doux);font-size:14.5px;line-height:1.5;margin-bottom:16px;}
+  .section-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--texte-doux);margin:22px 4px 10px;}
+  .btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:none;border-radius:16px;padding:16px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;transition:transform .08s;text-decoration:none;}
+  .btn:active{transform:scale(.98);}
+  .btn-primary{background:var(--vert);color:#fff;box-shadow:0 6px 16px rgba(46,125,91,.3);}
+  .btn-corail{background:var(--corail);color:#fff;box-shadow:0 6px 16px rgba(215,97,79,.28);}
+  .btn-ghost{background:var(--blanc);color:var(--vert);border:1.5px solid var(--bord);}
+  .btn-sm{padding:12px 14px;font-size:14.5px;border-radius:13px;}
+  .btn-urgence{background:linear-gradient(135deg,#2E7D5B,#3B9C74);color:#fff;flex-direction:column;gap:6px;padding:22px;border-radius:22px;box-shadow:0 10px 26px rgba(46,125,91,.32);}
+  .btn-urgence .big{font-size:20px;font-weight:800;}
+  .btn-urgence .small{font-size:13px;font-weight:500;opacity:.92;}
+  .btn-urgence svg{width:34px;height:34px;}
+  .card{background:var(--blanc);border-radius:var(--rayon);padding:16px;box-shadow:var(--ombre-douce);border:1px solid var(--bord);margin-bottom:12px;}
+  .tip{background:var(--ambre-pale);border:1px solid #f0d9a8;border-radius:var(--rayon);padding:16px;margin-bottom:12px;}
+  html[data-theme="dark"] .tip{border-color:#4a3f22;}
+  .tip .k{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:#9a6a12;margin-bottom:5px;}
+  html[data-theme="dark"] .tip .k{color:#e0b25a;}
+  .tip p{font-size:14.5px;line-height:1.5;}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .tile{background:var(--blanc);border:1px solid var(--bord);border-radius:18px;padding:16px 14px;cursor:pointer;text-align:left;box-shadow:var(--ombre-douce);transition:transform .08s;font-family:inherit;color:var(--texte);}
+  .tile:active{transform:scale(.97);}
+  .tile .ic{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;background:var(--vert-pale);color:var(--vert);}
+  .tile .ic svg{width:22px;height:22px;}
+  .tile h3{font-size:15.5px;margin-bottom:2px;}
+  .tile p{font-size:12.5px;color:var(--texte-doux);line-height:1.4;}
+  .opt{display:flex;align-items:center;gap:14px;width:100%;background:var(--blanc);border:1.5px solid var(--bord);border-radius:16px;padding:16px;font-size:15.5px;font-weight:600;color:var(--texte);cursor:pointer;text-align:left;margin-bottom:11px;font-family:inherit;transition:border-color .15s,transform .08s;}
+  .opt:active{transform:scale(.98);}
+  .opt .dot{width:34px;height:34px;border-radius:10px;background:var(--vert-pale);color:var(--vert);display:flex;align-items:center;justify-content:center;flex:0 0 auto;font-weight:800;}
+  .opt .dot svg{width:19px;height:19px;}
+  .opt .chev{margin-left:auto;color:#c3cbc5;font-size:20px;}
+  .opt.danger .dot{background:var(--corail-pale);color:var(--corail);}
+  .steps{display:flex;gap:6px;margin:2px 0 18px;}
+  .steps span{height:5px;flex:1;border-radius:4px;background:var(--bord);}
+  .steps span.on{background:var(--vert);}
+  .dolist{list-style:none;}
+  .dolist li{display:flex;gap:11px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--vert-pale);font-size:14.5px;line-height:1.45;}
+  .dolist li:last-child{border-bottom:none;}
+  .mark{width:24px;height:24px;border-radius:50%;flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;margin-top:1px;}
+  .mark.ok{background:var(--vert-pale);color:var(--vert);}
+  .mark.no{background:var(--corail-pale);color:var(--corail);}
+  .verdict{border-radius:var(--rayon);padding:18px;margin-bottom:16px;color:#fff;}
+  .verdict.calme{background:linear-gradient(135deg,#2E7D5B,#3B9C74);}
+  .verdict.alerte{background:linear-gradient(135deg,#D7614F,#e07a5f);}
+  .verdict .etiq{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;opacity:.9;margin-bottom:6px;}
+  .verdict h2{font-size:20px;line-height:1.25;}
+  .callout{background:var(--vert-pale);border-radius:16px;padding:14px 16px;margin:14px 0;font-size:14px;line-height:1.5;color:var(--texte);}
+  .callout b{color:var(--vert);}
+  .phone-num{font-size:20px;font-weight:800;color:var(--vert);letter-spacing:.5px;}
+  .disclaimer{font-size:11.5px;color:var(--texte-doux);text-align:center;line-height:1.5;margin-top:18px;padding:0 6px;}
+  .chip{display:inline-block;background:var(--blanc);border:1px solid var(--bord);border-radius:20px;padding:8px 13px;font-size:13.5px;font-weight:600;margin:0 7px 8px 0;cursor:pointer;color:var(--texte);}
+  .install{background:var(--vert-pale);border:1px dashed var(--vert-clair);border-radius:16px;padding:12px 14px;margin-bottom:14px;font-size:13.5px;line-height:1.5;display:none;}
+  .install b{color:var(--vert);}
+  .tabbar{position:fixed;bottom:0;left:0;right:0;height:calc(74px + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-top:1px solid var(--bord);display:flex;z-index:30;max-width:520px;margin:0 auto;}
+  .tab{flex:1;background:none;border:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:#9aa8a0;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;padding-top:8px;}
+  .tab svg{width:23px;height:23px;}
+  .tab.active{color:var(--vert);}
+  .hint{text-align:center;font-size:11px;color:#8b9790;margin:8px 0 0;}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M3 14c4 1 7-1 9-5 1 3 4 5 9 4-3 4-7 6-11 5-3-.7-6-2-7-4z" fill="#fff"/><circle cx="16.5" cy="9" r="1" fill="#2E7D5B"/></svg></div>
+    <div class="brand">Coup d'Aile<small>J'ai trouvé un oiseau</small></div>
+    <button class="back" id="backBtn" onclick="goBack()">Retour</button>
+  </div>
+
+  <div class="stage" id="stage">
+
+    <!-- ACCUEIL -->
+    <section class="screen active" id="home">
+      <div class="install" id="installBox"></div>
+      <h1 class="title">Tu as trouvé un oiseau ?</h1>
+      <p class="sub">On te guide pas à pas, en moins d'une minute, pour faire les bons gestes et joindre le bon secours.</p>
+      <button class="btn btn-urgence" onclick="startUrgence()">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M3 14c4 1 7-1 9-5 1 3 4 5 9 4-3 4-7 6-11 5-3-.7-6-2-7-4z" fill="#fff"/></svg>
+        <span class="big">J'ai trouvé un oiseau</span>
+        <span class="small">Démarrer le guide d'urgence</span>
+      </button>
+      <div class="tip"><div class="k">Le bon réflexe</div><p>Un oisillon au sol n'est presque jamais abandonné. Avant de le prendre, observe : ses parents sont souvent tout près. Le principe est simple, je le laisse, je le protège.</p></div>
+      <div class="section-label">Aussi</div>
+      <div class="grid">
+        <button class="tile" onclick="showScreen('secours')"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div><h3>Secours</h3><p>Qui appeler, où aller</p></button>
+        <button class="tile" onclick="showScreen('conseils')"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 20A7 7 0 0 1 9 6.3C13 4 19 5 19 11c0 5-4 6-8 9z"/></svg></div><h3>Conseils</h3><p>Les bons gestes</p></button>
+      </div>
+      <p class="disclaimer">Coup d'Aile informe et oriente, sans remplacer l'avis d'un centre de sauvegarde ou d'un vétérinaire. Conseils fondés sur la LPO et l'OFB.</p>
+    </section>
+
+    <!-- URGENCE 1 -->
+    <section class="screen" id="u1">
+      <div class="steps"><span class="on"></span><span></span><span></span><span></span></div>
+      <h1 class="title">L'oiseau est-il vivant ?</h1>
+      <p class="sub">Observe-le quelques instants, à distance, sans le toucher.</p>
+      <button class="opt" onclick="showScreen('u2')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l4 4 10-10"/></svg></span> Oui, il bouge ou respire <span class="chev">&rsaquo;</span></button>
+      <button class="opt danger" onclick="showScreen('rB')"><span class="dot">?</span> Immobile, je ne sais pas <span class="chev">&rsaquo;</span></button>
+    </section>
+
+    <!-- URGENCE 2 -->
+    <section class="screen" id="u2">
+      <div class="steps"><span class="on"></span><span class="on"></span><span></span><span></span></div>
+      <h1 class="title">Est-il visiblement blessé ?</h1>
+      <p class="sub">Saignement, aile qui pend, boiterie, ou attrapé par un chat.</p>
+      <button class="opt danger" onclick="showScreen('rB')"><span class="dot">!</span> Oui, il semble blessé <span class="chev">&rsaquo;</span></button>
+      <button class="opt" onclick="showScreen('u3')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l4 4 10-10"/></svg></span> Non, il a l'air indemne <span class="chev">&rsaquo;</span></button>
+    </section>
+
+    <!-- URGENCE 3 -->
+    <section class="screen" id="u3">
+      <div class="steps"><span class="on"></span><span class="on"></span><span class="on"></span><span></span></div>
+      <h1 class="title">À quoi ressemble-t-il ?</h1>
+      <p class="sub">Cela aide à estimer son âge et la bonne conduite à tenir.</p>
+      <button class="opt danger" onclick="showScreen('rNid')"><span class="dot">1</span> Nu ou en duvet, ne sautille pas <span class="chev">&rsaquo;</span></button>
+      <button class="opt" onclick="showScreen('u4')"><span class="dot">2</span> Plumes en tuyaux, il sautille <span class="chev">&rsaquo;</span></button>
+      <button class="opt" onclick="showScreen('u4')"><span class="dot">3</span> Emplumé, il vole un peu <span class="chev">&rsaquo;</span></button>
+      <button class="opt" onclick="showScreen('u4')"><span class="dot">4</span> Un adulte <span class="chev">&rsaquo;</span></button>
+    </section>
+
+    <!-- URGENCE 4 -->
+    <section class="screen" id="u4">
+      <div class="steps"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span></div>
+      <h1 class="title">Court-il un danger immédiat ?</h1>
+      <p class="sub">Route passante, chat qui rôde, plein soleil.</p>
+      <button class="opt danger" onclick="showScreen('rA')"><span class="dot">!</span> Oui, il est exposé <span class="chev">&rsaquo;</span></button>
+      <button class="opt" onclick="showScreen('rA')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l4 4 10-10"/></svg></span> Non, il est tranquille <span class="chev">&rsaquo;</span></button>
+    </section>
+
+    <!-- RESULTAT A -->
+    <section class="screen" id="rA">
+      <div class="verdict calme"><div class="etiq">Bonne nouvelle</div><h2>Laisse-le tout près, en sécurité. Ses parents veillent.</h2></div>
+      <p class="sub">Un jeune emplumé au sol est rarement abandonné. Je le laisse, je le protège.</p>
+      <div class="card"><ul class="dolist">
+        <li><span class="mark ok">&check;</span> Éloigne-toi et observe de loin. Les parents reviennent quand la voie est libre.</li>
+        <li><span class="mark ok">&check;</span> S'il est exposé, pose-le en hauteur tout près, sur une branche, un muret ou un buisson.</li>
+        <li><span class="mark ok">&check;</span> Rentre les chats quelques heures.</li>
+        <li><span class="mark ok">&check;</span> Lave-toi les mains après tout contact.</li>
+      </ul></div>
+      <div class="card"><ul class="dolist">
+        <li><span class="mark no">&times;</span> Ne lui donne ni eau ni nourriture.</li>
+        <li><span class="mark no">&times;</span> Ne l'emporte pas chez toi.</li>
+        <li><span class="mark no">&times;</span> Ne le garde pas, c'est interdit pour un oiseau sauvage.</li>
+      </ul></div>
+      <div class="callout">Un doute, une blessure repérée ? <b>Contacte un centre de sauvegarde.</b></div>
+      <button class="btn btn-primary" onclick="showScreen('secours')">Trouver un secours</button>
+    </section>
+
+    <!-- RESULTAT B -->
+    <section class="screen" id="rB">
+      <div class="verdict alerte"><div class="etiq">À prendre en charge</div><h2>Il a besoin d'un centre de soins. Agis avec douceur.</h2></div>
+      <div class="card"><ul class="dolist">
+        <li><span class="mark ok">&check;</span> Place-le dans un carton percé de trous, au calme, au chaud et dans le noir.</li>
+        <li><span class="mark ok">&check;</span> Contacte sans attendre le centre de sauvegarde le plus proche.</li>
+        <li><span class="mark ok">&check;</span> Lave-toi les mains après l'avoir manipulé.</li>
+      </ul></div>
+      <div class="card"><ul class="dolist">
+        <li><span class="mark no">&times;</span> Ne le nourris pas et ne le fais pas boire de force.</li>
+        <li><span class="mark no">&times;</span> Ne le manipule pas plus que nécessaire.</li>
+        <li><span class="mark no">&times;</span> Ne tente pas de le soigner toi-même.</li>
+      </ul></div>
+      <div class="callout">Un martinet au sol ne peut pas redécoller seul. Ne le relance pas en l'air, mets-le à l'abri et appelle un centre.</div>
+      <button class="btn btn-corail" onclick="showScreen('secours')">Trouver un secours</button>
+    </section>
+
+    <!-- RESULTAT NID -->
+    <section class="screen" id="rNid">
+      <div class="verdict calme"><div class="etiq">Tout jeune</div><h2>S'il est tombé trop tôt, on le remet au nid.</h2></div>
+      <p class="sub">Un oisillon nu ou en duvet a encore besoin de son nid.</p>
+      <div class="card"><ul class="dolist">
+        <li><span class="mark ok">&check;</span> Si le nid est intact et accessible, replace-le délicatement dedans.</li>
+        <li><span class="mark ok">&check;</span> Nid introuvable ou détruit ? Garde-le au chaud dans un linge, au calme, et contacte un centre.</li>
+      </ul></div>
+      <div class="card"><ul class="dolist">
+        <li><span class="mark no">&times;</span> Ne le nourris pas, un mauvais aliment peut le tuer.</li>
+        <li><span class="mark no">&times;</span> Ne le garde pas pour l'élever toi-même.</li>
+      </ul></div>
+      <button class="btn btn-primary" onclick="showScreen('secours')">Trouver un secours</button>
+    </section>
+
+    <!-- SECOURS -->
+    <section class="screen" id="secours">
+      <h1 class="title">Trouver un secours</h1>
+      <p class="sub">Le bon geste : confier l'oiseau à un centre de sauvegarde de la faune sauvage habilité.</p>
+      <div class="card" style="text-align:center">
+        <div class="section-label" style="margin-top:0">Numéro national LPO</div>
+        <a class="phone-num" href="tel:0546821234">05 46 82 12 34</a>
+        <div style="margin-top:14px"><a class="btn btn-primary" href="tel:0546821234">Appeler la LPO</a></div>
+      </div>
+      <div class="callout">L'annuaire géolocalisé des centres arrive très bientôt. En attendant, appelle la LPO, ou cherche « centre de sauvegarde faune sauvage » suivi de ton département.</div>
+      <div class="card"><ul class="dolist">
+        <li><span class="mark ok">&check;</span> Un vétérinaire est tenu de prendre en charge la faune sauvage en détresse.</li>
+        <li><span class="mark ok">&check;</span> Garde l'oiseau au calme, au chaud et dans le noir en attendant.</li>
+      </ul></div>
+      <p class="disclaimer">Numéro à revérifier avant mise en ligne publique. Sources : LPO, OFB.</p>
+    </section>
+
+    <!-- CONSEILS -->
+    <section class="screen" id="conseils">
+      <h1 class="title">Conseils</h1>
+      <p class="sub">Les bons gestes, simples et fiables.</p>
+      <div class="tip"><div class="k">Été</div><p>Pose une coupelle d'eau peu profonde à l'ombre. Nettoie-la et renouvelle l'eau chaque jour.</p></div>
+      <div class="card"><ul class="dolist">
+        <li><span class="mark no">&times;</span> Ne donne jamais de pain ni de lait aux oiseaux.</li>
+        <li><span class="mark ok">&check;</span> En cas de découverte d'un oiseau, limite les manipulations et le bruit.</li>
+        <li><span class="mark ok">&check;</span> Garde ton chat à l'intérieur quand un jeune apprend à voler à proximité.</li>
+        <li><span class="mark ok">&check;</span> Un martinet ne peut pas redécoller du sol, il a besoin d'aide.</li>
+      </ul></div>
+      <p class="disclaimer">Sources : LPO, OFB. D'autres conseils et un journal arrivent dans les prochains lots.</p>
+    </section>
+
+    <!-- REGLAGES -->
+    <section class="screen" id="reglages">
+      <h1 class="title">Réglages</h1>
+      <p class="sub">Adapte l'app à ton confort. Tout est modifiable à tout moment.</p>
+      <div class="section-label">Thème</div>
+      <div class="card"><div style="display:flex;gap:8px">
+        <button class="btn btn-ghost btn-sm" style="flex:1" onclick="setTheme('light')">Clair</button>
+        <button class="btn btn-ghost btn-sm" style="flex:1" onclick="setTheme('dark')">Sombre</button>
+        <button class="btn btn-ghost btn-sm" style="flex:1" onclick="setTheme('auto')">Auto</button>
+      </div></div>
+      <div class="section-label">Lecture</div>
+      <div class="card">
+        <button class="btn btn-ghost" id="btnDys" onclick="toggleDys()">Police dyslexie : désactivée</button>
+        <div style="height:10px"></div>
+        <button class="btn btn-ghost" id="btnLarge" onclick="toggleLarge()">Confort visuel, texte plus grand : désactivé</button>
+      </div>
+      <div class="section-label">Langue</div>
+      <div class="card"><span class="chip">Français</span><span class="chip" style="opacity:.5">English (bientôt)</span><span class="chip" style="opacity:.5">Español (bientôt)</span></div>
+      <p class="hint">Le multilingue complet, la localisation, l'identification et les comptes arrivent dans les prochains lots.</p>
+    </section>
+
+  </div>
+
+  <div class="tabbar">
+    <button class="tab active" id="tab-home" onclick="showScreen('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg>Accueil</button>
+    <button class="tab" id="tab-secours" onclick="showScreen('secours')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Secours</button>
+    <button class="tab" id="tab-conseils" onclick="showScreen('conseils')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 20A7 7 0 0 1 9 6.3C13 4 19 5 19 11c0 5-4 6-8 9z"/></svg>Conseils</button>
+    <button class="tab" id="tab-reglages" onclick="showScreen('reglages')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7 7 0 0 0-2-1.2L14 2h-4l-.5 2.6a7 7 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6A7 7 0 0 0 5 12a7 7 0 0 0 .1 1.2l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 2 1.2L10 22h4l.5-2.6a7 7 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6A7 7 0 0 0 19 12z"/></svg>Réglages</button>
+  </div>
+</div>
+
+<script>
+  var history_stack = ['home'];
+  var tabs = {home:'tab-home', secours:'tab-secours', conseils:'tab-conseils', reglages:'tab-reglages'};
+  function showScreen(id, isBack){
+    var el = document.getElementById(id); if(!el) return;
+    document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+    el.classList.add('active');
+    document.getElementById('stage').scrollTop = 0;
+    if(!isBack) history_stack.push(id);
+    Object.keys(tabs).forEach(function(k){ document.getElementById(tabs[k]).classList.remove('active'); });
+    if(tabs[id]) document.getElementById(tabs[id]).classList.add('active');
+    document.getElementById('backBtn').style.display = (id==='home') ? 'none' : 'block';
+  }
+  function startUrgence(){ showScreen('u1'); }
+  function goBack(){
+    if(history_stack.length>1){ history_stack.pop(); showScreen(history_stack[history_stack.length-1], true); }
+    else { showScreen('home', true); }
+  }
+  function setTheme(mode){
+    var root = document.documentElement;
+    if(mode==='auto'){ var d = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; root.setAttribute('data-theme', d?'dark':'light'); }
+    else { root.setAttribute('data-theme', mode); }
+    try{ localStorage.setItem('cda-theme', mode); }catch(e){}
+  }
+  function toggleDys(){
+    var on = document.documentElement.classList.toggle('cda-dys');
+    var b = document.getElementById('btnDys'); if(b) b.textContent = 'Police dyslexie : ' + (on?'activée':'désactivée');
+    try{ localStorage.setItem('cda-dys', on?'1':'0'); }catch(e){}
+  }
+  function toggleLarge(){
+    var on = document.documentElement.classList.toggle('cda-large');
+    var b = document.getElementById('btnLarge'); if(b) b.textContent = 'Confort visuel, texte plus grand : ' + (on?'activé':'désactivé');
+    try{ localStorage.setItem('cda-large', on?'1':'0'); }catch(e){}
+  }
+  // Restaurer les preferences
+  (function(){
+    try{
+      var t = localStorage.getItem('cda-theme'); if(t) setTheme(t);
+      if(localStorage.getItem('cda-dys')==='1') toggleDys();
+      if(localStorage.getItem('cda-large')==='1') toggleLarge();
+    }catch(e){}
+  })();
+  // Invite d'installation
+  var deferredPrompt = null;
+  window.addEventListener('beforeinstallprompt', function(e){
+    e.preventDefault(); deferredPrompt = e;
+    var box = document.getElementById('installBox');
+    box.style.display = 'block';
+    box.innerHTML = '<b>Installe Coup d\'Aile</b> pour un accès instantané, même hors connexion. <button class="btn btn-ghost btn-sm" style="margin-top:8px" id="installBtn">Ajouter à l\'écran d\'accueil</button>';
+    document.getElementById('installBtn').addEventListener('click', function(){
+      box.style.display='none'; if(deferredPrompt){ deferredPrompt.prompt(); deferredPrompt=null; }
+    });
+  });
+  // iOS: pas d'invite native, on affiche une astuce si non installe
+  (function(){
+    var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    var standalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
+    if(isIOS && !standalone){
+      var box = document.getElementById('installBox');
+      box.style.display='block';
+      box.innerHTML = '<b>Ajoute Coup d\'Aile à ton écran d\'accueil</b> : touche le bouton Partager de Safari, puis « Sur l\'écran d\'accueil ».';
+    }
+  })();
+  // Service worker
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); });
+  }
+</script>
+</body>
+</html>
