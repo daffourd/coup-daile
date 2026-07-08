@@ -330,6 +330,8 @@
       <p class="hint">Multilingue complet, comptes, badges, journal et identification photo arrivent dans les prochains lots.</p>
     </section>
 
+    <section class="screen" id="compte"><div id="compteView"></div></section>
+
   </div>
 
   <div class="tabbar">
@@ -338,10 +340,12 @@
     <button class="tab" id="tab-especes" onclick="showScreen('especes')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 14c4 1 7-1 9-5 1 3 4 5 9 4-3 4-7 6-11 5-3-.7-6-2-7-4z"/></svg>Espèces</button>
     <button class="tab" id="tab-conseils" onclick="showScreen('conseils')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 20A7 7 0 0 1 9 6.3C13 4 19 5 19 11c0 5-4 6-8 9z"/></svg>Conseils</button>
     <button class="tab" id="tab-reglages" onclick="showScreen('reglages')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 7 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H1a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 2.6 7a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H7a1.6 1.6 0 0 0 1-1.5V1a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 2.7 1.1 1.6 1.6 0 0 0 .3-1.8l-.1.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V7a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>Réglages</button>
+    <button class="tab" id="tab-compte" onclick="showScreen('compte')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.6 3.1-5.5 7-5.5s7 1.9 7 5.5"/></svg>Compte</button>
   </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   // Donnees centres (indicatives, verifiees au mieux, a appeler avant de se deplacer)
   var CENTRES = [
@@ -362,7 +366,7 @@
   ];
 
   var history_stack = ['home'];
-  var tabs = {home:'tab-home', secours:'tab-secours', especes:'tab-especes', conseils:'tab-conseils', reglages:'tab-reglages'};
+  var tabs = {home:'tab-home', secours:'tab-secours', especes:'tab-especes', conseils:'tab-conseils', reglages:'tab-reglages', compte:'tab-compte'};
   var userPos = null;
   var leafletMap = null;
 
@@ -377,6 +381,7 @@
     document.getElementById('backBtn').style.display = (id==='home') ? 'none' : 'block';
     if(id==='especes') renderEspeces();
     if(id==='centres') setTimeout(initMap, 60);
+    if(id==='compte' && typeof renderCompte==='function') renderCompte();
   }
   function startUrgence(){ showScreen('u1'); }
   function goBack(){
@@ -522,6 +527,32 @@
   }
   renderCentres();
   if('serviceWorker' in navigator){ window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); }); }
+
+  // ---- Comptes Supabase (carnet et badges) ----
+  var SUPA_URL='https://sgxohmndhngpxgkobkbm.supabase.co';
+  var SUPA_KEY='sb_publishable_OBbJMFqX9UIOkj6FF2T34Q_KTrqUbvL';
+  var db = (window.supabase && window.supabase.createClient) ? window.supabase.createClient(SUPA_URL, SUPA_KEY) : null;
+  var currentUser=null, myObs=[];
+  function escapeH(s){ return (s==null?'':String(s)).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function niveauNom(n){ var p=[[0,'Nouveau membre'],[1,'Observateur'],[3,'Explorateur'],[5,'Jeune sauveur'],[10,'Sauveur'],[25,'Protecteur des oiseaux'],[50,'Gardien des oiseaux']]; var l=p[0][1]; for(var i=0;i<p.length;i++){ if(n>=p[i][0]) l=p[i][1]; } return l; }
+  function renderCompte(){
+    var el=document.getElementById('compteView'); if(!el) return;
+    if(!db){ el.innerHTML='<h1 class="title">Mon compte</h1><p class="sub">Service momentanément indisponible.</p>'; return; }
+    if(!currentUser){
+      el.innerHTML='<h1 class="title">Mon compte</h1><p class="sub">Crée ton carnet d\'oiseaux et gagne des badges. Pas de mot de passe: on t\'envoie un lien magique par email.</p><div class="card"><b>Connexion par lien magique</b><p class="meta" style="margin:6px 0 10px">Tu reçois un lien, tu cliques, tu es connecté.</p><input class="field" id="magicEmail" inputmode="email" placeholder="ton@email.fr" style="margin-bottom:10px"><button class="btn btn-primary" onclick="sendMagic()">Recevoir mon lien</button><div id="authMsg" class="meta" style="margin-top:10px"></div></div><div class="callout">La connexion Google arrivera plus tard. Ton carnet reste privé, visible de toi seul.</div>';
+      return;
+    }
+    var n=myObs.length;
+    var plumes=myObs.reduce(function(s,o){ return s+((o.issue==='Confié à un centre'||o.issue==='Laissé en place'||o.issue==='Remis au nid')?3:1); },0);
+    var badges=[]; if(n>=1) badges.push('Premier envol'); if(myObs.filter(function(o){return o.issue==='Confié à un centre';}).length>=1) badges.push('Premier secours'); if(n>=5) badges.push('Carnet de 5');
+    var rows = n? myObs.map(function(o){ var d=o.created_at? new Date(o.created_at).toLocaleDateString('fr-FR'):''; return '<div class="centre"><div style="flex:1"><h4>'+(escapeH(o.espece)||'Oiseau')+'</h4><div class="meta">'+escapeH(o.issue||'')+(o.lieu?' · '+escapeH(o.lieu):'')+(d?' · '+d:'')+'</div></div></div>'; }).join('') : '<p class="meta" style="padding:10px 0">Ton carnet est vide. Ajoute ta première observation ci-dessus.</p>';
+    el.innerHTML='<div class="card" style="background:linear-gradient(135deg,#2E7D5B,#3B9C74);color:#fff;border:none"><div style="font-size:12px;opacity:.9;font-weight:700;text-transform:uppercase;letter-spacing:.6px">'+niveauNom(n)+'</div><div style="font-size:18px;font-weight:800;margin-top:2px;word-break:break-all">'+escapeH(currentUser.email)+'</div><div style="margin-top:8px;font-size:13px;opacity:.95">'+plumes+' plumes · '+n+' observation'+(n>1?'s':'')+'</div></div>'+(badges.length?'<div class="section-label">Mes badges</div><div>'+badges.map(function(b){return '<span class="chip on">'+escapeH(b)+'</span>';}).join('')+'</div>':'')+'<div class="section-label">Ajouter au carnet</div><div class="card"><input class="field" id="obsEspece" placeholder="Espèce (ex : Merle noir)" style="margin-bottom:8px"><select class="field" id="obsIssue" style="margin-bottom:8px"><option>Identifié</option><option>Laissé en place</option><option>Remis au nid</option><option>Confié à un centre</option></select><input class="field" id="obsLieu" placeholder="Lieu (ex : Montpellier)" style="margin-bottom:8px"><button class="btn btn-primary" onclick="addObs()">Enregistrer</button><div id="obsMsg" class="meta" style="margin-top:8px"></div></div><div class="section-label">Mon carnet</div><div class="card" style="padding:6px 16px">'+rows+'</div><button class="btn btn-ghost" onclick="signOut()">Se déconnecter</button>';
+  }
+  function sendMagic(){ var e=(document.getElementById('magicEmail')||{}).value, m=document.getElementById('authMsg'); if(!e||e.indexOf('@')<1){ if(m)m.textContent='Entre un email valide.'; return; } if(m)m.textContent='Envoi en cours...'; db.auth.signInWithOtp({email:e, options:{emailRedirectTo:'https://coup-daile.vercel.app'}}).then(function(r){ if(m) m.textContent = r.error?('Erreur : '+r.error.message):'Lien envoyé. Ouvre ta boîte mail, et regarde les spams au besoin.'; }); }
+  function signOut(){ db.auth.signOut().then(function(){ currentUser=null; myObs=[]; renderCompte(); }); }
+  function loadObs(){ if(!db||!currentUser) return; db.from('observations').select('*').order('created_at',{ascending:false}).then(function(r){ myObs=r.data||[]; renderCompte(); }); }
+  function addObs(){ if(!currentUser) return; var m=document.getElementById('obsMsg'); var o={espece:(document.getElementById('obsEspece')||{}).value, issue:(document.getElementById('obsIssue')||{}).value, lieu:(document.getElementById('obsLieu')||{}).value, user_id:currentUser.id}; if(m)m.textContent='Enregistrement...'; db.from('observations').insert(o).then(function(r){ if(r.error){ if(m)m.textContent='Erreur : '+r.error.message; } else { loadObs(); } }); }
+  if(db){ db.auth.getSession().then(function(r){ currentUser=r.data.session?r.data.session.user:null; renderCompte(); if(currentUser) loadObs(); }); db.auth.onAuthStateChange(function(_e,s){ currentUser=s?s.user:null; renderCompte(); if(currentUser) loadObs(); }); }
 </script>
 </body>
 </html>
