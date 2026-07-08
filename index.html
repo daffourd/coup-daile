@@ -262,11 +262,11 @@
       <h1 class="title">Identifier l'oiseau</h1>
       <p class="sub">Réponds à quelques questions, on te propose les espèces les plus probables. L'identification photo par IA arrive dans un prochain lot.</p>
       <div class="section-label">Sa taille</div>
-      <div id="q-taille"><span class="chip" data-g="taille" data-v="petit">Petit (moineau)</span><span class="chip" data-g="taille" data-v="moyen">Moyen (merle)</span><span class="chip" data-g="taille" data-v="grand">Grand (pigeon)</span></div>
+      <div id="q-taille"><span class="chip" data-g="taille" data-v="tp">Très petit (mésange)</span><span class="chip" data-g="taille" data-v="p">Petit (moineau)</span><span class="chip" data-g="taille" data-v="m">Moyen (merle)</span><span class="chip" data-g="taille" data-v="g">Grand (pigeon, corneille)</span><span class="chip" data-g="taille" data-v="tg">Très grand (goéland, héron)</span></div>
       <div class="section-label">Couleur dominante</div>
-      <div id="q-couleur"><span class="chip" data-g="couleur" data-v="noir">Noir foncé</span><span class="chip" data-g="couleur" data-v="brun">Brun</span><span class="chip" data-g="couleur" data-v="gris">Gris</span><span class="chip" data-g="couleur" data-v="colore">Coloré</span></div>
+      <div id="q-couleur"><span class="chip" data-g="couleur" data-v="noir">Noir</span><span class="chip" data-g="couleur" data-v="brun">Brun ou roux</span><span class="chip" data-g="couleur" data-v="gris">Gris</span><span class="chip" data-g="couleur" data-v="colore">Coloré</span><span class="chip" data-g="couleur" data-v="blanc">Blanc ou clair</span></div>
       <div class="section-label">Où l'as-tu trouvé</div>
-      <div id="q-lieu"><span class="chip" data-g="lieu" data-v="ville">Ville, rue</span><span class="chip" data-g="lieu" data-v="jardin">Jardin</span><span class="chip" data-g="lieu" data-v="toit">Sous un toit</span></div>
+      <div id="q-lieu"><span class="chip" data-g="lieu" data-v="ville">Ville, rue</span><span class="chip" data-g="lieu" data-v="jardin">Jardin</span><span class="chip" data-g="lieu" data-v="campagne">Campagne</span><span class="chip" data-g="lieu" data-v="foret">Forêt</span><span class="chip" data-g="lieu" data-v="eau">Bord de l'eau ou mer</span><span class="chip" data-g="lieu" data-v="toit">Sous un toit</span></div>
       <button class="btn btn-primary" style="margin-top:16px" onclick="proposeEspeces()">Voir les espèces probables</button>
       <div id="idResult"></div>
       <div class="callout" style="margin-top:16px">Pour une identification par le chant ou la photo, l'app <b>Merlin Bird ID</b> (gratuite, Cornell) est une excellente référence.</div>
@@ -275,7 +275,8 @@
     <!-- ESPECES liste -->
     <section class="screen" id="especes">
       <h1 class="title">Fiches espèces</h1>
-      <p class="sub">Les oiseaux les plus souvent trouvés. Touche une fiche pour la conduite à tenir.</p>
+      <p class="sub">Les oiseaux qu'on trouve partout en France. Cherche par nom ou touche une fiche.</p>
+      <input class="field" id="especeSearch" placeholder="Rechercher un oiseau (ex : étourneau)" oninput="renderEspeces()" style="margin-bottom:12px">
       <div id="especesList"></div>
       <p class="disclaimer">Contenu fondé sur la LPO, l'OFB et le Muséum national d'Histoire naturelle.</p>
     </section>
@@ -366,15 +367,51 @@
     {nom:"Centre de sauvegarde de la faune sauvage du Tarn", ville:"Tarn (81)", tel:"0627582885", lat:43.75, lon:2.05},
     {nom:"Centre régional de sauvegarde LPO PACA, Buoux", ville:"Buoux (84)", tel:"", lat:43.822, lon:5.383, site:"https://paca.lpo.fr/"}
   ];
+  var CONDUITE_PASSEREAU = "Emplumé et vif au sol, on le laisse et on le met en sécurité tout près, ses parents s'en occupent. Nu ou en duvet, on le remet au nid si possible. Blessé, on appelle un centre de sauvegarde.";
+  var CONDUITE_RAPACE = "Rapace: ne pas nourrir, le placer au calme dans un carton aéré et appeler un centre. Attention aux serres et au bec, manipule avec un linge épais.";
+  var CONDUITE_NOCTURNE = "Jeune au sol souvent normal (il apprend à grimper). S'il est indemne et sans danger, le remettre en hauteur près de l'arbre. Blessé, appeler un centre. Attention aux serres.";
+  var CONDUITE_CORVIDE = "Jeune au sol souvent surveillé par ses parents: le laisser s'il est vif, le mettre en hauteur en cas de danger. Blessé, appeler un centre. Manipuler avec précaution.";
+  var CONDUITE_EAU = "Ne pas manipuler plus que nécessaire, le placer dans un grand carton au calme et appeler un centre. Protège tes yeux des longs becs. Ne jamais donner de pain.";
   var ESPECES = [
-    {id:"merle", nom:"Merle noir", latin:"Turdus merula", reco:"Le mâle est noir au bec orange, la femelle brun foncé. Taille d'environ 25 cm, chant flûté.", jeune:"Brun roux tacheté, bec encore sombre. Souvent un jeune qui apprend à voler.", regime:"Vers, insectes, fruits et baies.", conduite:"S'il est emplumé et vif, on le laisse et on le met en sécurité tout près. Ses parents le nourrissent encore."},
-    {id:"moineau", nom:"Moineau domestique", latin:"Passer domesticus", reco:"Petit, brun et gris, le mâle a une bavette noire. Très présent en ville.", jeune:"Bec un peu jaune sur les côtés, plumage terne. Piaille pour être nourri.", regime:"Graines et insectes.", conduite:"Emplumé au sol, on le laisse à proximité en sécurité. Nu, on le remet au nid si possible, sinon centre."},
-    {id:"martinet", nom:"Martinet noir", latin:"Apus apus", reco:"Silhouette de faux, ailes en croissant, tout sombre, cri strident. Vole presque sans jamais se poser.", jeune:"Ressemble à l'adulte, bord des plumes plus clair.", regime:"Insectes attrapés en vol, uniquement.", conduite:"Au sol il ne peut pas redécoller. Ne le relance pas en l'air, mets-le à l'abri et appelle un centre sans tarder."},
-    {id:"hirondelle", nom:"Hirondelle", latin:"Hirundo, Delichon", reco:"Ailes fines, queue échancrée, dos sombre et ventre clair. Niche sous les toits.", jeune:"Couleurs plus ternes, gorge moins marquée.", regime:"Insectes attrapés en vol.", conduite:"Nid tombé : le fixer si possible tout près. Oiseau blessé ou affamé : centre de sauvegarde."},
-    {id:"mesange", nom:"Mésange charbonnière", latin:"Parus major", reco:"Tête noire, joues blanches, ventre jaune barré de noir. Petite et vive.", jeune:"Couleurs plus pâles, joues jaunâtres.", regime:"Insectes, graines, en hiver boules de graisse non salées.", conduite:"Emplumé au sol, on le laisse en sécurité près du lieu. Blessé, on contacte un centre."},
-    {id:"pigeon", nom:"Pigeon", latin:"Columba", reco:"Corps trapu, gris à reflets, roucoulement. Très commun en ville.", jeune:"Le pigeonneau reste longtemps au nid, plumage ébouriffé, cire du bec claire.", regime:"Graines, restes.", conduite:"Jeune emplumé : souvent autonome, on le laisse. Blessé ou empêtré (fil, filet) : centre ou vétérinaire."},
-    {id:"tourterelle", nom:"Tourterelle", latin:"Streptopelia", reco:"Plus fine que le pigeon, beige rosé, collier sombre chez la tourterelle turque.", jeune:"Sans collier net, plumage plus terne.", regime:"Graines.", conduite:"Comme le pigeon : jeune emplumé souvent autonome, blessé vers un centre."},
-    {id:"rougegorge", nom:"Rougegorge familier", latin:"Erithacus rubecula", reco:"Petit, poitrine orange vif, dos brun, gros yeux noirs. Peu farouche.", jeune:"Brun tacheté, sans l'orange, qui apparaît plus tard.", regime:"Insectes, vers, petits fruits.", conduite:"Emplumé au sol, on le laisse à l'abri près du lieu. Blessé, on appelle un centre."}
+    {id:"merle", nom:"Merle noir", latin:"Turdus merula", t:"m", c:"noir,brun", m:"jardin,ville,foret", reco:"Mâle noir au bec orange, femelle brun foncé. Environ 25 cm, chant flûté.", jeune:"Brun roux tacheté, bec encore sombre. Souvent un jeune qui apprend à voler.", regime:"Vers, insectes, fruits et baies.", conduite:CONDUITE_PASSEREAU},
+    {id:"grive", nom:"Grive musicienne", latin:"Turdus philomelos", t:"m", c:"brun", m:"jardin,foret,campagne", reco:"Brun dessus, poitrine crème couverte de taches sombres en pointe de flèche. Environ 23 cm.", jeune:"Semblable, teintes plus chaudes.", regime:"Vers, escargots, fruits.", conduite:CONDUITE_PASSEREAU},
+    {id:"etourneau", nom:"Étourneau sansonnet", latin:"Sturnus vulgaris", t:"m", c:"noir,colore", m:"ville,jardin,campagne", reco:"Noir à reflets verts et violets, moucheté de blanc surtout en hiver, bec jaune au printemps. Vole en nuées serrées. Environ 21 cm.", jeune:"Brun gris uniforme et terne, bec sombre.", regime:"Insectes, vers, fruits, restes. Très opportuniste.", conduite:CONDUITE_PASSEREAU},
+    {id:"moineau", nom:"Moineau domestique", latin:"Passer domesticus", t:"p", c:"brun,gris", m:"ville,jardin", reco:"Petit, brun et gris, le mâle a une bavette noire. Très présent en ville.", jeune:"Bec un peu jaune sur les côtés, plumage terne, piaille pour être nourri.", regime:"Graines et insectes.", conduite:CONDUITE_PASSEREAU},
+    {id:"pinson", nom:"Pinson des arbres", latin:"Fringilla coelebs", t:"p", c:"brun,colore", m:"jardin,foret,campagne", reco:"Mâle à poitrine rosée et calotte gris bleu, deux barres blanches sur l'aile. Femelle brun verdâtre. Environ 15 cm.", jeune:"Comme la femelle, terne.", regime:"Graines et insectes.", conduite:CONDUITE_PASSEREAU},
+    {id:"chardonneret", nom:"Chardonneret élégant", latin:"Carduelis carduelis", t:"p", c:"colore", m:"jardin,campagne", reco:"Face rouge vif, ailes noires barrées de jaune, corps chamois. Environ 13 cm.", jeune:"Sans le rouge, tête grisâtre.", regime:"Graines, surtout de chardons.", conduite:CONDUITE_PASSEREAU},
+    {id:"verdier", nom:"Verdier d'Europe", latin:"Chloris chloris", t:"p", c:"colore,gris", m:"jardin,ville", reco:"Vert olive, taches jaunes sur ailes et queue, bec épais. Environ 15 cm.", jeune:"Plus terne et rayé.", regime:"Graines.", conduite:CONDUITE_PASSEREAU},
+    {id:"mesange", nom:"Mésange charbonnière", latin:"Parus major", t:"tp", c:"colore", m:"jardin,foret", reco:"Tête noire, joues blanches, ventre jaune barré de noir. Petite et vive.", jeune:"Couleurs plus pâles, joues jaunâtres.", regime:"Insectes, graines, en hiver graisse non salée.", conduite:CONDUITE_PASSEREAU},
+    {id:"mesange_bleue", nom:"Mésange bleue", latin:"Cyanistes caeruleus", t:"tp", c:"colore", m:"jardin,foret", reco:"Calotte bleu vif, joues blanches, ventre jaune. Très petite, environ 12 cm.", jeune:"Couleurs plus pâles, joues jaunâtres.", regime:"Insectes et graines.", conduite:CONDUITE_PASSEREAU},
+    {id:"rougegorge", nom:"Rougegorge familier", latin:"Erithacus rubecula", t:"p", c:"brun,colore", m:"jardin,foret", reco:"Petit, poitrine orange vif, dos brun, gros yeux noirs. Peu farouche.", jeune:"Brun tacheté, sans l'orange qui apparaît plus tard.", regime:"Insectes, vers, petits fruits.", conduite:CONDUITE_PASSEREAU},
+    {id:"rougequeue", nom:"Rougequeue noir", latin:"Phoenicurus ochruros", t:"p", c:"noir,gris", m:"ville,toit", reco:"Gris sombre à noir, queue rousse sans cesse agitée. Sur les toits et bâtiments. Environ 14 cm.", jeune:"Brun gris, déjà la queue rousse.", regime:"Insectes.", conduite:CONDUITE_PASSEREAU},
+    {id:"accenteur", nom:"Accenteur mouchet", latin:"Prunella modularis", t:"p", c:"brun,gris", m:"jardin,campagne", reco:"Petit, brun rayé, tête et poitrine gris ardoise, bec fin. Discret au sol. Environ 14 cm.", jeune:"Plus rayé, sans le gris.", regime:"Insectes et petites graines.", conduite:CONDUITE_PASSEREAU},
+    {id:"troglodyte", nom:"Troglodyte mignon", latin:"Troglodytes troglodytes", t:"tp", c:"brun", m:"jardin,foret", reco:"Minuscule, brun roux, queue souvent dressée, chant très puissant. Environ 9 cm.", jeune:"Semblable, plus terne.", regime:"Insectes.", conduite:CONDUITE_PASSEREAU},
+    {id:"fauvette", nom:"Fauvette à tête noire", latin:"Sylvia atricapilla", t:"p", c:"gris,noir", m:"jardin,foret", reco:"Gris, calotte noire chez le mâle, rousse chez la femelle. Environ 14 cm.", jeune:"Calotte rousse.", regime:"Insectes puis fruits.", conduite:CONDUITE_PASSEREAU},
+    {id:"pouillot", nom:"Pouillot véloce", latin:"Phylloscopus collybita", t:"tp", c:"colore,brun", m:"jardin,foret", reco:"Très petit, vert olive terne, pattes sombres, chant tchif-tchaf. Environ 11 cm.", jeune:"Semblable.", regime:"Insectes.", conduite:CONDUITE_PASSEREAU},
+    {id:"bergeronnette", nom:"Bergeronnette grise", latin:"Motacilla alba", t:"p", c:"gris,noir,blanc", m:"ville,eau,campagne", reco:"Noir, blanc et gris, longue queue balancée, court au sol. Environ 18 cm.", jeune:"Plus grisâtre.", regime:"Insectes.", conduite:CONDUITE_PASSEREAU},
+    {id:"hirondelle", nom:"Hirondelle", latin:"Hirundo, Delichon", t:"p", c:"noir,blanc", m:"toit,campagne", reco:"Ailes fines, queue échancrée, dos sombre et ventre clair. Niche sous les toits.", jeune:"Couleurs plus ternes, gorge moins marquée.", regime:"Insectes attrapés en vol.", conduite:"Nid tombé: le fixer si possible tout près. Oiseau au sol, blessé ou affaibli: centre de sauvegarde."},
+    {id:"martinet", nom:"Martinet noir", latin:"Apus apus", t:"p", c:"noir", m:"toit,ville", reco:"Silhouette de faux, ailes en croissant, tout sombre, cri strident. Vole presque sans jamais se poser.", jeune:"Ressemble à l'adulte, bord des plumes plus clair.", regime:"Insectes attrapés en vol.", conduite:"Au sol il ne peut pas redécoller. Ne le relance pas en l'air, mets-le à l'abri et appelle un centre sans tarder."},
+    {id:"pigeon", nom:"Pigeon", latin:"Columba", t:"g", c:"gris", m:"ville", reco:"Corps trapu, gris à reflets, roucoulement. Très commun en ville.", jeune:"Le pigeonneau reste longtemps au nid, plumage ébouriffé, cire du bec claire.", regime:"Graines, restes.", conduite:"Jeune emplumé souvent autonome, on le laisse. Blessé ou empêtré (fil, filet): centre ou vétérinaire."},
+    {id:"tourterelle", nom:"Tourterelle", latin:"Streptopelia", t:"m", c:"gris,brun", m:"ville,jardin", reco:"Plus fine que le pigeon, beige rosé, collier sombre chez la tourterelle turque.", jeune:"Sans collier net, plumage plus terne.", regime:"Graines.", conduite:"Comme le pigeon: jeune emplumé souvent autonome, blessé vers un centre."},
+    {id:"corneille", nom:"Corneille noire", latin:"Corvus corone", t:"g", c:"noir", m:"ville,campagne", reco:"Entièrement noire, bec fort, environ 47 cm. Souvent seule ou en couple.", jeune:"Noir plus terne, commissures du bec claires, quémande.", regime:"Omnivore.", conduite:CONDUITE_CORVIDE},
+    {id:"corbeau", nom:"Corbeau freux", latin:"Corvus frugilegus", t:"g", c:"noir", m:"campagne", reco:"Noir à reflets, base du bec grisâtre et dénudée chez l'adulte, vit en colonies. Environ 46 cm.", jeune:"Base du bec encore emplumée.", regime:"Omnivore.", conduite:CONDUITE_CORVIDE},
+    {id:"choucas", nom:"Choucas des tours", latin:"Coloeus monedula", t:"m", c:"noir,gris", m:"ville,toit", reco:"Petit corvidé gris et noir, nuque grise, oeil clair. Niche dans les cheminées et clochers. Environ 34 cm.", jeune:"Semblable, oeil plus terne.", regime:"Omnivore.", conduite:"Souvent tombé d'une cheminée. Indemne, le remettre en hauteur près du nid. Blessé, appeler un centre."},
+    {id:"pie", nom:"Pie bavarde", latin:"Pica pica", t:"g", c:"noir,blanc", m:"ville,jardin,campagne", reco:"Noir et blanc, longue queue à reflets verts. Environ 46 cm.", jeune:"Queue plus courte.", regime:"Omnivore.", conduite:CONDUITE_CORVIDE},
+    {id:"geai", nom:"Geai des chênes", latin:"Garrulus glandarius", t:"g", c:"colore,brun", m:"foret,jardin", reco:"Brun rosé, tache bleue barrée de noir sur l'aile, croupion blanc, cri rauque. Environ 34 cm.", jeune:"Semblable, plus terne.", regime:"Glands, insectes.", conduite:CONDUITE_CORVIDE},
+    {id:"faucon", nom:"Faucon crécerelle", latin:"Falco tinnunculus", t:"g", c:"brun", m:"campagne,ville", reco:"Petit rapace roux tacheté, fait le vol sur place (Saint-Esprit). Environ 35 cm.", jeune:"Semblable, plus rayé.", regime:"Campagnols, insectes.", conduite:CONDUITE_RAPACE},
+    {id:"buse", nom:"Buse variable", latin:"Buteo buteo", t:"tg", c:"brun", m:"campagne,foret", reco:"Rapace brun trapu, ailes larges, plane en cercles en miaulant. Environ 55 cm.", jeune:"Semblable.", regime:"Petits mammifères, vers.", conduite:CONDUITE_RAPACE},
+    {id:"epervier", nom:"Épervier d'Europe", latin:"Accipiter nisus", t:"g", c:"gris,brun", m:"jardin,foret", reco:"Rapace élancé, ailes courtes et longue queue, chasse les petits oiseaux. Femelle plus grande.", jeune:"Poitrine barrée de brun.", regime:"Petits oiseaux.", conduite:CONDUITE_RAPACE},
+    {id:"chouette", nom:"Chouette hulotte", latin:"Strix aluco", t:"g", c:"brun", m:"foret,jardin", reco:"Rapace nocturne trapu, tête ronde sans aigrettes, gros yeux noirs. Environ 40 cm.", jeune:"Poussin blanc duveteux, jeune qui grimpe aux branches.", regime:"Petits mammifères.", conduite:CONDUITE_NOCTURNE},
+    {id:"effraie", nom:"Effraie des clochers", latin:"Tyto alba", t:"g", c:"blanc,colore", m:"campagne,toit", reco:"Face blanche en coeur, dessus doré, dessous très clair, nocturne. Environ 34 cm.", jeune:"Duveteux.", regime:"Campagnols.", conduite:CONDUITE_NOCTURNE},
+    {id:"cheveche", nom:"Chevêche d'Athéna", latin:"Athene noctua", t:"m", c:"brun", m:"campagne", reco:"Petite chouette trapue, active au crépuscule, sourcils clairs à l'air sévère. Environ 22 cm.", jeune:"Semblable, plus terne.", regime:"Insectes, campagnols.", conduite:CONDUITE_NOCTURNE},
+    {id:"canard", nom:"Canard colvert", latin:"Anas platyrhynchos", t:"tg", c:"colore,brun", m:"eau", reco:"Mâle à tête vert brillant et collier blanc, femelle brune mouchetée. Sur mares et rivières.", jeune:"Caneton duveteux jaune et brun suivant sa mère.", regime:"Plantes, graines, invertébrés.", conduite:"Caneton: sa mère est souvent tout près, ne l'en sépare pas. Isolé ou blessé, appeler un centre. Ne pas donner de pain."},
+    {id:"goeland", nom:"Goéland leucophée", latin:"Larus michahellis", t:"tg", c:"blanc,gris", m:"eau,ville,toit", reco:"Grand goéland, dos gris, pattes jaunes, bec jaune à point rouge. Commun sur le littoral méditerranéen. Environ 60 cm.", jeune:"Brun tacheté pendant plusieurs années, bec sombre.", regime:"Poissons, restes, très opportuniste.", conduite:"Jeune tombé d'un toit, souvent surveillé par des parents parfois agressifs. Blessé ou en danger, mise à l'abri et centre. Bec puissant, prudence."},
+    {id:"mouette", nom:"Mouette rieuse", latin:"Chroicocephalus ridibundus", t:"m", c:"blanc,gris", m:"eau,ville", reco:"Petit laridé, tête brun chocolat en été, capuchon effacé en hiver, bec et pattes rouges. Environ 38 cm.", jeune:"Ailes marquées de brun, bec orangé.", regime:"Insectes, poissons, restes.", conduite:CONDUITE_EAU},
+    {id:"heron", nom:"Héron cendré", latin:"Ardea cinerea", t:"tg", c:"gris", m:"eau", reco:"Grand échassier gris, long cou, long bec jaune, vol lent le cou replié. Environ 95 cm.", jeune:"Plus terne, calotte grise.", regime:"Poissons, amphibiens.", conduite:CONDUITE_EAU},
+    {id:"aigrette", nom:"Aigrette garzette", latin:"Egretta garzetta", t:"g", c:"blanc", m:"eau", reco:"Petit héron blanc, bec noir, pattes noires à doigts jaunes. Zones humides et littoral.", jeune:"Semblable.", regime:"Petits poissons, invertébrés.", conduite:CONDUITE_EAU},
+    {id:"flamant", nom:"Flamant rose", latin:"Phoenicopterus roseus", t:"tg", c:"colore,blanc", m:"eau", reco:"Grand, rose pâle, très longues pattes et cou, bec coudé. Emblème des étangs du littoral (Camargue, Hérault). Jusqu'à 130 cm.", jeune:"Gris blanchâtre, sans le rose.", regime:"Micro-organismes filtrés dans la vase.", conduite:"Oiseau protégé et fragile: ne pas le manipuler, garder ses distances et prévenir aussitôt un centre de sauvegarde ou la LPO."},
+    {id:"huppe", nom:"Huppe fasciée", latin:"Upupa epops", t:"m", c:"colore", m:"campagne,jardin", reco:"Orange, ailes barrées de noir et blanc, longue huppe érectile, long bec courbé. Environ 28 cm.", jeune:"Semblable, huppe plus courte.", regime:"Insectes du sol.", conduite:"Belle et inoffensive. Blessée, appeler un centre. Sinon la laisser."},
+    {id:"pic", nom:"Pic vert", latin:"Picus viridis", t:"m", c:"colore", m:"jardin,foret,campagne", reco:"Vert, croupion jaune, calotte rouge, cri sonore qui ressemble à un rire. Souvent au sol à chercher des fourmis. Environ 32 cm.", jeune:"Plus terne et moucheté.", regime:"Fourmis, insectes.", conduite:"Blessé, appeler un centre, attention au bec. Sinon le laisser."}
   ];
 
   var history_stack = ['home'];
@@ -479,29 +516,22 @@
     c.classList.add('on'); choix[g]=c.getAttribute('data-v');
   });
   function proposeEspeces(){
-    var score={};
-    ESPECES.forEach(function(e){score[e.id]=0;});
-    if(choix.taille==='petit'){score.moineau+=2;score.mesange+=2;score.rougegorge+=2;score.hirondelle+=1;score.martinet+=1;}
-    if(choix.taille==='moyen'){score.merle+=2;score.tourterelle+=1;}
-    if(choix.taille==='grand'){score.pigeon+=2;score.tourterelle+=2;}
-    if(choix.couleur==='noir'){score.merle+=2;score.martinet+=2;}
-    if(choix.couleur==='brun'){score.moineau+=2;score.merle+=1;score.tourterelle+=1;}
-    if(choix.couleur==='gris'){score.pigeon+=2;score.tourterelle+=1;}
-    if(choix.couleur==='colore'){score.mesange+=2;score.rougegorge+=2;}
-    if(choix.lieu==='ville'){score.moineau+=1;score.pigeon+=1;score.martinet+=1;}
-    if(choix.lieu==='jardin'){score.merle+=1;score.mesange+=1;score.rougegorge+=1;}
-    if(choix.lieu==='toit'){score.martinet+=2;score.hirondelle+=2;}
-    var arr=ESPECES.slice().sort(function(a,b){return score[b.id]-score[a.id];}).slice(0,3);
-    var html='<div class="section-label">Espèces probables</div><div class="card" style="padding:6px 16px">'+arr.map(function(e){
+    var sc={};
+    ESPECES.forEach(function(e){ var s=0; if(choix.taille&&e.t===choix.taille) s+=3; if(choix.couleur&&(','+e.c+',').indexOf(','+choix.couleur+',')>=0) s+=2; if(choix.lieu&&(','+e.m+',').indexOf(','+choix.lieu+',')>=0) s+=2; sc[e.id]=s; });
+    var any=(choix.taille||choix.couleur||choix.lieu);
+    var arr=ESPECES.slice().sort(function(a,b){return sc[b.id]-sc[a.id];}).slice(0,4);
+    var html='<div class="section-label">'+(any?'Espèces probables':'Choisis les critères ci-dessus')+'</div><div class="card" style="padding:6px 16px">'+arr.map(function(e){
       return '<div class="centre" style="cursor:pointer" onclick="openEspece(\''+e.id+'\')"><div style="flex:1"><h4>'+e.nom+'</h4><div class="meta">'+e.latin+'</div></div><span class="chev" style="color:#c3cbc5;font-size:20px;align-self:center">&rsaquo;</span></div>';
-    }).join('')+'</div>';
+    }).join('')+'</div><p class="hint">Pas sûr ? Ouvre l\'onglet Espèces et cherche par nom.</p>';
     document.getElementById('idResult').innerHTML=html;
   }
   function renderEspeces(){
-    var el=document.getElementById('especesList'); if(!el||el.dataset.done) return;
-    el.innerHTML='<div class="card" style="padding:6px 16px">'+ESPECES.map(function(e){
+    var el=document.getElementById('especesList'); if(!el) return;
+    var q=(((document.getElementById('especeSearch')||{}).value)||'').toLowerCase().trim();
+    var list=ESPECES.filter(function(e){ return !q || e.nom.toLowerCase().indexOf(q)>=0 || (e.latin||'').toLowerCase().indexOf(q)>=0; });
+    el.innerHTML='<div class="card" style="padding:6px 16px">'+(list.length?list.map(function(e){
       return '<div class="centre" style="cursor:pointer" onclick="openEspece(\''+e.id+'\')"><div style="flex:1"><h4>'+e.nom+'</h4><div class="meta">'+e.latin+'</div></div><span class="chev" style="color:#c3cbc5;font-size:20px;align-self:center">&rsaquo;</span></div>';
-    }).join('')+'</div>'; el.dataset.done='1';
+    }).join(''):'<p class="meta" style="padding:8px 4px">Aucune espèce trouvée. Essaie un autre nom.</p>')+'</div>';
   }
   function openEspece(id){
     var e=ESPECES.filter(function(x){return x.id===id;})[0]; if(!e) return;
