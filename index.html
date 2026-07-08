@@ -509,6 +509,12 @@
         <button class="btn btn-ghost" onclick="showScreen('conseils')">Conseils de saison</button>
         <div id="adminLinkWrap" style="display:none"><div style="height:10px"></div><button class="btn btn-ghost" onclick="showScreen('admin')">Back-office administrateur</button></div>
       </div>
+      <div class="section-label">Informations légales</div>
+      <div class="card">
+        <button class="btn btn-ghost" onclick="showScreen('mentions')">Mentions légales</button>
+        <div style="height:10px"></div>
+        <button class="btn btn-ghost" onclick="showScreen('cgu')">Conditions générales d'utilisation</button>
+      </div>
       <p class="hint">Multilingue complet, journal éditorial et identification photo arrivent dans les prochains lots.</p>
     </section>
 
@@ -544,6 +550,45 @@
         <div id="sgMsg" class="meta" style="margin-top:8px"></div>
       </div>
       <p class="disclaimer">Merci pour ta contribution. Les informations sont vérifiées avant d'être publiées.</p>
+    </section>
+
+    <section class="screen" id="mentions">
+      <h1 class="title">Mentions légales</h1>
+      <div class="section-label">Éditeur</div>
+      <div class="card"><p style="font-size:14px;line-height:1.6">L'application Coup d'Aile est éditée par DAFFOURD INVEST, société par actions simplifiée (SAS).<br>Siège social : 43 rue Sabine et Miron Zlatin, Apt 802, Résidence Lez in Art, 34000 Montpellier, France.<br>SIREN : 810 176 818. RCS Montpellier 810 176 818. SIRET du siège : 810 176 818 00021. TVA intracommunautaire : FR11 810176818.<br>Directeur de la publication : Vincent Daffourd, président.<br>Contact : daffourd@gmail.com, 06 20 08 09 79.</p></div>
+      <div class="section-label">Diffusion</div>
+      <div class="card"><p style="font-size:14px;line-height:1.6">La diffusion de l'application est assurée par l'association Plumage, représentée par sa fondatrice, Madame Anne Simonot. Contact via l'éditeur ci-dessus.</p></div>
+      <div class="section-label">Hébergement</div>
+      <div class="card"><p style="font-size:14px;line-height:1.6">Application hébergée par Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis (vercel.com).<br>Les données et l'authentification sont hébergées par Supabase (Supabase Inc.), qui agit comme sous-traitant au sens du RGPD.</p></div>
+      <div class="section-label">Données personnelles</div>
+      <div class="card"><p style="font-size:14px;line-height:1.6">Coup d'Aile collecte le minimum de données : ton adresse email (connexion par lien magique) et les informations que tu ajoutes volontairement (carnet d'observations, profil bénévole, fiche association). Ton carnet est privé. Les coordonnées d'un bénévole ne sont visibles que s'il choisit de les exposer. La géolocalisation n'est utilisée qu'avec ton accord, pour trouver les centres proches, et n'est pas conservée. Conformément au RGPD, tu disposes d'un droit d'accès, de rectification et de suppression de tes données en écrivant à daffourd@gmail.com. Aucune donnée n'est vendue.</p></div>
+      <div class="section-label">Propriété intellectuelle</div>
+      <div class="card"><p style="font-size:14px;line-height:1.6">Les contenus de l'application (textes, visuels, code) sont protégés. Les conseils de secours s'appuient sur des sources publiques citées, notamment la LPO et l'OFB. Toute reproduction sans autorisation est interdite.</p></div>
+      <div class="section-label">Responsabilité</div>
+      <div class="card"><p style="font-size:14px;line-height:1.6">Coup d'Aile informe et oriente, sans remplacer l'avis d'un centre de sauvegarde de la faune sauvage ou d'un vétérinaire. En cas de doute ou d'urgence, contacte un centre habilité. L'éditeur ne saurait être tenu responsable des décisions prises à partir des informations fournies.</p></div>
+      <p class="disclaimer">Dernière mise à jour : 8 juillet 2026.</p>
+    </section>
+
+    <section class="screen" id="cgu">
+      <h1 class="title">Conditions générales d'utilisation</h1>
+      <div class="card"><p style="font-size:14px;line-height:1.6">En utilisant Coup d'Aile, tu acceptes les présentes conditions.</p></div>
+      <div class="section-label">1. Objet</div>
+      <div class="card"><p style="font-size:14px;line-height:1.6">Coup d'Aile est une application gratuite d'aide aux personnes qui trouvent un oiseau en détresse : gestes d'urgence, orientation vers les centres de sauvegarde, information et communauté d'entraide.</p></div>
+      <div class="section-label">2. Accès et compte</div>
+      <div class="card"><p style="font-size:14px;line-height:1.6">L'application est accessible gratuitement. Certaines fonctions (carnet, bénévolat, espace associations) nécessitent un compte créé par un lien magique envoyé par email. Tu es responsable de l'accès à ta boîte mail.</p></div>
+      <div class="section-label">3. Règles de la communauté</div>
+      <div class="card"><p style="font-size:14px;line-height:1.6">Le carnet est réservé aux 15 ans et plus, le bénévolat aux 18 ans et plus. La mise en relation entre membres, bénévoles et associations repose sur le volontariat : chacun choisit les coordonnées qu'il expose. Aucun message ne transite par l'application. Les échanges et rencontres se font sous la seule responsabilité des personnes concernées. Il est interdit de publier des contenus faux, trompeurs, injurieux ou illégaux.</p></div>
+      <div class="section-label">4. Contributions</div>
+      <div class="card"><p style="font-size:14px;line-height:1.6">Les informations que tu proposes (proposition ou signalement de centre, fiche association) sont vérifiées avant publication. L'éditeur peut refuser, modifier ou retirer tout contenu.</p></div>
+      <div class="section-label">5. Bon usage et loi</div>
+      <div class="card"><p style="font-size:14px;line-height:1.6">Coup d'Aile ne remplace pas un professionnel. Tu t'engages à respecter la loi, notamment la protection des espèces sauvages : la détention d'un oiseau sauvage est interdite, il doit être confié à un centre habilité.</p></div>
+      <div class="section-label">6. Responsabilité</div>
+      <div class="card"><p style="font-size:14px;line-height:1.6">L'application est fournie en l'état. L'éditeur ne garantit ni l'absence d'erreurs ni une disponibilité permanente, et ne saurait être tenu responsable des dommages liés à l'usage de l'application ou aux relations entre membres.</p></div>
+      <div class="section-label">7. Données personnelles</div>
+      <div class="card"><p style="font-size:14px;line-height:1.6">Le traitement des données est décrit dans les mentions légales. Tu peux demander la suppression de ton compte et de tes données à daffourd@gmail.com.</p></div>
+      <div class="section-label">8. Droit applicable</div>
+      <div class="card"><p style="font-size:14px;line-height:1.6">Les présentes conditions sont soumises au droit français. En cas de litige, une solution amiable sera recherchée avant toute action.</p></div>
+      <p class="disclaimer">Dernière mise à jour : 8 juillet 2026.</p>
     </section>
 
   </div>
