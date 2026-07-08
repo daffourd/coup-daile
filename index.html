@@ -332,6 +332,13 @@
 
     <section class="screen" id="compte"><div id="compteView"></div></section>
 
+    <section class="screen" id="benevoles">
+      <h1 class="title">Bénévoles</h1>
+      <p class="sub">Des personnes prêtes à aider les oiseaux, près de chez toi. Contacte-les via le canal qu'elles ont choisi. Aucun échange ne passe par l'app.</p>
+      <div id="benevolesList"></div>
+      <p class="disclaimer">Profils publiés volontairement par leurs auteurs, réservés aux 18 ans et plus.</p>
+    </section>
+
   </div>
 
   <div class="tabbar">
@@ -382,6 +389,7 @@
     if(id==='especes') renderEspeces();
     if(id==='centres') setTimeout(initMap, 60);
     if(id==='compte' && typeof renderCompte==='function') renderCompte();
+    if(id==='benevoles' && typeof renderBenevoles==='function') renderBenevoles();
   }
   function startUrgence(){ showScreen('u1'); }
   function goBack(){
@@ -546,13 +554,37 @@
     var plumes=myObs.reduce(function(s,o){ return s+((o.issue==='Confié à un centre'||o.issue==='Laissé en place'||o.issue==='Remis au nid')?3:1); },0);
     var badges=[]; if(n>=1) badges.push('Premier envol'); if(myObs.filter(function(o){return o.issue==='Confié à un centre';}).length>=1) badges.push('Premier secours'); if(n>=5) badges.push('Carnet de 5');
     var rows = n? myObs.map(function(o){ var d=o.created_at? new Date(o.created_at).toLocaleDateString('fr-FR'):''; return '<div class="centre"><div style="flex:1"><h4>'+(escapeH(o.espece)||'Oiseau')+'</h4><div class="meta">'+escapeH(o.issue||'')+(o.lieu?' · '+escapeH(o.lieu):'')+(d?' · '+d:'')+'</div></div></div>'; }).join('') : '<p class="meta" style="padding:10px 0">Ton carnet est vide. Ajoute ta première observation ci-dessus.</p>';
-    el.innerHTML='<div class="card" style="background:linear-gradient(135deg,#2E7D5B,#3B9C74);color:#fff;border:none"><div style="font-size:12px;opacity:.9;font-weight:700;text-transform:uppercase;letter-spacing:.6px">'+niveauNom(n)+'</div><div style="font-size:18px;font-weight:800;margin-top:2px;word-break:break-all">'+escapeH(currentUser.email)+'</div><div style="margin-top:8px;font-size:13px;opacity:.95">'+plumes+' plumes · '+n+' observation'+(n>1?'s':'')+'</div></div>'+(badges.length?'<div class="section-label">Mes badges</div><div>'+badges.map(function(b){return '<span class="chip on">'+escapeH(b)+'</span>';}).join('')+'</div>':'')+'<div class="section-label">Ajouter au carnet</div><div class="card"><input class="field" id="obsEspece" placeholder="Espèce (ex : Merle noir)" style="margin-bottom:8px"><select class="field" id="obsIssue" style="margin-bottom:8px"><option>Identifié</option><option>Laissé en place</option><option>Remis au nid</option><option>Confié à un centre</option></select><input class="field" id="obsLieu" placeholder="Lieu (ex : Montpellier)" style="margin-bottom:8px"><button class="btn btn-primary" onclick="addObs()">Enregistrer</button><div id="obsMsg" class="meta" style="margin-top:8px"></div></div><div class="section-label">Mon carnet</div><div class="card" style="padding:6px 16px">'+rows+'</div><button class="btn btn-ghost" onclick="signOut()">Se déconnecter</button>';
+    el.innerHTML='<div class="card" style="background:linear-gradient(135deg,#2E7D5B,#3B9C74);color:#fff;border:none"><div style="font-size:12px;opacity:.9;font-weight:700;text-transform:uppercase;letter-spacing:.6px">'+niveauNom(n)+'</div><div style="font-size:18px;font-weight:800;margin-top:2px;word-break:break-all">'+escapeH(currentUser.email)+'</div><div style="margin-top:8px;font-size:13px;opacity:.95">'+plumes+' plumes · '+n+' observation'+(n>1?'s':'')+'</div></div>'+(badges.length?'<div class="section-label">Mes badges</div><div>'+badges.map(function(b){return '<span class="chip on">'+escapeH(b)+'</span>';}).join('')+'</div>':'')+'<div class="section-label">Ajouter au carnet</div><div class="card"><input class="field" id="obsEspece" placeholder="Espèce (ex : Merle noir)" style="margin-bottom:8px"><select class="field" id="obsIssue" style="margin-bottom:8px"><option>Identifié</option><option>Laissé en place</option><option>Remis au nid</option><option>Confié à un centre</option></select><input class="field" id="obsLieu" placeholder="Lieu (ex : Montpellier)" style="margin-bottom:8px"><button class="btn btn-primary" onclick="addObs()">Enregistrer</button><div id="obsMsg" class="meta" style="margin-top:8px"></div></div><div class="section-label">Mon carnet</div><div class="card" style="padding:6px 16px">'+rows+'</div>'+benevolatCardHtml()+'<button class="btn btn-ghost" onclick="signOut()">Se déconnecter</button>';
   }
   function sendMagic(){ var e=(document.getElementById('magicEmail')||{}).value, m=document.getElementById('authMsg'); if(!e||e.indexOf('@')<1){ if(m)m.textContent='Entre un email valide.'; return; } if(m)m.textContent='Envoi en cours...'; db.auth.signInWithOtp({email:e, options:{emailRedirectTo:'https://coup-daile.vercel.app'}}).then(function(r){ if(m) m.textContent = r.error?('Erreur : '+r.error.message):'Lien envoyé. Ouvre ta boîte mail, et regarde les spams au besoin.'; }); }
   function signOut(){ db.auth.signOut().then(function(){ currentUser=null; myObs=[]; renderCompte(); }); }
   function loadObs(){ if(!db||!currentUser) return; db.from('observations').select('*').order('created_at',{ascending:false}).then(function(r){ myObs=r.data||[]; renderCompte(); }); }
   function addObs(){ if(!currentUser) return; var m=document.getElementById('obsMsg'); var o={espece:(document.getElementById('obsEspece')||{}).value, issue:(document.getElementById('obsIssue')||{}).value, lieu:(document.getElementById('obsLieu')||{}).value, user_id:currentUser.id}; if(m)m.textContent='Enregistrement...'; db.from('observations').insert(o).then(function(r){ if(r.error){ if(m)m.textContent='Erreur : '+r.error.message; } else { loadObs(); } }); }
-  if(db){ db.auth.getSession().then(function(r){ currentUser=r.data.session?r.data.session.user:null; renderCompte(); if(currentUser) loadObs(); }); db.auth.onAuthStateChange(function(_e,s){ currentUser=s?s.user:null; renderCompte(); if(currentUser) loadObs(); }); }
+  var myBenevole=null;
+  function val(id){ var e=document.getElementById(id); return e? e.value : ''; }
+  function loadMyBenevole(){ if(!db||!currentUser) return; db.from('benevoles').select('*').eq('user_id',currentUser.id).then(function(r){ myBenevole=(r.data&&r.data[0])||null; renderCompte(); }); }
+  function benevolatCardHtml(){
+    var b=myBenevole||{}; function v(x){ return escapeH(x==null?'':x); } var actif=!!b.actif;
+    return '<div class="section-label">Bénévolat</div><div class="card">'
+    +'<p class="meta" style="margin-bottom:10px">Propose ton aide aux centres et associations. Visible des associations et des membres inscrits, réservé aux 18 ans et plus. Aucun message ne passe par l\'app, tu choisis les coordonnées à montrer.</p>'
+    +'<label style="display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:14px"><input type="checkbox" id="benMajeur"'+(b.majeur?' checked':'')+'> J\'ai 18 ans ou plus</label>'
+    +'<input class="field" id="benPseudo" placeholder="Ton prénom ou pseudo" value="'+v(b.pseudo)+'" style="margin-bottom:8px">'
+    +'<input class="field" id="benZone" placeholder="Zone (ex : Hérault, 30 km)" value="'+v(b.zone)+'" style="margin-bottom:8px">'
+    +'<input class="field" id="benDispos" placeholder="Disponibilités (ex : week-ends)" value="'+v(b.dispos)+'" style="margin-bottom:8px">'
+    +'<input class="field" id="benAides" placeholder="Aide (ex : transport, nourrissage)" value="'+v(b.aides)+'" style="margin-bottom:8px">'
+    +'<div class="section-label" style="margin:8px 0 6px">Coordonnées à exposer (vide = non montré)</div>'
+    +'<input class="field" id="benTel" placeholder="Téléphone" value="'+v(b.contact_tel)+'" style="margin-bottom:8px">'
+    +'<input class="field" id="benEmailC" placeholder="Email de contact" value="'+v(b.contact_email)+'" style="margin-bottom:8px">'
+    +'<input class="field" id="benInsta" placeholder="Instagram (@...)" value="'+v(b.contact_insta)+'" style="margin-bottom:8px">'
+    +'<button class="btn btn-primary" onclick="saveBenevole()">'+(actif?'Mettre à jour mon profil':'Devenir bénévole')+'</button>'
+    +(actif?'<div style="height:8px"></div><button class="btn btn-ghost" onclick="retireBenevole()">Me retirer de l\'annuaire</button>':'')
+    +'<div id="benMsg" class="meta" style="margin-top:8px"></div></div>'
+    +'<button class="btn btn-ghost" onclick="showScreen(\'benevoles\')">Voir les bénévoles</button>';
+  }
+  function saveBenevole(){ var m=document.getElementById('benMsg'); if(!document.getElementById('benMajeur')||!document.getElementById('benMajeur').checked){ if(m)m.textContent='Le bénévolat est réservé aux 18 ans et plus.'; return; } var row={user_id:currentUser.id, actif:true, majeur:true, pseudo:val('benPseudo'), zone:val('benZone'), dispos:val('benDispos'), aides:val('benAides'), contact_tel:val('benTel'), contact_email:val('benEmailC'), contact_insta:val('benInsta')}; if(m)m.textContent='Enregistrement...'; db.from('benevoles').upsert(row,{onConflict:'user_id'}).then(function(r){ if(r.error){ if(m)m.textContent='Erreur : '+r.error.message; } else { loadMyBenevole(); } }); }
+  function retireBenevole(){ db.from('benevoles').update({actif:false}).eq('user_id',currentUser.id).then(function(){ loadMyBenevole(); }); }
+  function renderBenevoles(){ var el=document.getElementById('benevolesList'); if(!el) return; if(!db){ el.innerHTML='<p class="sub">Service indisponible.</p>'; return; } if(!currentUser){ el.innerHTML='<div class="callout">Connecte-toi dans l\'onglet Compte pour voir les bénévoles.</div>'; return; } el.innerHTML='<p class="meta" style="padding:6px 0">Chargement...</p>'; db.from('benevoles').select('*').eq('actif',true).order('created_at',{ascending:false}).then(function(r){ var list=r.data||[]; if(!list.length){ el.innerHTML='<div class="callout">Pas encore de bénévole inscrit. Sois le premier depuis l\'onglet Compte.</div>'; return; } el.innerHTML='<div class="card" style="padding:6px 16px">'+list.map(function(b){ var c=[]; if(b.contact_tel) c.push('<a class="btn btn-ghost btn-sm" href="tel:'+escapeH(b.contact_tel)+'">Appeler</a>'); if(b.contact_email) c.push('<a class="btn btn-ghost btn-sm" href="mailto:'+escapeH(b.contact_email)+'">Email</a>'); if(b.contact_insta) c.push('<a class="btn btn-ghost btn-sm" href="https://instagram.com/'+escapeH(String(b.contact_insta).replace(/^@/,''))+'" target="_blank" rel="noopener">Instagram</a>'); return '<div class="centre"><div style="flex:1"><h4>'+(escapeH(b.pseudo)||'Bénévole')+'</h4><div class="meta">'+[escapeH(b.zone),escapeH(b.dispos),escapeH(b.aides)].filter(Boolean).join(' · ')+'</div>'+(c.length?'<div class="row-btns" style="margin-top:9px">'+c.join('')+'</div>':'<div class="meta" style="margin-top:6px">Aucun contact exposé</div>')+'</div></div>'; }).join('')+'</div>'; }); }
+  if(db){ db.auth.getSession().then(function(r){ currentUser=r.data.session?r.data.session.user:null; renderCompte(); if(currentUser){ loadObs(); loadMyBenevole(); } }); db.auth.onAuthStateChange(function(_e,s){ currentUser=s?s.user:null; renderCompte(); if(currentUser){ loadObs(); loadMyBenevole(); } }); }
 </script>
 </body>
 </html>
