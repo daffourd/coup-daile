@@ -1,6 +1,6 @@
 // Service worker Coup d'Aile, Lot 1
 // Cache le coeur vital pour un fonctionnement hors-ligne.
-const CACHE = 'coup-daile-v10';
+const CACHE = 'coup-daile-v11';
 const ASSETS = [
   './',
   './index.html',

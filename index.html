@@ -212,6 +212,17 @@
   .wt-row .btn{flex:1;}
   .wt-check{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:700;color:var(--texte-doux);margin-top:14px;cursor:pointer;}
   .wt-check input{width:18px;height:18px;accent-color:var(--vert);}
+  /* Photo de fiche espece */
+  .fiche-photo{height:190px;border-radius:20px;background-size:cover;background-position:center;box-shadow:var(--ombre-douce);}
+  .e-credit{font-size:11px;color:var(--texte-doux);font-weight:600;margin:6px 4px 10px;}
+  .e-credit a{color:var(--texte-doux);}
+  /* Avatar profil */
+  .avatar-wrap{display:flex;align-items:center;gap:14px;margin-bottom:6px;}
+  .avatar{width:64px;height:64px;border-radius:20px;background:rgba(255,255,255,.25);background-size:cover;background-position:center;flex:0 0 auto;display:grid;place-items:center;color:#fff;}
+  .avatar svg{width:30px;height:30px;opacity:.9;}
+  .badge-chip{display:inline-flex;align-items:center;gap:6px;background:var(--vert-pale);color:var(--vert);font-weight:800;font-size:12.5px;padding:8px 12px;border-radius:999px;margin:0 8px 8px 0;}
+  .badge-chip.lock{background:#eef0ee;color:#a9b3ac;}
+  .badge-chip svg{width:14px;height:14px;}
 </style>
 </head>
 <body>
@@ -388,7 +399,8 @@
       <p class="disclaimer">Contenu fondé sur la LPO, l'OFB et le Muséum national d'Histoire naturelle.</p>
     </section>
     <section class="screen" id="espece">
-      <div class="fiche-photo"></div>
+      <div class="fiche-photo" id="e-photo"></div>
+      <div class="e-credit" id="e-credit"></div>
       <h1 class="title" id="e-nom"></h1>
       <p class="sub" id="e-latin"></p>
       <div class="section-label">Reconnaître</div>
@@ -851,7 +863,19 @@
     document.getElementById('e-jeune').textContent=e.jeune;
     document.getElementById('e-regime').textContent=e.regime;
     document.getElementById('e-conduite').textContent=e.conduite;
+    loadEspecePhoto(e);
     showScreen('espece');
+  }
+  function loadEspecePhoto(e){
+    var box=document.getElementById('e-photo'), cr=document.getElementById('e-credit');
+    if(!box) return;
+    box.style.backgroundImage=''; if(cr) cr.innerHTML='';
+    function apply(p){ if(!p||!p.u) return; var img=new Image(); img.onload=function(){ box.style.backgroundImage='url("'+p.u+'")'; }; img.src=p.u; if(cr) cr.innerHTML='Photo : Wikimedia Commons'+(p.c?' · <a href="'+p.c+'" target="_blank" rel="noopener">source</a>':''); }
+    var key='cda-photo-'+e.id, cached=null;
+    try{ cached=JSON.parse(localStorage.getItem(key)||'null'); }catch(_){}
+    if(cached){ apply(cached); return; }
+    function fetchSum(title){ return fetch('https://fr.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(title)+'?redirect=true').then(function(r){return r.ok?r.json():null;}).then(function(j){ if(j&&j.thumbnail&&j.thumbnail.source) return {u:j.thumbnail.source.replace(/\/\d+px-/,'/640px-'), c:(j.content_urls&&j.content_urls.desktop&&j.content_urls.desktop.page)||''}; return null; }).catch(function(){return null;}); }
+    fetchSum(e.nom).then(function(p){ return p||fetchSum(e.latin); }).then(function(p){ if(p){ try{localStorage.setItem(key,JSON.stringify(p));}catch(_){} apply(p); } });
   }
 
   // Reglages
@@ -888,21 +912,85 @@
   var db = (window.supabase && window.supabase.createClient) ? window.supabase.createClient(SUPA_URL, SUPA_KEY) : null;
   var currentUser=null, myObs=[];
   function escapeH(s){ return (s==null?'':String(s)).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
-  function niveauNom(n){ var p=[[0,'Nouveau membre'],[1,'Observateur'],[3,'Explorateur'],[5,'Jeune sauveur'],[10,'Sauveur'],[25,'Protecteur des oiseaux'],[50,'Gardien des oiseaux']]; var l=p[0][1]; for(var i=0;i<p.length;i++){ if(n>=p[i][0]) l=p[i][1]; } return l; }
+  var NIVEAUX=[[0,'Nouveau membre'],[3,'Pioupiou'],[8,'Observateur'],[15,'Explorateur'],[30,'Jeune sauveur'],[50,'Sauveur'],[90,'Protecteur des oiseaux'],[150,'Gardien des oiseaux'],[250,"Ambassadeur Coup d'Aile"],[400,"Fondateur Coup d'Aile"]];
+  function niveauInfo(pl){ var idx=0; for(var i=0;i<NIVEAUX.length;i++){ if(pl>=NIVEAUX[i][0]) idx=i; } var next=NIVEAUX[idx+1]||null; return {nom:NIVEAUX[idx][1], seuil:NIVEAUX[idx][0], next:next?next[1]:null, nextSeuil:next?next[0]:null}; }
+  function niveauNom(pl){ return niveauInfo(pl).nom; }
+  var BADGES=[
+    {id:'envol', nom:'Premier envol', test:function(c){return c.n>=1;}},
+    {id:'secours', nom:'Premier secours', test:function(c){return c.confies>=1;}},
+    {id:'veilleur', nom:'Veilleur', test:function(c){return c.laisses>=1;}},
+    {id:'c5', nom:'Carnet de 5', test:function(c){return c.n>=5;}},
+    {id:'samaritain', nom:'Bon samaritain', test:function(c){return c.confies>=3;}},
+    {id:'c10', nom:'Carnet de 10', test:function(c){return c.n>=10;}},
+    {id:'benevole', nom:'Bénévole engagé', test:function(c){return c.benevole;}},
+    {id:'c25', nom:'Carnet de 25', test:function(c){return c.n>=25;}},
+    {id:'ambassadeur', nom:'Ambassadeur', test:function(c){return c.plumes>=250;}}
+  ];
   function renderCompte(){
     var el=document.getElementById('compteView'); if(!el) return;
     if(!db){ el.innerHTML='<h1 class="title">Mon compte</h1><p class="sub">Service momentanément indisponible.</p>'; return; }
     if(!currentUser){
-      el.innerHTML='<h1 class="title">Mon compte</h1><p class="sub">Crée ton carnet d\'oiseaux et gagne des badges. Pas de mot de passe: on t\'envoie un lien magique par email.</p><div class="card"><b>Connexion par lien magique</b><p class="meta" style="margin:6px 0 10px">Tu reçois un lien, tu cliques, tu es connecté.</p><input class="field" id="magicEmail" inputmode="email" placeholder="ton@email.fr" style="margin-bottom:10px"><button class="btn btn-primary" onclick="sendMagic()">Recevoir mon lien</button><div id="authMsg" class="meta" style="margin-top:10px"></div></div><div class="callout">La connexion Google arrivera plus tard. Ton carnet reste privé, visible de toi seul.</div>';
+      el.innerHTML='<h1 class="title">Mon compte</h1><p class="sub">Crée ton carnet, gagne des plumes et des badges. Pas de mot de passe : on t\'envoie un email avec un lien et un code.</p><div class="card"><b>Connexion par email</b><p class="meta" style="margin:6px 0 10px">Entre ton email. Tu reçois un lien à cliquer et un code à 6 chiffres.</p><input class="field" id="magicEmail" inputmode="email" autocomplete="email" placeholder="ton@email.fr" style="margin-bottom:10px"><button class="btn btn-primary" id="magicBtn" onclick="sendMagic()">Recevoir mon accès</button><div id="otpZone" style="display:none;margin-top:12px"><p class="meta" style="margin-bottom:8px">Ouvre ton email, et regarde aussi les spams. Clique le lien depuis ce navigateur, ou entre ici le code à 6 chiffres.</p><input class="field" id="otpCode" inputmode="numeric" maxlength="6" placeholder="Code à 6 chiffres" style="margin-bottom:8px"><button class="btn btn-primary" onclick="verifyOtp()">Valider le code</button><div style="height:8px"></div><button class="btn btn-ghost btn-sm" onclick="sendMagic(true)">Renvoyer l\'email</button></div><div id="authMsg" class="meta" style="margin-top:10px"></div></div><div class="callout">Ton carnet reste privé, visible de toi seul. La connexion Google arrivera plus tard.</div>';
       return;
     }
     var n=myObs.length;
     var plumes=myObs.reduce(function(s,o){ return s+((o.issue==='Confié à un centre'||o.issue==='Laissé en place'||o.issue==='Remis au nid')?3:1); },0);
-    var badges=[]; if(n>=1) badges.push('Premier envol'); if(myObs.filter(function(o){return o.issue==='Confié à un centre';}).length>=1) badges.push('Premier secours'); if(n>=5) badges.push('Carnet de 5');
+    var confies=myObs.filter(function(o){return o.issue==='Confié à un centre';}).length;
+    var laisses=myObs.filter(function(o){return o.issue==='Laissé en place'||o.issue==='Remis au nid';}).length;
+    var ctx={n:n, confies:confies, laisses:laisses, plumes:plumes, benevole:!!(myBenevole&&myBenevole.actif)};
+    var av=(currentUser.user_metadata&&currentUser.user_metadata.avatar_url)||'';
+    var ni=niveauInfo(plumes);
+    var prog=ni.nextSeuil!=null?Math.min(100,Math.max(4,Math.round((plumes-ni.seuil)/(ni.nextSeuil-ni.seuil)*100))):100;
+    var nextTxt=ni.next?('Plus que '+(ni.nextSeuil-plumes)+' plumes pour '+ni.next):'Niveau maximum atteint, bravo';
+    var unlocked=BADGES.filter(function(b){return b.test(ctx);});
+    var locked=BADGES.filter(function(b){return !b.test(ctx);}).slice(0,3);
+    var badgesHtml='<div class="section-label">Mes badges</div><div>'+unlocked.map(function(b){return '<span class="badge-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>'+escapeH(b.nom)+'</span>';}).join('')+locked.map(function(b){return '<span class="badge-chip lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>'+escapeH(b.nom)+'</span>';}).join('')+'</div>';
     var rows = n? myObs.map(function(o){ var d=o.created_at? new Date(o.created_at).toLocaleDateString('fr-FR'):''; return '<div class="centre"><div style="flex:1"><h4>'+(escapeH(o.espece)||'Oiseau')+'</h4><div class="meta">'+escapeH(o.issue||'')+(o.lieu?' · '+escapeH(o.lieu):'')+(d?' · '+d:'')+'</div></div></div>'; }).join('') : '<p class="meta" style="padding:10px 0">Ton carnet est vide. Ajoute ta première observation ci-dessus.</p>';
-    el.innerHTML='<div class="card" style="background:linear-gradient(135deg,#2E7D5B,#3B9C74);color:#fff;border:none"><div style="font-size:12px;opacity:.9;font-weight:700;text-transform:uppercase;letter-spacing:.6px">'+niveauNom(n)+'</div><div style="font-size:18px;font-weight:800;margin-top:2px;word-break:break-all">'+escapeH(currentUser.email)+'</div><div style="margin-top:8px;font-size:13px;opacity:.95">'+plumes+' plumes · '+n+' observation'+(n>1?'s':'')+'</div></div>'+(badges.length?'<div class="section-label">Mes badges</div><div>'+badges.map(function(b){return '<span class="chip on">'+escapeH(b)+'</span>';}).join('')+'</div>':'')+'<div class="section-label">Ajouter au carnet</div><div class="card"><input class="field" id="obsEspece" placeholder="Espèce (ex : Merle noir)" style="margin-bottom:8px"><select class="field" id="obsIssue" style="margin-bottom:8px"><option>Identifié</option><option>Laissé en place</option><option>Remis au nid</option><option>Confié à un centre</option></select><input class="field" id="obsLieu" placeholder="Lieu (ex : Montpellier)" style="margin-bottom:8px"><button class="btn btn-primary" onclick="addObs()">Enregistrer</button><div id="obsMsg" class="meta" style="margin-top:8px"></div></div><div class="section-label">Mon carnet</div><div class="card" style="padding:6px 16px">'+rows+'</div>'+benevolatCardHtml()+'<div style="height:10px"></div><button class="btn btn-ghost" onclick="showScreen(\'assos\')">Espace associations</button><div style="height:10px"></div><button class="btn btn-ghost" onclick="signOut()">Se déconnecter</button>';
+    el.innerHTML='<div class="card" style="background:linear-gradient(135deg,#1F9E67,#12885A);color:#fff;border:none"><div class="avatar-wrap"><div class="avatar" id="avatarBox"'+(av?' style="background-image:url(\''+av+'\')"':'')+'>'+(av?'':'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c1.5-4 12.5-4 14 0"/></svg>')+'</div><div style="flex:1;min-width:0"><div style="font-size:12px;opacity:.92;font-weight:800;text-transform:uppercase;letter-spacing:.6px">'+escapeH(ni.nom)+'</div><div style="font-size:15px;font-weight:800;word-break:break-all">'+escapeH(currentUser.email)+'</div></div></div><div style="margin-top:10px;font-size:13px;opacity:.95;font-weight:700">'+plumes+' plumes · '+n+' observation'+(n>1?'s':'')+'</div><div style="height:8px;background:rgba(255,255,255,.25);border-radius:6px;margin-top:8px;overflow:hidden"><div style="height:100%;width:'+prog+'%;background:#fff;border-radius:6px"></div></div><div style="font-size:11.5px;opacity:.92;margin-top:5px;font-weight:700">'+nextTxt+'</div><input type="file" id="avatarInput" accept="image/*" style="display:none" onchange="uploadAvatar(this.files[0])"><button class="btn btn-sm" style="margin-top:12px;background:rgba(255,255,255,.2);color:#fff;box-shadow:none" onclick="document.getElementById(\'avatarInput\').click()">Changer ma photo</button><div id="avatarMsg" style="font-size:11.5px;opacity:.95;margin-top:6px"></div></div>'+badgesHtml+'<div class="section-label">Ajouter au carnet</div><div class="card"><input class="field" id="obsEspece" placeholder="Espèce (ex : Merle noir)" style="margin-bottom:8px"><select class="field" id="obsIssue" style="margin-bottom:8px"><option>Identifié</option><option>Laissé en place</option><option>Remis au nid</option><option>Confié à un centre</option></select><input class="field" id="obsLieu" placeholder="Lieu (ex : Montpellier)" style="margin-bottom:8px"><button class="btn btn-primary" onclick="addObs()">Enregistrer</button><div id="obsMsg" class="meta" style="margin-top:8px"></div></div><div class="section-label">Mon carnet</div><div class="card" style="padding:6px 16px">'+rows+'</div>'+benevolatCardHtml()+'<div style="height:10px"></div><button class="btn btn-ghost" onclick="showScreen(\'assos\')">Espace associations</button><div style="height:10px"></div><button class="btn btn-ghost" onclick="signOut()">Se déconnecter</button>';
   }
-  function sendMagic(){ var e=(document.getElementById('magicEmail')||{}).value, m=document.getElementById('authMsg'); if(!e||e.indexOf('@')<1){ if(m)m.textContent='Entre un email valide.'; return; } if(m)m.textContent='Envoi en cours...'; db.auth.signInWithOtp({email:e, options:{emailRedirectTo:'https://coup-daile.vercel.app'}}).then(function(r){ if(m) m.textContent = r.error?('Erreur : '+r.error.message):'Lien envoyé. Ouvre ta boîte mail, et regarde les spams au besoin.'; }); }
+  var _lastEmail='';
+  function sendMagic(resend){
+    var m=document.getElementById('authMsg');
+    var e=((document.getElementById('magicEmail')||{}).value||_lastEmail||'').trim();
+    if(!e||e.indexOf('@')<1){ if(m)m.textContent='Entre un email valide.'; return; }
+    _lastEmail=e;
+    var btn=document.getElementById('magicBtn'); if(btn) btn.disabled=true;
+    if(m)m.textContent='Envoi en cours...';
+    db.auth.signInWithOtp({email:e, options:{shouldCreateUser:true, emailRedirectTo:'https://coup-daile.vercel.app'}}).then(function(r){
+      if(btn) btn.disabled=false;
+      if(r.error){ if(m)m.textContent = /rate|seconds|limit|too many/i.test(r.error.message)?"Trop de tentatives d'affilée. Attends une minute puis réessaie.":('Erreur : '+r.error.message); return; }
+      var z=document.getElementById('otpZone'); if(z) z.style.display='block';
+      if(m)m.textContent='Email envoyé à '+e+'. Ouvre ta boîte et regarde les spams.';
+    });
+  }
+  function verifyOtp(){
+    var m=document.getElementById('authMsg');
+    var code=((document.getElementById('otpCode')||{}).value||'').replace(/\D/g,'');
+    if(!/^\d{6}$/.test(code)){ if(m)m.textContent='Entre le code à 6 chiffres reçu par email.'; return; }
+    if(!_lastEmail){ if(m)m.textContent='Renseigne d\'abord ton email et demande un accès.'; return; }
+    if(m)m.textContent='Vérification du code...';
+    db.auth.verifyOtp({email:_lastEmail, token:code, type:'email'}).then(function(r){
+      if(r.error){ if(m)m.textContent='Code invalide ou expiré. Tu peux renvoyer un email.'; return; }
+      if(m)m.textContent='Connexion réussie.';
+    });
+  }
+  function uploadAvatar(file){
+    var m=document.getElementById('avatarMsg'); if(!file||!db||!currentUser) return;
+    if(file.size>3*1024*1024){ if(m)m.textContent='Image trop lourde (max 3 Mo).'; return; }
+    var ext=((file.name||'').split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'')||'jpg';
+    var path=currentUser.id+'/avatar.'+ext;
+    if(m)m.textContent='Envoi de la photo...';
+    db.storage.from('avatars').upload(path, file, {upsert:true, contentType:file.type||'image/jpeg'}).then(function(r){
+      if(r.error){ if(m)m.textContent = /bucket|not found/i.test(r.error.message)?'Stockage non configuré (voir ETAT).':('Erreur : '+r.error.message); return; }
+      var pub=db.storage.from('avatars').getPublicUrl(path).data.publicUrl+'?t='+Date.now();
+      db.auth.updateUser({data:{avatar_url:pub}}).then(function(u){
+        if(u.error){ if(m)m.textContent='Erreur : '+u.error.message; return; }
+        if(u.data&&u.data.user) currentUser=u.data.user;
+        try{ db.from('profiles').upsert({id:currentUser.id, avatar_url:pub}).then(function(){}); }catch(_){}
+        if(m)m.textContent='Photo mise à jour.'; renderCompte();
+      });
+    });
+  }
   function signOut(){ db.auth.signOut().then(function(){ currentUser=null; myObs=[]; renderCompte(); }); }
   function loadObs(){ if(!db||!currentUser) return; db.from('observations').select('*').order('created_at',{ascending:false}).then(function(r){ myObs=r.data||[]; renderCompte(); }); }
   function addObs(){ if(!currentUser) return; var m=document.getElementById('obsMsg'); var o={espece:(document.getElementById('obsEspece')||{}).value, issue:(document.getElementById('obsIssue')||{}).value, lieu:(document.getElementById('obsLieu')||{}).value, user_id:currentUser.id}; if(m)m.textContent='Enregistrement...'; db.from('observations').insert(o).then(function(r){ if(r.error){ if(m)m.textContent='Erreur : '+r.error.message; } else { loadObs(); } }); }
