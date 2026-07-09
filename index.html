@@ -870,11 +870,11 @@
     var box=document.getElementById('e-photo'), cr=document.getElementById('e-credit');
     if(!box) return;
     box.style.backgroundImage=''; if(cr) cr.innerHTML='';
-    function apply(p){ if(!p||!p.u) return; var img=new Image(); img.onload=function(){ box.style.backgroundImage='url("'+p.u+'")'; }; img.src=p.u; if(cr) cr.innerHTML='Photo : Wikimedia Commons'+(p.c?' · <a href="'+p.c+'" target="_blank" rel="noopener">source</a>':''); }
-    var key='cda-photo-'+e.id, cached=null;
+    function apply(p){ if(!p||!p.u) return; box.style.backgroundImage='url("'+p.u+'")'; if(cr) cr.innerHTML='Photo : Wikimedia Commons'+(p.c?' · <a href="'+p.c+'" target="_blank" rel="noopener">source</a>':''); }
+    var key='cda-photo2-'+e.id, cached=null;
     try{ cached=JSON.parse(localStorage.getItem(key)||'null'); }catch(_){}
     if(cached){ apply(cached); return; }
-    function fetchSum(title){ return fetch('https://fr.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(title)+'?redirect=true').then(function(r){return r.ok?r.json():null;}).then(function(j){ if(j&&j.thumbnail&&j.thumbnail.source) return {u:j.thumbnail.source.replace(/\/\d+px-/,'/640px-'), c:(j.content_urls&&j.content_urls.desktop&&j.content_urls.desktop.page)||''}; return null; }).catch(function(){return null;}); }
+    function fetchSum(title){ return fetch('https://fr.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(title)+'?redirect=true').then(function(r){return r.ok?r.json():null;}).then(function(j){ if(j&&j.thumbnail&&j.thumbnail.source){ var u=j.thumbnail.source; if(j.originalimage&&j.originalimage.source&&j.originalimage.width&&j.originalimage.width<=1400) u=j.originalimage.source; return {u:u, c:(j.content_urls&&j.content_urls.desktop&&j.content_urls.desktop.page)||''}; } return null; }).catch(function(){return null;}); }
     fetchSum(e.nom).then(function(p){ return p||fetchSum(e.latin); }).then(function(p){ if(p){ try{localStorage.setItem(key,JSON.stringify(p));}catch(_){} apply(p); } });
   }
 
