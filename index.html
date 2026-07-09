@@ -1075,8 +1075,8 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
   function renderAdmin(){
     var el=document.getElementById('adminView'); if(!el) return;
     if(!isAdmin()){ el.innerHTML='<div class="callout">Espace réservé à l\'administrateur. Connecte-toi avec le compte administrateur dans l\'onglet Compte.</div>'; return; }
-    el.innerHTML='<p class="sub">Statistiques anonymisées et modération. Aucune donnée personnelle des membres n\'est exposée.</p><div id="admStats"><p class="meta">Chargement des statistiques...</p></div><div class="section-label">Modération</div><div id="admMod"><p class="meta">Chargement...</p></div><div class="section-label">Contributions reçues</div><div id="admSignals"><p class="meta">Chargement...</p></div>';
-    loadAdminStats(); loadAdminMod(); loadAdminSignals();
+    el.innerHTML='<p class="sub">Réservé à l\'administrateur. Les statistiques sont anonymisées ; la liste des membres n\'est visible que de toi.</p><div id="admStats"><p class="meta">Chargement des statistiques...</p></div><div class="section-label">Membres inscrits</div><div id="admUsers"><p class="meta">Chargement...</p></div><div class="section-label">Modération des associations</div><div id="admMod"><p class="meta">Chargement...</p></div><div class="section-label">Contributions reçues</div><div id="admSignals"><p class="meta">Chargement...</p></div>';
+    loadAdminStats(); loadAdminUsers(); loadAdminMod(); loadAdminSignals();
   }
   function loadAdminStats(){
     var box=document.getElementById('admStats'); if(!box) return;
@@ -1110,6 +1110,22 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
       box.innerHTML='<div class="card" style="padding:6px 16px">'+list.map(function(x){ var d=x.created_at?new Date(x.created_at).toLocaleDateString('fr-FR'):''; return '<div class="centre"><div style="flex:1"><h4>'+escapeH(x.nom||'Centre')+' <span class="km">'+escapeH(x.type||'')+'</span></h4><div class="meta">'+[escapeH(x.ville),escapeH(x.tel),d].filter(Boolean).join(' · ')+(x.note?'<br>'+escapeH(x.note):'')+'</div></div></div>'; }).join('')+'</div>';
     });
   }
+  function loadAdminUsers(){
+    var box=document.getElementById('admUsers'); if(!box||!db) return;
+    db.rpc('admin_users').then(function(r){
+      if(r.error){ box.innerHTML='<div class="callout">Liste des membres non configurée. Exécute la fonction admin_users dans Supabase (voir ETAT).</div>'; return; }
+      var list=r.data||[]; if(!Array.isArray(list)){ try{ list=JSON.parse(list); }catch(e){ list=[]; } }
+      if(!list.length){ box.innerHTML='<p class="meta">Aucun membre inscrit pour l\'instant.</p>'; return; }
+      var rows=list.map(function(u){
+        var d=u.created_at?new Date(u.created_at).toLocaleDateString('fr-FR'):'';
+        var mod=u.has_benevole?(u.benevole_actif?'<button class="btn btn-ghost btn-sm" onclick="modBenevole(\''+u.id+'\',false)">Masquer le bénévole</button>':'<button class="btn btn-primary btn-sm" onclick="modBenevole(\''+u.id+'\',true)">Réactiver</button>'):'';
+        return '<div class="centre"><div style="flex:1"><h4>'+escapeH(u.email||'Membre')+'</h4><div class="meta">'+(u.pseudo?escapeH(u.pseudo)+' · ':'')+(u.obs||0)+' obs'+(u.has_asso?' · association':'')+(d?' · '+d:'')+'</div>'+(mod?'<div class="row-btns" style="margin-top:8px">'+mod+'</div>':'')+'</div></div>';
+      }).join('');
+      box.innerHTML='<div class="card" style="padding:6px 16px">'+rows+'</div><div style="height:10px"></div><button class="btn btn-ghost" onclick="adminDedupe()">Dédoublonner les profils</button><div id="admDedupeMsg" class="meta" style="margin-top:6px"></div>';
+    });
+  }
+  function modBenevole(uid, actif){ if(!db) return; db.from('benevoles').update({actif:actif}).eq('user_id',uid).then(function(){ loadAdminUsers(); }); }
+  function adminDedupe(){ var m=document.getElementById('admDedupeMsg'); if(!db) return; if(m)m.textContent='Nettoyage...'; db.rpc('admin_dedupe').then(function(r){ if(r.error){ if(m)m.textContent='Fonction admin_dedupe non configurée (voir ETAT).'; return; } var n=(r.data&&r.data.benevoles_removed)||0; if(m)m.textContent='Terminé. '+n+' doublon(s) supprimé(s).'; loadAdminUsers(); }); }
   function sendSignal(){
     var m=document.getElementById('sgMsg');
     if(!db){ if(m)m.textContent='Service indisponible.'; return; }
