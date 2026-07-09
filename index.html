@@ -213,7 +213,9 @@
   .wt-check{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:700;color:var(--texte-doux);margin-top:14px;cursor:pointer;}
   .wt-check input{width:18px;height:18px;accent-color:var(--vert);}
   /* Photo de fiche espece */
-  .fiche-photo{height:190px;border-radius:20px;background-size:cover;background-position:center;box-shadow:var(--ombre-douce);}
+  .fiche-photo{height:210px;border-radius:20px;overflow:hidden;box-shadow:var(--ombre-douce);background:linear-gradient(135deg,#e9f1ec,#d7e6de);display:flex;align-items:center;justify-content:center;}
+  html[data-theme="dark"] .fiche-photo{background:linear-gradient(135deg,#16302a,#0f231d);}
+  .fiche-photo img{width:100%;height:100%;object-fit:contain;display:block;}
   .e-credit{font-size:11px;color:var(--texte-doux);font-weight:600;margin:6px 4px 10px;}
   .e-credit a{color:var(--texte-doux);}
   /* Avatar profil */
@@ -869,8 +871,8 @@
   function loadEspecePhoto(e){
     var box=document.getElementById('e-photo'), cr=document.getElementById('e-credit');
     if(!box) return;
-    box.style.backgroundImage=''; if(cr) cr.innerHTML='';
-    function apply(p){ if(!p||!p.u) return; box.style.backgroundImage='url("'+p.u+'")'; if(cr) cr.innerHTML='Photo : Wikimedia Commons'+(p.c?' · <a href="'+p.c+'" target="_blank" rel="noopener">source</a>':''); }
+    box.innerHTML=''; if(cr) cr.innerHTML='';
+    function apply(p){ if(!p||!p.u) return; box.innerHTML='<img alt="" loading="lazy" src="'+p.u.replace(/"/g,'%22')+'">'; if(cr) cr.innerHTML='Photo : Wikimedia Commons'+(p.c?' · <a href="'+p.c+'" target="_blank" rel="noopener">source</a>':''); }
     var key='cda-photo2-'+e.id, cached=null;
     try{ cached=JSON.parse(localStorage.getItem(key)||'null'); }catch(_){}
     if(cached){ apply(cached); return; }
