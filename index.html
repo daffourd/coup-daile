@@ -7,14 +7,15 @@
 <meta name="description" content="Que faire si tu trouves un oiseau ou un oisillon. Gestes d'urgence, secours et identification.">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Coup d'Aile">
+<meta name="apple-mobile-web-app-title" content="Coup de Patte">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-<title>Coup d'Aile</title>
+<title>Coup de Patte</title>
 <style>
   :root{
     --vert:#2E7D5B;--vert-clair:#3B9C74;--vert-pale:#E7F1EB;--beige:#F7F5EF;
@@ -192,7 +193,23 @@
   .tab-fab svg{width:26px;height:26px;}
   .tab-center small{font-size:10px;font-weight:800;color:var(--corail);margin-top:2px;}
   /* Emplacement publicitaire (eteint par defaut) */
+  .bar-row{display:flex;align-items:center;gap:8px;margin:5px 0;font-size:13px;}
+  .bar-row .b-lab{flex:0 0 42%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--texte-doux);}
+  .bar-row .b-track{flex:1;height:9px;background:var(--beige);border-radius:99px;overflow:hidden;}
+  .bar-row .b-fill{height:100%;background:var(--vert);border-radius:99px;}
+  .bar-row .b-val{flex:0 0 34px;text-align:right;font-weight:800;}
+  .adm-tag{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-radius:99px;padding:2px 7px;margin-left:6px;}
+  .adm-tag.ko{background:#fde8e3;color:#b23c22;}
+  .adm-tag.ok{background:#e3f3ea;color:#1F9E67;}
+  html[data-theme="dark"] .adm-tag.ko{background:#4a2118;color:#f0a58e;}
+  html[data-theme="dark"] .adm-tag.ok{background:#173a2a;color:#7fd6a8;}
   .adslot{background:var(--blanc);border:1px dashed var(--bord);border-radius:16px;padding:14px;margin:14px 0;text-align:center;color:var(--texte-doux);font-size:12px;font-weight:700;}
+  .sponsor{display:flex;align-items:center;gap:12px;background:var(--blanc);border:1px solid var(--bord);border-radius:16px;padding:12px 14px;margin:14px 0;box-shadow:var(--ombre-douce);text-decoration:none;color:inherit;}
+  .sponsor img{width:44px;height:44px;border-radius:12px;object-fit:contain;background:var(--beige);flex-shrink:0;}
+  .sponsor .s-txt{flex:1;min-width:0;}
+  .sponsor .s-nom{font-weight:800;font-size:15px;}
+  .sponsor .s-base{font-size:13px;color:var(--texte-doux);}
+  .sponsor .s-tag{font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--texte-doux);border:1px solid var(--bord);border-radius:99px;padding:3px 7px;flex-shrink:0;}
   /* Back-office stats */
   .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:6px;}
   .statcard{background:var(--blanc);border:1px solid var(--bord);border-radius:18px;padding:16px;box-shadow:var(--ombre-douce);}
@@ -239,7 +256,7 @@
 <div class="app">
   <div class="topbar">
     <div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg></div>
-    <div class="brand">Coup d'Aile<small>J'ai trouvé un oiseau</small></div>
+    <div class="brand">Coup de Patte<small>J'ai trouvé un oiseau</small></div>
     <div style="margin-left:auto;display:flex;align-items:center;gap:2px">
       <button class="back" id="backBtn" onclick="goBack()">Retour</button>
       <button id="gearBtn" onclick="showScreen('reglages')" aria-label="Réglages" style="background:none;border:none;color:var(--texte-doux);cursor:pointer;padding:8px;display:flex"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 7 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 1.1-2.7H1a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 2.6 7a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H7a1.6 1.6 0 0 0 1-1.5V1a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 2.7 1.1 1.6 1.6 0 0 0 .3-1.8l-.1.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V7a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg></button>
@@ -266,7 +283,7 @@
       <button class="opt" onclick="showScreen('gestes')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span><b>Les bons gestes</b><span class="chev">&rsaquo;</span></button>
       <button class="opt" onclick="showScreen('especes')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg></span><b>Fiches espèces</b><span class="chev">&rsaquo;</span></button>
       <div id="adHome"></div>
-      <p class="disclaimer">Coup d'Aile informe et oriente, sans remplacer l'avis d'un centre de sauvegarde ou d'un vétérinaire. Conseils fondés sur la LPO et l'OFB.</p>
+      <p class="disclaimer">Coup de Patte informe et oriente, sans remplacer l'avis d'un centre de sauvegarde ou d'un vétérinaire. Conseils fondés sur la LPO et l'OFB.</p>
     </section>
 
     <!-- URGENCE 1 a 4 -->
@@ -506,7 +523,7 @@
         <a href="https://www.lpo.fr/decouvrir-la-nature/conseils-biodiversite/conseils-biodiversite/accueillir-la-faune-sauvage/cohabiter-avec-les-martinets" target="_blank" rel="noopener">LPO, Cohabiter avec les martinets</a> : martinet au sol.<br>
         <a href="https://www.lpo.fr/media/read/9877/file/SECOURIR%20ANIMAL%20DETRESSE%202024V5WEB.pdf" target="_blank" rel="noopener">LPO, guide Secourir un animal en détresse</a> (28 pages).
       </div>
-      <p class="disclaimer">Coup d'Aile te guide, sans remplacer l'avis d'un centre de sauvegarde ou d'un vétérinaire.</p>
+      <p class="disclaimer">Coup de Patte te guide, sans remplacer l'avis d'un centre de sauvegarde ou d'un vétérinaire.</p>
     </section>
 
     <!-- REGLAGES -->
@@ -580,25 +597,25 @@
     <section class="screen" id="mentions">
       <h1 class="title">Mentions légales</h1>
       <div class="section-label">Éditeur</div>
-      <div class="card"><p style="font-size:14px;line-height:1.6">L'application Coup d'Aile est éditée par DAFFOURD INVEST, société par actions simplifiée (SAS).<br>Siège social : 43 rue Sabine et Miron Zlatin, Apt 802, Résidence Lez in Art, 34000 Montpellier, France.<br>SIREN : 810 176 818. RCS Montpellier 810 176 818. SIRET du siège : 810 176 818 00021. TVA intracommunautaire : FR11 810176818.<br>Directeur de la publication : Vincent Daffourd, président.<br>Contact : daffourd@gmail.com, 06 20 08 09 79.</p></div>
+      <div class="card"><p style="font-size:14px;line-height:1.6">L'application Coup de Patte est éditée par l'association Coup de Patte, association régie par la loi du 1<sup>er</sup> juillet 1901.<br>Siège social : 1 impasse du Parc, 34130 Saint-Aunès, France.<br>Directrice de la publication : Anne Simonot.<br>Contact : 06 15 50 77 46.</p></div>
       <div class="section-label">Diffusion</div>
       <div class="card"><p style="font-size:14px;line-height:1.6">La diffusion de l'application est assurée par l'association Plumage, représentée par sa fondatrice, Madame Anne Simonot. Contact via l'éditeur ci-dessus.</p></div>
       <div class="section-label">Hébergement</div>
       <div class="card"><p style="font-size:14px;line-height:1.6">Application hébergée par Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis (vercel.com).<br>Les données et l'authentification sont hébergées par Supabase (Supabase Inc.), qui agit comme sous-traitant au sens du RGPD.</p></div>
       <div class="section-label">Données personnelles</div>
-      <div class="card"><p style="font-size:14px;line-height:1.6">Coup d'Aile collecte le minimum de données : ton adresse email (connexion par lien magique) et les informations que tu ajoutes volontairement (carnet d'observations, profil bénévole, fiche association). Ton carnet est privé. Les coordonnées d'un bénévole ne sont visibles que s'il choisit de les exposer. La géolocalisation n'est utilisée qu'avec ton accord, pour trouver les centres proches, et n'est pas conservée. Conformément au RGPD, tu disposes d'un droit d'accès, de rectification et de suppression de tes données en écrivant à daffourd@gmail.com. Aucune donnée n'est vendue.</p></div>
+      <div class="card"><p style="font-size:14px;line-height:1.6">Coup de Patte collecte le minimum de données : ton adresse email (connexion par lien magique) et les informations que tu ajoutes volontairement (carnet d'observations, profil bénévole, fiche association). Ton carnet est privé. Les coordonnées d'un bénévole ne sont visibles que s'il choisit de les exposer. La géolocalisation n'est utilisée qu'avec ton accord, pour trouver les centres proches, et n'est pas conservée. Conformément au RGPD, tu disposes d'un droit d'accès, de rectification et de suppression de tes données en contactant l'association Coup de Patte au 06 15 50 77 46, ou par courrier au 1 impasse du Parc, 34130 Saint-Aunès. Aucune donnée n'est vendue.</p></div>
       <div class="section-label">Propriété intellectuelle</div>
       <div class="card"><p style="font-size:14px;line-height:1.6">Les contenus de l'application (textes, visuels, code) sont protégés. Les conseils de secours s'appuient sur des sources publiques citées, notamment la LPO et l'OFB. Toute reproduction sans autorisation est interdite.</p></div>
       <div class="section-label">Responsabilité</div>
-      <div class="card"><p style="font-size:14px;line-height:1.6">Coup d'Aile informe et oriente, sans remplacer l'avis d'un centre de sauvegarde de la faune sauvage ou d'un vétérinaire. En cas de doute ou d'urgence, contacte un centre habilité. L'éditeur ne saurait être tenu responsable des décisions prises à partir des informations fournies.</p></div>
+      <div class="card"><p style="font-size:14px;line-height:1.6">Coup de Patte informe et oriente, sans remplacer l'avis d'un centre de sauvegarde de la faune sauvage ou d'un vétérinaire. En cas de doute ou d'urgence, contacte un centre habilité. L'éditeur ne saurait être tenu responsable des décisions prises à partir des informations fournies.</p></div>
       <p class="disclaimer">Dernière mise à jour : 8 juillet 2026.</p>
     </section>
 
     <section class="screen" id="cgu">
       <h1 class="title">Conditions générales d'utilisation</h1>
-      <div class="card"><p style="font-size:14px;line-height:1.6">En utilisant Coup d'Aile, tu acceptes les présentes conditions.</p></div>
+      <div class="card"><p style="font-size:14px;line-height:1.6">En utilisant Coup de Patte, tu acceptes les présentes conditions.</p></div>
       <div class="section-label">1. Objet</div>
-      <div class="card"><p style="font-size:14px;line-height:1.6">Coup d'Aile est une application gratuite d'aide aux personnes qui trouvent un oiseau en détresse : gestes d'urgence, orientation vers les centres de sauvegarde, information et communauté d'entraide.</p></div>
+      <div class="card"><p style="font-size:14px;line-height:1.6">Coup de Patte est une application gratuite d'aide aux personnes qui trouvent un oiseau en détresse : gestes d'urgence, orientation vers les centres de sauvegarde, information et communauté d'entraide.</p></div>
       <div class="section-label">2. Accès et compte</div>
       <div class="card"><p style="font-size:14px;line-height:1.6">L'application est accessible gratuitement. Certaines fonctions (carnet, bénévolat, espace associations) nécessitent un compte créé par un lien magique envoyé par email. Tu es responsable de l'accès à ta boîte mail.</p></div>
       <div class="section-label">3. Règles de la communauté</div>
@@ -606,11 +623,11 @@
       <div class="section-label">4. Contributions</div>
       <div class="card"><p style="font-size:14px;line-height:1.6">Les informations que tu proposes (proposition ou signalement de centre, fiche association) sont vérifiées avant publication. L'éditeur peut refuser, modifier ou retirer tout contenu.</p></div>
       <div class="section-label">5. Bon usage et loi</div>
-      <div class="card"><p style="font-size:14px;line-height:1.6">Coup d'Aile ne remplace pas un professionnel. Tu t'engages à respecter la loi, notamment la protection des espèces sauvages : la détention d'un oiseau sauvage est interdite, il doit être confié à un centre habilité.</p></div>
+      <div class="card"><p style="font-size:14px;line-height:1.6">Coup de Patte ne remplace pas un professionnel. Tu t'engages à respecter la loi, notamment la protection des espèces sauvages : la détention d'un oiseau sauvage est interdite, il doit être confié à un centre habilité.</p></div>
       <div class="section-label">6. Responsabilité</div>
       <div class="card"><p style="font-size:14px;line-height:1.6">L'application est fournie en l'état. L'éditeur ne garantit ni l'absence d'erreurs ni une disponibilité permanente, et ne saurait être tenu responsable des dommages liés à l'usage de l'application ou aux relations entre membres.</p></div>
       <div class="section-label">7. Données personnelles</div>
-      <div class="card"><p style="font-size:14px;line-height:1.6">Le traitement des données est décrit dans les mentions légales. Tu peux demander la suppression de ton compte et de tes données à daffourd@gmail.com.</p></div>
+      <div class="card"><p style="font-size:14px;line-height:1.6">Le traitement des données est décrit dans les mentions légales. Tu peux demander la suppression de ton compte et de tes données auprès de l'association Coup de Patte, au 06 15 50 77 46 ou par courrier au 1 impasse du Parc, 34130 Saint-Aunès.</p></div>
       <div class="section-label">8. Droit applicable</div>
       <div class="card"><p style="font-size:14px;line-height:1.6">Les présentes conditions sont soumises au droit français. En cas de litige, une solution amiable sera recherchée avant toute action.</p></div>
       <p class="disclaimer">Dernière mise à jour : 8 juillet 2026.</p>
@@ -954,7 +971,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
   var db = (window.supabase && window.supabase.createClient) ? window.supabase.createClient(SUPA_URL, SUPA_KEY) : null;
   var currentUser=null, myObs=[];
   function escapeH(s){ return (s==null?'':String(s)).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
-  var NIVEAUX=[[0,'Nouveau membre'],[3,'Pioupiou'],[8,'Observateur'],[15,'Explorateur'],[30,'Jeune sauveur'],[50,'Sauveur'],[90,'Protecteur des oiseaux'],[150,'Gardien des oiseaux'],[250,"Ambassadeur Coup d'Aile"],[400,"Fondateur Coup d'Aile"]];
+  var NIVEAUX=[[0,'Nouveau membre'],[3,'Pioupiou'],[8,'Observateur'],[15,'Explorateur'],[30,'Jeune sauveur'],[50,'Sauveur'],[90,'Protecteur des oiseaux'],[150,'Gardien des oiseaux'],[250,"Ambassadeur Coup de Patte"],[400,"Fondateur Coup de Patte"]];
   function niveauInfo(pl){ var idx=0; for(var i=0;i<NIVEAUX.length;i++){ if(pl>=NIVEAUX[i][0]) idx=i; } var next=NIVEAUX[idx+1]||null; return {nom:NIVEAUX[idx][1], seuil:NIVEAUX[idx][0], next:next?next[1]:null, nextSeuil:next?next[0]:null}; }
   function niveauNom(pl){ return niveauInfo(pl).nom; }
   var BADGES=[
@@ -1005,12 +1022,29 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
     _lastEmail=e;
     var btn=document.getElementById('magicBtn'); if(btn) btn.disabled=true;
     if(m)m.textContent='Envoi en cours...';
-    db.auth.signInWithOtp({email:e, options:{shouldCreateUser:true, emailRedirectTo:'https://coup-daile.vercel.app'}}).then(function(r){
+    // Redirection calculee depuis l'adresse reellement visitee, pour que le lien de
+    // connexion ramene sur le bon domaine (coupdepatte.eu comme coup-daile.vercel.app).
+    db.auth.signInWithOtp({email:e, options:{shouldCreateUser:true, emailRedirectTo:location.origin}}).then(function(r){
       if(btn) btn.disabled=false;
-      if(r.error){ if(m)m.textContent = /rate|seconds|limit|too many/i.test(r.error.message)?"Trop de tentatives d'affilée. Attends une minute puis réessaie.":('Erreur : '+r.error.message); return; }
+      if(r.error){ if(m)m.textContent = authErrLabel(r.error.message); return; }
       var z=document.getElementById('otpZone'); if(z) z.style.display='block';
       if(m)m.textContent='Email envoyé à '+e+'. Ouvre ta boîte et regarde les spams.';
+    }, function(err){
+      if(btn) btn.disabled=false;
+      if(m) m.textContent = authErrLabel(err && err.message ? err.message : String(err));
     });
+  }
+  // Traduit une erreur d'authentification en message actionnable.
+  // "Failed to fetch" ne veut pas dire que le serveur a refuse : la requete n'est
+  // jamais partie. Presque toujours : hors-ligne, bloqueur de contenu, VPN ou relais prive.
+  function authErrLabel(msg){
+    msg = String(msg||'');
+    if(/rate|seconds|limit|too many/i.test(msg)) return "Trop de tentatives d'affilée. Attends une minute puis réessaie.";
+    if(/failed to fetch|networkerror|load failed|network request failed/i.test(msg)){
+      if(navigator.onLine === false) return "Tu sembles hors ligne. Reconnecte-toi à Internet puis réessaie.";
+      return "Impossible de joindre le serveur. Ta connexion fonctionne, donc la requête est probablement bloquée : bloqueur de publicités, VPN, ou relais privé iCloud. Désactive-les pour ce site, ou essaie depuis un autre réseau.";
+    }
+    return 'Erreur : ' + msg;
   }
   function verifyOtp(){
     var m=document.getElementById('authMsg');
@@ -1043,10 +1077,21 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
   function signOut(){ db.auth.signOut().then(function(){ currentUser=null; myObs=[]; renderCompte(); }); }
   function loadObs(){ if(!db||!currentUser) return; db.from('observations').select('*').order('created_at',{ascending:false}).then(function(r){ myObs=r.data||[]; renderCompte(); }); }
   function reloadObs(cb){ if(!db||!currentUser){ if(cb)cb(); return; } db.from('observations').select('*').order('created_at',{ascending:false}).then(function(rr){ myObs=rr.data||[]; renderCompte(); if(cb)cb(); }); }
-  function addObs(){ var m=document.getElementById('obsMsg'); if(!currentUser){ if(m)m.textContent='Connecte-toi d\'abord pour tenir ton carnet.'; return; } var espece=(document.getElementById('obsEspece')||{}).value, issue=(document.getElementById('obsIssue')||{}).value, lieu=(document.getElementById('obsLieu')||{}).value; if(!espece){ if(m){m.style.color='';m.textContent='Choisis une espèce dans la liste.';} return; } if(m){m.style.color='';m.textContent=_editId?'Mise à jour...':'Enregistrement...';} var done=function(verbe){ reloadObs(function(){ var mm=document.getElementById('obsMsg'); if(mm){ mm.style.color='#1F9E67'; mm.innerHTML='&#10003; '+escapeH(espece)+' '+verbe+'.'; } var cs=document.getElementById('monCarnet'); if(cs&&cs.scrollIntoView){ try{cs.scrollIntoView({behavior:'smooth',block:'start'});}catch(_){cs.scrollIntoView();} } }); }; if(_editId){ var eid=_editId; _editId=null; db.from('observations').update({espece:espece,issue:issue,lieu:lieu}).eq('id',eid).then(function(r){ if(r.error){ _editId=eid; if(m){m.style.color='#c0392b';m.textContent='Erreur : '+r.error.message;} return; } done('mis à jour'); }); } else { db.from('observations').insert({espece:espece,issue:issue,lieu:lieu,user_id:currentUser.id}).select().then(function(r){ if(r.error){ if(m){m.style.color='#c0392b';m.textContent='Erreur : '+r.error.message;} return; } done('ajouté à ton carnet'); }); } }
+  function addObs(){ var m=document.getElementById('obsMsg'); if(!currentUser){ if(m)m.textContent='Connecte-toi d\'abord pour tenir ton carnet.'; return; } var espece=(document.getElementById('obsEspece')||{}).value, issue=(document.getElementById('obsIssue')||{}).value, lieu=(document.getElementById('obsLieu')||{}).value; if(!espece){ if(m){m.style.color='';m.textContent='Choisis une espèce dans la liste.';} return; } if(m){m.style.color='';m.textContent=_editId?'Mise à jour...':'Enregistrement...';} var done=function(verbe){ reloadObs(function(){ var mm=document.getElementById('obsMsg'); if(mm){ mm.style.color='#1F9E67'; mm.innerHTML='&#10003; '+escapeH(espece)+' '+verbe+'.'; } var cs=document.getElementById('monCarnet'); if(cs&&cs.scrollIntoView){ try{cs.scrollIntoView({behavior:'smooth',block:'start'});}catch(_){cs.scrollIntoView();} } }); }; if(_editId){ var eid=_editId; _editId=null; db.from('observations').update({espece:espece,issue:issue,lieu:lieu}).eq('id',eid).eq('user_id',currentUser.id).select().then(function(r){ if(r.error){ _editId=eid; if(m){m.style.color='#c0392b';m.textContent='Erreur : '+r.error.message;} return; } if(!r.data||!r.data.length){ _editId=eid; if(m){m.style.color='#c0392b';m.textContent='Modification refusée par la base. La règle obs_update_own est absente.';} return; } done('mis à jour'); }); } else { db.from('observations').insert({espece:espece,issue:issue,lieu:lieu,user_id:currentUser.id}).select().then(function(r){ if(r.error){ if(m){m.style.color='#c0392b';m.textContent='Erreur : '+r.error.message;} return; } done('ajouté à ton carnet'); }); } }
   function editObs(id){ var o=myObs.filter(function(x){return x.id===id;})[0]; if(!o) return; _editId=id; renderCompte(); var f=document.getElementById('ajoutCarnet'); if(f&&f.scrollIntoView){ try{f.scrollIntoView({behavior:'smooth',block:'start'});}catch(_){} } var m=document.getElementById('obsMsg'); if(m){ m.style.color=''; m.textContent='Modifie les champs puis Mettre à jour.'; } }
   function cancelEdit(){ _editId=null; renderCompte(); }
-  function delObs(id){ var o=myObs.filter(function(x){return x.id===id;})[0]; if(!o) return; if(!confirm('Supprimer '+(o.espece||'cette observation')+' de ton carnet ?')) return; db.from('observations').delete().eq('id',id).then(function(r){ if(r.error){ alert('Erreur : '+r.error.message); return; } if(_editId===id)_editId=null; reloadObs(function(){ var mm=document.getElementById('obsMsg'); if(mm){ mm.style.color='#1F9E67'; mm.innerHTML='&#10003; Observation supprimée.'; } }); }); }
+  function delObs(id){
+    var o=myObs.filter(function(x){return x.id===id;})[0]; if(!o) return;
+    if(!db||!currentUser) return;
+    if(!confirm('Supprimer '+(o.espece||'cette observation')+' de ton carnet ?')) return;
+    var m=document.getElementById('obsMsg'); if(m){ m.style.color=''; m.textContent='Suppression...'; }
+    db.from('observations').delete().eq('id',id).eq('user_id',currentUser.id).select().then(function(r){
+      if(r.error){ if(m){ m.style.color='#c0392b'; m.textContent='Erreur : '+r.error.message; } return; }
+      if(!r.data || !r.data.length){ if(m){ m.style.color='#c0392b'; m.textContent='Suppression refusée par la base. La règle obs_delete_own est absente.'; } return; }
+      if(_editId===id) _editId=null;
+      reloadObs(function(){ var mm=document.getElementById('obsMsg'); if(mm){ mm.style.color='#1F9E67'; mm.innerHTML='&#10003; Observation supprimée.'; } });
+    });
+  }
   var myBenevole=null;
   function val(id){ var e=document.getElementById(id); return e? e.value : ''; }
   function loadMyBenevole(){ if(!db||!currentUser) return; db.from('benevoles').select('*').eq('user_id',currentUser.id).then(function(r){ myBenevole=(r.data&&r.data[0])||null; renderCompte(); }); }
@@ -1073,28 +1118,164 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
   function renderBenevoles(){ var el=document.getElementById('benevolesList'); if(!el) return; if(!db){ el.innerHTML='<p class="sub">Service indisponible.</p>'; return; } if(!currentUser){ el.innerHTML='<div class="callout">Connecte-toi dans l\'onglet Compte pour voir les bénévoles.</div>'; return; } el.innerHTML='<p class="meta" style="padding:6px 0">Chargement...</p>'; db.from('benevoles').select('*').eq('actif',true).order('created_at',{ascending:false}).then(function(r){ var list=r.data||[]; if(!list.length){ el.innerHTML='<div class="callout">Pas encore de bénévole inscrit. Sois le premier depuis l\'onglet Compte.</div>'; return; } el.innerHTML='<div class="card" style="padding:6px 16px">'+list.map(function(b){ var c=[]; if(b.contact_tel) c.push('<a class="btn btn-ghost btn-sm" href="tel:'+escapeH(b.contact_tel)+'">Appeler</a>'); if(b.contact_email) c.push('<a class="btn btn-ghost btn-sm" href="mailto:'+escapeH(b.contact_email)+'">Email</a>'); if(b.contact_insta) c.push('<a class="btn btn-ghost btn-sm" href="https://instagram.com/'+escapeH(String(b.contact_insta).replace(/^@/,''))+'" target="_blank" rel="noopener">Instagram</a>'); return '<div class="centre"><div style="flex:1"><h4>'+(escapeH(b.pseudo)||'Bénévole')+'</h4><div class="meta">'+[escapeH(b.zone),escapeH(b.dispos),escapeH(b.aides)].filter(Boolean).join(' · ')+'</div>'+(c.length?'<div class="row-btns" style="margin-top:9px">'+c.join('')+'</div>':'<div class="meta" style="margin-top:6px">Aucun contact exposé</div>')+'</div></div>'; }).join('')+'</div>'; }); }
   var myAsso=null;
   function loadMyAsso(){ if(!db||!currentUser) return; db.from('associations').select('*').eq('user_id',currentUser.id).then(function(r){ myAsso=(r.data&&r.data[0])||null; var s=document.getElementById('assos'); if(s&&s.classList.contains('active')) renderAssos(); }); }
-  function renderAssos(){ var el=document.getElementById('assosView'); if(!el) return; if(!db){ el.innerHTML='<p class="sub">Service indisponible.</p>'; return; } if(!currentUser){ el.innerHTML='<div class="callout">Connecte-toi dans l\'onglet Compte pour inscrire ton association et voir les bénévoles.</div>'; return; } var a=myAsso||{}; function v(x){ return escapeH(x==null?'':x); } el.innerHTML='<p class="sub">Inscris ta structure et trouve des bénévoles près de chez toi. La vérification (RNA ou SIREN) est faite avant publication.</p><div class="card"><input class="field" id="asNom" placeholder="Nom de l\'association" value="'+v(a.nom)+'" style="margin-bottom:8px"><input class="field" id="asRna" placeholder="Numéro RNA ou SIREN" value="'+v(a.rna_siren)+'" style="margin-bottom:8px"><input class="field" id="asEmail" placeholder="Email de contact" value="'+v(a.email)+'" style="margin-bottom:8px"><input class="field" id="asZone" placeholder="Zone (département, ville)" value="'+v(a.zone)+'" style="margin-bottom:8px"><input class="field" id="asBesoins" placeholder="Besoins (ex : transport, accueil)" value="'+v(a.besoins)+'" style="margin-bottom:8px"><button class="btn btn-primary" onclick="saveAsso()">'+(a.id?'Mettre à jour':'Inscrire mon association')+'</button><div id="asMsg" class="meta" style="margin-top:8px">'+(a.id?(a.verifiee?'Association vérifiée.':'En attente de vérification.'):'')+'</div></div><button class="btn btn-primary" onclick="showScreen(\'benevoles\')">Voir les bénévoles</button><p class="disclaimer">La vérification complète et le tableau de bord arrivent avec le back-office. Les échanges avec les bénévoles se font hors plateforme.</p>'; }
-  function saveAsso(){ var m=document.getElementById('asMsg'); var row={user_id:currentUser.id, nom:val('asNom'), rna_siren:val('asRna'), email:val('asEmail'), zone:val('asZone'), besoins:val('asBesoins')}; if(!row.nom){ if(m)m.textContent='Indique au moins le nom.'; return; } if(m)m.textContent='Enregistrement...'; var q = myAsso ? db.from('associations').update(row).eq('user_id',currentUser.id).select() : db.from('associations').insert(row).select(); q.then(function(r){ if(r.error){ if(m)m.textContent='Erreur : '+r.error.message; } else { myAsso=(r.data&&r.data[0])||row; renderAssos(); } }); }
-  if(db){ db.auth.getSession().then(function(r){ currentUser=r.data.session?r.data.session.user:null; renderCompte(); updateAdminUI(); if(currentUser){ loadObs(); loadMyBenevole(); loadMyAsso(); } }); db.auth.onAuthStateChange(function(_e,s){ currentUser=s?s.user:null; renderCompte(); updateAdminUI(); if(currentUser){ loadObs(); loadMyBenevole(); loadMyAsso(); } }); }
-
-  // ================= Regie publicitaire (prete mais eteinte) =================
-  var ADS_ON = false; // basculer a true pour activer les emplacements
-  function renderAds(){
-    var slots=['adHome'];
-    slots.forEach(function(id){ var el=document.getElementById(id); if(!el) return;
-      el.innerHTML = ADS_ON ? '<div class="adslot">Emplacement partenaire</div>' : '';
+  // ================= Annuaire des associations, refuges et centres =================
+  var ASSO_TYPES = ['Association de protection','Refuge','Centre de sauvegarde','Clinique vétérinaire','Groupe local LPO','Autre structure'];
+  var _assoMode = 'annuaire';
+  var _assoList = null;
+  function setAssoMode(m){ _assoMode = m; renderAssos(); }
+  function assoTypeOptions(sel){ return '<option value="">Type de structure</option>' + ASSO_TYPES.map(function(t){ return '<option value="'+escapeH(t)+'"'+(t===sel?' selected':'')+'>'+escapeH(t)+'</option>'; }).join(''); }
+  function assoDeptOptions(sel){ var o='<option value="">Tous les départements</option>'; for(var i=0;i<DEPTS.length;i++){ var c=DEPTS[i][0], n=DEPTS[i][1]; o+='<option value="'+escapeH(c)+'"'+(c===sel?' selected':'')+'>'+escapeH(c+' - '+n)+'</option>'; } return o; }
+  function renderAssos(){
+    var el=document.getElementById('assosView'); if(!el) return;
+    if(!db){ el.innerHTML='<p class="sub">Service indisponible.</p>'; return; }
+    var seg='<div class="seg">'
+      +'<button class="'+(_assoMode==='annuaire'?'on':'')+'" onclick="setAssoMode(\'annuaire\')">Annuaire</button>'
+      +'<button class="'+(_assoMode==='moi'?'on':'')+'" onclick="setAssoMode(\'moi\')">Ma structure</button>'
+      +'</div>';
+    el.innerHTML = seg + '<div id="assoBody"></div>';
+    if(_assoMode==='annuaire') renderAssoAnnuaire(); else renderAssoForm();
+  }
+  function renderAssoAnnuaire(){
+    var box=document.getElementById('assoBody'); if(!box) return;
+    box.innerHTML='<p class="sub">Les structures qui recueillent et soignent les oiseaux, près de chez toi. Chaque fiche est vérifiée avant publication.</p>'
+      +'<input class="field" id="assoQ" placeholder="Rechercher un nom, une ville" oninput="filterAssos()" style="margin-bottom:8px">'
+      +'<select class="field" id="assoDept" onchange="filterAssos()" style="margin-bottom:8px">'+assoDeptOptions('')+'</select>'
+      +'<select class="field" id="assoType" onchange="filterAssos()" style="margin-bottom:12px">'+assoTypeOptions('')+'</select>'
+      +'<div id="assoResults"><p class="meta">Chargement...</p></div>'
+      +'<div style="height:10px"></div><button class="btn btn-ghost" onclick="showScreen(\'signaler\')">Une structure manque ? Signale-la</button>';
+    if(_assoList){ filterAssos(); return; }
+    db.from('associations').select('*').eq('verifiee',true).order('nom',{ascending:true}).then(function(r){
+      if(r.error){ var t=document.getElementById('assoResults'); if(t) t.innerHTML='<div class="callout">Annuaire indisponible pour le moment.</div>'; return; }
+      _assoList = r.data||[]; filterAssos();
     });
   }
+  function filterAssos(){
+    var box=document.getElementById('assoResults'); if(!box||!_assoList) return;
+    var q=(val('assoQ')||'').toLowerCase().trim(), dp=val('assoDept'), tp=val('assoType');
+    var list=_assoList.filter(function(a){
+      if(dp && String(a.dept||'')!==dp) return false;
+      if(tp && String(a.type||'')!==tp) return false;
+      if(q){ var hay=[a.nom,a.ville,a.zone,a.description].filter(Boolean).join(' ').toLowerCase(); if(hay.indexOf(q)<0) return false; }
+      return true;
+    });
+    if(!list.length){ box.innerHTML='<div class="callout">Aucune structure ne correspond. Élargis ta recherche, ou signale une structure manquante.</div>'; return; }
+    box.innerHTML='<p class="meta" style="padding:4px 0">'+list.length+' structure'+(list.length>1?'s':'')+'</p><div class="card" style="padding:6px 16px">'+list.map(assoFicheHtml).join('')+'</div>';
+  }
+  function assoFicheHtml(a){
+    var c=[];
+    if(a.tel) c.push('<a class="btn btn-primary btn-sm" href="tel:'+escapeH(a.tel)+'">Appeler</a>');
+    if(a.email) c.push('<a class="btn btn-ghost btn-sm" href="mailto:'+escapeH(a.email)+'">Email</a>');
+    if(a.site) c.push('<a class="btn btn-ghost btn-sm" href="'+escapeH(/^https?:/.test(a.site)?a.site:'https://'+a.site)+'" target="_blank" rel="noopener">Site</a>');
+    if(a.ville) c.push('<a class="btn btn-ghost btn-sm" href="https://www.openstreetmap.org/search?query='+encodeURIComponent((a.nom||'')+' '+a.ville)+'" target="_blank" rel="noopener">Itinéraire</a>');
+    var meta=[escapeH(a.type||''), escapeH(a.ville||''), a.dept?escapeH(a.dept):'', escapeH(a.zone||'')].filter(Boolean).join(' · ');
+    return '<div class="centre"><div style="flex:1;min-width:0"><h4>'+escapeH(a.nom||'Structure')+'</h4>'
+      +(meta?'<div class="meta">'+meta+'</div>':'')
+      +(a.description?'<div class="meta" style="margin-top:5px">'+escapeH(a.description)+'</div>':'')
+      +(a.besoins?'<div class="meta" style="margin-top:5px"><strong>Besoins :</strong> '+escapeH(a.besoins)+'</div>':'')
+      +(c.length?'<div class="row-btns" style="margin-top:9px">'+c.join('')+'</div>':'')
+      +'</div></div>';
+  }
+  function renderAssoForm(){
+    var box=document.getElementById('assoBody'); if(!box) return;
+    if(!currentUser){ box.innerHTML='<div class="callout">Connecte-toi dans l\'onglet Compte pour inscrire ta structure.</div>'; return; }
+    var a=myAsso||{}; function v(x){ return escapeH(x==null?'':x); }
+    box.innerHTML='<p class="sub">Inscris ta structure dans l\'annuaire et trouve des bénévoles près de chez toi. La vérification (RNA ou SIREN) est faite avant publication.</p><div class="card">'
+      +'<input class="field" id="asNom" placeholder="Nom de la structure" value="'+v(a.nom)+'" style="margin-bottom:8px">'
+      +'<select class="field" id="asType" style="margin-bottom:8px">'+assoTypeOptions(a.type||'')+'</select>'
+      +'<input class="field" id="asRna" placeholder="Numéro RNA ou SIREN" value="'+v(a.rna_siren)+'" style="margin-bottom:8px">'
+      +'<input class="field" id="asVille" placeholder="Ville" value="'+v(a.ville)+'" style="margin-bottom:8px">'
+      +'<select class="field" id="asDept" style="margin-bottom:8px">'+assoDeptOptions(a.dept||'')+'</select>'
+      +'<input class="field" id="asTel" placeholder="Téléphone" value="'+v(a.tel)+'" style="margin-bottom:8px">'
+      +'<input class="field" id="asEmail" placeholder="Email de contact" value="'+v(a.email)+'" style="margin-bottom:8px">'
+      +'<input class="field" id="asSite" placeholder="Site internet" value="'+v(a.site)+'" style="margin-bottom:8px">'
+      +'<input class="field" id="asZone" placeholder="Zone d\'intervention" value="'+v(a.zone)+'" style="margin-bottom:8px">'
+      +'<textarea class="field" id="asDesc" rows="3" placeholder="Que fait ta structure ?" style="margin-bottom:8px">'+v(a.description)+'</textarea>'
+      +'<input class="field" id="asBesoins" placeholder="Besoins (ex : transport, accueil)" value="'+v(a.besoins)+'" style="margin-bottom:8px">'
+      +'<button class="btn btn-primary" onclick="saveAsso()">'+(a.id?'Mettre à jour':'Inscrire ma structure')+'</button>'
+      +'<div id="asMsg" class="meta" style="margin-top:8px">'+(a.id?(a.verifiee?'Structure vérifiée et publiée dans l\'annuaire.':'En attente de vérification par l\'équipe.'):'')+'</div></div>'
+      +'<button class="btn btn-ghost" onclick="showScreen(\'benevoles\')">Voir les bénévoles</button>'
+      +'<p class="disclaimer">Les échanges avec les bénévoles se font hors plateforme.</p>';
+  }
+  function saveAsso(){ var m=document.getElementById('asMsg'); if(!currentUser) return; var row={user_id:currentUser.id, nom:val('asNom'), type:val('asType'), rna_siren:val('asRna'), ville:val('asVille'), dept:val('asDept'), tel:val('asTel'), email:val('asEmail'), site:val('asSite'), zone:val('asZone'), description:val('asDesc'), besoins:val('asBesoins')}; if(!row.nom){ if(m)m.textContent='Indique au moins le nom.'; return; } if(m)m.textContent='Enregistrement...'; var q = myAsso ? db.from('associations').update(row).eq('user_id',currentUser.id).select() : db.from('associations').insert(row).select(); q.then(function(r){ if(r.error){ if(m)m.textContent='Erreur : '+r.error.message; return; } if(!r.data||!r.data.length){ if(m)m.textContent='Enregistrement refusé par la base.'; return; } myAsso=r.data[0]; _assoList=null; if(m)m.textContent='Enregistré. En attente de vérification.'; renderAssoForm(); }); }
+
+  if(db){ db.auth.getSession().then(function(r){ currentUser=r.data.session?r.data.session.user:null; renderCompte(); refreshAdminFlag(updateAdminUI); if(currentUser){ loadObs(); loadMyBenevole(); loadMyAsso(); } }); db.auth.onAuthStateChange(function(_e,s){ currentUser=s?s.user:null; renderCompte(); refreshAdminFlag(updateAdminUI); if(currentUser){ loadObs(); loadMyBenevole(); loadMyAsso(); } }); }
+
+  // ================= Regie sponsors (parrainage direct, sans cookie ni pistage) =================
+  // Aucune regie tierce, aucun cookie, aucun identifiant. Les cartes sponsor viennent de la table
+  // publique sponsors. Les compteurs d'impressions et de clics sont agreges par jour, sans donnee
+  // personnelle. Rien ne s'affiche tant qu'aucun sponsor actif n'existe pour l'emplacement.
+  var ADS_ON = true;
+  var AD_SLOTS = ['adHome'];
+  var _sponsors = null, _sponsorSeen = {};
+  function renderAds(){
+    if(!ADS_ON || !db){ AD_SLOTS.forEach(function(id){ var e=document.getElementById(id); if(e)e.innerHTML=''; }); return; }
+    if(_sponsors){ paintAds(); return; }
+    db.rpc('sponsors_actifs').then(function(r){
+      if(r.error){ _sponsors=[]; paintAds(); return; }
+      var d=r.data; if(!Array.isArray(d)){ try{ d=JSON.parse(d); }catch(e){ d=[]; } }
+      _sponsors = d||[]; paintAds();
+    });
+  }
+  function pickSponsor(slot){
+    var pool=(_sponsors||[]).filter(function(s){ return (s.emplacement||'adHome')===slot; });
+    if(!pool.length) return null;
+    var total=pool.reduce(function(a,s){ return a + (s.poids>0?s.poids:1); },0);
+    var t=Math.random()*total;
+    for(var i=0;i<pool.length;i++){ t -= (pool[i].poids>0?pool[i].poids:1); if(t<=0) return pool[i]; }
+    return pool[0];
+  }
+  function paintAds(){
+    AD_SLOTS.forEach(function(slot){
+      var el=document.getElementById(slot); if(!el) return;
+      var s=pickSponsor(slot);
+      if(!s){ el.innerHTML=''; return; }
+      var href = s.url ? (/^https?:/.test(s.url)?s.url:'https://'+s.url) : null;
+      var img = s.logo_url ? '<img src="'+escapeH(s.logo_url)+'" alt="" loading="lazy">' : '';
+      var inner = img + '<div class="s-txt"><div class="s-nom">'+escapeH(s.nom||'')+'</div>'
+        + (s.baseline?'<div class="s-base">'+escapeH(s.baseline)+'</div>':'') + '</div>'
+        + '<span class="s-tag">Soutien</span>';
+      if(href){
+        el.innerHTML = '<a class="sponsor" href="'+escapeH(href)+'" target="_blank" rel="noopener sponsored" onclick="sponsorEvent(\'' + escapeH(s.id) + '\',\'clic\')">'+inner+'</a>';
+      } else {
+        el.innerHTML = '<div class="sponsor">'+inner+'</div>';
+      }
+      if(!_sponsorSeen[s.id]){ _sponsorSeen[s.id]=1; sponsorEvent(s.id,'impression'); }
+    });
+  }
+  function sponsorEvent(id, type){ if(!db||!id) return; try{ db.rpc('sponsor_event',{p_sponsor:id, p_type:type}).then(function(){},function(){}); }catch(e){} }
 
   // ================= Back-office administrateur =================
-  var ADMIN_EMAIL = 'daffourd@gmail.com';
-  function isAdmin(){ return !!(currentUser && currentUser.email && currentUser.email.toLowerCase()===ADMIN_EMAIL.toLowerCase()); }
+  // Empreinte SHA-256 de l'adresse administratrice. Le depot est public : on n'y ecrit
+  // aucune adresse en clair. La securite reelle reste cote base (fonction is_admin()),
+  // ce test ne fait qu'afficher ou masquer l'onglet Back-office.
+  var ADMIN_HASHES = [
+    'ea2ecd5fd6a34f6928c3e95a0245aa373e529ef0d5aea2e9db02d623e39a32ee',
+    '5e4002dc86cbcd8f5667ec59b88cd4888d2883806f26f9dbe80f742cc0b4213a'
+  ];
+  var _isAdmin = false;
+  function isAdmin(){ return _isAdmin; }
+  function refreshAdminFlag(cb){
+    _isAdmin = false;
+    var mail = currentUser && currentUser.email ? currentUser.email.toLowerCase().trim() : '';
+    if(!mail || !window.crypto || !crypto.subtle){ if(cb) cb(); return; }
+    crypto.subtle.digest('SHA-256', new TextEncoder().encode(mail)).then(function(buf){
+      var hex=[].map.call(new Uint8Array(buf), function(b){ return ('00'+b.toString(16)).slice(-2); }).join('');
+      _isAdmin = (ADMIN_HASHES.indexOf(hex) >= 0);
+      if(cb) cb();
+    }, function(){ if(cb) cb(); });
+  }
   function updateAdminUI(){ var w=document.getElementById('adminLinkWrap'); if(w) w.style.display=isAdmin()?'block':'none'; }
   function renderAdmin(){
     var el=document.getElementById('adminView'); if(!el) return;
     if(!isAdmin()){ el.innerHTML='<div class="callout">Espace réservé à l\'administrateur. Connecte-toi avec le compte administrateur dans l\'onglet Compte.</div>'; return; }
-    el.innerHTML='<p class="sub">Réservé à l\'administrateur. Les statistiques sont anonymisées ; la liste des membres n\'est visible que de toi.</p><div id="admStats"><p class="meta">Chargement des statistiques...</p></div><div class="section-label">Membres inscrits</div><div id="admUsers"><p class="meta">Chargement...</p></div><div class="section-label">Modération des associations</div><div id="admMod"><p class="meta">Chargement...</p></div><div class="section-label">Contributions reçues</div><div id="admSignals"><p class="meta">Chargement...</p></div>';
-    loadAdminStats(); loadAdminUsers(); loadAdminMod(); loadAdminSignals();
+    el.innerHTML='<p class="sub">Réservé à l\'administrateur. Les statistiques sont anonymisées ; la liste des membres n\'est visible que de toi.</p>'
+      +'<div id="admStats"><p class="meta">Chargement des statistiques...</p></div>'
+      +'<div class="section-label">Statistiques détaillées</div><div id="admStats2"><p class="meta">Chargement...</p></div>'
+      +'<div class="section-label">Membres et modération</div><div id="admUsers"><p class="meta">Chargement...</p></div>'
+      +'<div class="section-label">Modération des structures</div><div id="admMod"><p class="meta">Chargement...</p></div>'
+      +'<div class="section-label">Contributions reçues</div><div id="admSignals"><p class="meta">Chargement...</p></div>'
+      +'<div class="section-label">Régie sponsors</div><div id="admSponsors"><p class="meta">Chargement...</p></div>';
+    loadAdminStats(); loadAdminStats2(); loadAdminUsers(); loadAdminMod(); loadAdminSignals(); loadAdminSponsors();
   }
   function loadAdminStats(){
     var box=document.getElementById('admStats'); if(!box) return;
@@ -1111,15 +1292,124 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
     var s=window._lastStats||{}; var rows=[['indicateur','valeur'],['membres',s.membres||0],['observations',s.observations||0],['confies_centre',s.confies_centre||0],['benevoles_actifs',s.benevoles_actifs||0],['associations',s.associations||0],['signalements',s.signalements||0]];
     var csv=rows.map(function(r){return r.join(',');}).join('\n'); var blob=new Blob([csv],{type:'text/csv'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='coup-daile-stats.csv'; a.click();
   }
+  function barsHtml(rows, labKey, valKey){
+    if(!rows || !rows.length) return '<p class="meta">Aucune donnée.</p>';
+    var max=rows.reduce(function(m,r){ return Math.max(m, Number(r[valKey])||0); },0)||1;
+    return rows.map(function(r){
+      var v=Number(r[valKey])||0, pct=Math.round(v/max*100);
+      return '<div class="bar-row"><div class="b-lab">'+escapeH(String(r[labKey]||''))+'</div>'
+        +'<div class="b-track"><div class="b-fill" style="width:'+pct+'%"></div></div>'
+        +'<div class="b-val">'+v+'</div></div>';
+    }).join('');
+  }
+  function loadAdminStats2(){
+    var box=document.getElementById('admStats2'); if(!box||!db) return;
+    db.rpc('stats_avancees').then(function(r){
+      if(r.error){ box.innerHTML='<div class="callout">Statistiques détaillées non configurées. Exécute la migration v19 dans Supabase.</div>'; return; }
+      var s=r.data; if(typeof s==='string'){ try{ s=JSON.parse(s); }catch(e){ s={}; } }
+      if(!s || !s.membres_total && s.membres_total!==0){ box.innerHTML='<div class="callout">Statistiques détaillées indisponibles.</div>'; return; }
+      window._lastStats2=s;
+      function card(v,k){ return '<div class="statcard"><div class="v">'+(v==null?0:v)+'</div><div class="k">'+k+'</div></div>'; }
+      var alertes='';
+      if(s.signal_a_traiter>0) alertes+='<div class="callout">'+s.signal_a_traiter+' contribution(s) à traiter.</div>';
+      if(s.asso_a_verifier>0)  alertes+='<div class="callout">'+s.asso_a_verifier+' structure(s) en attente de vérification.</div>';
+      box.innerHTML=alertes
+        +'<div class="stat-grid">'+card(s.membres_total,'Membres (registre)')+card(s.nouveaux_7j,'Nouveaux 7 j')+card(s.nouveaux_30j,'Nouveaux 30 j')
+        +card(s.actifs_7j,'Actifs 7 j')+card(s.actifs_30j,'Actifs 30 j')+card(s.membres_bloques,'Membres bloqués')+'</div>'
+        +'<div class="card" style="margin-top:10px"><div class="section-label" style="margin-top:0">Espèces les plus trouvées</div>'+barsHtml(s.top_especes,'espece','n')+'</div>'
+        +'<div class="card"><div class="section-label" style="margin-top:0">Issues des observations</div>'+barsHtml(s.par_issue,'issue','n')+'</div>'
+        +'<div class="card"><div class="section-label" style="margin-top:0">Observations par mois</div>'+barsHtml(s.par_mois,'mois','n')+'</div>'
+        +'<button class="btn btn-ghost" onclick="exportStats2()">Exporter le détail (CSV)</button>';
+    });
+  }
+  function exportStats2(){
+    var s=window._lastStats2||{}; var rows=[['bloc','cle','valeur']];
+    ['membres_total','membres_bloques','nouveaux_7j','nouveaux_30j','actifs_7j','actifs_30j','observations'].forEach(function(k){ rows.push(['global',k,s[k]||0]); });
+    (s.top_especes||[]).forEach(function(r){ rows.push(['espece', String(r.espece).replace(/,/g,' '), r.n]); });
+    (s.par_issue||[]).forEach(function(r){ rows.push(['issue', String(r.issue).replace(/,/g,' '), r.n]); });
+    (s.par_mois||[]).forEach(function(r){ rows.push(['mois', r.mois, r.n]); });
+    var csv=rows.map(function(r){return r.join(',');}).join('\n');
+    var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download='coup-daile-stats-detail.csv'; a.click();
+  }
+  function admSetBloque(uid, bloque){
+    if(!db) return;
+    if(bloque && !confirm('Bloquer ce membre ? Il ne pourra plus rien publier, et sa fiche bénévole ou association sera masquée.')) return;
+    db.rpc('admin_set_bloque',{p_user:uid, p_bloque:bloque}).then(function(r){
+      if(r.error){ alert('Erreur : '+r.error.message); return; } loadAdminUsers(); loadAdminStats2();
+    });
+  }
+  function admPurge(uid, email){
+    if(!db) return;
+    if(!confirm('Effacer toutes les données de '+(email||'ce membre')+' ? Observations, fiche bénévole, fiche structure, pseudo et avatar. Action irréversible.')) return;
+    db.rpc('admin_purge_user',{p_user:uid}).then(function(r){
+      if(r.error){ alert('Erreur : '+r.error.message); return; }
+      var d=r.data||{}; alert('Données effacées. '+(d.observations_supprimees||0)+' observation(s) supprimée(s).');
+      loadAdminUsers(); loadAdminStats(); loadAdminStats2();
+    });
+  }
+  function loadAdminSponsors(){
+    var box=document.getElementById('admSponsors'); if(!box||!db) return;
+    db.rpc('admin_sponsors').then(function(r){
+      if(r.error){ box.innerHTML='<div class="callout">Régie non configurée. Exécute la migration v19 dans Supabase.</div>'; return; }
+      var list=r.data; if(typeof list==='string'){ try{ list=JSON.parse(list); }catch(e){ list=[]; } }
+      list=list||[];
+      var form='<div class="card"><div class="section-label" style="margin-top:0">Nouveau sponsor</div>'
+        +'<input class="field" id="spNom" placeholder="Nom du sponsor" style="margin-bottom:8px">'
+        +'<input class="field" id="spBase" placeholder="Baseline (une ligne)" style="margin-bottom:8px">'
+        +'<input class="field" id="spUrl" placeholder="Lien (https://...)" style="margin-bottom:8px">'
+        +'<input class="field" id="spLogo" placeholder="URL du logo" style="margin-bottom:8px">'
+        +'<input class="field" id="spPoids" type="number" min="1" value="1" placeholder="Poids de diffusion" style="margin-bottom:8px">'
+        +'<button class="btn btn-primary" onclick="admAddSponsor()">Créer le sponsor (inactif)</button>'
+        +'<div id="spMsg" class="meta" style="margin-top:8px"></div></div>';
+      var rows = list.length ? '<div class="card" style="padding:6px 16px">'+list.map(function(x){
+        var imp=Number(x.impressions)||0, cl=Number(x.clics)||0, ctr=imp?((cl/imp*100).toFixed(1)+' %'):'0 %';
+        return '<div class="centre"><div style="flex:1;min-width:0"><h4>'+escapeH(x.nom||'')+'<span class="adm-tag '+(x.actif?'ok':'ko')+'">'+(x.actif?'Diffusé':'Éteint')+'</span></h4>'
+          +'<div class="meta">'+escapeH(x.baseline||'')+'</div>'
+          +'<div class="meta" style="margin-top:4px">'+imp+' impressions · '+cl+' clics · CTR '+ctr+' · poids '+(x.poids||1)+'</div>'
+          +'<div class="row-btns" style="margin-top:8px">'
+          +(x.actif?'<button class="btn btn-ghost btn-sm" onclick="admSponsorActif(\''+x.id+'\',false)">Éteindre</button>'
+                   :'<button class="btn btn-primary btn-sm" onclick="admSponsorActif(\''+x.id+'\',true)">Diffuser</button>')
+          +'<button class="btn btn-ghost btn-sm" onclick="admSponsorDel(\''+x.id+'\')">Supprimer</button>'
+          +'</div></div></div>';
+      }).join('')+'</div>' : '<p class="meta">Aucun sponsor. Rien ne s\'affiche dans l\'app.</p>';
+      box.innerHTML='<p class="meta" style="padding:2px 0 8px">Parrainage direct, sans cookie ni pistage. Les compteurs sont agrégés par jour, sans donnée personnelle.</p>'+rows+form;
+    });
+  }
+  function admAddSponsor(){
+    var m=document.getElementById('spMsg'); var nom=val('spNom');
+    if(!nom){ if(m)m.textContent='Indique au moins le nom.'; return; }
+    if(m)m.textContent='Création...';
+    db.from('sponsors').insert({nom:nom, baseline:val('spBase'), url:val('spUrl'), logo_url:val('spLogo'), poids:parseInt(val('spPoids')||'1',10)||1, actif:false, emplacement:'adHome'}).select().then(function(r){
+      if(r.error){ if(m)m.textContent='Erreur : '+r.error.message; return; }
+      if(m)m.textContent='Créé, éteint par défaut. Active-le quand tu es prêt.'; _sponsors=null; loadAdminSponsors();
+    });
+  }
+  function admSponsorActif(id, actif){
+    db.from('sponsors').update({actif:actif}).eq('id',id).select().then(function(r){
+      if(r.error){ alert('Erreur : '+r.error.message); return; } _sponsors=null; _sponsorSeen={}; loadAdminSponsors(); renderAds();
+    });
+  }
+  function admSponsorDel(id){
+    if(!confirm('Supprimer ce sponsor et ses statistiques ?')) return;
+    db.from('sponsors').delete().eq('id',id).select().then(function(r){
+      if(r.error){ alert('Erreur : '+r.error.message); return; } _sponsors=null; loadAdminSponsors(); renderAds();
+    });
+  }
   function loadAdminMod(){
     var box=document.getElementById('admMod'); if(!box||!db) return;
     db.from('associations').select('*').order('created_at',{ascending:false}).then(function(r){
       if(r.error){ box.innerHTML='<div class="callout">Modération non configurée. Ajoute les policies is_admin (voir fichier ETAT).</div>'; return; }
       var list=r.data||[]; if(!list.length){ box.innerHTML='<p class="meta">Aucune association à modérer.</p>'; return; }
-      box.innerHTML='<div class="card" style="padding:6px 16px">'+list.map(function(a){ return '<div class="centre"><div style="flex:1"><h4>'+escapeH(a.nom||'Association')+'</h4><div class="meta">'+escapeH(a.zone||'')+' · '+(a.verifiee?'Vérifiée':'En attente')+'</div><div class="row-btns" style="margin-top:8px">'+(a.verifiee?'<button class="btn btn-ghost btn-sm" onclick="modAsso(\''+a.id+'\',false)">Masquer</button>':'<button class="btn btn-primary btn-sm" onclick="modAsso(\''+a.id+'\',true)">Valider</button>')+'</div></div></div>'; }).join('')+'</div>';
+      list.sort(function(a,b){ return (a.verifiee?1:0)-(b.verifiee?1:0); });
+      box.innerHTML='<div class="card" style="padding:6px 16px">'+list.map(function(a){
+        var meta=[escapeH(a.type||''),escapeH(a.ville||''),escapeH(a.dept||''),escapeH(a.rna_siren||'')].filter(Boolean).join(' · ');
+        return '<div class="centre"><div style="flex:1;min-width:0"><h4>'+escapeH(a.nom||'Structure')+'<span class="adm-tag '+(a.verifiee?'ok':'ko')+'">'+(a.verifiee?'Dans l\'annuaire':'En attente')+'</span></h4>'
+        +(meta?'<div class="meta">'+meta+'</div>':'')
+        +(a.description?'<div class="meta" style="margin-top:4px">'+escapeH(String(a.description).slice(0,140))+'</div>':'')
+        +'<div class="row-btns" style="margin-top:8px">'+(a.verifiee?'<button class="btn btn-ghost btn-sm" onclick="modAsso(\''+a.id+'\',false)">Retirer de l\'annuaire</button>':'<button class="btn btn-primary btn-sm" onclick="modAsso(\''+a.id+'\',true)">Valider et publier</button>')+'</div></div></div>'; }).join('')+'</div>';
     });
   }
-  function modAsso(id, ok){ if(!db) return; db.from('associations').update({verifiee:ok}).eq('id',id).then(function(){ loadAdminMod(); }); }
+  function modAsso(id, ok){ if(!db) return; db.from('associations').update({verifiee:ok}).eq('id',id).select().then(function(r){ if(r.error){ alert('Erreur : '+r.error.message); return; } _assoList=null; loadAdminMod(); loadAdminStats2(); }); }
   function loadAdminSignals(){
     var box=document.getElementById('admSignals'); if(!box||!db) return;
     db.from('signalements').select('*').order('created_at',{ascending:false}).then(function(r){
@@ -1134,12 +1424,25 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
       if(r.error){ box.innerHTML='<div class="callout">Liste des membres non configurée. Exécute la fonction admin_users dans Supabase (voir ETAT).</div>'; return; }
       var list=r.data||[]; if(!Array.isArray(list)){ try{ list=JSON.parse(list); }catch(e){ list=[]; } }
       if(!list.length){ box.innerHTML='<p class="meta">Aucun membre inscrit pour l\'instant.</p>'; return; }
+      list.sort(function(a,b){ return (a.bloque?0:1)-(b.bloque?0:1); });
       var rows=list.map(function(u){
         var d=u.created_at?new Date(u.created_at).toLocaleDateString('fr-FR'):'';
-        var mod=u.has_benevole?(u.benevole_actif?'<button class="btn btn-ghost btn-sm" onclick="modBenevole(\''+u.id+'\',false)">Masquer le bénévole</button>':'<button class="btn btn-primary btn-sm" onclick="modBenevole(\''+u.id+'\',true)">Réactiver</button>'):'';
-        return '<div class="centre"><div style="flex:1"><h4>'+escapeH(u.email||'Membre')+'</h4><div class="meta">'+(u.pseudo?escapeH(u.pseudo)+' · ':'')+(u.obs||0)+' obs'+(u.has_asso?' · association':'')+(d?' · '+d:'')+'</div>'+(mod?'<div class="row-btns" style="margin-top:8px">'+mod+'</div>':'')+'</div></div>';
+        var vu=u.last_sign_in_at?new Date(u.last_sign_in_at).toLocaleDateString('fr-FR'):'jamais';
+        var btns=[];
+        if(u.has_benevole) btns.push(u.benevole_actif
+          ? '<button class="btn btn-ghost btn-sm" onclick="modBenevole(\''+u.id+'\',false)">Masquer le bénévole</button>'
+          : '<button class="btn btn-ghost btn-sm" onclick="modBenevole(\''+u.id+'\',true)">Réactiver</button>');
+        btns.push(u.bloque
+          ? '<button class="btn btn-primary btn-sm" onclick="admSetBloque(\''+u.id+'\',false)">Débloquer</button>'
+          : '<button class="btn btn-ghost btn-sm" onclick="admSetBloque(\''+u.id+'\',true)">Bloquer</button>');
+        btns.push('<button class="btn btn-ghost btn-sm" onclick="admPurge(\''+u.id+'\',\''+escapeH(u.email||'')+'\')">Effacer ses données</button>');
+        var tag=u.bloque?'<span class="adm-tag ko">Bloqué</span>':'';
+        return '<div class="centre"><div style="flex:1;min-width:0"><h4>'+escapeH(u.email||'Membre')+tag+'</h4>'
+          +'<div class="meta">'+(u.pseudo?escapeH(u.pseudo)+' · ':'')+(u.obs||0)+' obs'+(u.has_asso?' · structure':'')+(u.has_benevole?' · bénévole':'')+'</div>'
+          +'<div class="meta">Inscrit le '+d+' · dernière visite '+vu+'</div>'
+          +'<div class="row-btns" style="margin-top:8px">'+btns.join('')+'</div></div></div>';
       }).join('');
-      box.innerHTML='<div class="card" style="padding:6px 16px">'+rows+'</div><div style="height:10px"></div><button class="btn btn-ghost" onclick="adminDedupe()">Dédoublonner les profils</button><div id="admDedupeMsg" class="meta" style="margin-top:6px"></div>';
+      box.innerHTML='<p class="meta" style="padding:2px 0 8px">'+list.length+' membre'+(list.length>1?'s':'')+' inscrit'+(list.length>1?'s':'')+'.</p><div class="card" style="padding:6px 16px">'+rows+'</div><div style="height:10px"></div><button class="btn btn-ghost" onclick="adminDedupe()">Dédoublonner les profils</button><div id="admDedupeMsg" class="meta" style="margin-top:6px"></div>';
     });
   }
   function modBenevole(uid, actif){ if(!db) return; db.from('benevoles').update({actif:actif}).eq('user_id',uid).then(function(){ loadAdminUsers(); }); }

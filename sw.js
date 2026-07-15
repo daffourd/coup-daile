@@ -1,6 +1,11 @@
-// Service worker Coup d'Aile, Lot 1
+// Service worker Coup d'Aile
 // Cache le coeur vital pour un fonctionnement hors-ligne.
-const CACHE = 'coup-daile-v18';
+// REGLE : on ne met en cache QUE l'app-shell de notre propre origine.
+// Toute requete vers un service tiers (Supabase, Wikipedia, Open-Meteo, Base Adresse
+// Nationale, tuiles OpenStreetMap) part directement au reseau, sans jamais passer par
+// le cache. Sinon les donnees du carnet resteraient figees apres un ajout, une
+// modification ou une suppression.
+const CACHE = 'coup-daile-v19';
 const ASSETS = [
   './',
   './index.html',
@@ -24,17 +29,43 @@ self.addEventListener('activate', (e) => {
   );
 });
 
-// Stratégie: cache d'abord pour l'app shell, repli reseau, puis repli page d'accueil hors-ligne.
 self.addEventListener('fetch', (e) => {
-  if (e.request.method !== 'GET') return;
+  const req = e.request;
+  if (req.method !== 'GET') return;
+
+  let url;
+  try { url = new URL(req.url); } catch (_) { return; }
+
+  // Tout ce qui n'est pas notre origine part au reseau, sans cache et sans interception.
+  if (url.origin !== self.location.origin) return;
+
+  // Navigation : reseau d'abord, repli sur le cache si hors-ligne.
+  if (req.mode === 'navigate') {
+    e.respondWith(
+      fetch(req)
+        .then((resp) => {
+          const copy = resp.clone();
+          caches.open(CACHE).then((c) => c.put('./index.html', copy));
+          return resp;
+        })
+        .catch(() => caches.match('./index.html'))
+    );
+    return;
+  }
+
+  // App-shell (icones, manifest, ressources statiques) : cache d'abord.
   e.respondWith(
-    caches.match(e.request).then((cached) => {
+    caches.match(req).then((cached) => {
       if (cached) return cached;
-      return fetch(e.request).then((resp) => {
-        const copy = resp.clone();
-        caches.open(CACHE).then((c) => c.put(e.request, copy));
-        return resp;
-      }).catch(() => caches.match('./index.html'));
+      return fetch(req)
+        .then((resp) => {
+          if (resp && resp.status === 200 && resp.type === 'basic') {
+            const copy = resp.clone();
+            caches.open(CACHE).then((c) => c.put(req, copy));
+          }
+          return resp;
+        })
+        .catch(() => caches.match('./index.html'));
     })
   );
 });
