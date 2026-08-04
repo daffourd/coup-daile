@@ -1,0 +1,51 @@
+name: keep-alive-supabase
+
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping de la base Supabase Coup d Aile
+        run: |
+          URL="https://sgxohmndhngpxgkobkbm.supabase.co"
+          KEY="sb_publishable_OBbJMFqX9UIOkj6FF2T34Q_KTrqUbvL"
+          ok=0
+          for i in 1 2 3; do
+            code=$(curl -s -o /tmp/out.json -w "%{http_code}" -X POST "$URL/rest/v1/rpc/stats_publics" -H "apikey: $KEY" -H "Authorization: Bearer $KEY" -H "Content-Type: application/json" -d '{}')
+            echo "tentative $i : HTTP $code"
+            cat /tmp/out.json 2>/dev/null || true
+            echo ""
+            if [ "$code" = "200" ]; then ok=1; fi
+            sleep 3
+          done
+          if [ "$ok" != "1" ]; then
+            echo "::error::La base Supabase ne repond pas. Le projet est probablement en pause : https://supabase.com/dashboard/project/sgxohmndhngpxgkobkbm"
+            exit 1
+          fi
+          echo "Base active, pause evitee."
+
+      - name: Recuperation du depot
+        if: github.event_name == 'schedule'
+        uses: actions/checkout@v4
+
+      - name: Heartbeat hebdomadaire (empeche GitHub de desactiver le cron)
+        if: github.event_name == 'schedule'
+        run: |
+          if [ "$(date -u +%u)" != "1" ]; then
+            echo "Pas lundi, pas de commit heartbeat."
+            exit 0
+          fi
+          mkdir -p .github
+          date -u +"%Y-%m-%dT%H:%M:%SZ" > .github/keepalive-heartbeat.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/keepalive-heartbeat.txt
+          git commit -m "chore: heartbeat keep-alive [skip ci]" || exit 0
+          git push
