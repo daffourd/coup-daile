@@ -5,7 +5,7 @@
 // Nationale, tuiles OpenStreetMap) part directement au reseau, sans jamais passer par
 // le cache. Sinon les donnees du carnet resteraient figees apres un ajout, une
 // modification ou une suppression.
-const CACHE = 'coup-de-patte-v23';
+const CACHE = 'coup-de-patte-v24';
 const ASSETS = [
   './',
   './index.html',

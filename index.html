@@ -1261,8 +1261,44 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
   }
   function saveBenevole(){ var m=document.getElementById('benMsg'); if(!document.getElementById('benMajeur')||!document.getElementById('benMajeur').checked){ if(m)m.textContent='Le bénévolat est réservé aux 18 ans et plus.'; return; } var row={user_id:currentUser.id, actif:true, majeur:true, pseudo:val('benPseudo'), zone:val('benZone'), dispos:val('benDispos'), aides:val('benAides'), contact_tel:val('benTel'), contact_email:val('benEmailC'), contact_insta:val('benInsta')}; if(m)m.textContent='Enregistrement...'; var q = myBenevole ? db.from('benevoles').update(row).eq('user_id',currentUser.id).select() : db.from('benevoles').insert(row).select(); q.then(function(r){ if(r.error){ if(m)m.textContent='Erreur : '+r.error.message; } else { myBenevole=(r.data&&r.data[0])||row; renderCompte(); } }); }
   function retireBenevole(){ db.from('benevoles').update({actif:false}).eq('user_id',currentUser.id).then(function(){ loadMyBenevole(); }); }
-  function renderBenevoles(){ var el=document.getElementById('benevolesList'); if(!el) return; if(!db){ el.innerHTML='<p class="sub">Service indisponible.</p>'; return; } if(!currentUser){ el.innerHTML='<div class="callout">Connecte-toi dans l\'onglet Compte pour voir les bénévoles.</div>'; return; } el.innerHTML='<p class="meta" style="padding:6px 0">Chargement...</p>'; db.from('benevoles').select('*').eq('actif',true).order('created_at',{ascending:false}).then(function(r){ var list=r.data||[]; if(!list.length){ el.innerHTML='<div class="callout">Pas encore de bénévole inscrit. Sois le premier depuis l\'onglet Compte.</div>'; return; } el.innerHTML='<div class="card" style="padding:6px 16px">'+list.map(function(b){ var c=[]; if(b.contact_tel) c.push('<a class="btn btn-ghost btn-sm" href="tel:'+escapeH(b.contact_tel)+'">Appeler</a>'); if(b.contact_email) c.push('<a class="btn btn-ghost btn-sm" href="mailto:'+escapeH(b.contact_email)+'">Email</a>'); if(b.contact_insta) c.push('<a class="btn btn-ghost btn-sm" href="https://instagram.com/'+escapeH(String(b.contact_insta).replace(/^@/,''))+'" target="_blank" rel="noopener">Instagram</a>'); return '<div class="centre"><div style="flex:1"><h4>'+(escapeH(b.pseudo)||'Bénévole')+'</h4><div class="meta">'+[escapeH(b.zone),escapeH(b.dispos),escapeH(b.aides)].filter(Boolean).join(' · ')+'</div>'+(c.length?'<div class="row-btns" style="margin-top:9px">'+c.join('')+'</div>':'<div class="meta" style="margin-top:6px">Aucun contact exposé</div>')+'</div></div>'; }).join('')+'</div>'; }); }
-  var myAsso=null;
+  function renderBenevoles(){
+    var el=document.getElementById('benevolesList'); if(!el) return;
+    if(!db){ el.innerHTML='<p class="sub">Service indisponible.</p>'; return; }
+    el.innerHTML='<p class="meta" style="padding:6px 0">Chargement...</p>';
+    // Liste publique, SANS coordonnees : accessible meme sans compte.
+    db.rpc('benevoles_publics').then(function(r){
+      if(r.error){ el.innerHTML='<div class="callout">Liste des benevoles momentanement indisponible.</div>'; return; }
+      var list=r.data||[]; if(!Array.isArray(list)){ try{ list=JSON.parse(list); }catch(e){ list=[]; } }
+      if(!list.length){ el.innerHTML='<div class="callout">Pas encore de benevole inscrit. Sois le premier depuis l\'onglet Compte.</div>'; return; }
+      el.innerHTML='<p class="meta" style="padding:2px 0 8px">'+list.length+' benevole'+(list.length>1?'s':'')+' pret'+(list.length>1?'s':'')+' a aider. Clique sur une fiche pour voir comment la joindre.</p><div class="card" style="padding:6px 16px">'+list.map(function(b){
+        var meta=[escapeH(b.zone),escapeH(b.dispos),escapeH(b.aides)].filter(Boolean).join(' · ');
+        var peut = b.a_tel || b.a_email || b.a_insta;
+        var zone = '<div id="ct_'+b.id+'"></div>';
+        var btn = peut
+          ? '<div class="row-btns" style="margin-top:8px"><button class="btn btn-primary btn-sm" onclick="voirContact(\''+b.id+'\',this)">Voir le contact</button></div>'
+          : '<div class="meta" style="margin-top:6px">Aucun moyen de contact renseigne.</div>';
+        return '<div class="centre"><div style="flex:1;min-width:0"><h4>'+(escapeH(b.pseudo)||'Benevole')+'</h4>'
+          +(meta?'<div class="meta">'+meta+'</div>':'')
+          +btn+zone+'</div></div>';
+      }).join('')+'</div>';
+    });
+  }
+  // Revelation a la demande : on ne charge les coordonnees qu'au clic, une fiche
+  // a la fois. Protege les benevoles du moissonnage en masse par un robot.
+  function voirContact(id, btn){
+    if(!db) return;
+    if(btn){ btn.disabled=true; btn.textContent='...'; }
+    db.rpc('benevole_contact',{p_id:id}).then(function(r){
+      var z=document.getElementById('ct_'+id); if(!z) return;
+      var d=r.data||{}; if(typeof d==='string'){ try{ d=JSON.parse(d); }catch(e){ d={}; } }
+      var c=[];
+      if(d.tel)   c.push('<a class="btn btn-ghost btn-sm" href="tel:'+escapeH(d.tel)+'">Appeler '+escapeH(d.tel)+'</a>');
+      if(d.email) c.push('<a class="btn btn-ghost btn-sm" href="mailto:'+escapeH(d.email)+'">Email</a>');
+      if(d.insta) c.push('<a class="btn btn-ghost btn-sm" href="https://instagram.com/'+escapeH(String(d.insta).replace(/^@/,''))+'" target="_blank" rel="noopener">Instagram</a>');
+      z.innerHTML = c.length ? '<div class="row-btns" style="margin-top:8px">'+c.join('')+'</div>' : '<div class="meta" style="margin-top:6px">Contact indisponible.</div>';
+      if(btn) btn.style.display='none';
+    });
+  }
   function loadMyAsso(){ if(!db||!currentUser) return; db.from('associations').select('*').eq('user_id',currentUser.id).then(function(r){ myAsso=(r.data&&r.data[0])||null; var s=document.getElementById('assos'); if(s&&s.classList.contains('active')) renderAssos(); }); }
   // ================= Annuaire des associations, refuges et centres =================
   var ASSO_TYPES = ['Association de protection','Refuge','Centre de sauvegarde','Clinique vétérinaire','Groupe local LPO','Autre structure'];
@@ -1588,11 +1624,77 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
           +'<div class="meta">Inscrit le '+d+' · dernière visite '+vu+'</div>'
           +'<div class="row-btns" style="margin-top:8px">'+btns.join('')+'</div></div></div>';
       }).join('');
-      box.innerHTML='<p class="meta" style="padding:2px 0 8px">'+list.length+' membre'+(list.length>1?'s':'')+' inscrit'+(list.length>1?'s':'')+'.</p><div class="card" style="padding:6px 16px">'+rows+'</div><div style="height:10px"></div><button class="btn btn-ghost" onclick="adminDedupe()">Dédoublonner les profils</button><div id="admDedupeMsg" class="meta" style="margin-top:6px"></div>';
+      box.innerHTML='<p class="meta" style="padding:2px 0 8px">'+list.length+' membre'+(list.length>1?'s':'')+' inscrit'+(list.length>1?'s':'')+'.</p><div class="card" style="padding:6px 16px">'+rows+'</div><div style="height:10px"></div><button class="btn btn-ghost" onclick="adminDoublons()">Chercher les doublons</button><div id="admDedupeMsg" class="meta" style="margin-top:6px"></div><div id="admDoublons"></div>';
     });
   }
   function modBenevole(uid, actif){ if(!db) return; db.from('benevoles').update({actif:actif}).eq('user_id',uid).then(function(){ loadAdminUsers(); }); }
-  function adminDedupe(){ var m=document.getElementById('admDedupeMsg'); if(!db) return; if(m)m.textContent='Nettoyage...'; db.rpc('admin_dedupe').then(function(r){ if(r.error){ if(m)m.textContent='Fonction admin_dedupe non configurée (voir ETAT).'; return; } var n=(r.data&&r.data.benevoles_removed)||0; if(m)m.textContent='Terminé. '+n+' doublon(s) supprimé(s).'; loadAdminUsers(); }); }
+  function adminDoublons(){
+    var m=document.getElementById('admDedupeMsg'), box=document.getElementById('admDoublons');
+    if(!db) return;
+    if(m) m.textContent='Recherche...'; if(box) box.innerHTML='';
+    db.rpc('admin_doublons').then(function(r){
+      if(r.error){ if(m) m.textContent='Fonction admin_doublons absente. Joue la migration v21.'; return; }
+      var g=r.data||[]; if(!Array.isArray(g)){ try{ g=JSON.parse(g); }catch(e){ g=[]; } }
+      if(!g.length){ if(m) m.textContent='Aucun doublon detecte.'; return; }
+      if(m) m.textContent = g.length+' groupe'+(g.length>1?'s':'')+' a examiner. Rien n\'est supprime tant que tu ne le demandes pas.';
+      var MOTIFS = {
+        benevoles_meme_compte: 'Plusieurs fiches pour le meme compte',
+        meme_telephone: 'Meme telephone, comptes differents',
+        meme_pseudo: 'Meme pseudo, comptes differents'
+      };
+      box.innerHTML = '<div style="height:10px"></div>' + g.map(function(grp){
+        var fiches = grp.fiches||[];
+        var lignes = fiches.map(function(f){
+          var dt = f.created_at ? new Date(f.created_at).toLocaleDateString('fr-FR') : '';
+          var uid = f.user_id || grp.cle;
+          return '<div class="centre" style="padding:8px 0"><div style="flex:1;min-width:0">'
+            +'<div><b>'+escapeH(f.pseudo||'(sans pseudo)')+'</b>'+(f.actif===false?' <span class="meta">(inactif)</span>':'')+'</div>'
+            +'<div class="meta">'+escapeH(f.email||'')+(f.tel?' &middot; '+escapeH(f.tel):'')+'</div>'
+            +'<div class="meta">Fiche creee le '+dt+'</div>'
+            +'<div class="row-btns" style="margin-top:6px">'
+            +'<button class="btn btn-ghost btn-sm" onclick="admDelBenevole(\''+f.id+'\',\''+escapeH(f.pseudo||'').replace(/'/g,"")+'\')">Supprimer cette fiche</button>'
+            +(grp.motif!=='benevoles_meme_compte' && uid ? '<button class="btn btn-ghost btn-sm" onclick="admPrepFusion(\''+uid+'\')">Garder ce compte</button>' : '')
+            +'</div></div></div>';
+        }).join('');
+        return '<div class="card" style="padding:10px 16px;margin-bottom:10px">'
+          +'<div class="meta" style="font-weight:700;color:var(--texte)">'+(MOTIFS[grp.motif]||grp.motif)+'</div>'
+          +'<div class="meta" style="margin-bottom:6px">'+grp.nb+' fiches concernees</div>'
+          +lignes+'</div>';
+      }).join('') + '<div id="admFusionZone"></div>';
+    });
+  }
+  function admDelBenevole(id, pseudo){
+    if(!db) return;
+    if(!confirm('Supprimer la fiche benevole '+(pseudo||'')+' ?\n\nLe compte et les observations sont conserves. Seule la fiche benevole publique disparait.')) return;
+    db.rpc('admin_del_benevole',{p_id:id}).then(function(r){
+      if(r.error){ alert('Erreur : '+r.error.message); return; }
+      adminDoublons(); loadAdminUsers();
+    });
+  }
+  var _fusionGarde = null;
+  function admPrepFusion(uid){
+    var z=document.getElementById('admFusionZone'); if(!z) return;
+    if(!_fusionGarde){
+      _fusionGarde = uid;
+      z.innerHTML='<div class="callout" style="margin-top:4px">Compte principal choisi. Clique maintenant sur <b>Garder ce compte</b> de l\'autre fiche pour indiquer le compte a absorber, ou <a href="#" onclick="admAnnuleFusion();return false;">annule</a>.</div>';
+      return;
+    }
+    if(_fusionGarde === uid){ admAnnuleFusion(); return; }
+    var absorbe = uid, garde = _fusionGarde;
+    if(!confirm('Fusionner ces deux comptes ?\n\nLes observations du second compte seront transferees vers le premier. Ses fiches benevole et structure seront supprimees. Son profil sera vide.\n\nLe compte lui-meme n\'est pas supprime : la personne pourra toujours se connecter, elle repartira de zero.')) { admAnnuleFusion(); return; }
+    db.rpc('admin_fusion',{p_garde:garde, p_absorbe:absorbe}).then(function(r){
+      _fusionGarde=null;
+      if(r.error){ alert('Erreur : '+r.error.message); return; }
+      var d=r.data||{};
+      if(d.ok===false){ alert('Fusion impossible : '+(d.motif||'')); return; }
+      alert('Fusion faite. '+(d.observations_transferees||0)+' observation(s) transferee(s), '+(d.benevoles_supprimees||0)+' fiche(s) benevole supprimee(s).');
+      adminDoublons(); loadAdminUsers(); loadAdminStats();
+    });
+  }
+  function admAnnuleFusion(){
+    _fusionGarde=null;
+    var z=document.getElementById('admFusionZone'); if(z) z.innerHTML='';
+  }
   function sendSignal(){
     var m=document.getElementById('sgMsg');
     if(!db){ if(m)m.textContent='Service indisponible.'; return; }
