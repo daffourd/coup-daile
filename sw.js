@@ -1,11 +1,11 @@
-// Service worker Coup d'Aile
+// Service worker Coup de Patte
 // Cache le coeur vital pour un fonctionnement hors-ligne.
 // REGLE : on ne met en cache QUE l'app-shell de notre propre origine.
 // Toute requete vers un service tiers (Supabase, Wikipedia, Open-Meteo, Base Adresse
 // Nationale, tuiles OpenStreetMap) part directement au reseau, sans jamais passer par
 // le cache. Sinon les donnees du carnet resteraient figees apres un ajout, une
 // modification ou une suppression.
-const CACHE = 'coup-daile-v19';
+const CACHE = 'coup-de-patte-v23';
 const ASSETS = [
   './',
   './index.html',

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#2E7D5B">
+<meta name="theme-color" content="#1F9E67">
 <meta name="description" content="Que faire si tu trouves un oiseau ou un oisillon. Gestes d'urgence, secours et identification.">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -18,7 +18,7 @@
 <title>Coup de Patte</title>
 <style>
   :root{
-    --vert:#2E7D5B;--vert-clair:#3B9C74;--vert-pale:#E7F1EB;--beige:#F7F5EF;
+    --vert:#1F9E67;--vert-clair:#3B9C74;--vert-pale:#E7F1EB;--beige:#F7F5EF;
     --ambre:#E39A2E;--ambre-pale:#FBEFD8;--corail:#D7614F;--corail-pale:#FBE6E1;
     --texte:#233029;--texte-doux:#5C6B63;--blanc:#FFFFFF;--bord:#E6E3DA;
     --ombre-douce:0 2px 10px rgba(30,50,40,.06);--rayon:20px;
@@ -60,7 +60,7 @@
   .icon-btn:active{transform:scale(.94);}
   .icon-btn.danger{color:var(--corail);}
   .icon-btn svg{width:18px;height:18px;}
-  .btn-urgence{background:linear-gradient(135deg,#2E7D5B,#3B9C74);color:#fff;flex-direction:column;gap:6px;padding:22px;border-radius:22px;box-shadow:0 10px 26px rgba(46,125,91,.32);}
+  .btn-urgence{background:linear-gradient(135deg,#1F9E67,#3B9C74);color:#fff;flex-direction:column;gap:6px;padding:22px;border-radius:22px;box-shadow:0 10px 26px rgba(46,125,91,.32);}
   .btn-urgence .big{font-size:20px;font-weight:800;}
   .btn-urgence .small{font-size:13px;font-weight:500;opacity:.92;}
   .btn-urgence svg{width:34px;height:34px;}
@@ -78,7 +78,7 @@
   .tile p{font-size:12.5px;color:var(--texte-doux);line-height:1.4;}
   .opt{display:flex;align-items:center;gap:14px;width:100%;background:var(--blanc);border:1.5px solid var(--bord);border-radius:16px;padding:16px;font-size:15.5px;font-weight:600;color:var(--texte);cursor:pointer;text-align:left;margin-bottom:11px;font-family:inherit;transition:border-color .15s,transform .08s;}
   .opt:active{transform:scale(.98);}
-  .opt .dot{width:34px;height:34px;border-radius:10px;background:var(--vert-pale);color:var(--vert);display:flex;align-items:center;justify-content:center;flex:0 0 auto;font-weight:800;}
+  .opt.sel{border-color:var(--vert);background:var(--vert-pale);} .opt .dot{width:34px;height:34px;border-radius:10px;background:var(--vert-pale);color:var(--vert);display:flex;align-items:center;justify-content:center;flex:0 0 auto;font-weight:800;}
   .opt .dot svg{width:19px;height:19px;}
   .opt .chev{margin-left:auto;color:#c3cbc5;font-size:20px;}
   .opt.danger .dot{background:var(--corail-pale);color:var(--corail);}
@@ -92,7 +92,7 @@
   .mark.ok{background:var(--vert-pale);color:var(--vert);}
   .mark.no{background:var(--corail-pale);color:var(--corail);}
   .verdict{border-radius:var(--rayon);padding:18px;margin-bottom:16px;color:#fff;}
-  .verdict.calme{background:linear-gradient(135deg,#2E7D5B,#3B9C74);}
+  .verdict.calme{background:linear-gradient(135deg,#1F9E67,#3B9C74);}
   .verdict.alerte{background:linear-gradient(135deg,#D7614F,#e07a5f);}
   .verdict .etiq{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;opacity:.9;margin-bottom:6px;}
   .verdict h2{font-size:20px;line-height:1.25;}
@@ -278,7 +278,8 @@
         <button class="go" onclick="startUrgence()">Commencer <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       </div>
       <div class="tip"><div class="k">Le bon réflexe</div><p>Un oisillon au sol n'est presque jamais abandonné. Avant de le prendre, observe : ses parents sont souvent tout près. Le principe est simple, je le laisse, je le protège.</p></div>
-      <div class="section-label">Explorer</div>
+      <button class="opt" onclick="showScreen('bague')" style="border-color:var(--vert)"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="8" ry="4.5"/><path d="M4 12v2.5c0 2.5 3.6 4.5 8 4.5s8-2 8-4.5V12"/><path d="M15 9.5l1.5 4"/></svg></span><span><b>Tu as trouvé un oiseau bagué ?</b><br><span class="meta" style="font-weight:400">Mort ou vivant, voici quoi faire</span></span><span class="chev">&rsaquo;</span></button>
+  <div class="section-label">Explorer</div>
       <button class="opt" onclick="showScreen('identifier')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3" stroke-linecap="round"/></svg></span><b>Identifier l'oiseau</b><span class="chev">&rsaquo;</span></button>
       <button class="opt" onclick="showScreen('gestes')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span><b>Les bons gestes</b><span class="chev">&rsaquo;</span></button>
       <button class="opt" onclick="showScreen('especes')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg></span><b>Fiches espèces</b><span class="chev">&rsaquo;</span></button>
@@ -346,7 +347,8 @@
         <li><span class="mark no">&times;</span> Ne le nourris pas et ne le fais pas boire de force.</li>
         <li><span class="mark no">&times;</span> Ne le manipule pas plus que nécessaire. Ne tente pas de le soigner toi-même.</li>
       </ul></div>
-      <div class="callout">Un martinet au sol ne peut pas redécoller seul. Ne le relance pas en l'air, mets-le à l'abri et appelle un centre.</div>
+      <div class="callout">Il porte une bague à la patte ? Ne la retire surtout pas. <a href="#" onclick="showScreen('bague');return false;">Voir quoi faire</a></div>
+  <div class="callout">Un martinet au sol ne peut pas redécoller seul. Ne le relance pas en l'air, mets-le à l'abri et appelle un centre.</div>
       <button class="btn btn-corail" onclick="showScreen('secours')">Trouver un secours</button>
       <div style="height:10px"></div>
       <button class="btn btn-ghost" onclick="showScreen('gestes')">Voir tous les bons gestes</button>
@@ -367,7 +369,27 @@
     </section>
 
     <!-- SECOURS -->
-    <section class="screen" id="secours">
+    <section class="screen" id="bague">
+  <h1 class="title">Oiseau bagué</h1>
+  <p class="sub">Une bague raconte la vie d'un oiseau : où il est né, par où il migre, combien de temps il vit. Ton signalement fait avancer la science, et tu recevras son histoire en retour.</p>
+
+  <div class="section-label">1. Quelle bague porte-t-il ?</div>
+  <button class="opt" id="bgT_metal" onclick="bagueChoix('type','metal')"><span class="dot">1</span><span><b>Bague en métal, gravée</b><br><span class="meta" style="font-weight:400">Petit anneau gris, souvent marqué MUSEUM PARIS ou le nom d'une capitale</span></span></button>
+  <button class="opt" id="bgT_couleur" onclick="bagueChoix('type','couleur')"><span class="dot">2</span><span><b>Bague ou marque de couleur</b><br><span class="meta" style="font-weight:400">Plastique coloré avec un code lisible de loin, marque à l'aile, collier</span></span></button>
+  <button class="opt" id="bgT_fermee" onclick="bagueChoix('type','fermee')"><span class="dot">3</span><span><b>Anneau fermé, sans ouverture</b><br><span class="meta" style="font-weight:400">Pigeon voyageur ou oiseau d'élevage échappé</span></span></button>
+
+  <div id="bgEtape2" style="display:none">
+    <div class="section-label">2. Et l'oiseau ?</div>
+    <button class="opt" id="bgE_mort" onclick="bagueChoix('etat','mort')"><span class="dot">&#9675;</span><b>Il est mort</b></button>
+    <button class="opt" id="bgE_blesse" onclick="bagueChoix('etat','blesse')"><span class="dot">+</span><b>Il est vivant mais blessé ou affaibli</b></button>
+    <button class="opt" id="bgE_forme" onclick="bagueChoix('etat','forme')"><span class="dot">&check;</span><b>Il est vivant et en forme</b></button>
+  </div>
+
+  <div id="bgOut"></div>
+  <p class="disclaimer">Consignes du Muséum national d'Histoire naturelle (CRBPO), de la LPO, de l'OFB et de la Fédération colombophile française.</p>
+</section>
+
+<section class="screen" id="secours">
       <h1 class="title">Trouver un secours</h1>
       <p class="sub">Le bon geste : confier l'oiseau à un centre de sauvegarde de la faune sauvage habilité. Appelle toujours avant de te déplacer.</p>
       <div class="card" style="text-align:center">
@@ -651,10 +673,14 @@
 <script>
   // Donnees centres (indicatives, verifiees au mieux, a appeler avant de se deplacer)
   var CENTRES = [
-    {nom:"Centre de sauvegarde LPO Bretagne, Île Grande", ville:"Pleumeur-Bodou (22)", tel:"0296919140", lat:48.8025, lon:-3.5739},
-    {nom:"Centre de soins LPO Aquitaine, Domaine de Certes", ville:"Audenge (33)", tel:"0556262052", lat:44.6817, lon:-1.0206},
-    {nom:"Centre de sauvegarde de la faune sauvage du Tarn", ville:"Tarn (81)", tel:"0627582885", lat:43.75, lon:2.05},
-    {nom:"Centre régional de sauvegarde LPO PACA, Buoux", ville:"Buoux (84)", tel:"", lat:43.822, lon:5.383, site:"https://paca.lpo.fr/"}
+    // Repli hors-ligne. Source : lpo.fr, verifie le 15/07/2026.
+    // La liste vivante est en base (table centres) et prend le dessus quand le reseau repond.
+    {nom:"Centre de sauvegarde LPO Alsace", ville:"Rosenwiller (67)", tel:"0388220735", lat:48.5297, lon:7.4406, site:"https://alsace.lpo.fr/index.php/le-centre-de-soins-de-rosenwiller"},
+    {nom:"Centre de sauvegarde LPO Aquitaine, Domaine de Certes", ville:"Audenge (33)", tel:"0556913381", lat:44.6817, lon:-1.0206},
+    {nom:"Centre de sauvegarde LPO Auvergne", ville:"Clermont-Ferrand (63)", tel:"", lat:45.7719, lon:3.0817, site:"https://auvergne-rhone-alpes.lpo.fr/sos-biodiversite/", note:"Ouvert 7j/7. Casiers de depot 24h/24 hors horaires."},
+    {nom:"Centre de sauvegarde LPO Bretagne, Ile Grande", ville:"Pleumeur-Bodou (22)", tel:"0296919140", lat:48.8025, lon:-3.5739},
+    {nom:"Centre de sauvegarde LPO Occitanie, site du Tarn", ville:"Labruguiere (81)", tel:"0627582885", lat:43.5406, lon:2.2606, site:"https://tarn.lpo.fr/"},
+    {nom:"Centre regional de sauvegarde LPO PACA", ville:"Buoux (84)", tel:"0465090220", lat:43.822, lon:5.383, site:"https://paca.lpo.fr/soins-animaux/le-centre"}
   ];
   var CONDUITE_PASSEREAU = "Emplumé et vif au sol, on le laisse et on le met en sécurité tout près, ses parents s'en occupent. Nu ou en duvet, on le remet au nid si possible. Blessé, on appelle un centre de sauvegarde.";
   var CONDUITE_RAPACE = "Rapace: ne pas nourrir, le placer au calme dans un carton aéré et appeler un centre. Attention aux serres et au bec, manipule avec un linge épais.";
@@ -786,6 +812,103 @@
     if(id==='admin' && typeof renderAdmin==='function') renderAdmin();
     if(typeof renderAds==='function') renderAds();
   }
+  // ---------- Oiseau bague : consignes officielles (CRBPO/MNHN, LPO, OFB, FCF), verifiees le 01/10/2026 ----------
+  var _bg = {type:null, etat:null};
+  var CRBPO_FORM = 'https://crbpo.mnhn.fr/vous-trouvez-un-oiseau-bague/article/vous-avez-trouve-un-oiseau-bague-et-vous-voudriez-en-connaitre-un-peu-plus-sur';
+  var CRBPO_MAIL = 'bague@mnhn.fr';
+  function bagueChoix(k, v){
+    _bg[k] = v;
+    ['metal','couleur','fermee'].forEach(function(t){ var b=document.getElementById('bgT_'+t); if(b) b.classList.toggle('sel', _bg.type===t); });
+    ['mort','blesse','forme'].forEach(function(t){ var b=document.getElementById('bgE_'+t); if(b) b.classList.toggle('sel', _bg.etat===t); });
+    var e2=document.getElementById('bgEtape2'); if(e2) e2.style.display = _bg.type ? 'block' : 'none';
+    renderBague();
+    if(k==='etat'){ var o=document.getElementById('bgOut'); if(o && o.scrollIntoView) o.scrollIntoView({behavior:'smooth', block:'start'}); }
+  }
+  function _li(ok, t){ return '<li><span class="mark '+(ok?'ok':'no')+'">'+(ok?'&check;':'&times;')+'</span> '+t+'</li>'; }
+  function _carte(items){ return '<div class="card"><ul class="dolist">'+items.join('')+'</ul></div>'; }
+  function renderBague(){
+    var o=document.getElementById('bgOut'); if(!o) return;
+    if(!_bg.type || !_bg.etat){ o.innerHTML=''; return; }
+    var h='', T=_bg.type, E=_bg.etat;
+
+    // Pigeon voyageur / oiseau d'elevage : le Museum ne traite pas ces bagues
+    if(T==='fermee'){
+      h+='<div class="verdict calme"><div class="etiq">Oiseau domestique</div><h2>Ce n\'est pas un oiseau sauvage : son propriétaire le cherche.</h2></div>';
+      if(E==='mort'){
+        h+=_carte([_li(true,'Ne le touche pas à mains nues. Photographie les bagues de près.'),
+                   _li(true,'Un pigeon voyageur porte deux bagues : un matricule (ex. FRANCE 166548-98) et souvent une bague avec les coordonnées du propriétaire.'),
+                   _li(true,'Préviens le propriétaire ou la Fédération colombophile française avec le numéro, la date et le lieu.')]);
+      } else {
+        h+=_carte([_li(true,'Souvent, il est simplement épuisé par son vol. Mets-le au calme dans un carton aéré.'),
+                   _li(true,'Donne-lui de l\'eau et un peu de grain (blé, maïs, petites graines, à défaut petits pois ou riz).'),
+                   _li(false,'Pas de pain : il le digère mal.'),
+                   _li(true,'Après un jour ou deux de repos, il repart souvent seul. Sinon, contacte son propriétaire grâce à la bague, ou la fédération.')]);
+        if(E==='blesse') h+='<div class="callout">Blessure visible ? Un vétérinaire ou une association locale peut le prendre en charge.</div>';
+      }
+      h+='<div class="card" style="text-align:center"><div class="section-label" style="margin-top:0">Fédération colombophile française</div>'
+        +'<a class="phone-num" href="tel:0320068287">03 20 06 82 87</a>'
+        +'<div class="row-btns" style="margin-top:12px;justify-content:center"><a class="btn btn-primary btn-sm" href="tel:0320068287">Appeler</a>'
+        +'<a class="btn btn-ghost btn-sm" href="https://www.colombophiliefr.com/recherche-proprietaire/" target="_blank" rel="noopener">Retrouver le propriétaire</a></div></div>'
+        +'<div class="callout">Le Muséum ne traite pas les bagues fermées : inutile de les lui envoyer.</div>';
+      o.innerHTML=h; return;
+    }
+
+    // Oiseau sauvage : bague metal ou marque couleur
+    if(E==='mort'){
+      h+='<div class="verdict alerte"><div class="etiq">Oiseau mort</div><h2>Son numéro de bague est précieux. Relève-le sans prendre de risque.</h2></div>';
+      h+=_carte([_li(false,'Ne le touche jamais à mains nues : risque de grippe aviaire et d\'autres maladies.'),
+                 _li(true,'Photographie la bague de près, sous plusieurs angles, jusqu\'à lire toutes les lettres et tous les chiffres. La photo suffit au Muséum.'),
+                 _li(true, T==='metal' ? 'Si tu as des gants ou un sac plastique retourné, tu peux ouvrir la bague doucement avec une pince et l\'envoyer aplatie, scotchée sur une feuille. Ce n\'est pas obligatoire.' : 'Note chaque couleur et chaque code, la patte (gauche ou droite) et la position (au-dessus ou au-dessous de l\'articulation).'),
+                 _li(true,'Lave-toi soigneusement les mains ensuite.')]);
+      h+='<div class="callout"><b>Plusieurs oiseaux morts au même endroit, ou un oiseau d\'eau, une mouette, un goéland, un rapace ?</b> Ne touche à rien et préviens le service départemental de l\'OFB ou la fédération des chasseurs de ton département (réseau SAGIR), avec photos et lieu précis. C\'est la surveillance officielle de la grippe aviaire.</div>';
+    } else if(E==='blesse'){
+      h+='<div class="verdict alerte"><div class="etiq">Vivant, blessé</div><h2>Il a besoin d\'un centre de soins. Il part avec sa bague.</h2></div>';
+      h+=_carte([_li(false,'Ne retire jamais la bague d\'un oiseau vivant.'),
+                 _li(true,'Relève le code complet de la bague (photo de près), puis place l\'oiseau dans un carton percé, au calme, au chaud et dans le noir.'),
+                 _li(true,'Confie-le au centre de sauvegarde le plus proche, toujours porteur de sa bague. Indique-leur qu\'il est bagué.'),
+                 _li(false,'Ne le nourris pas, ne le fais pas boire de force. La loi interdit de garder un oiseau sauvage chez soi.')]);
+      h+='<button class="btn btn-corail" onclick="showScreen(\'secours\')">Trouver un centre de soins</button><div style="height:14px"></div>';
+    } else {
+      h+='<div class="verdict calme"><div class="etiq">Vivant, en forme</div><h2>Relève sa bague, puis laisse-le repartir avec.</h2></div>';
+      h+=_carte([_li(true, T==='metal' ? 'Relève le libellé complet de la bague, une photo nette suffit.' : 'Note les couleurs et les codes, de quelle patte, au-dessus ou au-dessous de l\'articulation. Jumelles ou zoom bienvenus.'),
+                 _li(true,'S\'il s\'est cogné contre une vitre, laisse-le récupérer quelques minutes dans un carton au calme, puis relâche-le dehors, là où tu l\'as trouvé.'),
+                 _li(false,'Ne retire jamais la bague : elle doit rester sur l\'oiseau.')]);
+      if(T==='couleur') h+='<div class="callout">Les marques de couleur se lisent souvent à distance. Pas besoin d\'attraper l\'oiseau pour relever son code.</div>';
+    }
+
+    // Ce qu'il faut transmettre + email pre-rempli
+    h+='<div class="section-label">Ce que le Muséum a besoin de savoir</div>';
+    h+=_carte([_li(true,'Le libellé intégral de la bague, lettres et chiffres, sans oublier la ville gravée (ex. MUSEUM PARIS, LONDON, HELGOLAND).'),
+               _li(true,'La date' + (E==='mort' ? '' : ' et l\'heure') + ' de la découverte.'),
+               _li(true,'La commune et le lieu précis (lieu-dit, bord de route, jardin).'),
+               _li(true,'L\'espèce si tu la connais, et les circonstances (vitre, chat, route, trouvé sec depuis longtemps...).')]);
+    h+='<div class="card">'
+      +'<input class="field" id="bgCode" placeholder="Code de la bague (ex. MUSEUM PARIS 7A12345)" style="margin-bottom:8px">'
+      +'<input class="field" id="bgLieu" placeholder="Commune et lieu précis" style="margin-bottom:8px">'
+      +'<input class="field" id="bgEsp" placeholder="Espèce, si tu la connais" style="margin-bottom:8px">'
+      +'<textarea class="field" id="bgCirc" placeholder="Circonstances" style="margin-bottom:8px;min-height:64px"></textarea>'
+      +'<a class="btn btn-primary" href="'+CRBPO_FORM+'" target="_blank" rel="noopener">Signaler sur le formulaire officiel</a>'
+      +'<div style="height:8px"></div>'
+      +'<button class="btn btn-ghost" onclick="bagueMail()">Ou préparer l\'email au Muséum</button>'
+      +'<div class="meta" style="margin-top:8px">Pense à joindre tes photos de la bague. Le Muséum te répond avec l\'histoire de l\'oiseau : où et quand il a été bagué.</div>'
+      +'</div>';
+    o.innerHTML=h;
+  }
+  function bagueMail(){
+    var d=new Date(), ETATS={mort:'trouvé mort', blesse:'vivant, blessé ou affaibli (confié à un centre de soins)', forme:'vivant en bonne santé, relâché avec sa bague'};
+    var TYPES={metal:'bague métal', couleur:'bague ou marque de couleur'};
+    var v=function(id){ var e=document.getElementById(id); return e ? String(e.value||'').trim() : ''; };
+    var corps='Bonjour,\n\nJe vous signale la découverte d\'un oiseau bagué.\n\n'
+      +'Type de marquage : '+(TYPES[_bg.type]||'')+'\n'
+      +'Libellé complet de la bague : '+(v('bgCode')||'(à compléter)')+'\n'
+      +'Date et heure : '+d.toLocaleDateString('fr-FR')+' à '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})+'\n'
+      +'Lieu : '+(v('bgLieu')||'(à compléter)')+'\n'
+      +'Espèce présumée : '+(v('bgEsp')||'inconnue')+'\n'
+      +'État de l\'oiseau : '+(ETATS[_bg.etat]||'')+'\n'
+      +'Circonstances : '+(v('bgCirc')||'(à compléter)')+'\n\n'
+      +'Photos de la bague jointes.\n\nMerci de me transmettre l\'histoire de cet oiseau.\n\nCordialement';
+    location.href='mailto:'+CRBPO_MAIL+'?subject='+encodeURIComponent('Reprise de bague'+(v('bgCode')?' '+v('bgCode'):''))+'&body='+encodeURIComponent(corps);
+  }
   function startUrgence(){ showScreen('u1'); }
   function goBack(){
     if(history_stack.length>1){ history_stack.pop(); showScreen(history_stack[history_stack.length-1], true); }
@@ -798,16 +921,39 @@
     var x=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(a*Math.PI/180)*Math.cos(c*Math.PI/180)*Math.sin(dLon/2)*Math.sin(dLon/2);
     return Math.round(2*R*Math.asin(Math.sqrt(x)));
   }
+  // Liste vivante des centres. La base fait autorite ; CENTRES sert de repli hors-ligne,
+  // ce qui est vital : on cherche un centre justement quand on est dehors, avec un oiseau
+  // dans les mains et parfois sans reseau.
+  var _centresDb = null;
+  function loadCentres(){
+    if(!db) return;
+    db.from('centres').select('*').eq('ouvert',true).then(function(r){
+      if(r.error || !r.data || !r.data.length) return;   // on garde le repli local
+      _centresDb = r.data.map(function(c){
+        return {nom:c.nom, ville:(c.ville||'')+(c.dept?' ('+c.dept+')':''), tel:c.tel||'',
+                lat:c.lat, lon:c.lon, site:c.site||'', note:c.note||''};
+      });
+      renderCentres();
+      if(document.getElementById('centres') && document.getElementById('centres').classList.contains('active')) initMap(true);
+    });
+  }
   function centresTries(){
-    var list = CENTRES.map(function(c){ var x=Object.assign({},c); x.d = userPos ? distKm(userPos.lat,userPos.lon,c.lat,c.lon) : null; return x; });
+    var base = (_centresDb && _centresDb.length) ? _centresDb : CENTRES;
+    var list = base.map(function(c){ var x=Object.assign({},c); x.d = userPos ? distKm(userPos.lat,userPos.lon,c.lat,c.lon) : null; return x; });
     if(userPos) list.sort(function(a,b){return a.d-b.d;});
     return list;
   }
   function centreCard(c){
     var d = c.d!=null ? '<span class="km">à '+c.d+' km</span>' : '';
-    var tel = c.tel ? '<a class="btn btn-primary btn-sm" href="tel:'+c.tel+'">Appeler</a>' : (c.site ? '<a class="btn btn-primary btn-sm" href="'+c.site+'" target="_blank" rel="noopener">Voir le centre</a>' : '');
+    var tel = c.tel ? '<a class="btn btn-primary btn-sm" href="tel:'+escapeH(c.tel)+'">Appeler</a>' : (c.site ? '<a class="btn btn-primary btn-sm" href="'+escapeH(c.site)+'" target="_blank" rel="noopener">Voir le centre</a>' : '');
     var itin = '<a class="btn btn-ghost btn-sm" href="https://www.google.com/maps/dir/?api=1&destination='+c.lat+','+c.lon+'" target="_blank" rel="noopener">Itinéraire</a>';
-    return '<div class="centre"><div style="flex:1"><div style="display:flex;justify-content:space-between;gap:8px"><h4>'+c.nom+'</h4>'+d+'</div><div class="meta">'+c.ville+'. Appelle avant de te déplacer.</div><div class="row-btns">'+tel+itin+'</div></div></div>';
+    // Honnetete : au-dela de 100 km, on le dit. Envoyer quelqu'un a 400 km avec un
+    // oisillon deshydrate sans le prevenir serait pire que ne rien afficher.
+    var loin = (c.d!=null && c.d>100)
+      ? '<div class="callout" style="margin:8px 0 0 0;padding:9px 11px;font-size:13px">Ce centre est loin. Appelle-le d\'abord : il t\'orientera peut-etre vers une structure plus proche, ou vers un veterinaire, qui a l\'obligation d\'accueillir un animal sauvage en detresse.</div>'
+      : '';
+    var note = c.note ? '<div class="meta" style="margin-top:4px">'+escapeH(c.note)+'</div>' : '';
+    return '<div class="centre"><div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between;gap:8px"><h4>'+escapeH(c.nom)+'</h4>'+d+'</div><div class="meta">'+escapeH(c.ville)+'. Appelle avant de te déplacer.</div>'+note+'<div class="row-btns">'+tel+itin+'</div>'+loin+'</div></div>';
   }
   function renderCentres(){
     var html = '<div class="card">'+centresTries().map(centreCard).join('')+'</div>';
@@ -837,7 +983,7 @@
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18, attribution:'© OpenStreetMap'}).addTo(leafletMap);
       CENTRES.forEach(function(c){ L.marker([c.lat,c.lon]).addTo(leafletMap).bindPopup('<b>'+c.nom+'</b><br>'+c.ville); });
     } else if(recenter){ leafletMap.setView(center, 9); }
-    if(userPos){ L.circleMarker([userPos.lat,userPos.lon],{radius:8,color:'#2E7D5B',fillColor:'#3B9C74',fillOpacity:.9}).addTo(leafletMap).bindPopup('Ta position'); }
+    if(userPos){ L.circleMarker([userPos.lat,userPos.lon],{radius:8,color:'#1F9E67',fillColor:'#3B9C74',fillOpacity:.9}).addTo(leafletMap).bindPopup('Ta position'); }
     setTimeout(function(){ leafletMap.invalidateSize(); }, 120);
     renderCentres();
   }
@@ -929,7 +1075,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
     var box=document.getElementById('e-photo'), cr=document.getElementById('e-credit');
     if(!box) return;
     box.innerHTML=''; if(cr) cr.innerHTML='';
-    function apply(p){ if(!p||!p.u) return; box.innerHTML='<img alt="" loading="lazy" src="'+p.u.replace(/"/g,'%22')+'">'; if(cr) cr.innerHTML='Photo : Wikimedia Commons'+(p.c?' · <a href="'+p.c+'" target="_blank" rel="noopener">source</a>':''); }
+    function apply(p){ if(!p||!p.u) return; box.innerHTML='<img alt="" loading="lazy" src="'+p.u.replace(/"/g,'%22')+'">'; if(cr) cr.innerHTML='Photo : Wikimedia Commons'+(p.c&&/^https:\/\/[a-z]{2,3}\.wikipedia\.org\//.test(p.c)?' · <a href="'+escapeH(p.c)+'" target="_blank" rel="noopener">source</a>':''); }
     var key='cda-photo2-'+e.id, cached=null;
     try{ cached=JSON.parse(localStorage.getItem(key)||'null'); }catch(_){}
     if(cached){ apply(cached); return; }
@@ -1290,7 +1436,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
   }
   function exportStats(){
     var s=window._lastStats||{}; var rows=[['indicateur','valeur'],['membres',s.membres||0],['observations',s.observations||0],['confies_centre',s.confies_centre||0],['benevoles_actifs',s.benevoles_actifs||0],['associations',s.associations||0],['signalements',s.signalements||0]];
-    var csv=rows.map(function(r){return r.join(',');}).join('\n'); var blob=new Blob([csv],{type:'text/csv'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='coup-daile-stats.csv'; a.click();
+    var csv=rows.map(function(r){return r.join(',');}).join('\n'); var blob=new Blob([csv],{type:'text/csv'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='coup-de-patte-stats.csv'; a.click();
   }
   function barsHtml(rows, labKey, valKey){
     if(!rows || !rows.length) return '<p class="meta">Aucune donnée.</p>';
@@ -1329,7 +1475,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
     (s.par_issue||[]).forEach(function(r){ rows.push(['issue', String(r.issue).replace(/,/g,' '), r.n]); });
     (s.par_mois||[]).forEach(function(r){ rows.push(['mois', r.mois, r.n]); });
     var csv=rows.map(function(r){return r.join(',');}).join('\n');
-    var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download='coup-daile-stats-detail.csv'; a.click();
+    var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download='coup-de-patte-stats-detail.csv'; a.click();
   }
   function admSetBloque(uid, bloque){
     if(!db) return;
@@ -1485,7 +1631,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
   document.getElementById('walk').addEventListener('click', function(e){ if(e.target===this){ wtClose(); } });
   (function(){ var show=true; try{ show = localStorage.getItem('cda-wt-hide')!=='1'; }catch(e){} if(show){ setTimeout(function(){ openWalk(0); }, 500); } })();
 
-  updateAdminUI(); renderAds();
+  updateAdminUI(); renderAds(); loadCentres();
 </script>
 </body>
 </html>
