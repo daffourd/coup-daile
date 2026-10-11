@@ -1,0 +1,95 @@
+{
+  "slug": "migration-nocturne-lumieres-des-villes-et-vitres",
+  "date": "2026-10-11",
+  "rubrique": "saison",
+  "origine": "claude",
+  "titre": "Migration d'automne : la nuit, les lumières des villes piègent les oiseaux",
+  "chapo": "En ce moment, des millions d'oiseaux migrateurs traversent le ciel de France chaque nuit. Attirés par l'éclairage urbain, certains s'épuisent ou heurtent des vitres. Éteindre, orienter la lumière vers le sol et rendre les baies vitrées visibles suffit souvent à éviter le pire.",
+  "meta_description": "Pourquoi les oiseaux migrateurs heurtent les vitres en automne, le rôle de l'éclairage nocturne, et les gestes simples pour les protéger chez toi et en ville.",
+  "mots_cles": [
+    "oiseau contre vitre",
+    "migration oiseaux nuit",
+    "pollution lumineuse oiseaux",
+    "oiseau assommé que faire",
+    "éviter collision oiseaux fenêtre",
+    "migration automne"
+  ],
+  "especes": [
+    "Oiseaux migrateurs",
+    "Passereaux"
+  ],
+  "zone": "France",
+  "sections": [
+    {
+      "titre": "Un trafic nocturne invisible au-dessus des toits",
+      "paragraphes": [
+        "Septembre et octobre sont les mois du grand passage. La France se trouve sur un couloir migratoire majeur entre le nord de l'Europe et l'Afrique, et une grande partie des passereaux voyagent de nuit. Un article publié le 16 septembre 2026 par Sciencepost rappelle que plusieurs millions d'oiseaux franchissent le ciel français chaque nuit pendant ces périodes, et que ce trafic peut doubler d'une nuit à l'autre selon la météo.",
+        "Le même article cite des relevés de terrain parlants : en Vendée, un suivi acoustique de 1 100 heures a permis d'identifier 73 espèces de passage, et à Rouen, plusieurs centaines d'oiseaux migrateurs morts ont été retrouvés en un an dans un seul quartier."
+      ]
+    },
+    {
+      "titre": "Pourquoi la lumière les met en danger",
+      "paragraphes": [
+        "Les migrateurs nocturnes s'orientent en partie grâce aux étoiles. Les halos lumineux des villes, les façades éclairées et les enseignes les désorientent : ils tournent autour des sources de lumière, se posent en catastrophe en pleine ville, puis heurtent les vitres au petit matin, quand ils cherchent à repartir ou à se nourrir.",
+        "Une vitre propre reflète le ciel et les arbres, ou laisse voir la végétation de l'autre côté : pour un oiseau, c'est un passage ouvert. Les silhouettes de rapaces collées sur les vitres sont peu efficaces, car un oiseau les contourne simplement. Ce qui fonctionne, ce sont des marquages serrés sur toute la surface."
+      ]
+    },
+    {
+      "titre": "Des villes qui éteignent, une règle qui encadre",
+      "paragraphes": [
+        "Selon Sciencepost, plus de 12 000 communes françaises pratiquent déjà une extinction partielle ou totale de l'éclairage public en milieu de nuit. L'arrêté du 27 décembre 2018 relatif aux nuisances lumineuses fixe aussi des horaires d'extinction pour les vitrines et les enseignes, et limite la lumière envoyée vers le ciel. Chacun peut prolonger cet effort à l'échelle de sa maison ou de son immeuble."
+      ]
+    }
+  ],
+  "gestes": [
+    "Éteins les lumières extérieures inutiles la nuit, surtout pendant les pics de migration de septembre et d'octobre.",
+    "Oriente les éclairages vers le sol et préfère des ampoules à lumière chaude ou ambrée, plutôt que blanche.",
+    "Tire les rideaux ou baisse les volets le soir pour limiter la lumière qui s'échappe des fenêtres.",
+    "Rends tes grandes baies vitrées visibles avec des bandes ou des points serrés collés sur toute la surface, à l'extérieur.",
+    "Si un oiseau est assommé après un choc, mets-le dans un carton aéré, fermé, au calme et dans le noir, puis relâche-le sur place s'il repart vif après une à deux heures ; sinon, appelle un centre de soins."
+  ],
+  "faq": [
+    {
+      "q": "Que faire si un oiseau s'est cogné contre ma fenêtre ?",
+      "r": "Place-le dans un carton aéré et fermé, au calme et dans le noir, sans lui donner à manger ni à boire. S'il s'agite et vole bien au bout d'une à deux heures, relâche-le à l'endroit où tu l'as trouvé. S'il reste prostré ou semble blessé, appelle un centre de soins de la faune sauvage."
+    },
+    {
+      "q": "Les autocollants de rapace sur les vitres sont-ils efficaces ?",
+      "r": "Très peu. Un oiseau les perçoit comme un obstacle isolé et passe à côté. Des marquages répartis de façon serrée sur toute la vitre sont bien plus efficaces."
+    },
+    {
+      "q": "Pourquoi les oiseaux migrent-ils la nuit ?",
+      "r": "Beaucoup de petits oiseaux voyagent de nuit pour échapper aux prédateurs, profiter d'un air plus frais et calme, et garder la journée pour se nourrir. Ils s'orientent notamment grâce aux étoiles et au champ magnétique terrestre."
+    }
+  ],
+  "sources": [
+    {
+      "titre": "Des millions d'oiseaux passent au-dessus des toits chaque nuit et la lumière des villes en jette une partie contre les vitres",
+      "editeur": "Sciencepost",
+      "url": "https://sciencepost.fr/des-millions-d-oiseaux-passent-au-dessus-des-toits-chaque-nuit-et-la-lumiere-des-villes-en-jette-une-partie-contre-les-vitres",
+      "date": "2026-09-16"
+    },
+    {
+      "titre": "Arrêté du 27 décembre 2018 relatif à la prévention, à la réduction et à la limitation des nuisances lumineuses",
+      "editeur": "AIDA, INERIS",
+      "url": "https://aida.ineris.fr/reglementation/arrete-271218-relatif-a-prevention-a-reduction-a-limitation-nuisances-lumineuses",
+      "date": ""
+    },
+    {
+      "titre": "LPO, Ligue pour la Protection des Oiseaux",
+      "editeur": "LPO",
+      "url": "https://www.lpo.fr/",
+      "date": ""
+    }
+  ],
+  "social": "Cette nuit encore, des millions d'oiseaux migrateurs vont survoler nos villes. Attirés par les lumières, certains finiront contre une vitre au petit matin. Éteindre dehors, orienter la lumière vers le sol, rendre les baies vitrées visibles : trois gestes simples qui sauvent des vies en pleine migration.",
+  "hashtags": [
+    "migration",
+    "oiseaux",
+    "pollutionlumineuse",
+    "biodiversite",
+    "faunesauvage",
+    "coupdepatte"
+  ],
+  "heure": "08:00"
+}

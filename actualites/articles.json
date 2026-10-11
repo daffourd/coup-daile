@@ -1,0 +1,32 @@
+{
+ "maj": "2026-10-11",
+ "articles": [
+  {
+   "slug": "animal-sauvage-trouve-appeler-avant-d-agir",
+   "titre": "Animal sauvage trouvé : pourquoi il faut appeler un centre de soins avant d'agir",
+   "chapo": "Trouver un animal sauvage ne veut pas dire qu'il est en détresse. Le centre vétérinaire de la faune sauvage de Nantes, qui a accueilli plus de 2 900 animaux en 2025, rappelle la règle d'or : ne pas toucher, observer, et appeler avant de déplacer quoi que ce soit.",
+   "date": "2026-10-11",
+   "rubrique": "Le bon geste",
+   "url": "/actualites/animal-sauvage-trouve-appeler-avant-d-agir/",
+   "image": "/actualites/img/animal-sauvage-trouve-appeler-avant-d-agir.png"
+  },
+  {
+   "slug": "migration-nocturne-lumieres-des-villes-et-vitres",
+   "titre": "Migration d'automne : la nuit, les lumières des villes piègent les oiseaux",
+   "chapo": "En ce moment, des millions d'oiseaux migrateurs traversent le ciel de France chaque nuit. Attirés par l'éclairage urbain, certains s'épuisent ou heurtent des vitres. Éteindre, orienter la lumière vers le sol et rendre les baies vitrées visibles suffit souvent à éviter le pire.",
+   "date": "2026-10-11",
+   "rubrique": "Au fil des saisons",
+   "url": "/actualites/migration-nocturne-lumieres-des-villes-et-vitres/",
+   "image": "/actualites/img/migration-nocturne-lumieres-des-villes-et-vitres.png"
+  },
+  {
+   "slug": "herissons-de-londres-isoles-par-la-ville",
+   "titre": "Hérissons des villes : à Londres, la ville les isole jusque dans leurs gènes",
+   "chapo": "Une étude publiée en avril 2026 montre que les hérissons de certains parcs londoniens ont perdu une part de leur diversité génétique, faute de pouvoir circuler. Bonne nouvelle : un simple passage dans une clôture peut déjà changer la donne, et c'est le bon moment de l'année pour agir.",
+   "date": "2026-10-11",
+   "rubrique": "Science et découvertes",
+   "url": "/actualites/herissons-de-londres-isoles-par-la-ville/",
+   "image": "/actualites/img/herissons-de-londres-isoles-par-la-ville.png"
+  }
+ ]
+}

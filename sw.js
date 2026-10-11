@@ -5,7 +5,7 @@
 // Nationale, tuiles OpenStreetMap) part directement au reseau, sans jamais passer par
 // le cache. Sinon les donnees du carnet resteraient figees apres un ajout, une
 // modification ou une suppression.
-const CACHE = 'coup-de-patte-v24';
+const CACHE = 'coup-de-patte-v25';
 const ASSETS = [
   './',
   './index.html',
@@ -39,13 +39,26 @@ self.addEventListener('fetch', (e) => {
   // Tout ce qui n'est pas notre origine part au reseau, sans cache et sans interception.
   if (url.origin !== self.location.origin) return;
 
+  // Rubrique Actualites (pages, flux, visuels) : toujours le reseau, jamais le cache,
+  // pour que l'article du jour apparaisse sans attendre une nouvelle version de l'app.
+  if (url.pathname.indexOf('/actualites/') === 0) {
+    if (req.mode === 'navigate') {
+      e.respondWith(fetch(req).catch(() => caches.match('./index.html')));
+    }
+    return;
+  }
+
   // Navigation : reseau d'abord, repli sur le cache si hors-ligne.
+  // Seule la page de l'application est copiee dans le cache.
   if (req.mode === 'navigate') {
+    const estApp = url.pathname === '/' || url.pathname === '/index.html';
     e.respondWith(
       fetch(req)
         .then((resp) => {
-          const copy = resp.clone();
-          caches.open(CACHE).then((c) => c.put('./index.html', copy));
+          if (estApp && resp && resp.status === 200) {
+            const copy = resp.clone();
+            caches.open(CACHE).then((c) => c.put('./index.html', copy));
+          }
           return resp;
         })
         .catch(() => caches.match('./index.html'))

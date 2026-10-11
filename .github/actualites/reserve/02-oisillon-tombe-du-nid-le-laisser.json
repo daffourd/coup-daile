@@ -1,0 +1,61 @@
+{
+  "slug": "oisillon-tombe-du-nid-faut-il-le-ramasser",
+  "rubrique": "geste",
+  "titre": "Oisillon tombé du nid : faut-il le ramasser ? Les bons réflexes en 3 questions",
+  "chapo": "Un oisillon au sol n'est presque jamais abandonné. S'il a des plumes et sautille, ses parents le nourrissent encore tout près. Tout dépend de trois questions simples : a-t-il des plumes, est-il blessé, est-il en danger immédiat ?",
+  "meta_description": "Tu as trouvé un oisillon par terre ? Plumes, blessure, danger : 3 questions pour savoir s'il faut le laisser, le remettre au nid ou appeler un centre de soins.",
+  "mots_cles": ["oisillon tombé du nid", "oisillon par terre que faire", "bébé oiseau au sol", "remettre un oisillon au nid", "jeune oiseau ne vole pas"],
+  "especes": ["Merle noir", "Moineau domestique", "Mésange charbonnière", "Passereaux"],
+  "zone": "France",
+  "sections": [
+    {
+      "titre": "Le jeune qui apprend à voler n'est pas perdu",
+      "paragraphes": [
+        "Chez beaucoup de passereaux, comme le merle, la mésange ou le moineau, les jeunes quittent le nid avant de savoir bien voler. Pendant quelques jours, ils sautillent au sol ou dans les buissons, couverts de plumes mais avec une queue encore courte. Leurs parents restent à proximité et continuent de les nourrir plusieurs fois par heure.",
+        "Ramasser un tel oisillon pour le sauver revient souvent à le priver de ses parents, qui l'élèvent bien mieux que quiconque. La meilleure aide est de le laisser, en le protégeant simplement d'un danger tout proche."
+      ]
+    },
+    {
+      "titre": "Les trois questions à se poser",
+      "paragraphes": [
+        "Première question : a-t-il des plumes ? S'il est emplumé et vif, c'est un jeune à l'envol. Laisse-le sur place ou pose-le dans un buisson ou sur une branche basse à quelques mètres, à l'abri des chats et des passants, puis éloigne-toi pour que ses parents reviennent.",
+        "Deuxième question : est-il nu ou couvert de duvet ? Il est tombé trop tôt. Si tu vois le nid et qu'il est accessible sans risque, remets-le dedans : contrairement à une idée reçue, les parents ne le rejettent pas à cause de l'odeur. Si le nid est introuvable ou détruit, appelle un centre de soins.",
+        "Troisième question : est-il blessé, attaqué par un chat, mouillé et froid, ou couvert de mouches ? Dans ce cas, il a besoin d'aide rapidement. Mets-le dans un carton aéré, au calme et au chaud, et appelle un centre de soins de la faune sauvage."
+      ]
+    },
+    {
+      "titre": "Ce qu'il ne faut jamais faire",
+      "paragraphes": [
+        "Ne lui donne ni pain, ni lait, ni eau à la pipette : ces gestes partent d'une bonne intention mais peuvent le tuer. Ne le garde pas chez toi pour l'élever : c'est interdit pour les espèces sauvages protégées, et un oisillon élevé par l'humain a peu de chances de survivre une fois relâché."
+      ]
+    }
+  ],
+  "gestes": [
+    "Observe de loin quelques minutes pour repérer les parents avant toute intervention.",
+    "Si l'oisillon est emplumé et vif, laisse-le ou pose-le à l'abri tout près, puis éloigne-toi.",
+    "S'il est nu ou en duvet et que le nid est accessible, remets-le simplement dedans.",
+    "S'il est blessé ou attaqué par un chat, place-le dans un carton aéré, au chaud, et appelle un centre de soins.",
+    "Garde ton chat à l'intérieur pendant quelques jours si des jeunes apprennent à voler dans ton jardin."
+  ],
+  "faq": [
+    {
+      "q": "Les parents rejettent-ils un oisillon touché par un humain ?",
+      "r": "Non. La plupart des oiseaux ont un odorat peu développé et continuent de nourrir leur petit même s'il a été touché. Tu peux donc le remettre au nid sans crainte."
+    },
+    {
+      "q": "Combien de temps un jeune oiseau reste-t-il au sol ?",
+      "r": "En général quelques jours, le temps que ses plumes de vol poussent. Ses parents le nourrissent pendant toute cette période."
+    },
+    {
+      "q": "Que donner à manger à un oisillon trouvé ?",
+      "r": "Rien. Une alimentation inadaptée ou de l'eau donnée de force peuvent le tuer. S'il a besoin d'aide, un centre de soins s'en chargera."
+    }
+  ],
+  "sources": [
+    {"titre": "LPO, Ligue pour la Protection des Oiseaux", "editeur": "LPO", "url": "https://www.lpo.fr/", "date": ""},
+    {"titre": "Office français de la biodiversité", "editeur": "OFB", "url": "https://www.ofb.gouv.fr/", "date": ""},
+    {"titre": "Liste des centres de soins pour animaux sauvages en France", "editeur": "Hegalaldia", "url": "https://www.hegalaldia.org/liste-des-centres-de-soins-pour-animaux-sauvages-en-france/", "date": ""}
+  ],
+  "social": "Un oisillon au sol n'est presque jamais abandonné. S'il a des plumes et sautille, ses parents le nourrissent tout près : le ramasser, c'est le priver d'eux. Plumes, blessure, danger : trois questions suffisent pour faire le bon geste.",
+  "hashtags": ["oisillon", "oiseaux", "faunesauvage", "bonsgestes", "nature", "coupdepatte"]
+}

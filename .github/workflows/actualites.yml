@@ -1,0 +1,81 @@
+name: actualites-quotidiennes
+
+# Rubrique Actualites de Coup de Patte : un article par jour, sans intervention.
+# 1. Chaque matin (7 h 20 heure d'ete, 6 h 20 heure d'hiver), si aucun article du jour n'existe :
+#    redaction par l'API Anthropic (secret ANTHROPIC_API_KEY), sinon article de reserve.
+# 2. Regeneration des pages statiques, du flux RSS, du sitemap, de llms.txt et des visuels.
+# 3. Publication par push sur main (Vercel redeploie seul), puis partage Facebook et Instagram
+#    si les secrets Meta sont presents.
+# Un article ajoute a la main dans actualites/_data/ declenche aussi ce workflow.
+
+on:
+  schedule:
+    - cron: "20 5 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "actualites/_data/**"
+      - ".github/actualites/**"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: actualites
+  cancel-in-progress: false
+
+jobs:
+  publier:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Dependances
+        run: pip install --quiet "pillow>=10"
+
+      - name: Article du jour
+        if: github.event_name != 'push'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ACTUS_MODEL: ${{ vars.ACTUS_MODEL }}
+        run: python .github/actualites/actualites.py generate
+
+      - name: Pages, flux, sitemap, visuels
+        run: python .github/actualites/actualites.py build
+
+      - name: Publication sur le site
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A actualites sitemap.xml robots.txt llms.txt .github/actualites/reserve
+          if git diff --cached --quiet; then
+            echo "Rien de nouveau a publier."
+          else
+            git commit -m "actualites: publication du $(TZ=Europe/Paris date +%F)"
+            for i in 1 2 3; do
+              git pull --rebase origin main && git push origin HEAD:main && break
+              sleep 5
+            done
+          fi
+
+      - name: Partage Facebook et Instagram
+        env:
+          META_PAGE_ID: ${{ secrets.META_PAGE_ID }}
+          META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN }}
+          META_IG_USER_ID: ${{ secrets.META_IG_USER_ID }}
+        run: |
+          python .github/actualites/actualites.py social
+          git add actualites/_data/_social.json 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -m "actualites: suivi des partages [skip ci]"
+            for i in 1 2 3; do
+              git pull --rebase origin main && git push origin HEAD:main && break
+              sleep 5
+            done
+          fi

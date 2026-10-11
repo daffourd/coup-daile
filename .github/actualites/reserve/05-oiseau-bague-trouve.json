@@ -1,0 +1,92 @@
+{
+  "slug": "oiseau-bague-trouve-que-faire",
+  "rubrique": "geste",
+  "titre": "Oiseau bagué trouvé : comment signaler la bague au Muséum et pourquoi c'est utile",
+  "chapo": "La petite bague métallique gravée au nom du Muséum est un précieux outil de science. Mort ou vivant, un oiseau bagué raconte son voyage dès que quelqu'un transmet le code. Voici comment le lire, à qui l'envoyer, et les précautions à prendre.",
+  "meta_description": "Tu as trouvé un oiseau bagué ? Comment lire la bague, la signaler au CRBPO du Muséum, et les précautions à prendre si l'oiseau est mort ou blessé.",
+  "mots_cles": [
+    "oiseau bagué trouvé",
+    "bague museum paris",
+    "signaler une bague oiseau",
+    "CRBPO",
+    "pigeon bagué trouvé"
+  ],
+  "especes": [
+    "Oiseaux bagués",
+    "Pigeon voyageur"
+  ],
+  "zone": "France",
+  "sections": [
+    {
+      "titre": "À quoi sert une bague",
+      "paragraphes": [
+        "En France, le baguage des oiseaux sauvages est coordonné par le Centre de recherches sur la biologie des populations d'oiseaux (CRBPO), rattaché au Muséum national d'Histoire naturelle. Chaque bague porte un code unique et le nom d'un centre de baguage, souvent « MUSEUM PARIS » ou une capitale étrangère.",
+        "Quand un oiseau bagué est retrouvé, la date et le lieu de la découverte permettent de reconstituer ses déplacements, sa durée de vie et les menaces qu'il rencontre. Chaque signalement contribue ainsi à la connaissance et à la protection des espèces.",
+        "Il existe aussi des marques de couleur, en plastique, posées sur les pattes, les ailes ou le cou de certaines espèces comme les goélands ou les cigognes. Elles se lisent de loin, aux jumelles : il suffit alors de noter les couleurs, le code et la patte concernée, sans capturer l'oiseau."
+      ]
+    },
+    {
+      "titre": "Si l'oiseau est mort",
+      "paragraphes": [
+        "Ne le touche jamais à mains nues, en raison de maladies comme la grippe aviaire. Photographie la bague de près, jusqu'à pouvoir lire tous les caractères : selon le CRBPO, la photo suffit. Note la date, la commune, le lieu précis et l'espèce si tu la connais.",
+        "Si tu trouves plusieurs cadavres au même endroit, ou un oiseau d'eau, une mouette, un goéland ou un rapace, ne touche à rien et préviens le service départemental de l'Office français de la biodiversité, qui surveille les mortalités anormales."
+      ]
+    },
+    {
+      "titre": "Si l'oiseau est vivant",
+      "paragraphes": [
+        "Ne retire jamais la bague d'un oiseau vivant. Relève le code avec une photo ou des jumelles. S'il est blessé, mets-le dans un carton aéré, au calme, et confie-le à un centre de soins avec sa bague. Un anneau fermé, sans ouverture, signale en général un pigeon voyageur ou un oiseau d'élevage : son propriétaire le cherche, et la Fédération colombophile française peut aider à le retrouver."
+      ]
+    }
+  ],
+  "gestes": [
+    "Photographie la bague de près jusqu'à lire tout le texte, y compris la ville gravée.",
+    "Note la date, l'heure, la commune, le lieu exact, l'espèce et les circonstances.",
+    "Signale la découverte au CRBPO via son formulaire en ligne ou par email à bague@mnhn.fr.",
+    "Ne touche jamais un oiseau mort à mains nues, et lave-toi les mains après toute manipulation avec protection.",
+    "Ne retire jamais la bague d'un oiseau vivant."
+  ],
+  "faq": [
+    {
+      "q": "À qui signaler un oiseau bagué en France ?",
+      "r": "Au CRBPO du Muséum national d'Histoire naturelle, par son formulaire en ligne ou par email à bague@mnhn.fr, avec la photo de la bague et le lieu de découverte."
+    },
+    {
+      "q": "Saurai-je d'où venait l'oiseau ?",
+      "r": "Oui, le CRBPO transmet en général à la personne qui signale les informations sur le baguage de l'oiseau : lieu, date et parfois son histoire."
+    },
+    {
+      "q": "J'ai trouvé un pigeon avec une bague, que faire ?",
+      "r": "Un anneau fermé indique souvent un pigeon voyageur. Le Muséum ne traite pas ces bagues : contacte plutôt la Fédération colombophile française pour retrouver son propriétaire."
+    }
+  ],
+  "sources": [
+    {
+      "titre": "Vous trouvez un oiseau bagué",
+      "editeur": "CRBPO, Muséum national d'Histoire naturelle",
+      "url": "https://crbpo.mnhn.fr/vous-trouvez-un-oiseau-bague/",
+      "date": ""
+    },
+    {
+      "titre": "J'ai trouvé un oiseau bagué, que faire ?",
+      "editeur": "LPO",
+      "url": "https://www.lpo.fr/decouvrir-la-nature/conseils-biodiversite/conseils-biodiversite/accueillir-la-faune-sauvage/j-ai-trouve-un-oiseau-bague-que-faire",
+      "date": ""
+    },
+    {
+      "titre": "Que faire si vous trouvez un pigeon voyageur",
+      "editeur": "Fédération colombophile française",
+      "url": "https://www.colombophiliefr.com/que-faire/",
+      "date": ""
+    }
+  ],
+  "social": "Une petite bague gravée « MUSEUM PARIS » à la patte d'un oiseau ? C'est un trésor pour la science. Une photo, le lieu, la date, et ton signalement au Muséum aide à comprendre la vie et les voyages des oiseaux. Voici comment faire, en toute sécurité.",
+  "hashtags": [
+    "oiseaux",
+    "baguage",
+    "sciencesparticipatives",
+    "faunesauvage",
+    "museum",
+    "coupdepatte"
+  ]
+}

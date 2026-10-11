@@ -1,0 +1,59 @@
+{
+  "slug": "martinet-au-sol-que-faire",
+  "rubrique": "espece",
+  "titre": "Martinet au sol : pourquoi il ne peut pas repartir seul et comment l'aider",
+  "chapo": "Un martinet posé par terre n'est jamais en train de se reposer : avec ses pattes minuscules et ses ailes immenses, il est incapable de redécoller du sol. Le bon réflexe est simple : le mettre à l'abri dans un carton et appeler sans tarder un centre de soins de la faune sauvage.",
+  "meta_description": "Martinet trouvé au sol : pourquoi il ne peut pas s'envoler seul, les erreurs à éviter et les gestes qui le sauvent en attendant un centre de soins.",
+  "mots_cles": ["martinet au sol", "martinet trouvé que faire", "jeune martinet tombé", "martinet ne s'envole pas", "sauver un martinet"],
+  "especes": ["Martinet noir"],
+  "zone": "France",
+  "sections": [
+    {
+      "titre": "Un oiseau fait pour le ciel",
+      "paragraphes": [
+        "Le martinet noir passe presque toute sa vie en vol. Il s'y nourrit d'insectes, y boit, y dort même en partie. Ses pattes très courtes lui servent seulement à s'agripper aux murs et aux bords de ses cavités de nid, sous les toits et dans les fissures des bâtiments. Au sol, il ne peut pas prendre l'élan dont ses longues ailes ont besoin.",
+        "C'est pourquoi un martinet trouvé par terre est toujours en difficulté : jeune tombé du nid trop tôt, adulte épuisé après un orage ou une forte chaleur, oiseau blessé. Il ressemble parfois à une hirondelle, mais il est plus grand, entièrement brun sombre, avec des ailes en forme de faux."
+      ]
+    },
+    {
+      "titre": "Les erreurs qui coûtent cher",
+      "paragraphes": [
+        "Le lancer en l'air pour l'aider à repartir est le geste le plus fréquent, et le plus dangereux. Un oiseau trop faible ou trop jeune retombe lourdement et se blesse. Seul un soigneur peut juger s'il est prêt à voler.",
+        "Lui donner de l'eau à la pipette ou de la nourriture est tout aussi risqué. Le martinet est un insectivore strict : le pain, le lait, la pâtée pour chat ou les vers de terre le rendent malade, et l'eau peut passer dans ses voies respiratoires. En attendant le centre de soins, le calme et la chaleur suffisent."
+      ]
+    },
+    {
+      "titre": "Une espèce des villes à protéger",
+      "paragraphes": [
+        "Le martinet noir niche presque exclusivement dans les bâtiments, ce qui en fait un vrai voisin des citadins. Les rénovations de toitures et de façades qui bouchent les cavités le privent de sites de nid. Comme tous les oiseaux protégés, il ne peut être détenu que par un centre de soins autorisé. Ton rôle est de le mettre en sécurité et de passer le relais."
+      ]
+    }
+  ],
+  "gestes": [
+    "Ramasse-le délicatement avec un linge, pour qu'il ne reste pas exposé aux chats, aux voitures ou au soleil.",
+    "Place-le dans un carton aéré, garni d'un torchon, fermé, au calme et à température ambiante.",
+    "Ne le lance jamais en l'air et ne lui donne ni eau ni nourriture.",
+    "Appelle rapidement un centre de soins de la faune sauvage : l'application Coup de Patte t'indique le plus proche.",
+    "Note l'endroit exact où tu l'as trouvé, le centre pourra te le demander."
+  ],
+  "faq": [
+    {
+      "q": "Un martinet peut-il s'envoler depuis le sol ?",
+      "r": "Non. Ses pattes sont trop courtes et ses ailes trop longues pour prendre son envol depuis le sol. Il a besoin d'aide et doit être confié à un centre de soins."
+    },
+    {
+      "q": "Que donner à manger à un martinet ?",
+      "r": "Rien. Le martinet ne se nourrit que d'insectes capturés en vol, et une alimentation inadaptée peut le tuer. Seul un centre de soins peut le nourrir correctement."
+    },
+    {
+      "q": "Comment distinguer un martinet d'une hirondelle ?",
+      "r": "Le martinet est entièrement brun sombre, avec une petite gorge claire, et ses ailes forment un croissant. L'hirondelle a le ventre blanc et se pose volontiers sur les fils."
+    }
+  ],
+  "sources": [
+    {"titre": "LPO, Ligue pour la Protection des Oiseaux", "editeur": "LPO", "url": "https://www.lpo.fr/", "date": ""},
+    {"titre": "Liste des centres de soins pour animaux sauvages en France", "editeur": "Hegalaldia", "url": "https://www.hegalaldia.org/liste-des-centres-de-soins-pour-animaux-sauvages-en-france/", "date": ""}
+  ],
+  "social": "Un martinet par terre ne se repose pas : il est incapable de redécoller seul. Surtout, ne le lance pas en l'air et ne lui donne rien à manger. Un carton, du calme, et un appel à un centre de soins : voici comment lui sauver la vie.",
+  "hashtags": ["martinet", "oiseaux", "faunesauvage", "bonsgestes", "biodiversite", "coupdepatte"]
+}

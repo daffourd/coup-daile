@@ -1,0 +1,6 @@
+# Coup de Patte : contenus ouverts aux moteurs de recherche et aux assistants IA
+User-agent: *
+Allow: /
+Disallow: /.github/
+
+Sitemap: https://coupdepatte.eu/sitemap.xml

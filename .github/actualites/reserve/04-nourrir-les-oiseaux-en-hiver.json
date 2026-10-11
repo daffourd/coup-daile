@@ -1,0 +1,59 @@
+{
+  "slug": "nourrir-les-oiseaux-en-hiver-sans-leur-nuire",
+  "rubrique": "saison",
+  "titre": "Nourrir les oiseaux en hiver : quand commencer, quoi donner et ce qu'il faut éviter",
+  "chapo": "Pendant les grands froids, une mangeoire bien tenue aide les oiseaux du jardin et du balcon à passer l'hiver. Encore faut-il donner les bons aliments, au bon moment, et garder une hygiène irréprochable pour ne pas répandre de maladies.",
+  "meta_description": "Nourrir les oiseaux en hiver : période conseillée, graines adaptées, aliments interdits comme le pain et le lait, et règles d'hygiène des mangeoires.",
+  "mots_cles": ["nourrir les oiseaux en hiver", "mangeoire oiseaux", "quoi donner aux oiseaux", "pain oiseaux danger", "boule de graisse oiseaux"],
+  "especes": ["Mésange bleue", "Mésange charbonnière", "Rougegorge familier", "Moineau domestique", "Pinson des arbres"],
+  "zone": "France",
+  "sections": [
+    {
+      "titre": "Une aide ponctuelle, pas une dépendance",
+      "paragraphes": [
+        "En hiver, les journées sont courtes et les insectes rares. Les petits oiseaux doivent pourtant manger assez pour tenir des nuits froides. Le nourrissage leur apporte un coup de pouce, à condition de le réserver à la mauvaise saison, en gros du milieu de l'automne à la fin de l'hiver, et de l'arrêter progressivement au retour du printemps.",
+        "À partir du printemps, les oiseaux trouvent des insectes en abondance, et les oisillons ont besoin de cette nourriture vivante. Des graines sèches ou des morceaux de graisse ne leur conviennent pas. Une fois commencé, mieux vaut nourrir régulièrement pendant les grands froids, car les oiseaux comptent alors sur ce point de ravitaillement."
+      ]
+    },
+    {
+      "titre": "Les bons aliments et les interdits",
+      "paragraphes": [
+        "Les graines de tournesol, de préférence non salées, conviennent à la plupart des espèces du jardin. Les mélanges de graines, les cacahuètes non salées et non grillées présentées en mangeoire grillagée, et les boules de graisse végétale sans filet complètent bien le menu. Les merles et les grives apprécient aussi des fruits abîmés posés au sol.",
+        "Le pain, les biscottes et les restes de repas sont à proscrire : ils remplissent l'estomac sans nourrir et peuvent provoquer des troubles digestifs. Le lait est indigeste pour les oiseaux. Tout aliment salé, épicé ou cuisiné est à éviter, tout comme les filets en plastique des boules de graisse, dans lesquels les pattes se coincent."
+      ]
+    },
+    {
+      "titre": "L'hygiène, une question de survie",
+      "paragraphes": [
+        "Une mangeoire sale peut devenir un foyer de maladies entre oiseaux. Nettoie-la régulièrement à l'eau chaude, retire les graines moisies et déplace-la de temps en temps pour éviter l'accumulation de déchets au sol. Si tu observes des oiseaux malades ou morts autour de la mangeoire, arrête le nourrissage quelques semaines et désinfecte le matériel."
+      ]
+    }
+  ],
+  "gestes": [
+    "Installe la mangeoire en hauteur, à l'abri des chats et à quelques mètres d'une haie où les oiseaux peuvent se réfugier.",
+    "Propose des graines de tournesol non salées et des boules de graisse végétale sans filet.",
+    "N'offre jamais de pain, de lait ni de restes salés.",
+    "Ajoute une coupelle d'eau peu profonde, renouvelée chaque jour et dégelée par grand froid.",
+    "Nettoie mangeoire et abreuvoir chaque semaine, et réduis le nourrissage dès le retour du printemps."
+  ],
+  "faq": [
+    {
+      "q": "Quand commencer à nourrir les oiseaux ?",
+      "r": "Quand le froid s'installe, en général à partir de la fin de l'automne. Le nourrissage doit rester une aide de la mauvaise saison et s'arrêter progressivement au printemps."
+    },
+    {
+      "q": "Pourquoi ne faut-il pas donner de pain aux oiseaux ?",
+      "r": "Le pain remplit l'estomac sans apporter les graisses et les nutriments dont les oiseaux ont besoin pour lutter contre le froid. Il peut aussi gonfler, moisir et provoquer des troubles digestifs."
+    },
+    {
+      "q": "Faut-il donner de l'eau aux oiseaux en hiver ?",
+      "r": "Oui, c'est très utile quand tout gèle. Une coupelle peu profonde d'eau tiède, sans sel ni antigel, leur permet de boire et de se baigner."
+    }
+  ],
+  "sources": [
+    {"titre": "LPO, Ligue pour la Protection des Oiseaux", "editeur": "LPO", "url": "https://www.lpo.fr/", "date": ""},
+    {"titre": "Vigie-Nature, Muséum national d'Histoire naturelle", "editeur": "MNHN", "url": "https://www.vigienature.fr/", "date": ""}
+  ],
+  "social": "Quand le froid s'installe, une mangeoire bien tenue aide les mésanges, rougegorges et moineaux à passer l'hiver. Graines de tournesol oui, pain et lait non, et une hygiène irréprochable pour ne pas transmettre de maladies. Le guide pour bien faire.",
+  "hashtags": ["oiseaux", "hiver", "mangeoire", "jardin", "biodiversite", "coupdepatte"]
+}

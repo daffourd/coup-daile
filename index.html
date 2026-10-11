@@ -15,6 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="alternate" type="application/rss+xml" title="Actualités Coup de Patte" href="/actualites/rss.xml">
 <title>Coup de Patte</title>
 <style>
   :root{
@@ -250,6 +251,13 @@
   html[data-theme="dark"] .seg{background:#1b2c25;}
   .seg button{flex:1;border:none;background:none;font-family:inherit;font-weight:800;font-size:14px;color:var(--texte-doux);padding:11px;border-radius:11px;cursor:pointer;}
   .seg button.on{background:var(--blanc);color:var(--texte);box-shadow:var(--ombre-douce);}
+  /* Actualites */
+  .actu{display:flex;gap:12px;align-items:center;background:var(--blanc);border:1px solid var(--bord);border-radius:18px;padding:10px;margin:10px 0;box-shadow:var(--ombre-douce);text-decoration:none;color:inherit;}
+  .actu img{width:76px;height:76px;border-radius:14px;flex:0 0 auto;object-fit:cover;background:var(--vert-pale);}
+  .actu .a-txt{flex:1;min-width:0;}
+  .actu .a-meta{font-size:11.5px;font-weight:800;color:var(--ambre);text-transform:uppercase;letter-spacing:.03em;}
+  .actu .a-tit{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:16px;line-height:1.25;margin-top:3px;}
+  .actu .a-chapo{font-size:13px;color:var(--texte-doux);margin-top:4px;line-height:1.4;}
 </style>
 </head>
 <body>
@@ -283,6 +291,9 @@
       <button class="opt" onclick="showScreen('identifier')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3" stroke-linecap="round"/></svg></span><b>Identifier l'oiseau</b><span class="chev">&rsaquo;</span></button>
       <button class="opt" onclick="showScreen('gestes')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span><b>Les bons gestes</b><span class="chev">&rsaquo;</span></button>
       <button class="opt" onclick="showScreen('especes')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg></span><b>Fiches espèces</b><span class="chev">&rsaquo;</span></button>
+      <div class="section-label">Actualités</div>
+      <div id="actusHome"><a class="opt" href="/actualites/"><b>La faune sauvage en ville, chaque jour</b><span class="chev">&rsaquo;</span></a></div>
+      <button class="btn btn-ghost" onclick="showScreen('actus')">Toutes les actualités</button>
       <div id="adHome"></div>
       <p class="disclaimer">Coup de Patte informe et oriente, sans remplacer l'avis d'un centre de sauvegarde ou d'un vétérinaire. Conseils fondés sur la LPO et l'OFB.</p>
     </section>
@@ -633,6 +644,14 @@
       <p class="disclaimer">Dernière mise à jour : 8 juillet 2026.</p>
     </section>
 
+    <!-- ACTUALITES -->
+    <section class="screen" id="actus">
+      <h1 class="title">Actualités</h1>
+      <p class="sub">Chaque jour, une actualité de la faune sauvage en ville, en France, en Europe et dans le monde, et les gestes qui la sauvent.</p>
+      <div id="actusList"><p class="meta">Chargement des actualités...</p></div>
+      <p class="disclaimer">Articles sourcés, rédigés par la rédaction de Coup de Patte. <a href="/actualites/rss.xml">Flux RSS</a></p>
+    </section>
+
     <section class="screen" id="cgu">
       <h1 class="title">Conditions générales d'utilisation</h1>
       <div class="card"><p style="font-size:14px;line-height:1.6">En utilisant Coup de Patte, tu acceptes les présentes conditions.</p></div>
@@ -810,6 +829,7 @@
     if(id==='benevoles' && typeof renderBenevoles==='function') renderBenevoles();
     if(id==='assos' && typeof renderAssos==='function') renderAssos();
     if(id==='admin' && typeof renderAdmin==='function') renderAdmin();
+    if(id==='actus') renderActus();
     if(typeof renderAds==='function') renderAds();
   }
   // ---------- Oiseau bague : consignes officielles (CRBPO/MNHN, LPO, OFB, FCF), verifiees le 01/10/2026 ----------
@@ -1733,7 +1753,43 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
   document.getElementById('walk').addEventListener('click', function(e){ if(e.target===this){ wtClose(); } });
   (function(){ var show=true; try{ show = localStorage.getItem('cda-wt-hide')!=='1'; }catch(e){} if(show){ setTimeout(function(){ openWalk(0); }, 500); } })();
 
-  updateAdminUI(); renderAds(); loadCentres();
+  // ---------- Actualites : flux statique /actualites/articles.json, regenere chaque matin ----------
+  var _actus = null;
+  function _dateFr(d){
+    var m=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+    var p=String(d||'').split('-'); if(p.length!==3) return '';
+    return parseInt(p[2],10)+' '+m[parseInt(p[1],10)-1]+' '+p[0];
+  }
+  function _actuCard(a, avecChapo){
+    var u = String(a.url||''); if(u.indexOf('/actualites/')!==0) return '';
+    var img = String(a.image||''); if(img.indexOf('/actualites/')!==0) img='';
+    return '<a class="actu" href="'+escapeH(u)+'">'+(img?'<img src="'+escapeH(img)+'" alt="" loading="lazy">':'')+
+      '<span class="a-txt"><span class="a-meta">'+escapeH(a.rubrique)+' · '+escapeH(_dateFr(a.date))+'</span>'+
+      '<span class="a-tit" style="display:block">'+escapeH(a.titre)+'</span>'+
+      (avecChapo?'<span class="a-chapo" style="display:block">'+escapeH(String(a.chapo||'').slice(0,160))+(String(a.chapo||'').length>160?'…':'')+'</span>':'')+
+      '</span></a>';
+  }
+  function loadActus(cb){
+    if(_actus){ if(cb) cb(_actus); return; }
+    if(!window.fetch){ return; }
+    fetch('/actualites/articles.json', {cache:'no-store'}).then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(j){ _actus = (j && j.articles) ? j.articles : []; if(cb) cb(_actus); })
+      .catch(function(){ if(cb) cb(null); });
+  }
+  function renderActusHome(){
+    var box=document.getElementById('actusHome'); if(!box) return;
+    loadActus(function(l){ if(l && l.length){ box.innerHTML = l.slice(0,3).map(function(a){ return _actuCard(a,false); }).join(''); } });
+  }
+  function renderActus(){
+    var box=document.getElementById('actusList'); if(!box) return;
+    loadActus(function(l){
+      if(l===null){ box.innerHTML='<div class="callout">Actualités indisponibles hors connexion. Reviens quand tu auras du réseau.</div>'; return; }
+      if(!l.length){ box.innerHTML='<p class="meta">Les premières actualités arrivent très bientôt.</p>'; return; }
+      box.innerHTML = l.map(function(a){ return _actuCard(a,true); }).join('');
+    });
+  }
+
+  updateAdminUI(); renderAds(); loadCentres(); renderActusHome();
 </script>
 </body>
 </html>

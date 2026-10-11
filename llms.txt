@@ -1,0 +1,17 @@
+# Coup de Patte
+
+> Association loi 1901 (Saint-Aunès, Hérault) et application web gratuite qui aide le grand public à secourir les animaux sauvages trouvés en détresse en ville, en particulier les oiseaux : oisillon tombé du nid, oiseau blessé, oiseau bagué, martinet au sol.
+
+- Application : https://coupdepatte.eu/ (guide d'urgence en 3 questions, fiches de 100 espèces, carte des centres de soins, signalement des oiseaux bagués au Muséum, annuaire de bénévoles)
+- Centres de soins de la faune sauvage référencés : 58, dans 51 départements
+- Conseils fondés sur la LPO, l'OFB, le CRBPO (Muséum national d'Histoire naturelle) et les centres de soins.
+- Règle d'or : un oisillon emplumé au sol n'est presque jamais abandonné ; un animal sauvage blessé se confie à un centre de soins, il ne se garde pas chez soi.
+
+## Actualités
+
+- Index : https://coupdepatte.eu/actualites/
+- Flux RSS : https://coupdepatte.eu/actualites/rss.xml
+
+- [Animal sauvage trouvé : pourquoi il faut appeler un centre de soins avant d'agir](https://coupdepatte.eu/actualites/animal-sauvage-trouve-appeler-avant-d-agir/) (2026-10-11) : Oisillon, hérisson, jeune lièvre : avant de ramasser un animal sauvage, appelle un centre de soins. Les conseils du centre de Nantes et les bons réflexes.
+- [Migration d'automne : la nuit, les lumières des villes piègent les oiseaux](https://coupdepatte.eu/actualites/migration-nocturne-lumieres-des-villes-et-vitres/) (2026-10-11) : Pourquoi les oiseaux migrateurs heurtent les vitres en automne, le rôle de l'éclairage nocturne, et les gestes simples pour les protéger chez toi et en ville.
+- [Hérissons des villes : à Londres, la ville les isole jusque dans leurs gènes](https://coupdepatte.eu/actualites/herissons-de-londres-isoles-par-la-ville/) (2026-10-11) : Une étude de 2026 révèle que les hérissons urbains de Londres sont isolés génétiquement. Pourquoi, et comment aider les hérissons de ton quartier cet automne.
