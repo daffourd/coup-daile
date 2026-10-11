@@ -549,8 +549,13 @@ p{margin:0 0 14px}
 details{background:var(--blanc);border:1px solid var(--bord);border-radius:14px;padding:12px 16px;margin:8px 0}
 summary{font-weight:800;cursor:pointer}
 details p{margin:8px 0 0}
-.sources{font-size:14px;color:var(--doux)}
-.sources li{margin:4px 0 4px 18px}
+.pied-sources{max-width:760px;margin:10px auto 0;padding:22px 16px 6px;border-top:1px solid var(--bord);font-size:14px;color:var(--doux)}
+.pied-sources h2{font-family:Nunito,Arial,sans-serif;font-size:13px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--doux);margin:0 0 10px}
+.pied-sources ol{padding-left:20px;margin:0 0 12px}
+.pied-sources li{margin:6px 0;line-height:1.5}
+.pied-sources a{color:var(--texte)}
+.pied-sources p{font-size:12.5px;margin:0}
+footer{border-top:none}
 .liste{list-style:none}
 .carte{display:flex;gap:14px;background:var(--blanc);border:1px solid var(--bord);border-radius:18px;padding:12px;margin:12px 0;text-decoration:none;color:inherit}
 .carte img{width:96px;height:96px;border-radius:14px;flex:0 0 auto;object-fit:cover}
@@ -657,7 +662,7 @@ def render_article(a, others, st):
     out.append('<nav class="fil"><a href="/">Coup de Patte</a> › <a href="/actualites/">Actualités</a></nav>')
     out.append('<span class="etiq">%s</span>' % esc(rub))
     out.append('<h1>%s</h1>' % esc(a["titre"]))
-    out.append('<p class="meta">Publié le <time datetime="%s">%s</time> · Rédaction Coup de Patte</p>' % (a["date"], date_fr(a["date"])))
+    out.append('<p class="meta">Publié le <time datetime="%s">%s</time> · Rédaction Coup de Patte · <a href="#sources">%d source%s</a></p>' % (a["date"], date_fr(a["date"]), len(a["sources"]), "s" if len(a["sources"]) > 1 else ""))
     out.append('<p class="chapo">%s</p>' % esc(a["chapo"]))
     out.append('<img class="visuel" src="/actualites/img/%s-og.png" width="1200" height="630" alt="%s">' % (esc(a["slug"]), esc(a["titre"])))
     for s in a["sections"]:
@@ -670,11 +675,6 @@ def render_article(a, others, st):
     out.append('<h2>Questions fréquentes</h2>')
     for f in a["faq"]:
         out.append('<details><summary>%s</summary><p>%s</p></details>' % (esc(f["q"]), esc(f["r"])))
-    out.append('<h2>Sources</h2><ul class="sources">')
-    for s in a["sources"]:
-        dt = (", " + date_fr(s["date"])) if re.match(r"^\d{4}-\d{2}-\d{2}$", s.get("date") or "") else ""
-        out.append('<li><a href="%s" rel="noopener" target="_blank">%s</a>, %s%s</li>' % (esc(s["url"]), esc(s.get("titre", s["url"])), esc(s.get("editeur", "")), esc(dt)))
-    out.append('</ul>')
     out.append('<p class="avert">Coup de Patte informe et oriente, sans remplacer l\'avis d\'un centre de soins de la faune sauvage ou d\'un vétérinaire.</p>')
     out.append('</article>')
     if others:
@@ -683,6 +683,13 @@ def render_article(a, others, st):
             out.append(card_html(o))
         out.append('</ul>')
     out.append('</main>')
+    # Sources en pied de page de l'article
+    out.append('<section class="pied-sources" id="sources" aria-labelledby="titre-sources"><h2 id="titre-sources">Sources de cet article</h2><ol>')
+    for s in a["sources"]:
+        dt = (", " + date_fr(s["date"])) if re.match(r"^\d{4}-\d{2}-\d{2}$", s.get("date") or "") else ""
+        ed = (", " + s["editeur"]) if s.get("editeur") else ""
+        out.append('<li><a href="%s" rel="noopener" target="_blank">%s</a>%s%s</li>' % (esc(s["url"]), esc(s.get("titre", s["url"])), esc(ed), esc(dt)))
+    out.append('</ol><p>Les faits cités proviennent de ces sources, consultées à la date de publication. Les textes sont reformulés par la rédaction de Coup de Patte.</p></section>')
     out.append(FOOT)
     return "\n".join(out)
 

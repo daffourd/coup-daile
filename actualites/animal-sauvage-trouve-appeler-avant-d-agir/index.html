@@ -52,8 +52,13 @@ p{margin:0 0 14px}
 details{background:var(--blanc);border:1px solid var(--bord);border-radius:14px;padding:12px 16px;margin:8px 0}
 summary{font-weight:800;cursor:pointer}
 details p{margin:8px 0 0}
-.sources{font-size:14px;color:var(--doux)}
-.sources li{margin:4px 0 4px 18px}
+.pied-sources{max-width:760px;margin:10px auto 0;padding:22px 16px 6px;border-top:1px solid var(--bord);font-size:14px;color:var(--doux)}
+.pied-sources h2{font-family:Nunito,Arial,sans-serif;font-size:13px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--doux);margin:0 0 10px}
+.pied-sources ol{padding-left:20px;margin:0 0 12px}
+.pied-sources li{margin:6px 0;line-height:1.5}
+.pied-sources a{color:var(--texte)}
+.pied-sources p{font-size:12.5px;margin:0}
+footer{border-top:none}
 .liste{list-style:none}
 .carte{display:flex;gap:14px;background:var(--blanc);border:1px solid var(--bord);border-radius:18px;padding:12px;margin:12px 0;text-decoration:none;color:inherit}
 .carte img{width:96px;height:96px;border-radius:14px;flex:0 0 auto;object-fit:cover}
@@ -74,7 +79,7 @@ footer a{color:var(--doux)}
 <nav class="fil"><a href="/">Coup de Patte</a> › <a href="/actualites/">Actualités</a></nav>
 <span class="etiq">Le bon geste</span>
 <h1>Animal sauvage trouvé : pourquoi il faut appeler un centre de soins avant d&#x27;agir</h1>
-<p class="meta">Publié le <time datetime="2026-10-11">11 octobre 2026</time> · Rédaction Coup de Patte</p>
+<p class="meta">Publié le <time datetime="2026-10-11">11 octobre 2026</time> · Rédaction Coup de Patte · <a href="#sources">2 sources</a></p>
 <p class="chapo">Trouver un animal sauvage ne veut pas dire qu&#x27;il est en détresse. Le centre vétérinaire de la faune sauvage de Nantes, qui a accueilli plus de 2 900 animaux en 2025, rappelle la règle d&#x27;or : ne pas toucher, observer, et appeler avant de déplacer quoi que ce soit.</p>
 <img class="visuel" src="/actualites/img/animal-sauvage-trouve-appeler-avant-d-agir-og.png" width="1200" height="630" alt="Animal sauvage trouvé : pourquoi il faut appeler un centre de soins avant d&#x27;agir">
 <h2>Ce que voit un centre de soins au quotidien</h2>
@@ -91,10 +96,6 @@ footer a{color:var(--doux)}
 <details><summary>J&#x27;ai trouvé un oisillon par terre, dois-je le ramasser ?</summary><p>S&#x27;il a des plumes et sautille, c&#x27;est sans doute un jeune qui apprend à voler et ses parents le nourrissent encore : laisse-le, en le mettant simplement à l&#x27;abri d&#x27;un danger tout proche. S&#x27;il est nu ou blessé, appelle un centre de soins.</p></details>
 <details><summary>Un bébé lièvre est seul dans l&#x27;herbe, est-il abandonné ?</summary><p>Le plus souvent, non. Sa mère le laisse seul une grande partie de la journée et revient l&#x27;allaiter. Ne le touche pas et éloigne-toi.</p></details>
 <details><summary>Puis-je donner de l&#x27;eau à un animal sauvage affaibli ?</summary><p>Non. Le faire boire de force peut l&#x27;étouffer. Mets-le au calme et demande conseil à un centre de soins.</p></details>
-<h2>Sources</h2><ul class="sources">
-<li><a href="https://metropole.nantes.fr/actualites/faune-sauvage-ce-centre-soigne-les-animaux-en-detresse" rel="noopener" target="_blank">Faune sauvage : ce centre soigne les animaux en détresse</a>, Nantes Métropole, 2 juin 2026</li>
-<li><a href="https://www.hegalaldia.org/liste-des-centres-de-soins-pour-animaux-sauvages-en-france/" rel="noopener" target="_blank">Liste des centres de soins pour animaux sauvages en France</a>, Hegalaldia</li>
-</ul>
 <p class="avert">Coup de Patte informe et oriente, sans remplacer l'avis d'un centre de soins de la faune sauvage ou d'un vétérinaire.</p>
 </article>
 <h2>À lire aussi</h2><ul class="liste">
@@ -102,5 +103,9 @@ footer a{color:var(--doux)}
 <li><a class="carte" href="/actualites/herissons-de-londres-isoles-par-la-ville/"><img src="/actualites/img/herissons-de-londres-isoles-par-la-ville.png" alt="" loading="lazy" width="96" height="96"><div><span>Science et découvertes · 11 octobre 2026</span><b>Hérissons des villes : à Londres, la ville les isole jusque dans leurs gènes</b><span>Une étude publiée en avril 2026 montre que les hérissons de certains parcs londoniens ont perdu une part de leur diversité génétique, faute de pouvoir…</span></div></a></li>
 </ul>
 </main>
+<section class="pied-sources" id="sources" aria-labelledby="titre-sources"><h2 id="titre-sources">Sources de cet article</h2><ol>
+<li><a href="https://metropole.nantes.fr/actualites/faune-sauvage-ce-centre-soigne-les-animaux-en-detresse" rel="noopener" target="_blank">Faune sauvage : ce centre soigne les animaux en détresse</a>, Nantes Métropole, 2 juin 2026</li>
+<li><a href="https://www.hegalaldia.org/liste-des-centres-de-soins-pour-animaux-sauvages-en-france/" rel="noopener" target="_blank">Liste des centres de soins pour animaux sauvages en France</a>, Hegalaldia</li>
+</ol><p>Les faits cités proviennent de ces sources, consultées à la date de publication. Les textes sont reformulés par la rédaction de Coup de Patte.</p></section>
 <footer>Coup de Patte, association loi 1901, 1 impasse du Parc, 34130 Saint-Aunès. Application gratuite pour secourir la faune sauvage en ville. <a href="/">Ouvrir l'application</a> · <a href="/actualites/">Toutes les actualités</a> · <a href="/actualites/rss.xml">Flux RSS</a></footer>
 </body></html>

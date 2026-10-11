@@ -52,8 +52,13 @@ p{margin:0 0 14px}
 details{background:var(--blanc);border:1px solid var(--bord);border-radius:14px;padding:12px 16px;margin:8px 0}
 summary{font-weight:800;cursor:pointer}
 details p{margin:8px 0 0}
-.sources{font-size:14px;color:var(--doux)}
-.sources li{margin:4px 0 4px 18px}
+.pied-sources{max-width:760px;margin:10px auto 0;padding:22px 16px 6px;border-top:1px solid var(--bord);font-size:14px;color:var(--doux)}
+.pied-sources h2{font-family:Nunito,Arial,sans-serif;font-size:13px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--doux);margin:0 0 10px}
+.pied-sources ol{padding-left:20px;margin:0 0 12px}
+.pied-sources li{margin:6px 0;line-height:1.5}
+.pied-sources a{color:var(--texte)}
+.pied-sources p{font-size:12.5px;margin:0}
+footer{border-top:none}
 .liste{list-style:none}
 .carte{display:flex;gap:14px;background:var(--blanc);border:1px solid var(--bord);border-radius:18px;padding:12px;margin:12px 0;text-decoration:none;color:inherit}
 .carte img{width:96px;height:96px;border-radius:14px;flex:0 0 auto;object-fit:cover}
@@ -74,7 +79,7 @@ footer a{color:var(--doux)}
 <nav class="fil"><a href="/">Coup de Patte</a> › <a href="/actualites/">Actualités</a></nav>
 <span class="etiq">Au fil des saisons</span>
 <h1>Migration d&#x27;automne : la nuit, les lumières des villes piègent les oiseaux</h1>
-<p class="meta">Publié le <time datetime="2026-10-11">11 octobre 2026</time> · Rédaction Coup de Patte</p>
+<p class="meta">Publié le <time datetime="2026-10-11">11 octobre 2026</time> · Rédaction Coup de Patte · <a href="#sources">3 sources</a></p>
 <p class="chapo">En ce moment, des millions d&#x27;oiseaux migrateurs traversent le ciel de France chaque nuit. Attirés par l&#x27;éclairage urbain, certains s&#x27;épuisent ou heurtent des vitres. Éteindre, orienter la lumière vers le sol et rendre les baies vitrées visibles suffit souvent à éviter le pire.</p>
 <img class="visuel" src="/actualites/img/migration-nocturne-lumieres-des-villes-et-vitres-og.png" width="1200" height="630" alt="Migration d&#x27;automne : la nuit, les lumières des villes piègent les oiseaux">
 <h2>Un trafic nocturne invisible au-dessus des toits</h2>
@@ -91,11 +96,6 @@ footer a{color:var(--doux)}
 <details><summary>Que faire si un oiseau s&#x27;est cogné contre ma fenêtre ?</summary><p>Place-le dans un carton aéré et fermé, au calme et dans le noir, sans lui donner à manger ni à boire. S&#x27;il s&#x27;agite et vole bien au bout d&#x27;une à deux heures, relâche-le à l&#x27;endroit où tu l&#x27;as trouvé. S&#x27;il reste prostré ou semble blessé, appelle un centre de soins de la faune sauvage.</p></details>
 <details><summary>Les autocollants de rapace sur les vitres sont-ils efficaces ?</summary><p>Très peu. Un oiseau les perçoit comme un obstacle isolé et passe à côté. Des marquages répartis de façon serrée sur toute la vitre sont bien plus efficaces.</p></details>
 <details><summary>Pourquoi les oiseaux migrent-ils la nuit ?</summary><p>Beaucoup de petits oiseaux voyagent de nuit pour échapper aux prédateurs, profiter d&#x27;un air plus frais et calme, et garder la journée pour se nourrir. Ils s&#x27;orientent notamment grâce aux étoiles et au champ magnétique terrestre.</p></details>
-<h2>Sources</h2><ul class="sources">
-<li><a href="https://sciencepost.fr/des-millions-d-oiseaux-passent-au-dessus-des-toits-chaque-nuit-et-la-lumiere-des-villes-en-jette-une-partie-contre-les-vitres" rel="noopener" target="_blank">Des millions d&#x27;oiseaux passent au-dessus des toits chaque nuit et la lumière des villes en jette une partie contre les vitres</a>, Sciencepost, 16 septembre 2026</li>
-<li><a href="https://aida.ineris.fr/reglementation/arrete-271218-relatif-a-prevention-a-reduction-a-limitation-nuisances-lumineuses" rel="noopener" target="_blank">Arrêté du 27 décembre 2018 relatif à la prévention, à la réduction et à la limitation des nuisances lumineuses</a>, AIDA, INERIS</li>
-<li><a href="https://www.lpo.fr/" rel="noopener" target="_blank">LPO, Ligue pour la Protection des Oiseaux</a>, LPO</li>
-</ul>
 <p class="avert">Coup de Patte informe et oriente, sans remplacer l'avis d'un centre de soins de la faune sauvage ou d'un vétérinaire.</p>
 </article>
 <h2>À lire aussi</h2><ul class="liste">
@@ -103,5 +103,10 @@ footer a{color:var(--doux)}
 <li><a class="carte" href="/actualites/herissons-de-londres-isoles-par-la-ville/"><img src="/actualites/img/herissons-de-londres-isoles-par-la-ville.png" alt="" loading="lazy" width="96" height="96"><div><span>Science et découvertes · 11 octobre 2026</span><b>Hérissons des villes : à Londres, la ville les isole jusque dans leurs gènes</b><span>Une étude publiée en avril 2026 montre que les hérissons de certains parcs londoniens ont perdu une part de leur diversité génétique, faute de pouvoir…</span></div></a></li>
 </ul>
 </main>
+<section class="pied-sources" id="sources" aria-labelledby="titre-sources"><h2 id="titre-sources">Sources de cet article</h2><ol>
+<li><a href="https://sciencepost.fr/des-millions-d-oiseaux-passent-au-dessus-des-toits-chaque-nuit-et-la-lumiere-des-villes-en-jette-une-partie-contre-les-vitres" rel="noopener" target="_blank">Des millions d&#x27;oiseaux passent au-dessus des toits chaque nuit et la lumière des villes en jette une partie contre les vitres</a>, Sciencepost, 16 septembre 2026</li>
+<li><a href="https://aida.ineris.fr/reglementation/arrete-271218-relatif-a-prevention-a-reduction-a-limitation-nuisances-lumineuses" rel="noopener" target="_blank">Arrêté du 27 décembre 2018 relatif à la prévention, à la réduction et à la limitation des nuisances lumineuses</a>, AIDA, INERIS</li>
+<li><a href="https://www.lpo.fr/" rel="noopener" target="_blank">LPO, Ligue pour la Protection des Oiseaux</a>, LPO</li>
+</ol><p>Les faits cités proviennent de ces sources, consultées à la date de publication. Les textes sont reformulés par la rédaction de Coup de Patte.</p></section>
 <footer>Coup de Patte, association loi 1901, 1 impasse du Parc, 34130 Saint-Aunès. Application gratuite pour secourir la faune sauvage en ville. <a href="/">Ouvrir l'application</a> · <a href="/actualites/">Toutes les actualités</a> · <a href="/actualites/rss.xml">Flux RSS</a></footer>
 </body></html>
