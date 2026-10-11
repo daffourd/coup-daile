@@ -60,7 +60,7 @@ RUBRIQUES = [
 RUBRIQUE_LABEL = {
     "france": "Actu France", "monde": "Europe et monde", "geste": "Le bon geste",
     "espece": "Portrait d'espèce", "initiative": "Initiative", "saison": "Au fil des saisons",
-    "science": "Science et découvertes",
+    "science": "Science et découvertes", "guide": "Guide pratique",
 }
 MOIS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août",
         "septembre", "octobre", "novembre", "décembre"]
@@ -359,6 +359,7 @@ def finalize(a, day, rub_key, origine):
     a["date"] = day.isoformat()
     a["rubrique"] = a.get("rubrique") if a.get("rubrique") in RUBRIQUE_LABEL else rub_key
     a["origine"] = origine
+    a.setdefault("heure", "16:00" if a["rubrique"] == "guide" else "07:00")
     existing = {x["slug"] for x in load_articles()}
     base = slugify(a.get("slug") or a.get("titre", "article"))
     slug, i = base, 2
@@ -399,8 +400,8 @@ def use_reserve(day, rub_key):
 def cmd_generate():
     day = today_paris()
     arts = load_articles()
-    if any(a["date"] == day.isoformat() for a in arts):
-        log("un article existe deja pour aujourd'hui, rien a faire")
+    if any(a["date"] == day.isoformat() and a["rubrique"] != "guide" for a in arts):
+        log("l'actualite du jour existe deja, rien a faire")
         return
     rub = RUBRIQUES[day.weekday()]
     recent = [a["titre"] for a in arts]
@@ -640,8 +641,8 @@ def render_article(a, others, st):
         "@context": "https://schema.org",
         "@graph": [
             ORG,
-            {"@type": "NewsArticle", "headline": a["titre"], "description": a["meta_description"],
-             "datePublished": a["date"] + "T07:00:00+02:00", "dateModified": a.get("modifie", a["date"]) + "T07:00:00+02:00",
+            {"@type": "Article" if a["rubrique"] == "guide" else "NewsArticle", "headline": a["titre"], "description": a["meta_description"],
+             "datePublished": "%sT%s:00+02:00" % (a["date"], a.get("heure") or "07:00"), "dateModified": "%sT%s:00+02:00" % (a.get("modifie", a["date"]), a.get("heure") or "07:00"),
              "inLanguage": "fr-FR", "mainEntityOfPage": url, "image": [og, img],
              "articleSection": rub, "keywords": ", ".join(a.get("mots_cles", [])),
              "about": [{"@type": "Thing", "name": e} for e in a.get("especes", [])],

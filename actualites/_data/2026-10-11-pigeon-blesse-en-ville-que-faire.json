@@ -1,0 +1,64 @@
+{
+  "slug": "pigeon-blesse-en-ville-que-faire",
+  "date": "2026-10-11",
+  "heure": "16:00",
+  "rubrique": "guide",
+  "origine": "claude",
+  "titre": "Pigeon blessé ou affaibli en ville : que faire et qui appeler ?",
+  "chapo": "Un pigeon qui ne s'envole plus, boite ou reste en boule sur un trottoir a besoin d'aide, mais pas de n'importe laquelle. Mets-le d'abord à l'abri dans un carton, regarde s'il porte une bague, puis appelle avant de te déplacer : selon le cas, c'est un centre de soins, une association ou le propriétaire du pigeon qu'il faut joindre.",
+  "meta_description": "Pigeon blessé, affaibli ou bagué trouvé en ville : les premiers gestes, ce qu'il ne faut pas lui donner, et qui contacter selon la situation.",
+  "mots_cles": ["pigeon blessé que faire", "pigeon qui ne vole plus", "pigeon bagué trouvé", "qui appeler pour un pigeon blessé", "pigeon affaibli en ville", "pigeon voyageur perdu"],
+  "especes": ["Pigeon biset", "Pigeon ramier", "Pigeon voyageur"],
+  "zone": "France",
+  "sections": [
+    {
+      "titre": "Trois pigeons, trois situations",
+      "paragraphes": [
+        "En ville, le pigeon le plus courant est le pigeon biset, celui des places et des gares, gris avec deux barres noires sur l'aile. Le pigeon ramier, plus grand, se reconnaît à la tache blanche sur le côté du cou. Le pigeon voyageur, lui, est un oiseau d'élevage : il porte presque toujours une bague fermée à la patte et appartient à un colombophile.",
+        "Savoir lequel tu as devant toi change la suite. Un pigeon voyageur épuisé a surtout besoin de repos avant de reprendre la route, et son propriétaire peut être retrouvé. Un biset ou un ramier blessé relève, lui, des soins à la faune ou d'une association qui accueille les pigeons."
+      ]
+    },
+    {
+      "titre": "Les premiers gestes, quel que soit le pigeon",
+      "paragraphes": [
+        "Approche-toi calmement par l'arrière et couvre-le d'un linge pour le saisir en maintenant ses ailes contre son corps. Installe-le dans un carton percé de petits trous, garni d'un torchon, fermé, au calme et au chaud, loin des enfants et des animaux. L'obscurité le rassure et limite son stress.",
+        "Ne lui force jamais le bec pour le faire boire ou manger. Lave-toi les mains après l'avoir manipulé, comme pour tout animal sauvage, et évite tout contact avec ses fientes. Ensuite, observe : une aile qui pend, une patte enroulée dans un fil, une blessure visible ou un oiseau qui reste prostré sont des signes qui justifient un appel rapide."
+      ]
+    },
+    {
+      "titre": "Qui appeler selon le cas",
+      "paragraphes": [
+        "Si le pigeon porte une bague fermée avec un code, comme FRANCE suivi de chiffres, c'est probablement un pigeon voyageur. La Fédération colombophile française explique comment retrouver son propriétaire à partir de ce matricule. Un voyageur simplement fatigué repart souvent après un à deux jours de repos ; la fédération indique sur son site comment l'héberger en attendant.",
+        "Si le pigeon n'est pas bagué et qu'il est blessé, appelle un centre de soins de la faune sauvage avant de te déplacer. Tous n'accueillent pas les pigeons de ville : un coup de téléphone évite un trajet inutile et te permet d'être orienté vers une association spécialisée. L'application Coup de Patte t'aide à trouver les centres les plus proches de chez toi."
+      ]
+    }
+  ],
+  "gestes": [
+    "Couvre le pigeon d'un linge et saisis-le en maintenant ses ailes contre son corps.",
+    "Place-le dans un carton aéré, garni d'un torchon, fermé, au calme et au chaud.",
+    "Regarde s'il porte une bague et note le code inscrit dessus.",
+    "Appelle un centre de soins ou une association avant de te déplacer, et ne le force jamais à boire ni à manger.",
+    "Lave-toi les mains après chaque manipulation."
+  ],
+  "faq": [
+    {
+      "q": "Que donner à manger à un pigeon blessé ?",
+      "r": "Rien tant que tu n'as pas eu de conseil. Un pigeon blessé ou affaibli doit d'abord être mis au calme. Pour un pigeon voyageur simplement fatigué, la Fédération colombophile française indique sur son site comment le nourrir en attendant son départ."
+    },
+    {
+      "q": "Comment savoir si un pigeon est un pigeon voyageur ?",
+      "r": "Il porte en général une bague fermée à la patte, sans ouverture, avec un pays et un numéro, par exemple FRANCE suivi de chiffres. Il a souvent une allure plus élancée que le pigeon des villes."
+    },
+    {
+      "q": "Un centre de soins prend-il en charge les pigeons ?",
+      "r": "Cela dépend des centres. Certains accueillent les pigeons, d'autres orientent vers des associations spécialisées. Appelle toujours avant de te déplacer."
+    }
+  ],
+  "sources": [
+    {"titre": "Que faire si vous trouvez un pigeon voyageur", "editeur": "Fédération colombophile française", "url": "https://www.colombophiliefr.com/que-faire/", "date": ""},
+    {"titre": "Recherche du propriétaire d'un pigeon voyageur", "editeur": "Fédération colombophile française", "url": "https://www.colombophiliefr.com/recherche-proprietaire/", "date": ""},
+    {"titre": "Liste des centres de soins pour animaux sauvages en France", "editeur": "Hegalaldia", "url": "https://www.hegalaldia.org/liste-des-centres-de-soins-pour-animaux-sauvages-en-france/", "date": ""}
+  ],
+  "social": "Un pigeon qui ne s'envole plus sur ton trottoir ? Un carton aéré, du calme, un coup d'œil à sa patte pour voir s'il est bagué, puis un appel avant de te déplacer. Voici qui contacter selon la situation, et les erreurs à éviter.",
+  "hashtags": ["pigeon", "oiseaux", "faunesauvage", "bonsgestes", "ville", "coupdepatte"]
+}
