@@ -611,7 +611,7 @@ def head(title, desc, url, image, extra=""):
 """.format(t=esc(title), d=esc(desc), u=esc(url), i=esc(image), s=SITE, c=CSS, x=extra, l=LOGO_SVG)
 
 
-FOOT = """<footer>Coup de Patte, association loi 1901, 1 impasse du Parc, 34130 Saint-Aunès. Application gratuite pour secourir la faune sauvage en ville. <a href="/">Ouvrir l'application</a> · <a href="/actualites/">Toutes les actualités</a> · <a href="/actualites/rss.xml">Flux RSS</a></footer>
+FOOT = """<footer>Coup de Patte, association loi 1901, 1 impasse du Parc, 34130 Saint-Aunès. Application gratuite pour secourir la faune sauvage en ville. <a href="/">Ouvrir l'application</a> · <a href="/especes/">Fiches espèces</a> · <a href="/centres/">Centres de soins par département</a> · <a href="/actualites/">Toutes les actualités</a> · <a href="/actualites/rss.xml">Flux RSS</a></footer>
 </body></html>
 """
 
@@ -737,10 +737,20 @@ def render_rss(arts):
             '<atom:link href="%s/actualites/rss.xml" rel="self" type="application/rss+xml"/>%s</channel></rss>\n') % (SITE, SITE, "".join(items))
 
 
-def render_sitemap(arts):
+def render_sitemap(arts, fiches=None):
     urls = [(SITE + "/", today_paris().isoformat(), "daily", "1.0"), (SITE + "/actualites/", arts[0]["date"] if arts else today_paris().isoformat(), "daily", "0.9")]
     for a in arts:
         urls.append((article_url(a), a.get("modifie", a["date"]), "monthly", "0.7"))
+    fiches = fiches or {}
+    jour = today_paris().isoformat()
+    if fiches.get("centres"):
+        urls.append((SITE + "/centres/", jour, "weekly", "0.8"))
+        for f in fiches["centres"]:
+            urls.append((f[0], jour, "monthly", "0.8"))
+    if fiches.get("especes"):
+        urls.append((SITE + "/especes/", jour, "monthly", "0.7"))
+        for f in fiches["especes"]:
+            urls.append((f[0], jour, "monthly", "0.6"))
     body = "".join("<url><loc>%s</loc><lastmod>%s</lastmod><changefreq>%s</changefreq><priority>%s</priority></url>" % u for u in urls)
     return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">%s</urlset>\n' % body
 
@@ -754,7 +764,7 @@ Sitemap: https://coupdepatte.eu/sitemap.xml
 """
 
 
-def render_llms(arts, st):
+def render_llms(arts, st, fiches=None):
     c = st.get("centres_ouverts")
     dpt = st.get("departements_couverts")
     lines = [
@@ -778,6 +788,17 @@ def render_llms(arts, st):
     ]
     for a in arts[:60]:
         lines.append("- [%s](%s) (%s) : %s" % (a["titre"], article_url(a), a["date"], a["meta_description"]))
+    fiches = fiches or {}
+    if fiches.get("centres"):
+        lines += ["", "## Centres de soins de la faune sauvage par département", "",
+                  "- Index : %s/centres/" % SITE]
+        for u, nom, code, n in fiches["centres"]:
+            lines.append("- [%s (%s)](%s)" % (nom, code, u))
+    if fiches.get("especes"):
+        lines += ["", "## Fiches espèces (reconnaître l'oiseau, son jeune, le bon geste)", "",
+                  "- Index : %s/especes/" % SITE]
+        for u, nom, latin in fiches["especes"]:
+            lines.append("- [%s (%s)](%s)" % (nom, latin, u))
     return "\n".join(lines) + "\n"
 
 
@@ -824,9 +845,19 @@ def cmd_build():
              "image": "/actualites/img/%s.png" % a["slug"]} for a in arts[:50]]
     write(os.path.join(OUT, "articles.json"), json.dumps({"maj": today_paris().isoformat(), "articles": feed}, ensure_ascii=False, indent=1))
     write(os.path.join(OUT, "rss.xml"), render_rss(arts))
-    write(os.path.join(ROOT, "sitemap.xml"), render_sitemap(arts))
+    fiches = {}
+    try:
+        sys.path.insert(0, HERE)
+        import fiches as _fiches
+        fiches = _fiches.build({"ROOT": ROOT, "SITE": SITE, "SUPA": SUPA, "SUPA_KEY": SUPA_KEY, "ORG": ORG,
+                                "head": head, "FOOT": FOOT, "esc": esc, "slugify": slugify, "write": write,
+                                "http": http, "log": log, "date_fr": date_fr, "encart": encart_html(st)})
+        log("fiches : %d especes, %d departements" % (len(fiches.get("especes", [])), len(fiches.get("centres", []))))
+    except Exception as ex:  # les fiches ne doivent jamais bloquer les actualites
+        log("fiches non generees :", ex)
+    write(os.path.join(ROOT, "sitemap.xml"), render_sitemap(arts, fiches))
     write(os.path.join(ROOT, "robots.txt"), ROBOTS)
-    write(os.path.join(ROOT, "llms.txt"), render_llms(arts, st))
+    write(os.path.join(ROOT, "llms.txt"), render_llms(arts, st, fiches))
     log("%d articles publies" % len(arts))
 
 
