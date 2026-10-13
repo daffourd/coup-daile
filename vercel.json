@@ -1,0 +1,16 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.coupdepatte.eu" }],
+      "destination": "https://coupdepatte.eu/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "coup-daile.vercel.app" }],
+      "destination": "https://coupdepatte.eu/:path*",
+      "permanent": true
+    }
+  ]
+}
