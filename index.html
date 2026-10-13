@@ -4,7 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#1F9E67">
-<meta name="description" content="Que faire si tu trouves un oiseau ou un oisillon. Gestes d'urgence, secours et identification.">
+<meta name="description" content="Tu as trouvé un oiseau blessé, un oisillon au sol ou un oiseau bagué ? Le guide gratuit de l'association Coup de Patte : bons gestes en 3 questions, 100 fiches espèces, 58 centres de soins.">
+<link rel="canonical" href="https://coupdepatte.eu/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Coup de Patte">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Oiseau blessé ou oisillon tombé du nid : que faire ? | Coup de Patte">
+<meta property="og:description" content="Tu as trouvé un oiseau blessé, un oisillon au sol ou un oiseau bagué ? Le guide gratuit de l'association Coup de Patte : bons gestes en 3 questions, 100 fiches espèces, 58 centres de soins.">
+<meta property="og:url" content="https://coupdepatte.eu/">
+<meta property="og:image" content="https://coupdepatte.eu/og-accueil.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"NGO","@id":"https://coupdepatte.eu/#association","name":"Coup de Patte","alternateName":"Association Coup de Patte","url":"https://coupdepatte.eu/","logo":"https://coupdepatte.eu/icon-512.png","email":"bonjour@coupdepatte.eu","description":"Association loi 1901 et application gratuite pour secourir les animaux sauvages trouvés en détresse en ville, en particulier les oiseaux.","address":{"@type":"PostalAddress","streetAddress":"1 impasse du Parc","postalCode":"34130","addressLocality":"Saint-Aunès","addressRegion":"Occitanie","addressCountry":"FR"},"areaServed":{"@type":"Country","name":"France"},"knowsAbout":["oiseau blessé","oisillon tombé du nid","oiseau bagué","centres de soins de la faune sauvage","faune sauvage urbaine"]},{"@type":"WebSite","@id":"https://coupdepatte.eu/#site","url":"https://coupdepatte.eu/","name":"Coup de Patte","inLanguage":"fr-FR","publisher":{"@id":"https://coupdepatte.eu/#association"}},{"@type":"WebApplication","@id":"https://coupdepatte.eu/#app","name":"Coup de Patte","url":"https://coupdepatte.eu/","applicationCategory":"ReferenceApplication","operatingSystem":"Web, iOS, Android","inLanguage":"fr-FR","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"description":"Guide d'urgence gratuit pour secourir un oiseau ou un animal sauvage trouvé en détresse : diagnostic en 3 questions, fiches de 100 espèces, carte des centres de soins, signalement des oiseaux bagués au Muséum.","featureList":["Guide d'urgence en 3 questions","100 fiches espèces","Carte de 58 centres de soins de la faune sauvage dans 51 départements","Signalement des oiseaux bagués au CRBPO","Annuaire de bénévoles"],"publisher":{"@id":"https://coupdepatte.eu/#association"}}]}</script>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -16,7 +29,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="alternate" type="application/rss+xml" title="Actualités Coup de Patte" href="/actualites/rss.xml">
-<title>Coup de Patte</title>
+<title>Oiseau blessé ou oisillon tombé du nid : que faire ? | Coup de Patte</title>
 <style>
   :root{
     --vert:#1F9E67;--vert-clair:#3B9C74;--vert-pale:#E7F1EB;--beige:#F7F5EF;
@@ -48,7 +61,7 @@
   .screen{display:none;padding:4px 18px 24px;animation:fade .25s ease;}
   .screen.active{display:block;}
   @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
-  h1.title{font-size:23px;line-height:1.22;margin:6px 0 4px;letter-spacing:-.3px;}
+  h1.title,h2.title{font-size:23px;line-height:1.22;margin:6px 0 4px;letter-spacing:-.3px;}
   p.sub{color:var(--texte-doux);font-size:14.5px;line-height:1.5;margin-bottom:16px;}
   .section-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--texte-doux);margin:22px 4px 10px;}
   .btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:none;border-radius:16px;padding:16px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;transition:transform .08s;text-decoration:none;}
@@ -127,9 +140,9 @@
   /* Direction Aube et Plumage: typographie chaleureuse et palette adoucie */
   html:not([data-theme="dark"]){--beige:#FAF6EC;}
   body{font-family:"Nunito",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
-  h1.title,.verdict h2,.brand,.g-hero h2,.e-titre{font-family:"Fraunces",Georgia,"Times New Roman",serif;font-weight:600;letter-spacing:-.2px;}
+  h1.title,h2.title,.verdict h2,.brand,.g-hero h2,.e-titre{font-family:"Fraunces",Georgia,"Times New Roman",serif;font-weight:600;letter-spacing:-.2px;}
   .brand{font-weight:700;}
-  html.cda-dys .stage h1.title,html.cda-dys .stage .verdict h2,html.cda-dys .stage .g-hero h2{font-family:Verdana,Tahoma,Geneva,sans-serif;letter-spacing:.3px;}
+  html.cda-dys .stage h1.title,html.cda-dys .stage h2.title,html.cda-dys .stage .verdict h2,html.cda-dys .stage .g-hero h2{font-family:Verdana,Tahoma,Geneva,sans-serif;letter-spacing:.3px;}
   /* Ecran Bons gestes */
   .g-hero{border-radius:var(--rayon);padding:20px;color:#fff;background:linear-gradient(135deg,#EF8E7E 0%,#C79AD2 55%,#4FB98C 100%);box-shadow:0 12px 26px rgba(70,60,90,.22);margin:2px 0 14px;}
   .g-hero .k{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;opacity:.95;}
@@ -164,9 +177,9 @@
   }
   html[data-theme="dark"]{--vert:#3ECf8F;--vert-clair:#54D89E;--corail:#FF9E86;}
   body{font-family:"Nunito",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
-  h1.title,.verdict h2,.brand,.g-hero h2,.e-titre{font-family:"Nunito",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-weight:900;letter-spacing:-.5px;}
-  html.cda-dys .stage h1.title,html.cda-dys .stage .verdict h2,html.cda-dys .stage .g-hero h2{font-family:Verdana,Tahoma,Geneva,sans-serif;letter-spacing:.3px;}
-  h1.title{font-size:26px;line-height:1.12;margin:16px 2px 6px;}
+  h1.title,h2.title,.verdict h2,.brand,.g-hero h2,.e-titre{font-family:"Nunito",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-weight:900;letter-spacing:-.5px;}
+  html.cda-dys .stage h1.title,html.cda-dys .stage h2.title,html.cda-dys .stage .verdict h2,html.cda-dys .stage .g-hero h2{font-family:Verdana,Tahoma,Geneva,sans-serif;letter-spacing:.3px;}
+  h1.title,h2.title{font-size:26px;line-height:1.12;margin:16px 2px 6px;}
   p.sub{font-size:15px;}
   .screen{padding:4px 20px 26px;}
   .card{border-radius:20px;box-shadow:var(--ombre-douce);border:1px solid var(--bord);}
@@ -301,21 +314,21 @@
     <!-- URGENCE 1 a 4 -->
     <section class="screen" id="u1">
       <div class="steps"><span class="on"></span><span></span><span></span><span></span></div>
-      <h1 class="title">L'oiseau est-il vivant ?</h1>
+      <h2 class="title">L'oiseau est-il vivant ?</h2>
       <p class="sub">Observe-le quelques instants, à distance, sans le toucher.</p>
       <button class="opt" onclick="showScreen('u2')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l4 4 10-10"/></svg></span> Oui, il bouge ou respire <span class="chev">&rsaquo;</span></button>
       <button class="opt danger" onclick="showScreen('rB')"><span class="dot">?</span> Immobile, je ne sais pas <span class="chev">&rsaquo;</span></button>
     </section>
     <section class="screen" id="u2">
       <div class="steps"><span class="on"></span><span class="on"></span><span></span><span></span></div>
-      <h1 class="title">Est-il visiblement blessé ?</h1>
+      <h2 class="title">Est-il visiblement blessé ?</h2>
       <p class="sub">Saignement, aile qui pend, boiterie, ou attrapé par un chat.</p>
       <button class="opt danger" onclick="showScreen('rB')"><span class="dot">!</span> Oui, il semble blessé <span class="chev">&rsaquo;</span></button>
       <button class="opt" onclick="showScreen('u3')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l4 4 10-10"/></svg></span> Non, il a l'air indemne <span class="chev">&rsaquo;</span></button>
     </section>
     <section class="screen" id="u3">
       <div class="steps"><span class="on"></span><span class="on"></span><span class="on"></span><span></span></div>
-      <h1 class="title">À quoi ressemble-t-il ?</h1>
+      <h2 class="title">À quoi ressemble-t-il ?</h2>
       <p class="sub">Cela aide à estimer son âge et la bonne conduite à tenir.</p>
       <button class="opt danger" onclick="showScreen('rNid')"><span class="dot">1</span> Nu ou en duvet, ne sautille pas <span class="chev">&rsaquo;</span></button>
       <button class="opt" onclick="showScreen('u4')"><span class="dot">2</span> Plumes en tuyaux, il sautille <span class="chev">&rsaquo;</span></button>
@@ -324,7 +337,7 @@
     </section>
     <section class="screen" id="u4">
       <div class="steps"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span></div>
-      <h1 class="title">Court-il un danger immédiat ?</h1>
+      <h2 class="title">Court-il un danger immédiat ?</h2>
       <p class="sub">Route passante, chat qui rôde, plein soleil.</p>
       <button class="opt danger" onclick="showScreen('rA')"><span class="dot">!</span> Oui, il est exposé <span class="chev">&rsaquo;</span></button>
       <button class="opt" onclick="showScreen('rA')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l4 4 10-10"/></svg></span> Non, il est tranquille <span class="chev">&rsaquo;</span></button>
@@ -381,7 +394,7 @@
 
     <!-- SECOURS -->
     <section class="screen" id="bague">
-  <h1 class="title">Oiseau bagué</h1>
+  <h2 class="title">Oiseau bagué</h2>
   <p class="sub">Une bague raconte la vie d'un oiseau : où il est né, par où il migre, combien de temps il vit. Ton signalement fait avancer la science, et tu recevras son histoire en retour.</p>
 
   <div class="section-label">1. Quelle bague porte-t-il ?</div>
@@ -401,7 +414,7 @@
 </section>
 
 <section class="screen" id="secours">
-      <h1 class="title">Trouver un secours</h1>
+      <h2 class="title">Trouver un secours</h2>
       <p class="sub">Le bon geste : confier l'oiseau à un centre de sauvegarde de la faune sauvage habilité. Appelle toujours avant de te déplacer.</p>
       <div class="card" style="text-align:center">
         <div class="section-label" style="margin-top:0">Numéro national LPO</div>
@@ -427,7 +440,7 @@
 
     <!-- CARTE -->
     <section class="screen" id="centres">
-      <h1 class="title">Carte des centres</h1>
+      <h2 class="title">Carte des centres</h2>
       <p class="sub" id="mapSub">Autorise la localisation pour voir les centres les plus proches.</p>
       <div id="map"></div>
       <button class="btn btn-ghost" onclick="locateMe()">Recentrer sur ma position</button>
@@ -437,7 +450,7 @@
 
     <!-- IDENTIFIER (guide) -->
     <section class="screen" id="identifier">
-      <h1 class="title">Identifier l'oiseau</h1>
+      <h2 class="title">Identifier l'oiseau</h2>
       <p class="sub">Réponds à quelques questions, on te propose les espèces les plus probables. L'identification photo par IA arrive dans un prochain lot.</p>
       <div class="section-label">Sa taille</div>
       <div id="q-taille"><span class="chip" data-g="taille" data-v="tp">Très petit (mésange)</span><span class="chip" data-g="taille" data-v="p">Petit (moineau)</span><span class="chip" data-g="taille" data-v="m">Moyen (merle)</span><span class="chip" data-g="taille" data-v="g">Grand (pigeon, corneille)</span><span class="chip" data-g="taille" data-v="tg">Très grand (goéland, héron)</span></div>
@@ -452,7 +465,7 @@
 
     <!-- ESPECES liste -->
     <section class="screen" id="especes">
-      <h1 class="title">Fiches espèces</h1>
+      <h2 class="title">Fiches espèces</h2>
       <p class="sub">Cherche un oiseau par nom, ou par département pour voir ceux qu'on y rencontre.</p>
       <div class="seg"><button class="on" id="segNom" onclick="setEspMode('nom')">Par nom</button><button id="segDept" onclick="setEspMode('dept')">Par département</button></div><input class="field" id="especeSearch" placeholder="Rechercher un oiseau (ex : étourneau)" oninput="renderEspeces()" style="margin-bottom:12px"><select class="field" id="especeDept" onchange="renderEspeces()" style="margin-bottom:12px;display:none"><option value="">Choisis ton département</option><option value="01">01 - Ain</option><option value="02">02 - Aisne</option><option value="03">03 - Allier</option><option value="04">04 - Alpes-de-Haute-Provence</option><option value="05">05 - Hautes-Alpes</option><option value="06">06 - Alpes-Maritimes</option><option value="07">07 - Ardèche</option><option value="08">08 - Ardennes</option><option value="09">09 - Ariège</option><option value="10">10 - Aube</option><option value="11">11 - Aude</option><option value="12">12 - Aveyron</option><option value="13">13 - Bouches-du-Rhône</option><option value="14">14 - Calvados</option><option value="15">15 - Cantal</option><option value="16">16 - Charente</option><option value="17">17 - Charente-Maritime</option><option value="18">18 - Cher</option><option value="19">19 - Corrèze</option><option value="21">21 - Côte-d'Or</option><option value="22">22 - Côtes-d'Armor</option><option value="23">23 - Creuse</option><option value="24">24 - Dordogne</option><option value="25">25 - Doubs</option><option value="26">26 - Drôme</option><option value="27">27 - Eure</option><option value="28">28 - Eure-et-Loir</option><option value="29">29 - Finistère</option><option value="2A">2A - Corse-du-Sud</option><option value="2B">2B - Haute-Corse</option><option value="30">30 - Gard</option><option value="31">31 - Haute-Garonne</option><option value="32">32 - Gers</option><option value="33">33 - Gironde</option><option value="34">34 - Hérault</option><option value="35">35 - Ille-et-Vilaine</option><option value="36">36 - Indre</option><option value="37">37 - Indre-et-Loire</option><option value="38">38 - Isère</option><option value="39">39 - Jura</option><option value="40">40 - Landes</option><option value="41">41 - Loir-et-Cher</option><option value="42">42 - Loire</option><option value="43">43 - Haute-Loire</option><option value="44">44 - Loire-Atlantique</option><option value="45">45 - Loiret</option><option value="46">46 - Lot</option><option value="47">47 - Lot-et-Garonne</option><option value="48">48 - Lozère</option><option value="49">49 - Maine-et-Loire</option><option value="50">50 - Manche</option><option value="51">51 - Marne</option><option value="52">52 - Haute-Marne</option><option value="53">53 - Mayenne</option><option value="54">54 - Meurthe-et-Moselle</option><option value="55">55 - Meuse</option><option value="56">56 - Morbihan</option><option value="57">57 - Moselle</option><option value="58">58 - Nièvre</option><option value="59">59 - Nord</option><option value="60">60 - Oise</option><option value="61">61 - Orne</option><option value="62">62 - Pas-de-Calais</option><option value="63">63 - Puy-de-Dôme</option><option value="64">64 - Pyrénées-Atlantiques</option><option value="65">65 - Hautes-Pyrénées</option><option value="66">66 - Pyrénées-Orientales</option><option value="67">67 - Bas-Rhin</option><option value="68">68 - Haut-Rhin</option><option value="69">69 - Rhône</option><option value="70">70 - Haute-Saône</option><option value="71">71 - Saône-et-Loire</option><option value="72">72 - Sarthe</option><option value="73">73 - Savoie</option><option value="74">74 - Haute-Savoie</option><option value="75">75 - Paris</option><option value="76">76 - Seine-Maritime</option><option value="77">77 - Seine-et-Marne</option><option value="78">78 - Yvelines</option><option value="79">79 - Deux-Sèvres</option><option value="80">80 - Somme</option><option value="81">81 - Tarn</option><option value="82">82 - Tarn-et-Garonne</option><option value="83">83 - Var</option><option value="84">84 - Vaucluse</option><option value="85">85 - Vendée</option><option value="86">86 - Vienne</option><option value="87">87 - Haute-Vienne</option><option value="88">88 - Vosges</option><option value="89">89 - Yonne</option><option value="90">90 - Territoire de Belfort</option><option value="91">91 - Essonne</option><option value="92">92 - Hauts-de-Seine</option><option value="93">93 - Seine-Saint-Denis</option><option value="94">94 - Val-de-Marne</option><option value="95">95 - Val-d'Oise</option></select>
       <div id="especesList"></div>
@@ -461,7 +474,7 @@
     <section class="screen" id="espece">
       <div class="fiche-photo" id="e-photo"></div>
       <div class="e-credit" id="e-credit"></div>
-      <h1 class="title" id="e-nom"></h1>
+      <h2 class="title" id="e-nom"></h2>
       <p class="sub" id="e-latin"></p>
       <div class="section-label">Reconnaître</div>
       <div class="card"><p id="e-reco" style="font-size:14.5px;line-height:1.55"></p></div>
@@ -479,7 +492,7 @@
 
     <!-- CONSEILS -->
     <section class="screen" id="conseils">
-      <h1 class="title">Conseils</h1>
+      <h2 class="title">Conseils</h2>
       <p class="sub">Les bons gestes, simples et fiables, au fil des saisons.</p>
       <div class="tip"><div class="k">Été</div><p>Pose une coupelle d'eau peu profonde à l'ombre. Nettoie-la et renouvelle l'eau chaque jour. C'est vital en cas de forte chaleur.</p></div>
       <div class="card"><ul class="dolist">
@@ -561,7 +574,7 @@
 
     <!-- REGLAGES -->
     <section class="screen" id="reglages">
-      <h1 class="title">Réglages</h1>
+      <h2 class="title">Réglages</h2>
       <p class="sub">Adapte l'app à ton confort. Tout est modifiable à tout moment.</p>
       <div class="section-label">Thème</div>
       <div class="card"><div style="display:flex;gap:8px">
@@ -596,24 +609,24 @@
     <section class="screen" id="compte"><div id="compteView"></div></section>
 
     <section class="screen" id="benevoles">
-      <h1 class="title">Bénévoles</h1>
+      <h2 class="title">Bénévoles</h2>
       <p class="sub">Des personnes prêtes à aider les oiseaux, près de chez toi. Contacte-les via le canal qu'elles ont choisi. Aucun échange ne passe par l'app.</p>
       <div id="benevolesList"></div>
       <p class="disclaimer">Profils publiés volontairement par leurs auteurs, réservés aux 18 ans et plus.</p>
     </section>
 
     <section class="screen" id="assos">
-      <h1 class="title">Espace associations</h1>
+      <h2 class="title">Espace associations</h2>
       <div id="assosView"></div>
     </section>
 
     <section class="screen" id="admin">
-      <h1 class="title">Back-office</h1>
+      <h2 class="title">Back-office</h2>
       <div id="adminView"></div>
     </section>
 
     <section class="screen" id="signaler">
-      <h1 class="title">Proposer ou signaler</h1>
+      <h2 class="title">Proposer ou signaler</h2>
       <p class="sub">Aide-nous à garder l'annuaire à jour. Un administrateur vérifie avant publication.</p>
       <div class="card">
         <select class="field" id="sgType" style="margin-bottom:8px"><option value="proposer">Proposer un nouveau centre</option><option value="fermeture">Signaler une fermeture</option><option value="correction">Corriger une information</option></select>
@@ -628,7 +641,7 @@
     </section>
 
     <section class="screen" id="mentions">
-      <h1 class="title">Mentions légales</h1>
+      <h2 class="title">Mentions légales</h2>
       <div class="section-label">Éditeur</div>
       <div class="card"><p style="font-size:14px;line-height:1.6">L'application Coup de Patte est éditée par l'association Coup de Patte, association régie par la loi du 1<sup>er</sup> juillet 1901.<br>Siège social : 1 impasse du Parc, 34130 Saint-Aunès, France.<br>Directrice de la publication : Anne Simonot.<br>Contact : 06 15 50 77 46.</p></div>
       <div class="section-label">Diffusion</div>
@@ -646,14 +659,14 @@
 
     <!-- ACTUALITES -->
     <section class="screen" id="actus">
-      <h1 class="title">Actualités</h1>
+      <h2 class="title">Actualités</h2>
       <p class="sub">Chaque jour, une actualité de la faune sauvage en ville, en France, en Europe et dans le monde, et les gestes qui la sauvent.</p>
       <div id="actusList"><p class="meta">Chargement des actualités...</p></div>
       <p class="disclaimer">Articles sourcés, rédigés par la rédaction de Coup de Patte. <a href="/actualites/rss.xml">Flux RSS</a></p>
     </section>
 
     <section class="screen" id="cgu">
-      <h1 class="title">Conditions générales d'utilisation</h1>
+      <h2 class="title">Conditions générales d'utilisation</h2>
       <div class="card"><p style="font-size:14px;line-height:1.6">En utilisant Coup de Patte, tu acceptes les présentes conditions.</p></div>
       <div class="section-label">1. Objet</div>
       <div class="card"><p style="font-size:14px;line-height:1.6">Coup de Patte est une application gratuite d'aide aux personnes qui trouvent un oiseau en détresse : gestes d'urgence, orientation vers les centres de sauvegarde, information et communauté d'entraide.</p></div>
@@ -1153,9 +1166,9 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
   ];
   function renderCompte(){
     var el=document.getElementById('compteView'); if(!el) return;
-    if(!db){ el.innerHTML='<h1 class="title">Mon compte</h1><p class="sub">Service momentanément indisponible.</p>'; return; }
+    if(!db){ el.innerHTML='<h2 class="title">Mon compte</h2><p class="sub">Service momentanément indisponible.</p>'; return; }
     if(!currentUser){
-      el.innerHTML='<h1 class="title">Mon compte</h1><p class="sub">Crée ton carnet, gagne des plumes et des badges. Pas de mot de passe : on t\'envoie un email avec un lien et un code.</p><div class="card"><b>Connexion par email</b><p class="meta" style="margin:6px 0 10px">Entre ton email. Tu reçois un lien à cliquer et un code à 6 chiffres.</p><input class="field" id="magicEmail" inputmode="email" autocomplete="email" placeholder="ton@email.fr" style="margin-bottom:10px"><button class="btn btn-primary" id="magicBtn" onclick="sendMagic()">Recevoir mon accès</button><div id="otpZone" style="display:none;margin-top:12px"><p class="meta" style="margin-bottom:8px">Ouvre ton email, et regarde aussi les spams. Clique le lien depuis ce navigateur, ou entre ici le code à 6 chiffres.</p><input class="field" id="otpCode" inputmode="numeric" maxlength="6" placeholder="Code à 6 chiffres" style="margin-bottom:8px"><button class="btn btn-primary" onclick="verifyOtp()">Valider le code</button><div style="height:8px"></div><button class="btn btn-ghost btn-sm" onclick="sendMagic(true)">Renvoyer l\'email</button></div><div id="authMsg" class="meta" style="margin-top:10px"></div></div><div class="callout">Ton carnet reste privé, visible de toi seul. La connexion Google arrivera plus tard.</div>';
+      el.innerHTML='<h2 class="title">Mon compte</h2><p class="sub">Crée ton carnet, gagne des plumes et des badges. Pas de mot de passe : on t\'envoie un email avec un lien et un code.</p><div class="card"><b>Connexion par email</b><p class="meta" style="margin:6px 0 10px">Entre ton email. Tu reçois un lien à cliquer et un code à 6 chiffres.</p><input class="field" id="magicEmail" inputmode="email" autocomplete="email" placeholder="ton@email.fr" style="margin-bottom:10px"><button class="btn btn-primary" id="magicBtn" onclick="sendMagic()">Recevoir mon accès</button><div id="otpZone" style="display:none;margin-top:12px"><p class="meta" style="margin-bottom:8px">Ouvre ton email, et regarde aussi les spams. Clique le lien depuis ce navigateur, ou entre ici le code à 6 chiffres.</p><input class="field" id="otpCode" inputmode="numeric" maxlength="6" placeholder="Code à 6 chiffres" style="margin-bottom:8px"><button class="btn btn-primary" onclick="verifyOtp()">Valider le code</button><div style="height:8px"></div><button class="btn btn-ghost btn-sm" onclick="sendMagic(true)">Renvoyer l\'email</button></div><div id="authMsg" class="meta" style="margin-top:10px"></div></div><div class="callout">Ton carnet reste privé, visible de toi seul. La connexion Google arrivera plus tard.</div>';
       return;
     }
     var n=myObs.length;
