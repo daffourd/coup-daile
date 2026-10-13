@@ -1396,7 +1396,17 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
       +'<button class="btn btn-primary" onclick="saveAsso()">'+(a.id?'Mettre à jour':'Inscrire ma structure')+'</button>'
       +'<div id="asMsg" class="meta" style="margin-top:8px">'+(a.id?(a.verifiee?'Structure vérifiée et publiée dans l\'annuaire.':'En attente de vérification par l\'équipe.'):'')+'</div></div>'
       +'<button class="btn btn-ghost" onclick="showScreen(\'benevoles\')">Voir les bénévoles</button>'
-      +'<p class="disclaimer">Les échanges avec les bénévoles se font hors plateforme.</p>';
+      +'<p class="disclaimer">Les échanges avec les bénévoles se font hors plateforme.</p>'
+      +merlinReco();
+  }
+  // Recommandation discrète : Merlin Bird ID (Cornell Lab), appli gratuite et complémentaire
+  function merlinReco(){
+    var android=/android/i.test(navigator.userAgent);
+    var url=android?'https://play.google.com/store/apps/details?id=com.labs.merlinbirdid.app':'https://apps.apple.com/app/id773457673';
+    return '<div style="margin-top:18px;padding:12px 14px;border:1px dashed var(--bord);border-radius:14px;display:flex;gap:12px;align-items:center">'
+      +'<div style="flex:1;min-width:0"><div class="meta" style="text-transform:uppercase;letter-spacing:.06em;font-size:11px">À découvrir</div>'
+      +'<div style="font-size:14px;line-height:1.45;margin-top:2px"><strong>Merlin Bird ID</strong>, l\'appli gratuite du Cornell Lab pour reconnaître un oiseau à la vue ou à son chant.</div></div>'
+      +'<a class="btn btn-ghost btn-sm" href="'+url+'" target="_blank" rel="noopener" style="flex:none">Voir</a></div>';
   }
   function saveAsso(){ var m=document.getElementById('asMsg'); if(!currentUser) return; var row={user_id:currentUser.id, nom:val('asNom'), type:val('asType'), rna_siren:val('asRna'), ville:val('asVille'), dept:val('asDept'), tel:val('asTel'), email:val('asEmail'), site:val('asSite'), zone:val('asZone'), description:val('asDesc'), besoins:val('asBesoins')}; if(!row.nom){ if(m)m.textContent='Indique au moins le nom.'; return; } if(m)m.textContent='Enregistrement...'; var q = myAsso ? db.from('associations').update(row).eq('user_id',currentUser.id).select() : db.from('associations').insert(row).select(); q.then(function(r){ if(r.error){ if(m)m.textContent='Erreur : '+r.error.message; return; } if(!r.data||!r.data.length){ if(m)m.textContent='Enregistrement refusé par la base.'; return; } myAsso=r.data[0]; _assoList=null; if(m)m.textContent='Enregistré. En attente de vérification.'; renderAssoForm(); }); }
 
