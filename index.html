@@ -271,6 +271,94 @@
   .actu .a-meta{font-size:11.5px;font-weight:800;color:var(--ambre);text-transform:uppercase;letter-spacing:.03em;}
   .actu .a-tit{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:16px;line-height:1.25;margin-top:3px;}
   .actu .a-chapo{font-size:13px;color:var(--texte-doux);margin-top:4px;line-height:1.4;}
+  /* ===== Lot 2 : connexion, espace membre, annuaires ===== */
+  .acc-hero{text-align:center;padding:8px 6px 4px;}
+  .acc-hero-ic{width:58px;height:58px;border-radius:19px;margin:6px auto 0;display:grid;place-items:center;color:#fff;background:linear-gradient(150deg,#25B87A,#12885A);box-shadow:0 14px 26px -14px rgba(18,136,90,.7);}
+  .acc-card{padding:18px;margin-top:16px;}
+  .acc-lab{display:block;font-size:13px;font-weight:800;color:var(--texte);margin:0 0 7px 2px;}
+  .acc-card .field{font-size:16px;padding:14px;}
+  .acc-msg{margin-top:10px;min-height:1px;}
+  .acc-msg.err{color:var(--corail);font-weight:700;}
+  .acc-msg.ok{color:var(--vert);font-weight:700;}
+  .acc-how{margin-top:14px;padding:12px 14px;border-radius:14px;background:var(--vert-pale);font-size:13.5px;line-height:1.5;}
+  .acc-how b{color:var(--texte);}
+  .acc-benef{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0 4px;}
+  .acc-benef div{background:var(--blanc);border:1px solid var(--bord);border-radius:16px;padding:12px 10px;text-align:center;box-shadow:var(--ombre-douce);}
+  .acc-benef span{width:34px;height:34px;border-radius:11px;background:var(--vert-pale);color:var(--vert);display:grid;place-items:center;margin:0 auto 6px;}
+  .acc-benef b{display:block;font-size:12.5px;}
+  .acc-benef small{display:block;font-size:11px;color:var(--texte-doux);line-height:1.3;margin-top:2px;}
+  .acc-sent{text-align:center;}
+  .acc-env{width:62px;height:62px;border-radius:50%;background:var(--vert-pale);color:var(--vert);display:grid;place-items:center;margin:2px auto 10px;}
+  .acc-sent h3{font-size:20px;font-weight:900;margin-bottom:6px;}
+  .acc-mail{color:var(--vert);word-break:break-all;}
+  .acc-steps{list-style:none;text-align:left;margin:14px 0 4px;}
+  .acc-steps li{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;padding:8px 0;border-top:1px solid var(--bord);}
+  .acc-steps li span{flex:0 0 24px;height:24px;border-radius:50%;background:var(--vert);color:#fff;font-weight:800;font-size:13px;display:grid;place-items:center;}
+  .acc-note{text-align:left;margin-top:12px;padding:11px 13px;border-radius:13px;background:var(--ambre-pale);font-size:12.5px;line-height:1.5;color:var(--texte);}
+  .acc-link{background:none;border:none;color:var(--vert);font-weight:800;font-size:13.5px;margin-top:12px;cursor:pointer;font-family:inherit;text-decoration:underline;}
+  .acc-code{text-align:left;margin-top:12px;}
+  .acc-head{display:flex;align-items:center;gap:14px;margin:12px 2px 14px;}
+  .acc-av{position:relative;width:62px;height:62px;border-radius:21px;border:none;background:linear-gradient(150deg,#25B87A,#12885A);background-size:cover;background-position:center;color:#fff;font-size:26px;font-weight:900;cursor:pointer;flex:0 0 auto;font-family:inherit;}
+  .acc-av i{position:absolute;right:-4px;bottom:-4px;width:22px;height:22px;border-radius:50%;background:var(--blanc);color:var(--vert);display:grid;place-items:center;box-shadow:0 2px 6px rgba(0,0,0,.15);}
+  .acc-lvl{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--vert);}
+  .acc-nom{font-size:22px;font-weight:900;letter-spacing:-.4px;line-height:1.15;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .acc-stats{display:grid;grid-template-columns:repeat(3,1fr);background:var(--blanc);border:1px solid var(--bord);border-radius:18px;box-shadow:var(--ombre-douce);}
+  .acc-stats div{text-align:center;padding:12px 6px;}
+  .acc-stats div+div{border-left:1px solid var(--bord);}
+  .acc-stats b{display:block;font-size:22px;font-weight:900;color:var(--texte);}
+  .acc-stats b span{font-size:13px;color:var(--texte-doux);font-weight:700;}
+  .acc-stats small{font-size:11.5px;color:var(--texte-doux);font-weight:700;}
+  .acc-prog{height:8px;border-radius:8px;background:var(--bord);margin:12px 2px 0;overflow:hidden;}
+  .acc-prog div{height:100%;border-radius:8px;background:linear-gradient(90deg,#25B87A,#1F9E67);}
+  .acc-next{font-size:12px;font-weight:700;color:var(--texte-doux);margin:6px 2px 0;}
+  .acc-qa{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0 14px;}
+  .acc-qa button{display:flex;align-items:center;gap:10px;background:var(--blanc);border:1px solid var(--bord);border-radius:16px;padding:12px;font-family:inherit;font-weight:800;font-size:13.5px;color:var(--texte);text-align:left;cursor:pointer;box-shadow:var(--ombre-douce);line-height:1.2;}
+  .acc-qa button:active{transform:scale(.97);}
+  .acc-qa .qa-wide{grid-column:1/-1;}
+  .qa-ic{flex:0 0 36px;height:36px;border-radius:11px;background:var(--vert-pale);color:var(--vert);display:grid;place-items:center;}
+  .qa-ic.qa-cor{background:var(--corail-pale);color:var(--corail);}
+  .qa-ic.qa-amb{background:var(--ambre-pale);color:#9a6a12;}
+  .dotnew{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--corail);vertical-align:middle;margin-left:3px;}
+  .obs-row{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--bord);}
+  .obs-row:last-child{border-bottom:none;}
+  .obs-row h4{font-size:15px;}
+  .obs-ic{flex:0 0 36px;height:36px;border-radius:12px;background:var(--vert-pale);color:var(--vert);display:grid;place-items:center;}
+  .acc-empty{text-align:center;padding:22px 10px;color:var(--texte-doux);}
+  .acc-empty svg{color:var(--vert);opacity:.8;}
+  .acc-empty b{display:block;color:var(--texte);font-size:15px;margin:8px 0 4px;}
+  .acc-empty span{display:block;font-size:13px;line-height:1.45;}
+  .badge-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+  .bdg{background:var(--blanc);border:1px solid var(--bord);border-radius:15px;padding:10px 6px;text-align:center;opacity:.55;}
+  .bdg.on{opacity:1;box-shadow:var(--ombre-douce);}
+  .bdg span{width:34px;height:34px;border-radius:50%;margin:0 auto 5px;display:grid;place-items:center;background:#eef0ee;color:#a9b3ac;}
+  .bdg.on span{background:linear-gradient(150deg,#F5C25B,#E39A2E);color:#fff;}
+  .bdg small{display:block;font-size:11px;font-weight:800;line-height:1.25;}
+  .acc-pitch{background:linear-gradient(150deg,#25B87A,#12885A);color:#fff;border-radius:20px;padding:16px 18px;margin:4px 0 2px;}
+  .acc-pitch b{font-size:17px;font-weight:900;}
+  .acc-pitch p{font-size:13.5px;line-height:1.5;margin-top:6px;opacity:.95;}
+  .acc-line{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-top:1px solid var(--bord);margin-top:10px;font-size:13.5px;}
+  .acc-line span{color:var(--texte-doux);}
+  .acc-line b{text-align:right;word-break:break-all;}
+  .ben-card,.asso-card{background:var(--blanc);border:1px solid var(--bord);border-radius:18px;padding:14px;margin-bottom:10px;box-shadow:var(--ombre-douce);}
+  .ben-top,.asso-top{display:flex;gap:12px;align-items:flex-start;}
+  .ben-top h4,.asso-top h4{font-size:15.5px;line-height:1.25;}
+  .ben-av{flex:0 0 42px;height:42px;border-radius:14px;background:var(--vert-pale);color:var(--vert);font-weight:900;font-size:18px;display:grid;place-items:center;}
+  .ben-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+  .ben-tags span{font-size:11.5px;font-weight:700;background:var(--beige);border:1px solid var(--bord);border-radius:20px;padding:4px 9px;color:var(--texte);}
+  .asso-dot{flex:0 0 12px;height:12px;border-radius:50%;margin-top:5px;box-shadow:0 0 0 3px rgba(0,0,0,.04);}
+  .asso-type{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--texte-doux);margin-bottom:2px;}
+  .asso-card .row-btns .btn{gap:6px;}
+  .asso-filtres{padding:12px;}
+  .asso-chips{display:flex;flex-wrap:wrap;margin-top:10px;}
+  .asso-chips .chip{display:inline-flex;align-items:center;gap:6px;margin:0 6px 6px 0;padding:8px 12px;font-size:13px;font-family:inherit;}
+  .asso-chips .chip i{width:9px;height:9px;border-radius:50%;display:inline-block;}
+  .asso-kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;}
+  .asso-kpi div{background:var(--blanc);border:1px solid var(--bord);border-radius:16px;padding:10px;text-align:center;box-shadow:var(--ombre-douce);}
+  .asso-kpi b{display:block;font-size:20px;font-weight:900;color:var(--vert);}
+  .asso-kpi small{font-size:11px;font-weight:700;color:var(--texte-doux);}
+  .tabbar{z-index:1000;}
+  .wt{z-index:1100;}
+  .seg button{display:inline-flex;align-items:center;justify-content:center;gap:6px;}
 </style>
 </head>
 <body>
@@ -304,6 +392,10 @@
       <button class="opt" onclick="showScreen('identifier')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3" stroke-linecap="round"/></svg></span><b>Identifier l'oiseau</b><span class="chev">&rsaquo;</span></button>
       <button class="opt" onclick="showScreen('gestes')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span><b>Les bons gestes</b><span class="chev">&rsaquo;</span></button>
       <button class="opt" onclick="showScreen('especes')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg></span><b>Fiches espèces</b><span class="chev">&rsaquo;</span></button>
+      <div class="section-label">Agir</div>
+      <button class="opt" onclick="benAllerFormulaire()" style="border-color:var(--vert)"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg></span><span><b>Je deviens bénévole</b><br><span class="meta" style="font-weight:400">5 questions, moins d'une minute</span></span><span class="chev">&rsaquo;</span></button>
+      <button class="opt" onclick="showScreen('benevoles')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5"/><circle cx="17" cy="9" r="2.4"/><path d="M16 15c3 0 5 1.5 5 4"/></svg></span><b>Les bénévoles près de chez toi</b><span class="chev">&rsaquo;</span></button>
+      <button class="opt" onclick="_assoMode='annuaire';showScreen('assos')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></svg></span><span><b>Associations et refuges</b><br><span class="meta" style="font-weight:400">Partout en France, par département</span></span><span class="chev">&rsaquo;</span></button>
       <div class="section-label">Actualités</div>
       <div id="actusHome"><a class="opt" href="/actualites/"><b>La faune sauvage en ville, chaque jour</b><span class="chev">&rsaquo;</span></a></div>
       <button class="btn btn-ghost" onclick="showScreen('actus')">Toutes les actualités</button>
@@ -612,6 +704,7 @@
     <section class="screen" id="benevoles">
       <h2 class="title">Bénévoles</h2>
       <p class="sub">Des personnes prêtes à aider les oiseaux, près de chez toi. Contacte-les via le canal qu'elles ont choisi. Aucun échange ne passe par l'app.</p>
+      <div id="reseauStats"></div>
       <div id="benevolesList"></div>
       <p class="disclaimer">Profils publiés volontairement par leurs auteurs, réservés aux 18 ans et plus.</p>
     </section>
@@ -840,7 +933,7 @@
     if(id==='especes') renderEspeces();
     if(id==='centres') setTimeout(initMap, 60);
     if(id==='compte' && typeof renderCompte==='function') renderCompte();
-    if(id==='benevoles' && typeof renderBenevoles==='function') renderBenevoles();
+    if(id==='benevoles'){ _benList=null; renderBenevoles(); loadReseauStats(); }
     if(id==='assos' && typeof renderAssos==='function') renderAssos();
     if(id==='admin' && typeof renderAdmin==='function') renderAdmin();
     if(id==='actus') renderActus();
@@ -1132,11 +1225,11 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
   var deferredPrompt=null;
   window.addEventListener('beforeinstallprompt', function(e){ e.preventDefault(); deferredPrompt=e;
     var box=document.getElementById('installBox'); box.style.display='block';
-    box.innerHTML='<b>Installe Coup d\'Aile</b> pour un accès instantané, même hors connexion. <button class="btn btn-ghost btn-sm" style="margin-top:8px" id="installBtn">Ajouter à l\'écran d\'accueil</button>';
+    box.innerHTML='<b>Installe Coup de Patte</b> pour un accès instantané, même hors connexion. <button class="btn btn-ghost btn-sm" style="margin-top:8px" id="installBtn">Ajouter à l\'écran d\'accueil</button>';
     document.getElementById('installBtn').addEventListener('click', function(){ box.style.display='none'; if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null;} });
   });
   (function(){ var isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent); var standalone=window.navigator.standalone===true||window.matchMedia('(display-mode: standalone)').matches;
-    if(isIOS&&!standalone){ var box=document.getElementById('installBox'); box.style.display='block'; box.innerHTML='<b>Ajoute Coup d\'Aile à ton écran d\'accueil</b> : touche le bouton Partager de Safari, puis « Sur l\'écran d\'accueil ».'; }
+    if(isIOS&&!standalone){ var box=document.getElementById('installBox'); box.style.display='block'; box.innerHTML='<b>Ajoute Coup de Patte à ton écran d\'accueil</b> : touche le bouton Partager de Safari, puis « Sur l\'écran d\'accueil ».'; }
   })();
   // Position initiale silencieuse pour meteo et centres (si deja autorisee)
   if(navigator.permissions && navigator.geolocation){
@@ -1165,55 +1258,6 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
     {id:'c25', nom:'Carnet de 25', test:function(c){return c.n>=25;}},
     {id:'ambassadeur', nom:'Ambassadeur', test:function(c){return c.plumes>=250;}}
   ];
-  function renderCompte(){
-    var el=document.getElementById('compteView'); if(!el) return;
-    if(!db){ el.innerHTML='<h2 class="title">Mon compte</h2><p class="sub">Service momentanément indisponible.</p>'; return; }
-    if(!currentUser){
-      el.innerHTML='<h2 class="title">Mon compte</h2><p class="sub">Crée ton carnet, gagne des plumes et des badges. Pas de mot de passe : on t\'envoie un email avec un lien et un code.</p><div class="card"><b>Connexion par email</b><p class="meta" style="margin:6px 0 10px">Entre ton email. Tu reçois un lien à cliquer et un code à 6 chiffres.</p><input class="field" id="magicEmail" inputmode="email" autocomplete="email" placeholder="ton@email.fr" style="margin-bottom:10px"><button class="btn btn-primary" id="magicBtn" onclick="sendMagic()">Recevoir mon accès</button><div id="otpZone" style="display:none;margin-top:12px"><p class="meta" style="margin-bottom:8px">Ouvre ton email, et regarde aussi les spams. Clique le lien depuis ce navigateur, ou entre ici le code à 6 chiffres.</p><input class="field" id="otpCode" inputmode="numeric" maxlength="6" placeholder="Code à 6 chiffres" style="margin-bottom:8px"><button class="btn btn-primary" onclick="verifyOtp()">Valider le code</button><div style="height:8px"></div><button class="btn btn-ghost btn-sm" onclick="sendMagic(true)">Renvoyer l\'email</button></div><div id="authMsg" class="meta" style="margin-top:10px"></div></div><div class="callout">Ton carnet reste privé, visible de toi seul. La connexion Google arrivera plus tard.</div>';
-      return;
-    }
-    var n=myObs.length;
-    var plumes=myObs.reduce(function(s,o){ return s+((o.issue==='Confié à un centre'||o.issue==='Laissé en place'||o.issue==='Remis au nid')?3:1); },0);
-    var confies=myObs.filter(function(o){return o.issue==='Confié à un centre';}).length;
-    var laisses=myObs.filter(function(o){return o.issue==='Laissé en place'||o.issue==='Remis au nid';}).length;
-    var ctx={n:n, confies:confies, laisses:laisses, plumes:plumes, benevole:!!(myBenevole&&myBenevole.actif)};
-    var av=(currentUser.user_metadata&&currentUser.user_metadata.avatar_url)||'';
-    var ni=niveauInfo(plumes);
-    var prog=ni.nextSeuil!=null?Math.min(100,Math.max(4,Math.round((plumes-ni.seuil)/(ni.nextSeuil-ni.seuil)*100))):100;
-    var nextTxt=ni.next?('Plus que '+(ni.nextSeuil-plumes)+' plumes pour '+ni.next):'Niveau maximum atteint, bravo';
-    var unlocked=BADGES.filter(function(b){return b.test(ctx);});
-    var locked=BADGES.filter(function(b){return !b.test(ctx);}).slice(0,3);
-    var badgesHtml='<div class="section-label">Mes badges</div><div>'+unlocked.map(function(b){return '<span class="badge-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>'+escapeH(b.nom)+'</span>';}).join('')+locked.map(function(b){return '<span class="badge-chip lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>'+escapeH(b.nom)+'</span>';}).join('')+'</div>';
-    var rows = n? myObs.map(function(o){ var dt=o.created_at?new Date(o.created_at):null; var ds=dt?(dt.toLocaleDateString('fr-FR')+' à '+dt.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})):''; var oid=escapeH(o.id); return '<div class="centre" style="align-items:center"><div style="flex:1;min-width:0"><h4>'+(escapeH(o.espece)||'Oiseau')+'</h4><div class="meta">'+escapeH(o.issue||'')+(o.lieu?' · '+escapeH(o.lieu):'')+(ds?' · '+ds:'')+'</div></div><div style="display:flex;gap:6px;flex-shrink:0"><button class="icon-btn" aria-label="Modifier" onclick="editObs(\''+oid+'\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button><button class="icon-btn danger" aria-label="Supprimer" onclick="delObs(\''+oid+'\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></button></div></div>'; }).join('') : '<p class="meta" style="padding:10px 0">Ton carnet est vide. Ajoute ta première observation ci-dessus.</p>';
-    var editing = _editId ? myObs.filter(function(x){return x.id===_editId;})[0] : null;
-    var formTitle = editing ? 'Modifier l\'observation' : 'Ajouter au carnet';
-    var espSel = especeOptions(editing?editing.espece:'');
-    var issSel = issueOptions(editing?editing.issue:'');
-    var lieuVal = editing? escapeH(editing.lieu||'') : '';
-    var saveLabel = editing ? 'Mettre à jour' : 'Enregistrer';
-    var cancelBtn = editing ? '<button class="btn btn-ghost btn-sm" style="margin-top:8px" onclick="cancelEdit()">Annuler la modification</button>' : '';
-    el.innerHTML='<div class="card" style="background:linear-gradient(135deg,#1F9E67,#12885A);color:#fff;border:none"><div class="avatar-wrap"><div class="avatar" id="avatarBox"'+(av?' style="background-image:url(\''+av+'\')"':'')+'>'+(av?'':'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c1.5-4 12.5-4 14 0"/></svg>')+'</div><div style="flex:1;min-width:0"><div style="font-size:12px;opacity:.92;font-weight:800;text-transform:uppercase;letter-spacing:.6px">'+escapeH(ni.nom)+'</div><div style="font-size:15px;font-weight:800;word-break:break-all">'+escapeH(currentUser.email)+'</div></div></div><div style="margin-top:10px;font-size:13px;opacity:.95;font-weight:700">'+plumes+' plumes · '+n+' observation'+(n>1?'s':'')+'</div><div style="height:8px;background:rgba(255,255,255,.25);border-radius:6px;margin-top:8px;overflow:hidden"><div style="height:100%;width:'+prog+'%;background:#fff;border-radius:6px"></div></div><div style="font-size:11.5px;opacity:.92;margin-top:5px;font-weight:700">'+nextTxt+'</div><input type="file" id="avatarInput" accept="image/*" style="display:none" onchange="uploadAvatar(this.files[0])"><button class="btn btn-sm" style="margin-top:12px;background:rgba(255,255,255,.2);color:#fff;box-shadow:none" onclick="document.getElementById(\'avatarInput\').click()">Changer ma photo</button><div id="avatarMsg" style="font-size:11.5px;opacity:.95;margin-top:6px"></div></div>'+badgesHtml+'<div class="section-label" id="ajoutCarnet">'+formTitle+'</div><div class="card"><select class="field" id="obsEspece" style="margin-bottom:8px"><option value="">Choisis une espèce</option>'+espSel+'</select><select class="field" id="obsIssue" style="margin-bottom:8px">'+issSel+'</select><input class="field" id="obsLieu" placeholder="Lieu (ex : Montpellier)" value="'+lieuVal+'" style="margin-bottom:8px"><button class="btn btn-primary" onclick="addObs()">'+saveLabel+'</button>'+cancelBtn+'<div id="obsMsg" class="meta" style="margin-top:8px"></div></div><div class="section-label" id="monCarnet">Mon carnet</div><div class="card" style="padding:6px 16px">'+rows+'</div>'+benevolatCardHtml()+'<div style="height:10px"></div><button class="btn btn-ghost" onclick="showScreen(\'assos\')">Espace associations</button><div style="height:10px"></div><button class="btn btn-ghost" onclick="signOut()">Se déconnecter</button>';
-  }
-  var _lastEmail='';
-  function sendMagic(resend){
-    var m=document.getElementById('authMsg');
-    var e=((document.getElementById('magicEmail')||{}).value||_lastEmail||'').trim();
-    if(!e||e.indexOf('@')<1){ if(m)m.textContent='Entre un email valide.'; return; }
-    _lastEmail=e;
-    var btn=document.getElementById('magicBtn'); if(btn) btn.disabled=true;
-    if(m)m.textContent='Envoi en cours...';
-    // Redirection calculee depuis l'adresse reellement visitee, pour que le lien de
-    // connexion ramene sur le bon domaine (coupdepatte.eu comme coup-daile.vercel.app).
-    db.auth.signInWithOtp({email:e, options:{shouldCreateUser:true, emailRedirectTo:location.origin}}).then(function(r){
-      if(btn) btn.disabled=false;
-      if(r.error){ if(m)m.textContent = authErrLabel(r.error.message); return; }
-      var z=document.getElementById('otpZone'); if(z) z.style.display='block';
-      if(m)m.textContent='Email envoyé à '+e+'. Ouvre ta boîte et regarde les spams.';
-    }, function(err){
-      if(btn) btn.disabled=false;
-      if(m) m.textContent = authErrLabel(err && err.message ? err.message : String(err));
-    });
-  }
   // Traduit une erreur d'authentification en message actionnable.
   // "Failed to fetch" ne veut pas dire que le serveur a refuse : la requete n'est
   // jamais partie. Presque toujours : hors-ligne, bloqueur de contenu, VPN ou relais prive.
@@ -1225,17 +1269,6 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
       return "Impossible de joindre le serveur. Ta connexion fonctionne, donc la requête est probablement bloquée : bloqueur de publicités, VPN, ou relais privé iCloud. Désactive-les pour ce site, ou essaie depuis un autre réseau.";
     }
     return 'Erreur : ' + msg;
-  }
-  function verifyOtp(){
-    var m=document.getElementById('authMsg');
-    var code=((document.getElementById('otpCode')||{}).value||'').replace(/\D/g,'');
-    if(!/^\d{6}$/.test(code)){ if(m)m.textContent='Entre le code à 6 chiffres reçu par email.'; return; }
-    if(!_lastEmail){ if(m)m.textContent='Renseigne d\'abord ton email et demande un accès.'; return; }
-    if(m)m.textContent='Vérification du code...';
-    db.auth.verifyOtp({email:_lastEmail, token:code, type:'email'}).then(function(r){
-      if(r.error){ if(m)m.textContent='Code invalide ou expiré. Tu peux renvoyer un email.'; return; }
-      if(m)m.textContent='Connexion réussie.';
-    });
   }
   function uploadAvatar(file){
     var m=document.getElementById('avatarMsg'); if(!file||!db||!currentUser) return;
@@ -1254,7 +1287,6 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
       });
     });
   }
-  function signOut(){ db.auth.signOut().then(function(){ currentUser=null; myObs=[]; renderCompte(); }); }
   function loadObs(){ if(!db||!currentUser) return; db.from('observations').select('*').order('created_at',{ascending:false}).then(function(r){ myObs=r.data||[]; renderCompte(); }); }
   function reloadObs(cb){ if(!db||!currentUser){ if(cb)cb(); return; } db.from('observations').select('*').order('created_at',{ascending:false}).then(function(rr){ myObs=rr.data||[]; renderCompte(); if(cb)cb(); }); }
   function addObs(){ var m=document.getElementById('obsMsg'); if(!currentUser){ if(m)m.textContent='Connecte-toi d\'abord pour tenir ton carnet.'; return; } var espece=(document.getElementById('obsEspece')||{}).value, issue=(document.getElementById('obsIssue')||{}).value, lieu=(document.getElementById('obsLieu')||{}).value; if(!espece){ if(m){m.style.color='';m.textContent='Choisis une espèce dans la liste.';} return; } if(m){m.style.color='';m.textContent=_editId?'Mise à jour...':'Enregistrement...';} var done=function(verbe){ reloadObs(function(){ var mm=document.getElementById('obsMsg'); if(mm){ mm.style.color='#1F9E67'; mm.innerHTML='&#10003; '+escapeH(espece)+' '+verbe+'.'; } var cs=document.getElementById('monCarnet'); if(cs&&cs.scrollIntoView){ try{cs.scrollIntoView({behavior:'smooth',block:'start'});}catch(_){cs.scrollIntoView();} } }); }; if(_editId){ var eid=_editId; _editId=null; db.from('observations').update({espece:espece,issue:issue,lieu:lieu}).eq('id',eid).eq('user_id',currentUser.id).select().then(function(r){ if(r.error){ _editId=eid; if(m){m.style.color='#c0392b';m.textContent='Erreur : '+r.error.message;} return; } if(!r.data||!r.data.length){ _editId=eid; if(m){m.style.color='#c0392b';m.textContent='Modification refusée par la base. La règle obs_update_own est absente.';} return; } done('mis à jour'); }); } else { db.from('observations').insert({espece:espece,issue:issue,lieu:lieu,user_id:currentUser.id}).select().then(function(r){ if(r.error){ if(m){m.style.color='#c0392b';m.textContent='Erreur : '+r.error.message;} return; } done('ajouté à ton carnet'); }); } }
@@ -1275,48 +1307,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
   var myBenevole=null;
   function val(id){ var e=document.getElementById(id); return e? e.value : ''; }
   function loadMyBenevole(){ if(!db||!currentUser) return; db.from('benevoles').select('*').eq('user_id',currentUser.id).then(function(r){ myBenevole=(r.data&&r.data[0])||null; renderCompte(); }); }
-  function benevolatCardHtml(){
-    var b=myBenevole||{}; function v(x){ return escapeH(x==null?'':x); } var actif=!!b.actif;
-    return '<div class="section-label">Bénévolat</div><div class="card">'
-    +'<p class="meta" style="margin-bottom:10px">Propose ton aide aux centres et associations. Visible des associations et des membres inscrits, réservé aux 18 ans et plus. Aucun message ne passe par l\'app, tu choisis les coordonnées à montrer.</p>'
-    +'<label style="display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:14px"><input type="checkbox" id="benMajeur"'+(b.majeur?' checked':'')+'> J\'ai 18 ans ou plus</label>'
-    +'<input class="field" id="benPseudo" placeholder="Ton prénom ou pseudo" value="'+v(b.pseudo)+'" style="margin-bottom:8px">'
-    +'<input class="field" id="benZone" placeholder="Zone (ex : Hérault, 30 km)" value="'+v(b.zone)+'" style="margin-bottom:8px">'
-    +'<input class="field" id="benDispos" placeholder="Disponibilités (ex : week-ends)" value="'+v(b.dispos)+'" style="margin-bottom:8px">'
-    +'<input class="field" id="benAides" placeholder="Aide (ex : transport, nourrissage)" value="'+v(b.aides)+'" style="margin-bottom:8px">'
-    +'<div class="section-label" style="margin:8px 0 6px">Coordonnées à exposer (vide = non montré)</div>'
-    +'<input class="field" id="benTel" placeholder="Téléphone" value="'+v(b.contact_tel)+'" style="margin-bottom:8px">'
-    +'<input class="field" id="benEmailC" placeholder="Email de contact" value="'+v(b.contact_email)+'" style="margin-bottom:8px">'
-    +'<input class="field" id="benInsta" placeholder="Instagram (@...)" value="'+v(b.contact_insta)+'" style="margin-bottom:8px">'
-    +'<button class="btn btn-primary" onclick="saveBenevole()">'+(actif?'Mettre à jour mon profil':'Devenir bénévole')+'</button>'
-    +(actif?'<div style="height:8px"></div><button class="btn btn-ghost" onclick="retireBenevole()">Me retirer de l\'annuaire</button>':'')
-    +'<div id="benMsg" class="meta" style="margin-top:8px"></div></div>'
-    +'<button class="btn btn-ghost" onclick="showScreen(\'benevoles\')">Voir les bénévoles</button>';
-  }
-  function saveBenevole(){ var m=document.getElementById('benMsg'); if(!document.getElementById('benMajeur')||!document.getElementById('benMajeur').checked){ if(m)m.textContent='Le bénévolat est réservé aux 18 ans et plus.'; return; } var row={user_id:currentUser.id, actif:true, majeur:true, pseudo:val('benPseudo'), zone:val('benZone'), dispos:val('benDispos'), aides:val('benAides'), contact_tel:val('benTel'), contact_email:val('benEmailC'), contact_insta:val('benInsta')}; if(m)m.textContent='Enregistrement...'; var q = myBenevole ? db.from('benevoles').update(row).eq('user_id',currentUser.id).select() : db.from('benevoles').insert(row).select(); q.then(function(r){ if(r.error){ if(m)m.textContent='Erreur : '+r.error.message; } else { myBenevole=(r.data&&r.data[0])||row; renderCompte(); } }); }
   function retireBenevole(){ db.from('benevoles').update({actif:false}).eq('user_id',currentUser.id).then(function(){ loadMyBenevole(); }); }
-  function renderBenevoles(){
-    var el=document.getElementById('benevolesList'); if(!el) return;
-    if(!db){ el.innerHTML='<p class="sub">Service indisponible.</p>'; return; }
-    el.innerHTML='<p class="meta" style="padding:6px 0">Chargement...</p>';
-    // Liste publique, SANS coordonnees : accessible meme sans compte.
-    db.rpc('benevoles_publics').then(function(r){
-      if(r.error){ el.innerHTML='<div class="callout">Liste des benevoles momentanement indisponible.</div>'; return; }
-      var list=r.data||[]; if(!Array.isArray(list)){ try{ list=JSON.parse(list); }catch(e){ list=[]; } }
-      if(!list.length){ el.innerHTML='<div class="callout">Pas encore de benevole inscrit. Sois le premier depuis l\'onglet Compte.</div>'; return; }
-      el.innerHTML='<p class="meta" style="padding:2px 0 8px">'+list.length+' benevole'+(list.length>1?'s':'')+' pret'+(list.length>1?'s':'')+' a aider. Clique sur une fiche pour voir comment la joindre.</p><div class="card" style="padding:6px 16px">'+list.map(function(b){
-        var meta=[escapeH(b.zone),escapeH(b.dispos),escapeH(b.aides)].filter(Boolean).join(' · ');
-        var peut = b.a_tel || b.a_email || b.a_insta;
-        var zone = '<div id="ct_'+b.id+'"></div>';
-        var btn = peut
-          ? '<div class="row-btns" style="margin-top:8px"><button class="btn btn-primary btn-sm" onclick="voirContact(\''+b.id+'\',this)">Voir le contact</button></div>'
-          : '<div class="meta" style="margin-top:6px">Aucun moyen de contact renseigne.</div>';
-        return '<div class="centre"><div style="flex:1;min-width:0"><h4>'+(escapeH(b.pseudo)||'Benevole')+'</h4>'
-          +(meta?'<div class="meta">'+meta+'</div>':'')
-          +btn+zone+'</div></div>';
-      }).join('')+'</div>';
-    });
-  }
   // Revelation a la demande : on ne charge les coordonnees qu'au clic, une fiche
   // a la fois. Protege les benevoles du moissonnage en masse par un robot.
   function voirContact(id, btn){
@@ -1336,61 +1327,8 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
   function loadMyAsso(){ if(!db||!currentUser) return; db.from('associations').select('*').eq('user_id',currentUser.id).then(function(r){ myAsso=(r.data&&r.data[0])||null; var s=document.getElementById('assos'); if(s&&s.classList.contains('active')) renderAssos(); }); }
   // ================= Annuaire des associations, refuges et centres =================
   var ASSO_TYPES = ['Association de protection','Refuge','Centre de sauvegarde','Clinique vétérinaire','Groupe local LPO','Autre structure'];
-  var _assoMode = 'annuaire';
-  var _assoList = null;
-  function setAssoMode(m){ _assoMode = m; renderAssos(); }
   function assoTypeOptions(sel){ return '<option value="">Type de structure</option>' + ASSO_TYPES.map(function(t){ return '<option value="'+escapeH(t)+'"'+(t===sel?' selected':'')+'>'+escapeH(t)+'</option>'; }).join(''); }
   function assoDeptOptions(sel){ var o='<option value="">Tous les départements</option>'; for(var i=0;i<DEPTS.length;i++){ var c=DEPTS[i][0], n=DEPTS[i][1]; o+='<option value="'+escapeH(c)+'"'+(c===sel?' selected':'')+'>'+escapeH(c+' - '+n)+'</option>'; } return o; }
-  function renderAssos(){
-    var el=document.getElementById('assosView'); if(!el) return;
-    if(!db){ el.innerHTML='<p class="sub">Service indisponible.</p>'; return; }
-    var seg='<div class="seg">'
-      +'<button class="'+(_assoMode==='annuaire'?'on':'')+'" onclick="setAssoMode(\'annuaire\')">Annuaire</button>'
-      +'<button class="'+(_assoMode==='moi'?'on':'')+'" onclick="setAssoMode(\'moi\')">Ma structure</button>'
-      +'</div>';
-    el.innerHTML = seg + '<div id="assoBody"></div>';
-    if(_assoMode==='annuaire') renderAssoAnnuaire(); else renderAssoForm();
-  }
-  function renderAssoAnnuaire(){
-    var box=document.getElementById('assoBody'); if(!box) return;
-    box.innerHTML='<p class="sub">Les structures qui recueillent et soignent les oiseaux, près de chez toi. Chaque fiche est vérifiée avant publication.</p>'
-      +'<input class="field" id="assoQ" placeholder="Rechercher un nom, une ville" oninput="filterAssos()" style="margin-bottom:8px">'
-      +'<select class="field" id="assoDept" onchange="filterAssos()" style="margin-bottom:8px">'+assoDeptOptions('')+'</select>'
-      +'<select class="field" id="assoType" onchange="filterAssos()" style="margin-bottom:12px">'+assoTypeOptions('')+'</select>'
-      +'<div id="assoResults"><p class="meta">Chargement...</p></div>'
-      +'<div style="height:10px"></div><button class="btn btn-ghost" onclick="showScreen(\'signaler\')">Une structure manque ? Signale-la</button>';
-    if(_assoList){ filterAssos(); return; }
-    db.from('associations').select('*').eq('verifiee',true).order('nom',{ascending:true}).then(function(r){
-      if(r.error){ var t=document.getElementById('assoResults'); if(t) t.innerHTML='<div class="callout">Annuaire indisponible pour le moment.</div>'; return; }
-      _assoList = r.data||[]; filterAssos();
-    });
-  }
-  function filterAssos(){
-    var box=document.getElementById('assoResults'); if(!box||!_assoList) return;
-    var q=(val('assoQ')||'').toLowerCase().trim(), dp=val('assoDept'), tp=val('assoType');
-    var list=_assoList.filter(function(a){
-      if(dp && String(a.dept||'')!==dp) return false;
-      if(tp && String(a.type||'')!==tp) return false;
-      if(q){ var hay=[a.nom,a.ville,a.zone,a.description].filter(Boolean).join(' ').toLowerCase(); if(hay.indexOf(q)<0) return false; }
-      return true;
-    });
-    if(!list.length){ box.innerHTML='<div class="callout">Aucune structure ne correspond. Élargis ta recherche, ou signale une structure manquante.</div>'; return; }
-    box.innerHTML='<p class="meta" style="padding:4px 0">'+list.length+' structure'+(list.length>1?'s':'')+'</p><div class="card" style="padding:6px 16px">'+list.map(assoFicheHtml).join('')+'</div>';
-  }
-  function assoFicheHtml(a){
-    var c=[];
-    if(a.tel) c.push('<a class="btn btn-primary btn-sm" href="tel:'+escapeH(a.tel)+'">Appeler</a>');
-    if(a.email) c.push('<a class="btn btn-ghost btn-sm" href="mailto:'+escapeH(a.email)+'">Email</a>');
-    if(a.site) c.push('<a class="btn btn-ghost btn-sm" href="'+escapeH(/^https?:/.test(a.site)?a.site:'https://'+a.site)+'" target="_blank" rel="noopener">Site</a>');
-    if(a.ville) c.push('<a class="btn btn-ghost btn-sm" href="https://www.openstreetmap.org/search?query='+encodeURIComponent((a.nom||'')+' '+a.ville)+'" target="_blank" rel="noopener">Itinéraire</a>');
-    var meta=[escapeH(a.type||''), escapeH(a.ville||''), a.dept?escapeH(a.dept):'', escapeH(a.zone||'')].filter(Boolean).join(' · ');
-    return '<div class="centre"><div style="flex:1;min-width:0"><h4>'+escapeH(a.nom||'Structure')+'</h4>'
-      +(meta?'<div class="meta">'+meta+'</div>':'')
-      +(a.description?'<div class="meta" style="margin-top:5px">'+escapeH(a.description)+'</div>':'')
-      +(a.besoins?'<div class="meta" style="margin-top:5px"><strong>Besoins :</strong> '+escapeH(a.besoins)+'</div>':'')
-      +(c.length?'<div class="row-btns" style="margin-top:9px">'+c.join('')+'</div>':'')
-      +'</div></div>';
-  }
   function renderAssoForm(){
     var box=document.getElementById('assoBody'); if(!box) return;
     if(!currentUser){ box.innerHTML='<div class="callout">Connecte-toi dans l\'onglet Compte pour inscrire ta structure.</div>'; return; }
@@ -1497,11 +1435,12 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
     el.innerHTML='<p class="sub">Réservé à l\'administrateur. Les statistiques sont anonymisées ; la liste des membres n\'est visible que de toi.</p>'
       +'<div id="admStats"><p class="meta">Chargement des statistiques...</p></div>'
       +'<div class="section-label">Statistiques détaillées</div><div id="admStats2"><p class="meta">Chargement...</p></div>'
+      +'<div class="section-label">Réseau de bénévoles</div><div id="admBen"><p class="meta">Chargement...</p></div>'
       +'<div class="section-label">Membres et modération</div><div id="admUsers"><p class="meta">Chargement...</p></div>'
       +'<div class="section-label">Modération des structures</div><div id="admMod"><p class="meta">Chargement...</p></div>'
       +'<div class="section-label">Contributions reçues</div><div id="admSignals"><p class="meta">Chargement...</p></div>'
       +'<div class="section-label">Régie sponsors</div><div id="admSponsors"><p class="meta">Chargement...</p></div>';
-    loadAdminStats(); loadAdminStats2(); loadAdminUsers(); loadAdminMod(); loadAdminSignals(); loadAdminSponsors();
+    loadAdminBenevoles(); loadAdminStats(); loadAdminStats2(); loadAdminUsers(); loadAdminMod(); loadAdminSignals(); loadAdminSponsors();
   }
   function loadAdminStats(){
     var box=document.getElementById('admStats'); if(!box) return;
@@ -1751,9 +1690,9 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
 
   // ================= Walkthrough onboarding =================
   var WT=[
-    {c:'#1F9E67', ic:'<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/>', t:'Bienvenue sur Coup d\'Aile', p:'Tu as trouvé un oiseau ou un oisillon ? On te guide pas à pas pour faire le bon geste, sans stress.'},
+    {c:'#1F9E67', ic:'<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/>', t:'Bienvenue sur Coup de Patte', p:'Tu as trouvé un oiseau ou un oisillon ? On te guide pas à pas pour faire le bon geste, sans stress.'},
     {c:'#EF6C4D', ic:'<path d="M16 7h.01"/><path d="M3.4 18H12a8 8 0 0 0 8-8V7a4 4 0 0 0-7.28-2.3L2 20"/><path d="m20 7 2 .5-2 .5"/><path d="M10 18v3"/><path d="M14 17.75V21"/><path d="M7 18a6 6 0 0 0 3.84-10.61"/>', t:'Le bon geste d\'abord', p:'Le bouton central Trouvé lance un guide en trois questions et t\'indique quoi faire, et ce qu\'il ne faut surtout pas faire.'},
-    {c:'#2FA9B8', ic:'<path d="M12 21s7-5 7-11a7 7 0 1 0-14 0c0 6 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/>', t:'Un centre près de toi', p:'Coup d\'Aile trouve le centre de sauvegarde le plus proche et son numéro. Appelle toujours avant de te déplacer.'},
+    {c:'#2FA9B8', ic:'<path d="M12 21s7-5 7-11a7 7 0 1 0-14 0c0 6 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/>', t:'Un centre près de toi', p:'Coup de Patte trouve le centre de sauvegarde le plus proche et son numéro. Appelle toujours avant de te déplacer.'},
     {c:'#E39A2E', ic:'<circle cx="12" cy="8" r="3.4"/><path d="M5 20c1.5-4 12.5-4 14 0"/>', t:'Ta communauté', p:'Crée ton carnet, gagne des plumes et des badges, et propose ton aide aux centres. Tout est gratuit.'}
   ];
   var wtIdx=0;
@@ -1814,6 +1753,683 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
   }
 
   updateAdminUI(); renderAds(); loadCentres(); renderActusHome();
+  // ===================================================================
+  // RESEAU DE BENEVOLES (lot 1, migration v23)
+  // Formulaire en 5 etapes, parrainage, compteur public, back-office.
+  // ===================================================================
+  var BEN_TYPES=[['recuperer','Récupérer un oiseau en détresse'],['transport','Transporter vers un centre de soins'],['relais','Famille relais (sur autorisation d\'un centre)'],['faire_connaitre','Faire connaître l\'association'],['en_ligne','Aider en ligne (rédaction, design, traduction)'],['stand','Tenir un stand']];
+  var BEN_TEMPS=[['mois','Quelques heures par mois'],['semaine','1 à 2 h par semaine'],['plus','Plus de 2 h par semaine'],['urgence','Ponctuellement, en cas d\'urgence']];
+  var BEN_CREN=[['semaine','En semaine (journée)'],['soir','Le soir'],['weekend','Le week-end']];
+  var BEN_RAYON=[5,15,30];
+  var BEN_PALIERS=[[25,'Nuée'],[10,'Envol'],[3,'Aile'],[1,'Plume']];
+  function benLabel(list,k){ for(var i=0;i<list.length;i++){ if(list[i][0]===k) return list[i][1]; } return k||''; }
+  function benPalier(n){ for(var i=0;i<BEN_PALIERS.length;i++){ if(n>=BEN_PALIERS[i][0]) return BEN_PALIERS[i][1]; } return ''; }
+
+  // --- Parrainage : capture du code ?p= a l'arrivee sur le site ---
+  (function(){ try{ var m=location.search.match(/[?&]p=([A-Za-z0-9]{3,16})/); if(m){ localStorage.setItem('cdp_parrain', m[1].toUpperCase()); } }catch(e){} })();
+  function benParrainCode(){ try{ return localStorage.getItem('cdp_parrain')||null; }catch(e){ return null; } }
+
+  // --- Etat du formulaire ---
+  var benForm=null, benParr=null, benEdit=false;
+  function benInitForm(){
+    var b=myBenevole||{};
+    benForm={ step:1, communes:[],
+      code_postal:b.code_postal||'', ville:b.ville||'', code_insee:b.code_insee||'', departement:b.departement||'', departement_nom:b.departement_nom||'', region:b.region||'', lat:b.lat||null, lon:b.lon||null,
+      types_aide:(b.types_aide||[]).slice(), temps:b.temps||'', creneaux:(b.creneaux||[]).slice(), rayon_km:b.rayon_km||15, vehicule:!!b.vehicule,
+      pseudo:b.pseudo||'', newsletter:b.newsletter!==false, profil_public:b.profil_public!==false, majeur:!!b.majeur, mot:b.mot||'',
+      contact_tel:b.contact_tel||'', contact_email:b.contact_email||'', contact_insta:b.contact_insta||'' };
+  }
+  function benCollect(){
+    if(!benForm) return; function g(id){ var e=document.getElementById(id); return e?e.value:null; } function c(id){ var e=document.getElementById(id); return e?e.checked:null; }
+    var s=benForm.step;
+    if(s===1){ var cp=g('benCP'); if(cp!==null) benForm.code_postal=cp.trim(); }
+    if(s===4){ var r=g('benRayon'); if(r) benForm.rayon_km=parseInt(r,10); var v=c('benVehicule'); if(v!==null) benForm.vehicule=v; }
+    if(s===5){ ['pseudo','mot','contact_tel','contact_email','contact_insta'].forEach(function(k){ var x=g('benF_'+k); if(x!==null) benForm[k]=x.trim(); });
+      var n=c('benF_newsletter'); if(n!==null) benForm.newsletter=n; var p=c('benF_profil'); if(p!==null) benForm.profil_public=p; var mj=c('benF_majeur'); if(mj!==null) benForm.majeur=mj; }
+  }
+  function benToggle(field, key){ benCollect(); var a=benForm[field]; var i=a.indexOf(key); if(i>=0) a.splice(i,1); else a.push(key); benRerender(); }
+  function benSetTemps(k){ benCollect(); benForm.temps=k; benRerender(); }
+  function benRerender(){ var w=document.getElementById('benWizard'); if(w) w.innerHTML=benWizardInner(); }
+  function benChip(on, onclick, label){ return '<button type="button" class="chip'+(on?' on':'')+'" aria-pressed="'+(on?'true':'false')+'" onclick="'+onclick+'">'+escapeH(label)+'</button>'; }
+
+  function benLookupCP(){
+    benCollect(); var m=document.getElementById('benStepMsg'); var cp=benForm.code_postal;
+    if(!/^\d{5}$/.test(cp)){ if(m) m.textContent='Indique un code postal à 5 chiffres.'; return; }
+    if(m) m.textContent='Recherche de ta commune...';
+    fetch('https://geo.api.gouv.fr/communes?codePostal='+cp+'&fields=nom,code,codeDepartement,departement,region,centre&format=json')
+      .then(function(r){ return r.json(); })
+      .then(function(list){ benForm.communes=Array.isArray(list)?list:[]; if(benForm.communes.length===1) benPickCommune(0); else { if(!benForm.communes.length && m) m.textContent='Aucune commune trouvée pour ce code postal.'; benRerender(); } })
+      .catch(function(){ if(m) m.textContent='Recherche indisponible, réessaie dans un instant.'; });
+  }
+  function benPickCommune(i){
+    var c=benForm.communes[i]; if(!c) return;
+    benForm.ville=c.nom; benForm.code_insee=c.code; benForm.departement=c.codeDepartement||(c.departement&&c.departement.code)||'';
+    benForm.departement_nom=(c.departement&&c.departement.nom)||''; benForm.region=(c.region&&c.region.nom)||'';
+    if(c.centre&&c.centre.coordinates){ benForm.lon=c.centre.coordinates[0]; benForm.lat=c.centre.coordinates[1]; }
+    benForm.communes=[]; benRerender();
+  }
+  function benNext(){
+    benCollect(); var f=benForm, m=document.getElementById('benStepMsg'); var err='';
+    if(f.step===1 && !f.ville) err='Valide ton code postal pour trouver ta commune.';
+    if(f.step===2 && !f.types_aide.length) err='Choisis au moins une façon d\'aider.';
+    if(f.step===3 && !f.temps) err='Choisis le temps que tu souhaites donner.';
+    if(f.step===4 && !f.creneaux.length) err='Choisis au moins un moment où tu es disponible.';
+    if(err){ if(m) m.textContent=err; return; }
+    if(f.step<5){ f.step++; benRerender(); } else { saveBenevole(); }
+  }
+  function benPrev(){ benCollect(); if(benForm.step>1){ benForm.step--; benRerender(); } }
+
+  function benWizardInner(){
+    var f=benForm, s=f.step, h='';
+    h+='<div class="meta" style="font-weight:800;margin-bottom:6px">Étape '+s+' sur 5</div><div style="height:6px;background:var(--vert-pale);border-radius:6px;overflow:hidden;margin-bottom:14px"><div style="height:100%;width:'+(s*20)+'%;background:var(--vert);border-radius:6px"></div></div>';
+    if(s===1){
+      h+='<h3 style="margin:0 0 6px">Où es-tu ?</h3><p class="meta" style="margin-bottom:10px">Ton code postal suffit. Il sert à te mettre en relation avec les centres et les besoins proches de chez toi.</p>'
+        +'<div style="display:flex;gap:8px"><input class="field" id="benCP" inputmode="numeric" maxlength="5" placeholder="Code postal" value="'+escapeH(f.code_postal)+'" onkeydown="if(event.key===\'Enter\'){benLookupCP();}"><button class="btn btn-ghost btn-sm" style="width:auto;white-space:nowrap" onclick="benLookupCP()">Valider</button></div>';
+      if(f.communes.length>1){ h+='<div class="meta" style="margin:10px 0 6px">Choisis ta commune :</div>'+f.communes.map(function(c,i){ return benChip(false,'benPickCommune('+i+')',c.nom); }).join(''); }
+      if(f.ville){ h+='<div class="callout" style="margin-bottom:0"><b>'+escapeH(f.ville)+'</b><br>'+escapeH(f.departement_nom)+' ('+escapeH(f.departement)+') · '+escapeH(f.region)+'</div>'; }
+    }
+    if(s===2){
+      h+='<h3 style="margin:0 0 6px">Comment veux-tu aider ?</h3><p class="meta" style="margin-bottom:10px">Plusieurs choix possibles.</p>'
+        +BEN_TYPES.map(function(t){ return benChip(f.types_aide.indexOf(t[0])>=0,'benToggle(\'types_aide\',\''+t[0]+'\')',t[1]); }).join('');
+    }
+    if(s===3){
+      h+='<h3 style="margin:0 0 6px">Combien de temps veux-tu donner ?</h3><p class="meta" style="margin-bottom:10px">Tu pourras le changer à tout moment.</p>'
+        +BEN_TEMPS.map(function(t){ return benChip(f.temps===t[0],'benSetTemps(\''+t[0]+'\')',t[1]); }).join('');
+    }
+    if(s===4){
+      h+='<h3 style="margin:0 0 6px">Quand es-tu disponible ?</h3>'
+        +BEN_CREN.map(function(t){ return benChip(f.creneaux.indexOf(t[0])>=0,'benToggle(\'creneaux\',\''+t[0]+'\')',t[1]); }).join('')
+        +'<label class="meta" for="benRayon" style="display:block;margin:10px 0 6px">Jusqu\'où peux-tu te déplacer ?</label><select class="field" id="benRayon">'+BEN_RAYON.map(function(r){ return '<option value="'+r+'"'+(f.rayon_km===r?' selected':'')+'>'+r+' km autour de chez moi</option>'; }).join('')+'</select>'
+        +'<label style="display:flex;align-items:center;gap:8px;margin-top:10px;font-size:14px"><input type="checkbox" id="benVehicule"'+(f.vehicule?' checked':'')+'> J\'ai un véhicule</label>';
+    }
+    if(s===5){
+      h+='<h3 style="margin:0 0 6px">Comment rester en contact ?</h3>'
+        +'<label class="meta" for="benF_pseudo">Ton prénom ou pseudo</label><input class="field" id="benF_pseudo" value="'+escapeH(f.pseudo)+'" style="margin:4px 0 10px">'
+        +'<label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;font-size:14px"><input type="checkbox" id="benF_newsletter"'+(f.newsletter?' checked':'')+'> <span>Je reçois « La Plume du samedi », la newsletter hebdomadaire. Désinscription en un clic.</span></label>'
+        +'<label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:10px;font-size:14px"><input type="checkbox" id="benF_profil"'+(f.profil_public?' checked':'')+'> <span>Mon profil apparaît dans l\'annuaire des bénévoles.</span></label>'
+        +'<div class="section-label" style="margin:6px 0">Coordonnées à montrer dans l\'annuaire (vide = non montré)</div>'
+        +'<input class="field" id="benF_contact_tel" placeholder="Téléphone" value="'+escapeH(f.contact_tel)+'" style="margin-bottom:8px">'
+        +'<input class="field" id="benF_contact_email" placeholder="Email de contact" value="'+escapeH(f.contact_email)+'" style="margin-bottom:8px">'
+        +'<input class="field" id="benF_contact_insta" placeholder="Instagram (@...)" value="'+escapeH(f.contact_insta)+'" style="margin-bottom:8px">'
+        +'<label class="meta" for="benF_mot">Un mot sur toi (facultatif)</label><textarea class="field" id="benF_mot" rows="2" style="margin:4px 0 10px">'+escapeH(f.mot)+'</textarea>'
+        +'<label style="display:flex;align-items:center;gap:8px;font-size:14px"><input type="checkbox" id="benF_majeur"'+(f.majeur?' checked':'')+'> J\'ai 18 ans ou plus</label>';
+      if(!myBenevole && benParrainCode()) h+='<p class="meta" style="margin-top:8px">Tu as été invité avec le code '+escapeH(benParrainCode())+'.</p>';
+    }
+    h+='<div id="benStepMsg" class="meta" style="margin-top:10px;color:var(--corail)"></div>'
+      +'<div style="display:flex;gap:8px;margin-top:12px">'
+      +(s>1?'<button class="btn btn-ghost" style="flex:1" onclick="benPrev()">Retour</button>':'')
+      +'<button class="btn btn-primary" style="flex:2" onclick="benNext()">'+(s<5?'Continuer':(myBenevole&&myBenevole.actif?'Enregistrer':'Je deviens bénévole'))+'</button></div>'
+      +(benEdit?'<div style="height:8px"></div><button class="btn btn-ghost" onclick="benEdit=false;renderCompte()">Annuler</button>':'');
+    return h;
+  }
+
+  function benevolatCardHtml(){
+    var b=myBenevole, actif=!!(b&&b.actif);
+    if(!actif || benEdit){
+      if(!benForm) benInitForm();
+      return '<div class="section-label" id="devenirBenevole">'+(actif?'Modifier mon bénévolat':'Devenir bénévole')+'</div><div class="card"><div id="benWizard">'+benWizardInner()+'</div></div>'
+        +'<button class="btn btn-ghost" onclick="showScreen(\'benevoles\')">Voir les bénévoles</button>';
+    }
+    if(benParr===null){ benParr={}; loadMonParrainage(); }
+    var lien=location.origin+'/?p='+encodeURIComponent((benParr&&benParr.code)||b.code_parrain||'');
+    var fil=(benParr&&benParr.filleuls)||0, pal=benPalier(fil);
+    var types=(b.types_aide||[]).map(function(k){ return benLabel(BEN_TYPES,k); }).join(', ')||escapeH(b.aides||'');
+    return '<div class="section-label">Mon bénévolat</div><div class="card">'
+      +'<div style="font-weight:800;font-size:16px">'+escapeH(b.pseudo||'Bénévole')+(pal?' <span class="adm-tag" style="background:var(--ambre-pale);color:#7A4F0E">'+pal+'</span>':'')+'</div>'
+      +'<div class="meta">'+escapeH(b.ville||b.zone||'')+(b.departement?' ('+escapeH(b.departement)+')':'')+(b.temps?' · '+escapeH(benLabel(BEN_TEMPS,b.temps)):'')+'</div>'
+      +(types?'<div class="meta" style="margin-top:4px">'+types+'</div>':'')
+      +(benParr&&benParr.rang?'<div class="callout" style="margin-bottom:0">Tu es le '+benParr.rang+(benParr.rang===1?'er':'e')+' bénévole du réseau Coup de Patte. Merci.</div>':'')
+      +'<div style="height:10px"></div><button class="btn btn-ghost" onclick="benEdit=true;benInitForm();renderCompte()">Modifier mes réponses</button>'
+      +'<div style="height:8px"></div><button class="btn btn-ghost" onclick="retireBenevole()">Me retirer de l\'annuaire</button></div>'
+      +'<div class="section-label">Parrainer un bénévole</div><div class="card">'
+      +'<p class="meta" style="margin-bottom:10px">Partage ton lien personnel. Chaque inscription arrivée par lui t\'est rattachée. Paliers : Plume (1 filleul), Aile (3), Envol (10), Nuée (25).</p>'
+      +'<div style="font-size:28px;font-weight:800;color:var(--vert)">'+fil+' <span class="meta" style="font-size:14px">filleul'+(fil>1?'s':'')+'</span></div>'
+      +'<input class="field" id="benLien" readonly value="'+escapeH(lien)+'" style="margin:10px 0 8px" onclick="this.select()">'
+      +'<div style="display:flex;gap:8px"><button class="btn btn-primary" style="flex:1" onclick="benPartager()">Partager</button><button class="btn btn-ghost" style="flex:1" onclick="benCopier()">Copier le lien</button></div>'
+      +'<div id="benQR" style="display:flex;justify-content:center;margin-top:14px"></div><div id="benShareMsg" class="meta" style="margin-top:6px;text-align:center"></div></div>'
+      +'<button class="btn btn-ghost" onclick="showScreen(\'benevoles\')">Voir les bénévoles</button>';
+  }
+  function loadMonParrainage(){
+    if(!db||!currentUser) return;
+    db.rpc('mon_parrainage').then(function(r){ var d=r.data; if(typeof d==='string'){ try{ d=JSON.parse(d); }catch(e){ d=null; } } benParr=d||{}; renderCompte(); setTimeout(benDrawQR,50); });
+  }
+  function benShareText(){ return 'Je suis bénévole Coup de Patte pour aider les oiseaux sauvages en détresse près de chez nous. Rejoins le réseau : '; }
+  function benPartager(){
+    var l=val('benLien'); var t=benShareText();
+    if(navigator.share){ navigator.share({title:'Coup de Patte', text:t, url:l}).catch(function(){}); }
+    else benCopier();
+  }
+  function benCopier(){
+    var l=val('benLien'), m=document.getElementById('benShareMsg');
+    var txt=benShareText()+l+' #CoupDePatte #FauneSauvage #OiseauBlessé';
+    if(navigator.clipboard){ navigator.clipboard.writeText(txt).then(function(){ if(m) m.textContent='Texte et lien copiés, prêts à coller.'; }); }
+    else { var e=document.getElementById('benLien'); if(e){ e.select(); document.execCommand('copy'); } if(m) m.textContent='Lien copié.'; }
+  }
+  function benDrawQR(){
+    var box=document.getElementById('benQR'); if(!box) return; var l=val('benLien'); if(!l||/p=$/.test(l)) return;
+    function draw(){ box.innerHTML=''; try{ new QRCode(box,{text:l,width:160,height:160,colorDark:'#1F9E67',colorLight:'#ffffff'}); }catch(e){} }
+    if(window.QRCode) draw(); else { var s=document.createElement('script'); s.src='https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js'; s.onload=draw; document.head.appendChild(s); }
+  }
+
+  function saveBenevole(){
+    benCollect(); var f=benForm, m=document.getElementById('benStepMsg');
+    if(!currentUser){ if(m) m.textContent='Connecte-toi d\'abord avec ton email (en haut de cet écran).'; return; }
+    if(!f.majeur){ if(m) m.textContent='Le bénévolat est réservé aux 18 ans et plus.'; return; }
+    if(!f.pseudo){ if(m) m.textContent='Indique ton prénom ou un pseudo.'; return; }
+    var row={ user_id:currentUser.id, actif:true, majeur:true, pseudo:f.pseudo,
+      zone:f.ville+(f.departement?' ('+f.departement+')':'')+', '+f.rayon_km+' km',
+      dispos:f.creneaux.map(function(k){ return benLabel(BEN_CREN,k); }).join(', '),
+      aides:f.types_aide.map(function(k){ return benLabel(BEN_TYPES,k); }).join(', '),
+      contact_tel:f.contact_tel, contact_email:f.contact_email, contact_insta:f.contact_insta,
+      code_postal:f.code_postal, ville:f.ville, code_insee:f.code_insee, departement:f.departement, departement_nom:f.departement_nom, region:f.region, lat:f.lat, lon:f.lon,
+      types_aide:f.types_aide, temps:f.temps, creneaux:f.creneaux, rayon_km:f.rayon_km, vehicule:f.vehicule,
+      newsletter:f.newsletter, profil_public:f.profil_public, mot:f.mot };
+    if(!myBenevole){ var pc=benParrainCode(); if(pc) row.parrain_code=pc; }
+    if(m) m.textContent='Enregistrement...';
+    var q = myBenevole ? db.from('benevoles').update(row).eq('user_id',currentUser.id).select() : db.from('benevoles').insert(row).select();
+    q.then(function(r){
+      if(r.error){ if(m) m.textContent='Erreur : '+r.error.message; return; }
+      myBenevole=(r.data&&r.data[0])||row; benEdit=false; benForm=null; benParr=null;
+      try{ localStorage.removeItem('cdp_parrain'); }catch(e){}
+      renderCompte();
+    });
+  }
+
+  // --- Compteur public du reseau (ecran Benevoles) ---
+  function loadReseauStats(){
+    var el=document.getElementById('reseauStats'); if(!el||!db) return;
+    db.rpc('stats_reseau').then(function(r){
+      var d=r.data; if(typeof d==='string'){ try{ d=JSON.parse(d); }catch(e){ d=null; } } if(r.error||!d) { el.innerHTML=''; return; }
+      el.innerHTML='<div class="card" style="background:var(--vert);color:#fff;border:none"><div style="display:flex;gap:18px;align-items:flex-end"><div><div style="font-size:30px;font-weight:800">'+(d.benevoles||0)+'</div><div style="font-size:13px;font-weight:700">bénévoles</div></div><div><div style="font-size:30px;font-weight:800">'+(d.departements||0)+'</div><div style="font-size:13px;font-weight:700">départements sur 101</div></div></div>'
+        +'<div style="font-size:13.5px;margin-top:8px;opacity:.95">Objectif : un bénévole dans chaque département de France.</div>'
+        +'<button class="btn" style="margin-top:12px;background:#fff;color:var(--vert)" onclick="benAllerFormulaire()">Je deviens bénévole</button></div>';
+    });
+  }
+  function benAllerFormulaire(){ showScreen('compte'); setTimeout(function(){ var a=document.getElementById('devenirBenevole')||document.getElementById('compteView'); if(a&&a.scrollIntoView) a.scrollIntoView({behavior:'smooth'}); },150); }
+
+  // --- Back-office : reseau de benevoles ---
+  var admBen=[], admBenF={region:'',dep:'',q:'',temps:'',type:'',vehicule:false,newsletter:false,statut:''}, admBenOpen=null;
+  function loadAdminBenevoles(){
+    var box=document.getElementById('admBen'); if(!box||!db) return;
+    db.rpc('admin_benevoles').then(function(r){
+      if(r.error){ box.innerHTML='<div class="callout">Back-office bénévoles non configuré. Applique la migration v23 dans Supabase.</div>'; return; }
+      var d=r.data; if(typeof d==='string'){ try{ d=JSON.parse(d); }catch(e){ d=[]; } } admBen=Array.isArray(d)?d:[]; renderAdminBenevoles();
+    });
+  }
+  function admBenFiltre(){
+    var f=admBenF, q=f.q.toLowerCase();
+    return admBen.filter(function(b){
+      if(f.region && b.region!==f.region) return false;
+      if(f.dep && b.departement!==f.dep) return false;
+      if(f.temps && b.temps!==f.temps) return false;
+      if(f.type && (b.types_aide||[]).indexOf(f.type)<0) return false;
+      if(f.vehicule && !b.vehicule) return false;
+      if(f.newsletter && !b.newsletter) return false;
+      if(f.statut && b.statut!==f.statut) return false;
+      if(q && ((b.pseudo||'')+' '+(b.ville||'')+' '+(b.email||'')+' '+(b.zone||'')).toLowerCase().indexOf(q)<0) return false;
+      return true;
+    });
+  }
+  function admBenSet(k,v){ admBenF[k]=v; if(k==='region') admBenF.dep=''; renderAdminBenevoles(); }
+  function renderAdminBenevoles(){
+    var box=document.getElementById('admBen'); if(!box) return;
+    var all=admBen, list=admBenFiltre();
+    var semaine=Date.now()-7*864e5, nouveaux=all.filter(function(b){ return b.inscrit_le && new Date(b.inscrit_le).getTime()>semaine; }).length;
+    var actifs=all.filter(function(b){ return b.actif; }).length, nl=all.filter(function(b){ return b.newsletter; }).length;
+    var deps={}, regs={}; all.forEach(function(b){ if(b.departement) deps[b.departement]=(b.departement_nom||b.departement); if(b.region) regs[b.region]=1; });
+    var top=all.filter(function(b){ return b.filleuls>0; }).sort(function(a,b){ return b.filleuls-a.filleuls; }).slice(0,3);
+    function card(n,l){ return '<div class="statcard"><div class="v">'+n+'</div><div class="k">'+l+'</div></div>'; }
+    function opt(v,l,cur){ return '<option value="'+escapeH(v)+'"'+(v===cur?' selected':'')+'>'+escapeH(l)+'</option>'; }
+    var depKeys=Object.keys(deps).filter(function(k){ return !admBenF.region || all.some(function(b){ return b.departement===k && b.region===admBenF.region; }); }).sort();
+    var h='<div class="stat-grid">'+card(all.length,'Bénévoles inscrits')+card(actifs,'Actifs')+card(nouveaux,'Nouveaux (7 jours)')+card(Object.keys(deps).length,'Départements couverts')+card(nl,'Abonnés newsletter')+card(all.filter(function(b){ return b.vehicule; }).length,'Avec véhicule')+'</div>';
+    if(top.length) h+='<p class="meta" style="margin:4px 0 10px">Meilleurs parrains : '+top.map(function(b){ return escapeH(b.pseudo||'?')+' ('+b.filleuls+')'; }).join(', ')+'</p>';
+    h+='<div class="card"><div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">'
+      +'<select class="field" aria-label="Région" onchange="admBenSet(\'region\',this.value)">'+opt('','Toutes les régions',admBenF.region)+Object.keys(regs).sort().map(function(r){ return opt(r,r,admBenF.region); }).join('')+'</select>'
+      +'<select class="field" aria-label="Département" onchange="admBenSet(\'dep\',this.value)">'+opt('','Tous les départements',admBenF.dep)+depKeys.map(function(k){ return opt(k,k+' · '+deps[k],admBenF.dep); }).join('')+'</select>'
+      +'<select class="field" aria-label="Temps donné" onchange="admBenSet(\'temps\',this.value)">'+opt('','Tout engagement',admBenF.temps)+BEN_TEMPS.map(function(t){ return opt(t[0],t[1],admBenF.temps); }).join('')+'</select>'
+      +'<select class="field" aria-label="Type d\'aide" onchange="admBenSet(\'type\',this.value)">'+opt('','Toute aide',admBenF.type)+BEN_TYPES.map(function(t){ return opt(t[0],t[1],admBenF.type); }).join('')+'</select>'
+      +'<select class="field" aria-label="Statut" onchange="admBenSet(\'statut\',this.value)">'+opt('','Tout statut',admBenF.statut)+opt('nouveau','Nouveau',admBenF.statut)+opt('actif','Actif',admBenF.statut)+opt('referent','Référent',admBenF.statut)+opt('en_pause','En pause',admBenF.statut)+'</select>'
+      +'<input class="field" aria-label="Recherche" placeholder="Nom, ville, email" value="'+escapeH(admBenF.q)+'" onchange="admBenSet(\'q\',this.value)">'
+      +'</div><div style="display:flex;gap:16px;margin-top:10px;font-size:14px;flex-wrap:wrap"><label><input type="checkbox"'+(admBenF.vehicule?' checked':'')+' onchange="admBenSet(\'vehicule\',this.checked)"> Avec véhicule</label><label><input type="checkbox"'+(admBenF.newsletter?' checked':'')+' onchange="admBenSet(\'newsletter\',this.checked)"> Abonnés newsletter</label></div></div>';
+    h+='<p class="meta" style="padding:2px 0 8px">'+list.length+' bénévole'+(list.length>1?'s':'')+' affiché'+(list.length>1?'s':'')+'.</p>';
+    h+='<div class="card" style="padding:6px 16px">'+(list.length?list.map(function(b){
+      var d=b.inscrit_le?new Date(b.inscrit_le).toLocaleDateString('fr-FR'):'';
+      var open=admBenOpen===b.id;
+      var s='<div class="centre" style="display:block"><button type="button" onclick="admBenToggle(\''+b.id+'\')" style="all:unset;cursor:pointer;display:block;width:100%"><h4 style="margin:0">'+escapeH(b.pseudo||'Bénévole')+(b.actif?'':' <span class="adm-tag ko">Masqué</span>')+' <span class="adm-tag">'+escapeH(b.statut||'nouveau')+'</span></h4>'
+        +'<div class="meta">'+escapeH(b.ville||b.zone||'')+(b.departement?' ('+escapeH(b.departement)+')':'')+(b.region?' · '+escapeH(b.region):'')+'</div>'
+        +'<div class="meta">'+escapeH(benLabel(BEN_TEMPS,b.temps)||b.dispos||'')+(b.vehicule?' · véhicule':'')+(b.newsletter?' · newsletter':'')+(b.filleuls?' · '+b.filleuls+' filleul'+(b.filleuls>1?'s':''):'')+' · inscrit le '+d+'</div></button>';
+      if(open){
+        s+='<div style="margin-top:10px;font-size:14px;line-height:1.5">'
+          +'<div><b>Email :</b> '+escapeH(b.email||'')+'</div>'
+          +(b.contact_tel?'<div><b>Tél. :</b> '+escapeH(b.contact_tel)+'</div>':'')
+          +'<div><b>Aide :</b> '+escapeH((b.types_aide||[]).map(function(k){ return benLabel(BEN_TYPES,k); }).join(', ')||b.aides||'')+'</div>'
+          +'<div><b>Disponible :</b> '+escapeH((b.creneaux||[]).map(function(k){ return benLabel(BEN_CREN,k); }).join(', ')||b.dispos||'')+(b.rayon_km?', '+b.rayon_km+' km':'')+'</div>'
+          +(b.mot?'<div><b>Son mot :</b> '+escapeH(b.mot)+'</div>':'')
+          +'<div><b>Code parrain :</b> '+escapeH(b.code_parrain||'')+(b.parrain_pseudo?' · parrainé par '+escapeH(b.parrain_pseudo):'')+'</div>'
+          +'<label class="meta" style="display:block;margin-top:8px">Statut</label><select class="field" id="admSt_'+b.id+'">'+['nouveau','actif','referent','en_pause'].map(function(x){ return '<option value="'+x+'"'+(b.statut===x?' selected':'')+'>'+({nouveau:'Nouveau',actif:'Actif',referent:'Référent département',en_pause:'En pause'})[x]+'</option>'; }).join('')+'</select>'
+          +'<label class="meta" style="display:block;margin-top:8px">Notes internes</label><textarea class="field" rows="2" id="admNo_'+b.id+'">'+escapeH(b.notes||'')+'</textarea>'
+          +'<div class="row-btns" style="margin-top:8px"><button class="btn btn-primary btn-sm" onclick="admBenSave(\''+b.id+'\')">Enregistrer le suivi</button></div><div class="meta" id="admBenMsg_'+b.id+'"></div></div>';
+      }
+      return s+'</div>';
+    }).join(''):'<p class="meta">Aucun bénévole ne correspond à ces filtres.</p>')+'</div>';
+    h+='<button class="btn btn-ghost" onclick="admBenExport()">Exporter la sélection (CSV)</button>';
+    box.innerHTML=h;
+  }
+  function admBenToggle(id){ admBenOpen=(admBenOpen===id)?null:id; renderAdminBenevoles(); }
+  function admBenSave(id){
+    var st=val('admSt_'+id), no=val('admNo_'+id), m=document.getElementById('admBenMsg_'+id); if(m) m.textContent='Enregistrement...';
+    db.rpc('admin_benevole_suivi',{p_id:id,p_statut:st,p_notes:no}).then(function(r){
+      if(r.error){ if(m) m.textContent='Erreur : '+r.error.message; return; }
+      admBen.forEach(function(b){ if(b.id===id){ b.statut=st; b.notes=no; } }); renderAdminBenevoles();
+    });
+  }
+  function admBenExport(){
+    var list=admBenFiltre(); var cols=['pseudo','email','ville','code_postal','departement','departement_nom','region','temps','types_aide','creneaux','rayon_km','vehicule','newsletter','statut','filleuls','code_parrain','parrain_pseudo','inscrit_le','contact_tel'];
+    function cell(v){ if(Array.isArray(v)) v=v.join(' | '); if(v==null) v=''; v=String(v); if(/^[=+\-@]/.test(v)) v="'"+v; return '"'+v.replace(/"/g,'""')+'"'; }
+    var csv='﻿'+cols.join(';')+'\n'+list.map(function(b){ return cols.map(function(c){ return cell(b[c]); }).join(';'); }).join('\n');
+    var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})); a.download='benevoles-coupdepatte-'+new Date().toISOString().slice(0,10)+'.csv'; document.body.appendChild(a); a.click(); a.remove();
+  }
+
+  // ===================================================================
+  // LOT 2 (13/10/2026) : connexion coherente, espace membre refondu,
+  // annuaire des benevoles et annuaire national des associations.
+  // ===================================================================
+
+  // Le modele d'email actuel (expediteur Supabase par defaut) ne contient QUE le lien.
+  // Passer a true des que les modeles Coup de Patte (lien + code) sont installes.
+  var EMAIL_HAS_CODE = false;
+  // Passer a true des que l'email de connexion part en francais, au nom de Coup de Patte (SMTP configure).
+  var EMAIL_BRANDED = false;
+
+  function _ico(p, w){ return '<svg viewBox="0 0 24 24" width="'+(w||20)+'" height="'+(w||20)+'" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>'; }
+  var IC = {
+    plume:'<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/>',
+    mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
+    carnet:'<path d="M4 4h12a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3z"/><path d="M8 8h7M8 12h7"/>',
+    coeur:'<path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/>',
+    gens:'<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5"/><circle cx="17" cy="9" r="2.4"/><path d="M16 15c3 0 5 1.5 5 4"/>',
+    maison:'<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/>',
+    oiseau:'<path d="M16 7h.01"/><path d="M3.4 18H12a8 8 0 0 0 8-8V7a4 4 0 0 0-7.28-2.3L2 20"/><path d="m20 7 2 .5-2 .5"/><path d="M10 18v3"/><path d="M14 17.75V21"/>',
+    reglage:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/>',
+    cle:'<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3"/>',
+    carte:'<path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/>',
+    liste:'<path d="M8 6h13M8 12h13M8 18h13"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/>',
+    pin:'<path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+    tel:'<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>',
+    web:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+    check:'<path d="M5 13l4 4L19 7"/>'
+  };
+  function deptNom(code){ for(var i=0;i<DEPTS.length;i++){ if(DEPTS[i][0]===code) return DEPTS[i][1]; } return ''; }
+
+  // ----------------------------- CONNEXION -----------------------------
+  var _lastEmail='', _authSent=false, _authCooldown=0, _authTimer=null, _showCode=false;
+  try{ _lastEmail=localStorage.getItem('cdp_last_email')||''; }catch(e){}
+  function renderLogin(el){
+    var h='<div class="acc-hero"><div class="acc-hero-ic">'+_ico(IC.plume,26)+'</div>'
+      +'<h2 class="title" style="margin:10px 0 4px">Ton espace Coup de Patte</h2>'
+      +'<p class="sub" style="margin:0">Ton carnet d\'oiseaux secourus, tes plumes et tes badges, ton engagement bénévole.</p></div>';
+    if(!_authSent){
+      h+='<div class="card acc-card"><label class="acc-lab" for="magicEmail">Ton adresse email</label>'
+        +'<input class="field" id="magicEmail" type="email" inputmode="email" autocomplete="email" autocapitalize="off" placeholder="ton@email.fr" value="'+escapeH(_lastEmail)+'" onkeydown="if(event.key===\'Enter\'){sendMagic();}">'
+        +'<button class="btn btn-primary" id="magicBtn" style="margin-top:12px" onclick="sendMagic()">'+_ico(IC.mail,19)+' Recevoir mon lien de connexion</button>'
+        +'<div id="authMsg" class="meta acc-msg"></div>'
+        +'<div class="acc-how"><b>Comment ça marche ?</b> Pas de mot de passe. Tu reçois un email avec un <b>lien magique</b> : un seul clic, et tu es connecté. Le lien fonctionne une fois et expire au bout d\'une heure.</div>'
+        +'</div>';
+      h+='<div class="acc-benef">'
+        +'<div><span>'+_ico(IC.carnet,18)+'</span><b>Ton carnet</b><small>Garde la trace des oiseaux aidés</small></div>'
+        +'<div><span>'+_ico(IC.plume,18)+'</span><b>Plumes et badges</b><small>Chaque geste compte</small></div>'
+        +'<div><span>'+_ico(IC.coeur,18)+'</span><b>Bénévolat</b><small>Aide près de chez toi</small></div>'
+        +'</div>';
+    } else {
+      h+='<div class="card acc-card acc-sent"><div class="acc-env">'+_ico(IC.mail,30)+'</div>'
+        +'<h3>Regarde ta boîte mail</h3>'
+        +'<p class="meta">Nous venons d\'envoyer ton <b>lien de connexion</b> à<br><b class="acc-mail">'+escapeH(_lastEmail)+'</b></p>'
+        +'<ol class="acc-steps">'
+        +'<li><span>1</span><div>Ouvre l\'email '+(EMAIL_BRANDED?'<b>« Ta connexion à Coup de Patte »</b>':'de connexion')+'. Pas reçu dans la minute ? Regarde dans les spams ou les promotions.</div></li>'
+        +'<li><span>2</span><div>Touche le lien <b>'+(EMAIL_BRANDED?'Me connecter':'Sign in')+'</b>, de préférence sur ce même appareil.</div></li>'
+        +'<li><span>3</span><div>Tu arrives directement dans ton espace, connecté.</div></li>'
+        +'</ol>';
+      if(!EMAIL_BRANDED){
+        h+='<div class="acc-note">Pendant quelques jours encore, l\'email peut arriver au nom de <b>Supabase Auth</b>, notre service de connexion sécurisé, avec l\'objet anglais « Your sign-in link ». C\'est bien nous.</div>';
+      }
+      if(EMAIL_HAS_CODE){
+        h+= _showCode
+          ? '<div class="acc-code"><label class="acc-lab" for="otpCode">Code à 6 chiffres reçu dans l\'email</label><input class="field" id="otpCode" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="123456" style="letter-spacing:6px;text-align:center;font-size:20px;font-weight:800" onkeydown="if(event.key===\'Enter\'){verifyOtp();}"><button class="btn btn-primary" style="margin-top:10px" onclick="verifyOtp()">Valider le code</button></div>'
+          : '<button class="acc-link" onclick="_showCode=true;renderCompte()">Le lien ne s\'ouvre pas sur ce téléphone ? Saisir le code de l\'email</button>';
+      }
+      h+='<div id="authMsg" class="meta acc-msg"></div>'
+        +'<div class="row-btns" style="margin-top:12px"><button class="btn btn-ghost btn-sm" id="resendBtn" onclick="sendMagic(true)"'+(_authCooldown>0?' disabled':'')+'>'+(_authCooldown>0?'Renvoyer dans '+_authCooldown+' s':'Renvoyer le lien')+'</button><button class="btn btn-ghost btn-sm" onclick="authChangeEmail()">Changer d\'email</button></div>'
+        +'</div>';
+    }
+    h+='<p class="disclaimer">Ton carnet reste privé, visible de toi seul. Nous n\'utilisons ton email que pour te connecter, et pour la newsletter si tu la demandes.</p>';
+    el.innerHTML=h;
+  }
+  function authChangeEmail(){ _authSent=false; _showCode=false; renderCompte(); setTimeout(function(){ var i=document.getElementById('magicEmail'); if(i){ i.focus(); i.select(); } },60); }
+  function _authTick(){
+    if(_authTimer) clearInterval(_authTimer);
+    _authCooldown=60;
+    _authTimer=setInterval(function(){
+      _authCooldown--; var b=document.getElementById('resendBtn');
+      if(b){ b.disabled=_authCooldown>0; b.textContent=_authCooldown>0?'Renvoyer dans '+_authCooldown+' s':'Renvoyer le lien'; }
+      if(_authCooldown<=0){ clearInterval(_authTimer); _authTimer=null; }
+    },1000);
+  }
+  function sendMagic(resend){
+    var m=document.getElementById('authMsg');
+    var e=resend ? _lastEmail : ((document.getElementById('magicEmail')||{}).value||'').trim().toLowerCase();
+    if(!e || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e)){ if(m){ m.className='meta acc-msg err'; m.textContent='Cette adresse email ne semble pas valide.'; } return; }
+    _lastEmail=e; try{ localStorage.setItem('cdp_last_email', e); }catch(x){}
+    var btn=document.getElementById(resend?'resendBtn':'magicBtn'); if(btn) btn.disabled=true;
+    if(m){ m.className='meta acc-msg'; m.textContent='Envoi en cours...'; }
+    // Redirection calculee depuis l'adresse reellement visitee (coupdepatte.eu, www, ou vercel.app).
+    db.auth.signInWithOtp({email:e, options:{shouldCreateUser:true, emailRedirectTo:location.origin}}).then(function(r){
+      if(btn) btn.disabled=false;
+      if(r.error){ var mm=document.getElementById('authMsg'); if(mm){ mm.className='meta acc-msg err'; mm.textContent=authErrLabel(r.error.message); } return; }
+      _authSent=true; renderCompte(); _authTick();
+      var m2=document.getElementById('authMsg'); if(m2 && resend){ m2.className='meta acc-msg ok'; m2.textContent='Nouveau lien envoyé. Seul le dernier reçu fonctionne.'; }
+    }, function(err){
+      if(btn) btn.disabled=false;
+      var mm=document.getElementById('authMsg'); if(mm){ mm.className='meta acc-msg err'; mm.textContent=authErrLabel(err && err.message ? err.message : String(err)); }
+    });
+  }
+  function verifyOtp(){
+    var m=document.getElementById('authMsg');
+    var code=((document.getElementById('otpCode')||{}).value||'').replace(/\D/g,'');
+    if(!/^\d{6}$/.test(code)){ if(m){ m.className='meta acc-msg err'; m.textContent='Le code contient 6 chiffres.'; } return; }
+    if(m){ m.className='meta acc-msg'; m.textContent='Vérification...'; }
+    db.auth.verifyOtp({email:_lastEmail, token:code, type:'email'}).then(function(r){
+      if(r.error){ if(m){ m.className='meta acc-msg err'; m.textContent='Code invalide ou expiré. Demande un nouveau lien.'; } return; }
+      _authSent=false; _showCode=false;
+    });
+  }
+
+  // ------------------------- ESPACE MEMBRE -------------------------
+  var _compteTab='carnet', _monProfil=null;
+  function setCompteTab(t){ _compteTab=t; renderCompte(); var s=document.getElementById('stage'); var a=document.getElementById('accTabs'); if(s&&a){ s.scrollTop=Math.max(0,a.offsetTop-70); } }
+  function loadMonProfil(){
+    if(!db||!currentUser) return;
+    db.from('profiles').select('pseudo,avatar_url').eq('id',currentUser.id).then(function(r){ _monProfil=(r.data&&r.data[0])||{}; renderCompte(); });
+  }
+  function monNom(){
+    var p=(_monProfil&&_monProfil.pseudo)||(myBenevole&&myBenevole.pseudo)||'';
+    if(p) return String(p).trim();
+    var e=(currentUser&&currentUser.email)||''; var l=e.split('@')[0].replace(/[._-]+/g,' ');
+    return l ? l.charAt(0).toUpperCase()+l.slice(1) : 'Membre';
+  }
+  function renderCompte(){
+    var el=document.getElementById('compteView'); if(!el) return;
+    if(!db){ el.innerHTML='<h2 class="title">Mon compte</h2><p class="sub">Service momentanément indisponible. Vérifie ta connexion.</p>'; return; }
+    if(!currentUser){ renderLogin(el); return; }
+    if(_monProfil===null){ _monProfil={}; loadMonProfil(); }
+    if(_editId) _compteTab='carnet';
+    var n=myObs.length;
+    var plumes=myObs.reduce(function(s,o){ return s+((o.issue==='Confié à un centre'||o.issue==='Laissé en place'||o.issue==='Remis au nid')?3:1); },0);
+    var confies=myObs.filter(function(o){return o.issue==='Confié à un centre';}).length;
+    var laisses=myObs.filter(function(o){return o.issue==='Laissé en place'||o.issue==='Remis au nid';}).length;
+    var benActif=!!(myBenevole&&myBenevole.actif);
+    var ctx={n:n, confies:confies, laisses:laisses, plumes:plumes, benevole:benActif};
+    var av=(currentUser.user_metadata&&currentUser.user_metadata.avatar_url)||(_monProfil&&_monProfil.avatar_url)||'';
+    var ni=niveauInfo(plumes);
+    var prog=ni.nextSeuil!=null?Math.min(100,Math.max(4,Math.round((plumes-ni.seuil)/(ni.nextSeuil-ni.seuil)*100))):100;
+    var nextTxt=ni.next?('Encore '+(ni.nextSeuil-plumes)+' plume'+((ni.nextSeuil-plumes)>1?'s':'')+' pour devenir '+ni.next):'Niveau maximum atteint, bravo';
+    var unlocked=BADGES.filter(function(b){return b.test(ctx);});
+    var nom=monNom();
+    var ini=nom.charAt(0).toUpperCase();
+
+    var h='<div class="acc-head">'
+      +'<button class="acc-av" onclick="document.getElementById(\'avatarInput\').click()" aria-label="Changer ma photo"'+(av?' style="background-image:url(\''+escapeH(av)+'\')"':'')+'>'+(av?'':'<span>'+escapeH(ini)+'</span>')+'<i>'+_ico('<path d="M12 5v14M5 12h14"/>',12)+'</i></button>'
+      +'<div style="flex:1;min-width:0"><div class="acc-lvl">'+escapeH(ni.nom)+(benActif?' · Bénévole':'')+'</div><div class="acc-nom">Bonjour '+escapeH(nom)+'</div></div>'
+      +'<input type="file" id="avatarInput" accept="image/*" style="display:none" onchange="uploadAvatar(this.files[0])"></div>'
+      +'<div class="acc-stats"><div><b>'+plumes+'</b><small>plumes</small></div><div><b>'+n+'</b><small>oiseau'+(n>1?'x':'')+' au carnet</small></div><div><b>'+unlocked.length+'<span>/'+BADGES.length+'</span></b><small>badges</small></div></div>'
+      +'<div class="acc-prog"><div style="width:'+prog+'%"></div></div><div class="acc-next">'+escapeH(nextTxt)+'</div>'
+      +'<div id="avatarMsg" class="meta" style="margin-top:4px"></div>';
+
+    h+='<div class="acc-qa">'
+      +'<button onclick="startUrgence()"><span class="qa-ic qa-cor">'+_ico(IC.oiseau,20)+'</span>J\'ai trouvé un oiseau</button>'
+      +'<button onclick="setCompteTab(\'carnet\');setTimeout(function(){var e=document.getElementById(\'obsEspece\');if(e)e.focus();},120)"><span class="qa-ic">'+_ico(IC.carnet,20)+'</span>Ajouter au carnet</button>'
+      +'<button onclick="showScreen(\'benevoles\')"><span class="qa-ic">'+_ico(IC.gens,20)+'</span>Les bénévoles</button>'
+      +'<button onclick="_assoMode=\'annuaire\';showScreen(\'assos\')"><span class="qa-ic">'+_ico(IC.maison,20)+'</span>Les associations</button>'
+      +(isAdmin()?'<button onclick="showScreen(\'admin\')" class="qa-wide"><span class="qa-ic qa-amb">'+_ico(IC.cle,20)+'</span>Back-office de l\'association</button>':'')
+      +'</div>';
+
+    h+='<div class="seg" id="accTabs" role="tablist">'
+      +'<button role="tab" class="'+(_compteTab==='carnet'?'on':'')+'" onclick="setCompteTab(\'carnet\')">Carnet</button>'
+      +'<button role="tab" class="'+(_compteTab==='benevolat'?'on':'')+'" onclick="setCompteTab(\'benevolat\')">Bénévolat'+(benActif?'':' <i class="dotnew"></i>')+'</button>'
+      +'<button role="tab" class="'+(_compteTab==='profil'?'on':'')+'" onclick="setCompteTab(\'profil\')">Profil</button>'
+      +'</div>';
+
+    if(_compteTab==='carnet') h+=compteCarnetHtml(unlocked, ctx);
+    else if(_compteTab==='benevolat') h+=compteBenevolatHtml();
+    else h+=compteProfilHtml(nom);
+    el.innerHTML=h;
+    if(_compteTab==='benevolat' && benActif) setTimeout(benDrawQR,60);
+  }
+  function compteCarnetHtml(unlocked, ctx){
+    var n=myObs.length;
+    var editing = _editId ? myObs.filter(function(x){return x.id===_editId;})[0] : null;
+    var rows = n ? myObs.map(function(o){
+      var dt=o.created_at?new Date(o.created_at):null; var ds=dt?dt.toLocaleDateString('fr-FR',{day:'numeric',month:'short',year:'numeric'}):'';
+      var oid=escapeH(o.id);
+      var pill = o.issue==='Confié à un centre'?'pill-act':'pill-wait';
+      return '<div class="obs-row"><div class="obs-ic">'+_ico(IC.plume,17)+'</div><div style="flex:1;min-width:0"><h4>'+(escapeH(o.espece)||'Oiseau')+'</h4>'
+        +'<div class="meta">'+(ds?ds:'')+(o.lieu?' · '+escapeH(o.lieu):'')+'</div>'
+        +(o.issue?'<span class="pill '+pill+'" style="margin-top:6px;display:inline-flex;padding:4px 9px;border-radius:20px;font-size:11.5px;font-weight:800">'+escapeH(o.issue)+'</span>':'')+'</div>'
+        +'<div style="display:flex;gap:6px;flex-shrink:0"><button class="icon-btn" aria-label="Modifier" onclick="editObs(\''+oid+'\')">'+_ico('<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',17)+'</button><button class="icon-btn danger" aria-label="Supprimer" onclick="delObs(\''+oid+'\')">'+_ico('<path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>',17)+'</button></div></div>';
+    }).join('') : '<div class="acc-empty">'+_ico(IC.carnet,28)+'<b>Ton carnet est vide</b><span>Ajoute le premier oiseau que tu as aidé, ou ouvre une fiche espèce et touche « Je l\'ai trouvé ».</span></div>';
+    var h='<div class="section-label" id="ajoutCarnet">'+(editing?'Modifier l\'observation':'Ajouter un oiseau')+'</div><div class="card">'
+      +'<select class="field" id="obsEspece" style="margin-bottom:8px"><option value="">Quelle espèce ?</option>'+especeOptions(editing?editing.espece:'')+'</select>'
+      +'<select class="field" id="obsIssue" style="margin-bottom:8px">'+issueOptions(editing?editing.issue:'')+'</select>'
+      +'<input class="field" id="obsLieu" placeholder="Lieu (ex : Montpellier)" value="'+(editing?escapeH(editing.lieu||''):'')+'" style="margin-bottom:10px">'
+      +'<button class="btn btn-primary" onclick="addObs()">'+(editing?'Mettre à jour':'Enregistrer dans mon carnet')+'</button>'
+      +(editing?'<button class="btn btn-ghost btn-sm" style="margin-top:8px" onclick="cancelEdit()">Annuler la modification</button>':'')
+      +'<div id="obsMsg" class="meta" style="margin-top:8px"></div>'
+      +'<p class="meta" style="margin-top:8px">+3 plumes si l\'oiseau est laissé en place, remis au nid ou confié à un centre. +1 sinon.</p></div>';
+    h+='<div class="section-label" id="monCarnet">Mon carnet'+(n?' · '+n:'')+'</div><div class="card" style="padding:4px 14px">'+rows+'</div>';
+    h+='<div class="section-label">Mes badges</div><div class="badge-grid">'+BADGES.map(function(b){ var ok=b.test(ctx); return '<div class="bdg'+(ok?' on':'')+'"><span>'+_ico(ok?IC.check:'<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',18)+'</span><small>'+escapeH(b.nom)+'</small></div>'; }).join('')+'</div>';
+    if(n) h+='<button class="btn btn-ghost" style="margin-top:12px" onclick="exportCarnet()">Télécharger mon carnet (CSV)</button>';
+    return h;
+  }
+  function compteBenevolatHtml(){
+    var b=myBenevole, actif=!!(b&&b.actif);
+    var h='';
+    if(!actif && !benEdit){
+      h+='<div class="acc-pitch"><b>Rejoins le réseau des bénévoles</b><p>Récupérer un oiseau, le conduire à un centre, tenir un stand, aider en ligne : chaque coup de main compte. 5 questions, moins d\'une minute.</p></div>';
+    }
+    return h+benevolatCardHtml();
+  }
+  function compteProfilHtml(nom){
+    var asso = (typeof myAsso!=='undefined' && myAsso) ? myAsso : null;
+    return '<div class="section-label">Mon profil</div><div class="card">'
+      +'<label class="acc-lab" for="pfPseudo">Prénom ou pseudo</label>'
+      +'<div style="display:flex;gap:8px"><input class="field" id="pfPseudo" maxlength="40" value="'+escapeH((_monProfil&&_monProfil.pseudo)||'')+'" placeholder="'+escapeH(nom)+'"><button class="btn btn-primary btn-sm" style="width:auto" onclick="savePseudo()">Enregistrer</button></div>'
+      +'<div id="pfMsg" class="meta" style="margin-top:6px"></div>'
+      +'<div class="acc-line"><span>Email de connexion</span><b>'+escapeH(currentUser.email||'')+'</b></div>'
+      +'<div class="acc-line"><span>Membre depuis</span><b>'+(currentUser.created_at?new Date(currentUser.created_at).toLocaleDateString('fr-FR',{month:'long',year:'numeric'}):'')+'</b></div>'
+      +'<button class="btn btn-ghost btn-sm" style="margin-top:10px" onclick="document.getElementById(\'avatarInput\').click()">Changer ma photo</button>'
+      +'</div>'
+      +'<div class="section-label">Ma structure</div><div class="card">'
+      +(asso?'<b>'+escapeH(asso.nom||'')+'</b><div class="meta">'+(asso.verifiee?'Publiée dans l\'annuaire':'En attente de vérification')+'</div>':'<p class="meta">Tu fais partie d\'une association, d\'un refuge ou d\'un centre ? Inscris-la dans l\'annuaire national.</p>')
+      +'<button class="btn btn-ghost btn-sm" style="margin-top:10px" onclick="_assoMode=\'moi\';showScreen(\'assos\')">'+(asso?'Gérer ma structure':'Inscrire ma structure')+'</button></div>'
+      +'<div class="section-label">Mes données</div><div class="card">'
+      +'<p class="meta" style="margin-bottom:10px">Tu peux télécharger ton carnet, ou demander l\'effacement complet de ton compte (carnet, fiche bénévole, photo).</p>'
+      +'<div class="row-btns"><button class="btn btn-ghost btn-sm" onclick="exportCarnet()">Télécharger mon carnet</button><a class="btn btn-ghost btn-sm" href="mailto:bonjour@coupdepatte.eu?subject='+encodeURIComponent('Effacement de mon compte Coup de Patte')+'&body='+encodeURIComponent('Bonjour,\n\nJe souhaite l\'effacement de mon compte et de mes données, liés à l\'adresse '+(currentUser.email||'')+'.\n\nMerci.')+'">Effacer mon compte</a></div></div>'
+      +'<button class="btn btn-ghost" style="margin-top:6px" onclick="signOut()">Se déconnecter</button>';
+  }
+  function savePseudo(){
+    var v=(val('pfPseudo')||'').trim(), m=document.getElementById('pfMsg');
+    if(!db||!currentUser) return;
+    if(m) m.textContent='Enregistrement...';
+    db.from('profiles').upsert({id:currentUser.id, pseudo:v||null}).select().then(function(r){
+      if(r.error){ if(m) m.textContent='Erreur : '+r.error.message; return; }
+      _monProfil=(r.data&&r.data[0])||{pseudo:v}; renderCompte();
+      var mm=document.getElementById('pfMsg'); if(mm){ mm.style.color='var(--vert)'; mm.textContent='C\'est enregistré.'; }
+    });
+  }
+  function exportCarnet(){
+    var rows=[['date','espece','issue','lieu']].concat(myObs.map(function(o){ return [o.created_at?new Date(o.created_at).toLocaleString('fr-FR'):'', o.espece||'', o.issue||'', o.lieu||'']; }));
+    var csv='﻿'+rows.map(function(r){ return r.map(function(c){ c=String(c); if(/^[=+\-@]/.test(c)) c="'"+c; return '"'+c.replace(/"/g,'""')+'"'; }).join(';'); }).join('\n');
+    var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})); a.download='mon-carnet-coupdepatte.csv'; document.body.appendChild(a); a.click(); a.remove();
+  }
+  function signOut(){ db.auth.signOut().then(function(){ currentUser=null; myObs=[]; myBenevole=null; _monProfil=null; _authSent=false; _compteTab='carnet'; renderCompte(); }); }
+
+  // ----------------------- ANNUAIRE DES BENEVOLES -----------------------
+  var _benList=null, _benDep='';
+  function renderBenevoles(){
+    var el=document.getElementById('benevolesList'); if(!el) return;
+    if(!db){ el.innerHTML='<div class="callout">Service indisponible.</div>'; return; }
+    if(_benList===null){
+      el.innerHTML='<p class="meta" style="padding:6px 0">Chargement...</p>';
+      db.rpc('benevoles_publics').then(function(r){
+        if(r.error){ el.innerHTML='<div class="callout">Liste des bénévoles momentanément indisponible.</div>'; _benList=null; return; }
+        var list=r.data||[]; if(!Array.isArray(list)){ try{ list=JSON.parse(list); }catch(e){ list=[]; } }
+        _benList=list; renderBenevoles();
+      });
+      return;
+    }
+    var deps={}; _benList.forEach(function(b){ if(b.departement) deps[b.departement]=(deps[b.departement]||0)+1; });
+    var list=_benList.filter(function(b){ return !_benDep || b.departement===_benDep; });
+    var h='';
+    var moiAbsent = currentUser && !(myBenevole&&myBenevole.actif);
+    if(moiAbsent) h+='<div class="callout">Tu n\'apparais pas encore dans cette liste : seules les personnes qui ont rempli leur fiche bénévole y figurent. <a href="#" onclick="benAllerFormulaire();return false;">Remplir ma fiche</a></div>';
+    if(Object.keys(deps).length>1){
+      h+='<select class="field" style="margin-bottom:12px" onchange="_benDep=this.value;renderBenevoles()"><option value="">Toute la France ('+_benList.length+')</option>'
+        +Object.keys(deps).sort().map(function(k){ return '<option value="'+escapeH(k)+'"'+(k===_benDep?' selected':'')+'>'+escapeH(k+' · '+(deptNom(k)||k))+' ('+deps[k]+')</option>'; }).join('')+'</select>';
+    }
+    if(!list.length){
+      h+='<div class="acc-empty">'+_ico(IC.gens,28)+'<b>Pas encore de bénévole '+(_benDep?'dans ce département':'inscrit')+'</b><span>Sois la première ou le premier : ta fiche aide les centres à trouver du renfort près de chez toi.</span><button class="btn btn-primary btn-sm" style="margin-top:12px;width:auto" onclick="benAllerFormulaire()">Je deviens bénévole</button></div>';
+      el.innerHTML=h; return;
+    }
+    h+='<p class="meta" style="padding:2px 0 8px">'+list.length+' bénévole'+(list.length>1?'s':'')+' prêt'+(list.length>1?'s':'')+' à aider. Touche « Voir le contact » pour savoir comment le joindre.</p>';
+    h+=list.map(function(b){
+      var nom=String(b.pseudo||'Bénévole').trim();
+      var lieu=b.ville?(b.ville+(b.departement?' ('+b.departement+')':'')):(b.departement?((deptNom(b.departement)||b.departement)+' ('+b.departement+')'):(b.zone||''));
+      var tags=(b.types_aide&&b.types_aide.length)?b.types_aide.map(function(k){ return benLabel(BEN_TYPES,k); }):(b.aides?String(b.aides).split(/\s*,\s*/):[]);
+      var peut=b.a_tel||b.a_email||b.a_insta;
+      return '<div class="ben-card"><div class="ben-top"><div class="ben-av">'+escapeH(nom.charAt(0).toUpperCase())+'</div><div style="flex:1;min-width:0"><h4>'+escapeH(nom)+'</h4><div class="meta">'+escapeH(lieu)+(b.temps?' · '+escapeH(benLabel(BEN_TEMPS,b.temps)):(b.dispos?' · '+escapeH(b.dispos):''))+'</div></div>'+(b.vehicule?'<span class="adm-tag ok">Véhiculé</span>':'')+'</div>'
+        +(tags.length?'<div class="ben-tags">'+tags.slice(0,4).map(function(t){ return '<span>'+escapeH(t)+'</span>'; }).join('')+'</div>':'')
+        +(b.mot?'<p class="meta" style="margin-top:8px;font-style:italic">« '+escapeH(b.mot)+' »</p>':'')
+        +(peut?'<div class="row-btns" style="margin-top:10px"><button class="btn btn-primary btn-sm" onclick="voirContact(\''+b.id+'\',this)">Voir le contact</button></div>':'<div class="meta" style="margin-top:8px">Aucun moyen de contact renseigné.</div>')
+        +'<div id="ct_'+b.id+'"></div></div>';
+    }).join('');
+    el.innerHTML=h;
+  }
+
+  // -------------------- ANNUAIRE NATIONAL DES ASSOCIATIONS --------------------
+  var _assoMode='annuaire', _assoList=null, _assoView='liste', _assoF={dep:'',type:'',q:''}, _assoMax=30, _assoMap=null, _assoLayer=null;
+  var ASSO_FAMILLES=[['','Toutes'],['centre','Centres de soins'],['lpo','LPO'],['protection','Protection de la nature'],['refuge','Refuges et défense animale']];
+  function assoFamille(t){ t=String(t||'').toLowerCase(); if(t.indexOf('centre')>=0||t.indexOf('clinique')>=0) return 'centre'; if(t.indexOf('lpo')>=0) return 'lpo'; if(t.indexOf('refuge')>=0) return 'refuge'; return 'protection'; }
+  var ASSO_COUL={centre:'#EF6C4D', lpo:'#1F9E67', protection:'#2FA9B8', refuge:'#E39A2E'};
+  function setAssoMode(m){ _assoMode=m; renderAssos(); }
+  function loadAnnuaire(cb){
+    if(_assoList){ cb(_assoList); return; }
+    var out=[], seen={}, pending=3;
+    function add(a){ if(!a||!a.nom) return; var k=String(a.nom).toLowerCase().replace(/\s+/g,' ').trim()+'|'+(a.dept||''); if(seen[k]) return; seen[k]=1; a.fam=assoFamille(a.type); out.push(a); }
+    function done(){ pending--; if(pending>0) return; out.sort(function(a,b){ return String(a.dept||'').localeCompare(String(b.dept||'')) || (['centre','lpo','protection','refuge'].indexOf(a.fam)-['centre','lpo','protection','refuge'].indexOf(b.fam)) || String(a.nom).localeCompare(String(b.nom)); }); _assoList=out; cb(out); }
+    db.from('centres').select('nom,ville,dept,tel,email,site,lat,lon,note').eq('ouvert',true).then(function(r){
+      (r.data||[]).forEach(function(c){ add({nom:c.nom, type:'Centre de soins faune sauvage', ville:c.ville, dept:c.dept, tel:c.tel, email:c.email, site:c.site, lat:c.lat, lng:c.lon, description:c.note||'Accueille et soigne les animaux sauvages en détresse, dont les oiseaux. Appelle avant de te déplacer.'}); });
+      done();
+    }, done);
+    db.from('associations').select('*').eq('verifiee',true).then(function(r){ (r.data||[]).forEach(function(a){ add(a); }); done(); }, done);
+    fetch('/data/annuaire-associations.json').then(function(r){ return r.ok?r.json():[]; }).then(function(list){ (list||[]).forEach(function(a){ add(a); }); done(); }).catch(done);
+  }
+  function renderAssos(){
+    var el=document.getElementById('assosView'); if(!el) return;
+    if(!db){ el.innerHTML='<p class="sub">Service indisponible.</p>'; return; }
+    el.innerHTML='<div class="seg">'
+      +'<button class="'+(_assoMode==='annuaire'?'on':'')+'" onclick="setAssoMode(\'annuaire\')">Annuaire</button>'
+      +'<button class="'+(_assoMode==='moi'?'on':'')+'" onclick="setAssoMode(\'moi\')">Ma structure</button>'
+      +'</div><div id="assoBody"></div>';
+    if(_assoMode==='annuaire') renderAssoAnnuaire(); else renderAssoForm();
+  }
+  function renderAssoAnnuaire(){
+    var box=document.getElementById('assoBody'); if(!box) return;
+    box.innerHTML='<p class="sub">Centres de soins, LPO, associations de protection de la nature et refuges, partout en France. Coup de Patte reste spécialisé dans les oiseaux : ces structures sont tes alliées.</p><div id="assoStats"></div>'
+      +'<div class="card asso-filtres">'
+      +'<div style="display:flex;gap:8px"><select class="field" id="assoDept" onchange="_assoF.dep=this.value;_assoMax=30;filterAssos()" style="flex:1"><option value="">Toute la France</option>'+DEPTS.map(function(d){ return '<option value="'+escapeH(d[0])+'"'+(d[0]===_assoF.dep?' selected':'')+'>'+escapeH(d[0]+' · '+d[1])+'</option>'; }).join('')+'</select>'
+      +'<button class="icon-btn" style="width:48px;height:48px" aria-label="Près de moi" onclick="assoPresDeMoi()">'+_ico('<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>',20)+'</button></div>'
+      +'<input class="field" id="assoQ" placeholder="Rechercher un nom, une ville" value="'+escapeH(_assoF.q)+'" oninput="_assoF.q=this.value;_assoMax=30;filterAssos()" style="margin-top:8px">'
+      +'<div class="asso-chips">'+ASSO_FAMILLES.map(function(f){ return '<button class="chip'+(_assoF.type===f[0]?' on':'')+'" onclick="_assoF.type=\''+f[0]+'\';_assoMax=30;renderAssoAnnuaire()">'+(f[0]?'<i style="background:'+ASSO_COUL[f[0]]+'"></i>':'')+escapeH(f[1])+'</button>'; }).join('')+'</div>'
+      +'</div>'
+      +'<div class="seg" style="margin-top:4px"><button class="'+(_assoView==='liste'?'on':'')+'" onclick="_assoView=\'liste\';renderAssoAnnuaire()">'+_ico(IC.liste,16)+' Liste</button><button class="'+(_assoView==='carte'?'on':'')+'" onclick="_assoView=\'carte\';renderAssoAnnuaire()">'+_ico(IC.carte,16)+' Carte</button></div>'
+      +(_assoView==='carte'?'<div id="assoMap" style="height:380px;border-radius:18px;border:1px solid var(--bord);margin-bottom:12px;background:var(--vert-pale)"></div>':'')
+      +'<div id="assoResults"><p class="meta">Chargement de l\'annuaire...</p></div>'
+      +'<div style="height:10px"></div><button class="btn btn-ghost" onclick="_assoMode=\'moi\';renderAssos()">Inscrire ma structure</button>'
+      +'<div style="height:8px"></div><button class="btn btn-ghost" onclick="showScreen(\'signaler\')">Signaler une erreur ou une structure manquante</button>'
+      +'<p class="disclaimer">Informations publiques relevées sur les sites officiels des structures, de la LPO, de La SPA et de France Nature Environnement. Une structure peut changer : appelle avant de te déplacer.</p>';
+    _assoMap=null; _assoLayer=null;
+    loadAnnuaire(function(){ filterAssos(); });
+  }
+  function assoPresDeMoi(){
+    if(!navigator.geolocation){ return; }
+    navigator.geolocation.getCurrentPosition(function(p){
+      userPos={lat:p.coords.latitude, lon:p.coords.longitude};
+      _assoF.dep=''; var s=document.getElementById('assoDept'); if(s) s.value='';
+      _assoMax=30; filterAssos();
+    }, function(){ alert('Localisation refusée. Choisis ton département dans la liste.'); }, {timeout:8000});
+  }
+  function assoFiltrees(){
+    var q=String(_assoF.q||'').toLowerCase().trim();
+    var list=(_assoList||[]).filter(function(a){
+      if(_assoF.dep && String(a.dept||'')!==_assoF.dep) return false;
+      if(_assoF.type && a.fam!==_assoF.type) return false;
+      if(q){ var hay=[a.nom,a.ville,a.description,a.type].filter(Boolean).join(' ').toLowerCase(); if(hay.indexOf(q)<0) return false; }
+      return true;
+    });
+    if(userPos && !_assoF.dep){
+      list=list.map(function(a){ var x=Object.assign({},a); x.d=(a.lat!=null&&a.lng!=null)?distKm(userPos.lat,userPos.lon,a.lat,a.lng):9999; return x; });
+      list.sort(function(a,b){ return a.d-b.d; });
+    }
+    return list;
+  }
+  function filterAssos(){
+    var box=document.getElementById('assoResults'); if(!box||!_assoList) return;
+    var all=_assoList, list=assoFiltrees();
+    var deps={}; all.forEach(function(a){ if(a.dept) deps[a.dept]=1; });
+    var st=document.getElementById('assoStats');
+    if(st) st.innerHTML='<div class="asso-kpi"><div><b>'+all.length+'</b><small>structures</small></div><div><b>'+Object.keys(deps).length+'</b><small>départements</small></div><div><b>'+all.filter(function(a){return a.fam==='centre';}).length+'</b><small>centres de soins</small></div></div>';
+    if(_assoView==='carte') drawAssoMap(list);
+    if(!list.length){ box.innerHTML='<div class="acc-empty">'+_ico(IC.maison,28)+'<b>Aucune structure ne correspond</b><span>Élargis ta recherche, ou signale-nous une structure qui manque.</span></div>'; return; }
+    var head=_assoF.dep?('<b>'+escapeH(deptNom(_assoF.dep))+'</b> · '):(userPos?'<b>Les plus proches de toi</b> · ':'');
+    box.innerHTML='<p class="meta" style="padding:4px 2px 8px">'+head+list.length+' structure'+(list.length>1?'s':'')+'</p>'
+      +list.slice(0,_assoMax).map(assoFicheHtml).join('')
+      +(list.length>_assoMax?'<button class="btn btn-ghost" onclick="_assoMax+=30;filterAssos()">Afficher plus ('+(list.length-_assoMax)+' restantes)</button>':'');
+  }
+  function assoFicheHtml(a){
+    var c=[];
+    if(a.tel) c.push('<a class="btn btn-primary btn-sm" href="tel:'+escapeH(String(a.tel).replace(/[^\d+]/g,''))+'">'+_ico(IC.tel,15)+' Appeler</a>');
+    if(a.site) c.push('<a class="btn btn-ghost btn-sm" href="'+escapeH(/^https?:/.test(a.site)?a.site:'https://'+a.site)+'" target="_blank" rel="noopener">'+_ico(IC.web,15)+' Site</a>');
+    if(a.email) c.push('<a class="btn btn-ghost btn-sm" href="mailto:'+escapeH(a.email)+'">'+_ico(IC.mail,15)+' Email</a>');
+    if(a.lat!=null && a.lng!=null && !a.approx) c.push('<a class="btn btn-ghost btn-sm" href="https://www.google.com/maps/dir/?api=1&destination='+a.lat+','+a.lng+'" target="_blank" rel="noopener">'+_ico(IC.pin,15)+' Y aller</a>');
+    var lieu=[a.ville, a.dept?(deptNom(a.dept)||a.dept):''].filter(Boolean).join(' · ');
+    return '<div class="asso-card"><div class="asso-top"><span class="asso-dot" style="background:'+ASSO_COUL[a.fam]+'"></span><div style="flex:1;min-width:0"><div class="asso-type">'+escapeH(a.type||'')+'</div><h4>'+escapeH(a.nom)+'</h4><div class="meta">'+escapeH(lieu)+'</div></div>'+(a.d!=null&&a.d<9999?'<span class="km">'+a.d+' km</span>':'')+'</div>'
+      +(a.description?'<p class="meta" style="margin-top:6px">'+escapeH(a.description)+'</p>':'')
+      +(a.besoins?'<p class="meta" style="margin-top:4px"><b>Besoins :</b> '+escapeH(a.besoins)+'</p>':'')
+      +(c.length?'<div class="row-btns" style="margin-top:10px">'+c.join('')+'</div>':'')+'</div>';
+  }
+  function drawAssoMap(list){
+    if(typeof L==='undefined') return;
+    var el=document.getElementById('assoMap'); if(!el) return;
+    if(!_assoMap){
+      _assoMap=L.map('assoMap').setView([46.6,2.4],5);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18, attribution:'© OpenStreetMap'}).addTo(_assoMap);
+    }
+    if(_assoLayer) _assoMap.removeLayer(_assoLayer);
+    _assoLayer=L.layerGroup();
+    var pts=[];
+    list.forEach(function(a){
+      if(a.lat==null||a.lng==null) return;
+      var jit=a.approx?((a.nom.length%7)-3)*0.02:0;
+      var ll=[a.lat+jit, a.lng+jit]; pts.push(ll);
+      L.circleMarker(ll,{radius:7,color:'#fff',weight:2,fillColor:ASSO_COUL[a.fam],fillOpacity:.95})
+        .bindPopup('<b>'+escapeH(a.nom)+'</b><br><span style="color:#7C8A82">'+escapeH(a.type||'')+'<br>'+escapeH(a.ville||'')+'</span>'+(a.tel?'<br><a href="tel:'+escapeH(String(a.tel).replace(/[^\d+]/g,''))+'">'+escapeH(a.tel)+'</a>':'')+(a.site?'<br><a href="'+escapeH(a.site)+'" target="_blank" rel="noopener">Site</a>':''))
+        .addTo(_assoLayer);
+    });
+    _assoLayer.addTo(_assoMap);
+    if(userPos) L.circleMarker([userPos.lat,userPos.lon],{radius:8,color:'#1B2620',weight:3,fillColor:'#fff',fillOpacity:1}).bindPopup('Toi').addTo(_assoLayer);
+    setTimeout(function(){ _assoMap.invalidateSize(); if(_assoF.dep && pts.length){ _assoMap.fitBounds(pts,{padding:[30,30],maxZoom:10}); } else if(userPos){ _assoMap.setView([userPos.lat,userPos.lon],8); } else { _assoMap.setView([46.6,2.4],5); } },80);
+  }
+  var myAsso = null;
+  if(db){ db.auth.onAuthStateChange(function(ev){ if(ev==='SIGNED_IN'){ _authSent=false; _showCode=false; } if(ev==='SIGNED_OUT'){ _monProfil=null; } }); }
 </script>
 </body>
 </html>
