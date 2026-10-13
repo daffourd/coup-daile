@@ -64,6 +64,27 @@ jobs:
             done
           fi
 
+      - name: Signalement IndexNow (Bing et autres moteurs)
+        continue-on-error: true
+        env:
+          INDEXNOW_KEY: "62d12dee55bdde8f73a9758fda047442"
+        run: |
+          sleep 120
+          python3 - <<'PY'
+          import json, os, re, urllib.request
+          key = os.environ["INDEXNOW_KEY"]
+          urls = re.findall(r"<loc>([^<]+)</loc>", open("sitemap.xml", encoding="utf-8").read())
+          body = json.dumps({"host": "coupdepatte.eu", "key": key,
+                             "keyLocation": "https://coupdepatte.eu/%s.txt" % key,
+                             "urlList": urls[:10000]}).encode()
+          req = urllib.request.Request("https://api.indexnow.org/indexnow", data=body,
+                                       headers={"Content-Type": "application/json; charset=utf-8"})
+          try:
+              print("IndexNow", urllib.request.urlopen(req, timeout=30).status, len(urls), "URL")
+          except Exception as e:
+              print("IndexNow erreur", e)
+          PY
+
       - name: Partage Facebook et Instagram
         env:
           META_PAGE_ID: ${{ secrets.META_PAGE_ID }}
