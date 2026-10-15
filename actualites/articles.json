@@ -1,6 +1,15 @@
 {
- "maj": "2026-10-14",
+ "maj": "2026-10-15",
  "articles": [
+  {
+   "slug": "ecureuil-roux-en-ville-automne-reserves-et-dangers",
+   "titre": "Écureuil roux en ville : pourquoi tu le croises plus souvent en automne",
+   "chapo": "En octobre, l'écureuil roux passe ses journées à enterrer graines, noisettes et glands pour tenir jusqu'au printemps. Plus actif, plus souvent au sol, il devient aussi plus visible dans les parcs et les cimetières, et plus exposé aux voitures. Portrait d'un voisin protégé, et les bons gestes pour l'aider.",
+   "date": "2026-10-15",
+   "rubrique": "Portrait d'espèce",
+   "url": "/actualites/ecureuil-roux-en-ville-automne-reserves-et-dangers/",
+   "image": "/actualites/img/ecureuil-roux-en-ville-automne-reserves-et-dangers.png"
+  },
   {
    "slug": "quand-nettoyer-un-nichoir-a-oiseaux-et-comment-faire",
    "titre": "Quand nettoyer un nichoir à oiseaux et comment faire ?",
