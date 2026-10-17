@@ -88,7 +88,11 @@ Deno.serve(async (req) => {
         }],
       }),
     });
-    if (!rep.ok) return Response.json({ erreur: "Analyse indisponible, réessaie." }, { status: 502, headers: h });
+    if (!rep.ok) {
+      let type = "";
+      try { const e = await rep.json(); type = (e && e.error && e.error.type) || ""; console.error("Anthropic", rep.status, JSON.stringify(e).slice(0, 300)); } catch (_) { /* rien */ }
+      return Response.json({ erreur: "Analyse indisponible, réessaie.", code: rep.status, type }, { status: 502, headers: h });
+    }
     const j = await rep.json();
     const texte = (j.content || []).map((c: any) => c.text || "").join("");
     const brut = JSON.parse(texte.slice(texte.indexOf("{"), texte.lastIndexOf("}") + 1));
