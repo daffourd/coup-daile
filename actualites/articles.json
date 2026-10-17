@@ -1,6 +1,15 @@
 {
- "maj": "2026-10-16",
+ "maj": "2026-10-17",
  "articles": [
+  {
+   "slug": "villes-oiseaux-diversite-etude-pnas-espaces-verts",
+   "titre": "Oiseaux en ville : une étude mondiale mesure ce que l'urbanisation fait perdre",
+   "chapo": "Une étude publiée dans la revue PNAS et présentée le 14 octobre 2026 par l'Université McGill compare les oiseaux des villes et ceux des milieux naturels sur cinq continents. Résultat : un tiers d'espèces en moins en moyenne en ville, mais beaucoup moins de pertes là où les espaces verts restent nombreux.",
+   "date": "2026-10-17",
+   "rubrique": "Science et découvertes",
+   "url": "/actualites/villes-oiseaux-diversite-etude-pnas-espaces-verts/",
+   "image": "/actualites/img/villes-oiseaux-diversite-etude-pnas-espaces-verts.png"
+  },
   {
    "slug": "chouette-blessee-au-sol-que-faire",
    "titre": "Chouette blessée ou au sol : que faire et qui appeler ?",
