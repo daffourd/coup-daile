@@ -1248,7 +1248,20 @@
     document.getElementById('pidBody').innerHTML='<h2 class="title">Analyse en cours…</h2><p class="sub">On compare ta photo aux oiseaux de France.</p><div class="pid-scan"><img src="'+_pid.photo+'" alt=""></div>';
     /* En production : envoi de la photo a la fonction serveur « identifier-oiseau », qui renvoie
        l'age (stade), 1 a 3 especes candidates parmi les fiches et les questions qui les departagent. */
+    if(PHOTO_ID_ON && !_pid.demo && typeof db!=='undefined' && db && db.functions){
+      db.functions.invoke('identifier-oiseau',{body:{image:_pid.photo}}).then(function(r){
+        var d=r&&r.data;
+        if(r.error || !d || d.erreur){ pidErreur((d&&d.erreur)||'Analyse impossible pour le moment. Réessaie, ou parcours les photos.'); return; }
+        if(d.qualite==='pas_un_oiseau'){ pidErreur('On ne voit pas d\'oiseau sur cette photo. Reprends-la en cadrant l\'oiseau en entier.'); return; }
+        if(d.qualite==='floue' || !d.cands || !d.cands.length){ pidErreur('La photo est trop floue pour reconnaître l\'oiseau. Reprends-la à la lumière du jour, sans flash.'); return; }
+        _pid.res=d; _pid.qi=0; pidNorm(); pidResultat();
+      }).catch(function(){ pidErreur('Pas de réseau ? Tu peux parcourir les photos, elles marchent hors ligne une fois vues.'); });
+      return;
+    }
     setTimeout(function(){ _pid.res=pidResultatDemo(); _pid.qi=0; pidResultat(); }, 1800);
+  }
+  function pidErreur(msg){
+    document.getElementById('pidBody').innerHTML='<h2 class="title">Reconnaissance impossible</h2><div class="callout">'+escapeH(msg)+'</div><button class="btn btn-primary" onclick="pidIntro()">Reprendre une photo</button><div style="height:10px"></div><button class="btn btn-ghost" onclick="navTab(\'especes\')">Parcourir toutes les photos</button><div style="height:10px"></div><button class="btn btn-corail" onclick="startUrgence()">Que faire maintenant</button>';
   }
   function pidResultatDemo(){
     return { stade:{label:'Jeune hors du nid, déjà emplumé', txt:'À cet âge, il apprend à voler. Ses parents le nourrissent encore, souvent tout près.'},
@@ -1265,9 +1278,9 @@
     pidNorm(); _pid.qi++; pidResultat();
   }
   function pidResultat(){
-    var r=_pid.res, top=r.cands[0], e=espById(top.id), html='';
+    var r=_pid.res; r.questions=r.questions||[]; r.stade=r.stade||{label:'Âge à préciser',txt:''}; var top=r.cands[0], e=espById(top.id), html='';
     if(_pid.demo) html+='<div class="pid-demo"><b>Démonstration.</b> Résultat simulé pour montrer le parcours. La vraie reconnaissance sera branchée à l\'étape suivante.</div>';
-    else if(_pid.user) html+='<div class="pid-demo"><b>Prototype.</b> L\'analyse réelle n\'est pas encore branchée : le résultat ci-dessous est un exemple, il ne correspond pas à ta photo.</div>';
+    else if(_pid.user && !PHOTO_ID_ON) html+='<div class="pid-demo"><b>Prototype.</b> L\'analyse réelle n\'est pas encore branchée : le résultat ci-dessous est un exemple, il ne correspond pas à ta photo.</div>';
     html+='<div class="pid-head"><img src="'+_pid.photo+'" alt="Ta photo"><div><span class="stade">'+escapeH(r.stade.label)+'</span><p>'+escapeH(r.stade.txt)+'</p></div></div>';
     var sure = top.p>=80 || _pid.qi>=r.questions.length;
     if(sure){
