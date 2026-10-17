@@ -460,6 +460,12 @@
   @media (min-width:768px){ .esp-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;} .esp-filters{margin:0;padding:0;} .esp-row{flex-wrap:wrap;overflow:visible;padding-right:0;} .id-entry{max-width:620px;} }
   @media (min-width:1100px){ .esp-grid{grid-template-columns:repeat(6,minmax(0,1fr));} #photoId{max-width:820px;} }
   @media (hover:hover){ .esp-card:hover{border-color:var(--vert-clair);} .fchip:hover{border-color:var(--vert-clair);} }
+  .esp-age{margin:4px 0 6px;}
+  .e-ages{margin:0 0 6px;}
+  .e-ages:empty{display:none;}
+  .ph{position:relative;}
+  .age-tag{position:absolute;left:6px;top:6px;z-index:1;background:var(--vert);color:#fff;font-size:10.5px;font-weight:800;padding:3px 7px;border-radius:999px;}
+  .age-tag.muted{background:rgba(35,48,41,.72);}
   /* ===== GRANDS ECRANS (tablette et ordinateur) =====
      Rien ici ne s'applique sous 768 px : l'iPhone reste strictement identique. */
   @media (min-width:768px){
@@ -732,6 +738,7 @@
         <div class="esp-row"><span class="fl">Couleur</span><button class="fchip" data-g="c" data-v="noir" onclick="espFiltre(this)"><i class="sw" style="background:#26272a"></i>Noir</button><button class="fchip" data-g="c" data-v="brun" onclick="espFiltre(this)"><i class="sw" style="background:#8a5a35"></i>Brun, roux</button><button class="fchip" data-g="c" data-v="gris" onclick="espFiltre(this)"><i class="sw" style="background:#9aa1a3"></i>Gris</button><button class="fchip" data-g="c" data-v="blanc" onclick="espFiltre(this)"><i class="sw" style="background:#f6f5f0"></i>Blanc</button><button class="fchip" data-g="c" data-v="colore" onclick="espFiltre(this)"><i class="sw" style="background:conic-gradient(#f2c230,#e0503a,#3b82c4,#1f9e67,#f2c230)"></i>Coloré</button></div>
         <div class="esp-row"><span class="fl">Où</span><button class="fchip" data-g="m" data-v="ville" onclick="espFiltre(this)">Ville</button><button class="fchip" data-g="m" data-v="jardin" onclick="espFiltre(this)">Jardin</button><button class="fchip" data-g="m" data-v="campagne" onclick="espFiltre(this)">Campagne</button><button class="fchip" data-g="m" data-v="foret" onclick="espFiltre(this)">Forêt</button><button class="fchip" data-g="m" data-v="eau" onclick="espFiltre(this)">Eau, mer</button><button class="fchip" data-g="m" data-v="toit" onclick="espFiltre(this)">Sous un toit</button></div>
       </div>
+      <div class="seg esp-age" id="espAgeSeg"><button class="on" data-age="adulte" onclick="espSetAge('adulte')">Adultes</button><button data-age="jeune" onclick="espSetAge('jeune')">Jeunes et oisillons</button></div>
       <div class="esp-count"><span id="espCount"></span><button id="espReset" onclick="espReset()" style="display:none">Effacer les filtres</button></div>
       <div class="esp-grid" id="especesList"></div>
       <p class="disclaimer">Contenu fondé sur la LPO, l'OFB et le Muséum national d'Histoire naturelle. Photos sous licence libre. <a href="#" style="color:inherit" onclick="espCredits();return false">Voir les crédits photos</a></p>
@@ -747,6 +754,7 @@
     <section class="screen" id="espece">
       <div class="fiche-photo" id="e-photo"></div>
       <div class="e-credit" id="e-credit"></div>
+      <div class="seg e-ages" id="e-ages"></div>
       <h2 class="title" id="e-nom"></h2>
       <p class="sub" id="e-latin"></p>
       <div class="section-label">Reconnaître</div>
@@ -1285,7 +1293,7 @@
     var sure = top.p>=80 || _pid.qi>=r.questions.length;
     if(sure){
       html+='<div class="pid-win"><div class="etiq">'+(top.p>=80?'C\'est très probablement':'Le plus probable')+'</div><h2>'+escapeH(e.nom)+(top.note?' ('+top.note+')':'')+'</h2><div class="meta">'+escapeH(e.latin)+' · confiance '+top.p+' %</div>'+
-        '<div class="pid-cmp"><figure><img src="'+_pid.photo+'" alt=""><figcaption>Ta photo</figcaption></figure><figure><img src="'+espImg(e.id)+'" alt=""><figcaption>Photo de référence</figcaption></figure></div>'+
+        '<div class="pid-cmp"><figure><img src="'+_pid.photo+'" alt=""><figcaption>Ta photo</figcaption></figure><figure><img src="'+(top.note==='jeune'?espAgeImg(e.id,'jeune').u:espImg(e.id))+'" alt=""><figcaption>Photo de référence</figcaption></figure></div>'+
         '<button class="btn btn-primary" onclick="openEspece(\''+e.id+'\')">Oui, c\'est lui : voir sa fiche</button></div>';
       var autres=r.cands.slice(1).filter(function(c){return c.p>=5;});
       if(autres.length) html+='<div class="section-label">Ce n\'est pas lui ? Peut-être</div><div class="cands">'+autres.map(pidCand).join('')+'</div>';
@@ -1519,8 +1527,14 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
     box.innerHTML='<div class="card" style="font-size:12.5px;line-height:1.6;margin-top:10px"><b>Crédits des photos</b><br>'+ESPECES.map(function(e){ var x=c[e.id]; if(!x) return ''; return escapeH(e.nom)+' : '+escapeH(x.a||'auteur inconnu')+(x.l?' ('+escapeH(x.l)+')':'')+(x.u?' <a href="'+escapeH(x.u)+'" target="_blank" rel="noopener" style="color:var(--vert)">source</a>':''); }).filter(Boolean).join('<br>')+'</div>';
   }
   function espImg(id){ return '/especes-img/'+id+'.webp'; }
+  var ESP_AGES={}, _espAge='adulte';
+  try{ fetch('/especes-img/ages.json').then(function(r){return r.ok?r.json():{};}).then(function(j){ ESP_AGES=j||{}; if(_espAge!=='adulte') renderEspeces(); }).catch(function(){}); }catch(_){}
+  function espAgeImg(id, age){ var a=ESP_AGES[id]||[]; if(age==='jeune'){ if(a.indexOf('jeune')>=0) return {u:'/especes-img/'+id+'-jeune.webp',k:'jeune'}; if(a.indexOf('oisillon')>=0) return {u:'/especes-img/'+id+'-oisillon.webp',k:'oisillon'}; } else if(age && a.indexOf(age)>=0) return {u:'/especes-img/'+id+'-'+age+'.webp',k:age}; return {u:espImg(id),k:'adulte'}; }
+  function espSetAge(a){ _espAge=a; document.querySelectorAll('#espAgeSeg button').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-age')===a); }); renderEspeces(); }
+  var AGE_LBL={adulte:'Adulte',jeune:'Jeune',oisillon:'Oisillon'};
   function espCard(e){
-    return '<button class="esp-card" onclick="openEspece(\''+e.id+'\')"><span class="ph"><img src="'+espImg(e.id)+'" alt="" loading="lazy" onerror="this.remove()"></span><span class="n">'+escapeH(e.nom)+'</span></button>';
+    var im=espAgeImg(e.id,_espAge), tag=(_espAge!=='adulte')?'<span class="age-tag'+(im.k==='adulte'?' muted':'')+'">'+AGE_LBL[im.k]+'</span>':'';
+    return '<button class="esp-card" onclick="openEspece(\''+e.id+'\''+(_espAge!=='adulte'&&im.k!=='adulte'?',\''+im.k+'\'':'')+')"><span class="ph">'+tag+'<img src="'+im.u+'" alt="" loading="lazy" onerror="this.remove()"></span><span class="n">'+escapeH(e.nom)+'</span></button>';
   }
   function renderEspeces(){
     var el=document.getElementById('especesList'); if(!el) return;
@@ -1556,8 +1570,9 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
       if(m){m.style.color='#1F9E67';m.innerHTML='&#10003; '+escapeH(_curEspece.nom)+' ajouté à ton carnet. Retrouve-le dans Compte.';} loadObs();
     });
   }
-  function openEspece(id){
+  function openEspece(id, age){
     var e=ESPECES.filter(function(x){return x.id===id;})[0]; if(!e) return;
+    setTimeout(function(){ espFicheAges(e, age||'adulte'); }, 0);
     _curEspece=e;
     var cm=document.getElementById('e-carnetMsg'); if(cm) cm.textContent='';
     document.getElementById('e-nom').textContent=e.nom;
@@ -1579,11 +1594,24 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
     box.innerHTML=''; if(cr) cr.innerHTML=''; im.src=espImg(e.id);
   }
   _loadEspecePhotoWeb=function(e){ loadEspecePhoto(e); };
+  function espFicheAges(e, age){
+    var box=document.getElementById('e-ages'); if(!box) return;
+    var a=ESP_AGES[e.id]||[]; if(!a.length){ box.innerHTML=''; return; }
+    var all=['adulte'].concat(a);
+    box.innerHTML=all.map(function(k){ return '<button class="'+(k===age?'on':'')+'" onclick="espFicheAges(_curEspece,\''+k+'\')">'+AGE_LBL[k]+'</button>'; }).join('');
+    if(age==='adulte'){ if(box.getAttribute('data-shown')!=='adulte'||box.getAttribute('data-id')!==e.id) loadEspecePhoto(e); }
+    else {
+      var ph=document.getElementById('e-photo'), cr=document.getElementById('e-credit'), c=(ESP_CREDITS||{})[e.id+'-'+age];
+      ph.innerHTML='<img alt="" src="/especes-img/'+e.id+'-'+age+'.webp">';
+      if(cr) cr.innerHTML = c ? 'Photo : '+escapeH(c.a||'auteur inconnu')+(c.l?' · '+escapeH(c.l):'')+(c.u?' · <a href="'+escapeH(c.u)+'" target="_blank" rel="noopener">source</a>':'') : '';
+    }
+    box.setAttribute('data-shown',age); box.setAttribute('data-id',e.id);
+  }
   function loadEspecePhoto(e){
     var box=document.getElementById('e-photo'), cr=document.getElementById('e-credit');
     if(!box) return;
     box.innerHTML=''; if(cr) cr.innerHTML='';
-    function apply(p){ if(!p||!p.u) return; box.innerHTML='<img alt="" loading="lazy" src="'+p.u.replace(/"/g,'%22')+'">'; if(cr) cr.innerHTML='Photo : Wikimedia Commons'+(p.c&&/^https:\/\/[a-z]{2,3}\.wikipedia\.org\//.test(p.c)?' · <a href="'+escapeH(p.c)+'" target="_blank" rel="noopener">source</a>':''); }
+    function apply(p){ if(!p||!p.u) return; var ag=document.getElementById('e-ages'); if(ag && ag.getAttribute('data-id')===e.id && ag.getAttribute('data-shown') && ag.getAttribute('data-shown')!=='adulte') return; box.innerHTML='<img alt="" loading="lazy" src="'+p.u.replace(/"/g,'%22')+'">'; if(cr) cr.innerHTML='Photo : Wikimedia Commons'+(p.c&&/^https:\/\/[a-z]{2,3}\.wikipedia\.org\//.test(p.c)?' · <a href="'+escapeH(p.c)+'" target="_blank" rel="noopener">source</a>':''); }
     var key='cda-photo2-'+e.id, cached=null;
     try{ cached=JSON.parse(localStorage.getItem(key)||'null'); }catch(_){}
     if(cached){ apply(cached); return; }
