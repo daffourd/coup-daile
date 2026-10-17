@@ -359,23 +359,179 @@
   .tabbar{z-index:1000;}
   .wt{z-index:1100;}
   .seg button{display:inline-flex;align-items:center;justify-content:center;gap:6px;}
+
+
+  /* ===== Navigation : chevron, titre, fil d'Ariane ===== */
+  .topbar{position:sticky;}
+  .nav-back{display:none;align-items:center;gap:1px;background:none;border:none;color:var(--vert);font-family:inherit;font-weight:700;font-size:16px;padding:8px 10px 8px 2px;margin-left:-8px;min-height:44px;cursor:pointer;max-width:42%;}
+  .nav-back svg{width:26px;height:26px;flex:0 0 auto;}
+  .nav-back span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .nav-back:active{opacity:.55;}
+  .nav-title{display:none;position:absolute;left:50%;transform:translateX(-50%);bottom:22px;font-weight:800;font-size:16px;max-width:46%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none;}
+  html.sub .topbar .logo,html.sub .topbar .brand{display:none;}
+  html.sub .nav-back{display:flex;}
+  html.sub .nav-title{display:block;}
+  .crumbs{display:none;}
+  @keyframes inFwd{from{opacity:0;transform:translateX(26px);}to{opacity:1;transform:none;}}
+  @keyframes inBack{from{opacity:0;transform:translateX(-26px);}to{opacity:1;transform:none;}}
+  .screen.in-fwd{animation:inFwd .26s ease;}
+  .screen.in-back{animation:inBack .26s ease;}
+  @media (prefers-reduced-motion:reduce){.screen.in-fwd,.screen.in-back{animation:none;}}
+  @media (min-width:1100px){
+    html.sub .topbar .logo,html.sub .topbar .brand{display:flex;}
+    html.sub .topbar .brand{display:block;}
+    html.sub .nav-back,html.sub .nav-title{display:none;}
+    html.sub .crumbs{display:flex;align-items:center;gap:14px;max-width:760px;margin:0 auto 6px;padding:0 32px;}
+    html.sub .crumbs.wide{max-width:1140px;}
+    .cr-back{display:inline-flex;align-items:center;gap:2px;background:var(--blanc);border:1px solid var(--bord);border-radius:12px;padding:7px 14px 7px 8px;font-family:inherit;font-weight:700;font-size:14px;color:var(--vert);cursor:pointer;}
+    .cr-back svg{width:18px;height:18px;}
+    .cr-back:hover{border-color:var(--vert-clair);}
+    .cr-path{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--texte-doux);min-width:0;}
+    .cr-link{background:none;border:none;font-family:inherit;font-size:14px;color:var(--texte-doux);cursor:pointer;padding:2px 0;}
+    .cr-link:hover{color:var(--vert);text-decoration:underline;}
+    .cr-here{font-weight:700;color:var(--texte);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .cr-sep{opacity:.5;}
+  }
+
+  /* ===== Especes : grille photo et identification ===== */
+  .id-entry{display:grid;grid-template-columns:1fr;gap:10px;margin:4px 0 14px;}
+  html.pid-on .id-entry{grid-template-columns:1.35fr 1fr;}
+  html:not(.pid-on) .pid-only{display:none !important;}
+  .id-cam,.id-quiz{display:flex;align-items:center;gap:11px;border-radius:18px;padding:15px 14px;font-family:inherit;text-align:left;cursor:pointer;transition:transform .08s;}
+  .id-cam{background:linear-gradient(150deg,#25B87A,#12885A);color:#fff;border:none;box-shadow:0 12px 26px -14px rgba(18,136,90,.75);}
+  .id-quiz{background:var(--blanc);border:1.5px solid var(--bord);color:var(--texte);}
+  .id-cam:active,.id-quiz:active{transform:scale(.97);}
+  .id-cam svg,.id-quiz svg{width:28px;height:28px;flex:0 0 auto;}
+  .id-quiz svg{color:var(--vert);}
+  .id-cam b,.id-quiz b{display:block;font-size:15px;line-height:1.2;}
+  .id-cam small,.id-quiz small{display:block;font-size:12px;font-weight:600;opacity:.85;margin-top:2px;}
+  .esp-tools{display:grid;gap:8px;margin-bottom:10px;}
+  .esp-filters{margin:0 -20px;padding:0 20px;}
+  .esp-row{display:flex;gap:7px;overflow-x:auto;padding:2px 20px 8px 0;align-items:center;scrollbar-width:none;}
+  .esp-row::-webkit-scrollbar{display:none;}
+  .fl{flex:0 0 auto;width:58px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--texte-doux);}
+  .fchip{flex:0 0 auto;display:inline-flex;align-items:center;gap:7px;background:var(--blanc);border:1.5px solid var(--bord);border-radius:999px;padding:8px 13px;font-family:inherit;font-weight:700;font-size:13.5px;color:var(--texte);cursor:pointer;white-space:nowrap;}
+  .fchip.on{border-color:var(--vert);background:var(--vert-pale);color:var(--vert);}
+  .sz{display:inline-block;width:var(--s);height:var(--s);border-radius:50%;background:currentColor;opacity:.5;}
+  .sw{display:inline-block;width:14px;height:14px;border-radius:50%;border:1px solid rgba(0,0,0,.18);}
+  .esp-count{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:600;color:var(--texte-doux);margin:6px 2px 10px;}
+  .esp-count button{background:none;border:none;color:var(--vert);font-family:inherit;font-weight:800;font-size:13px;cursor:pointer;padding:4px 0;}
+  .esp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;}
+  .esp-card{display:flex;flex-direction:column;background:var(--blanc);border:1px solid var(--bord);border-radius:16px;padding:0;overflow:hidden;cursor:pointer;font-family:inherit;text-align:left;box-shadow:var(--ombre-douce);transition:transform .08s,border-color .15s;}
+  .esp-card:active{transform:scale(.97);}
+  .ph{display:block;aspect-ratio:1/1;background:linear-gradient(135deg,var(--vert-pale),#dbe7df);}
+  .ph img{width:100%;height:100%;object-fit:cover;display:block;}
+  .esp-card .n{padding:7px 9px 9px;font-size:12.5px;font-weight:700;line-height:1.25;color:var(--texte);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:calc(2.5em + 16px);}
+  .fiche-photo{overflow:hidden;}
+  .fiche-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+  .pid-hero{display:grid;place-items:center;width:84px;height:84px;border-radius:26px;background:var(--vert-pale);color:var(--vert);margin:8px 0 14px;}
+  .pid-hero svg{width:42px;height:42px;}
+  .pid-tips{list-style:none;margin:4px 0 18px;}
+  .pid-tips li{display:flex;gap:11px;padding:9px 0;font-size:14.5px;line-height:1.45;}
+  .pid-tips li i{flex:0 0 26px;height:26px;border-radius:9px;background:var(--vert-pale);color:var(--vert);font-style:normal;font-weight:800;display:grid;place-items:center;font-size:13px;}
+  .pid-link{display:block;width:100%;background:none;border:none;color:var(--vert);font-family:inherit;font-weight:800;font-size:14.5px;padding:14px;cursor:pointer;}
+  .pid-scan{position:relative;border-radius:22px;overflow:hidden;aspect-ratio:4/3;background:#10241a;margin:8px 0 14px;}
+  .pid-scan img{width:100%;height:100%;object-fit:cover;display:block;opacity:.85;}
+  .pid-scan::after{content:"";position:absolute;left:0;right:0;height:38%;top:-40%;background:linear-gradient(180deg,transparent,rgba(37,184,122,.45),transparent);animation:scan 1.4s ease-in-out infinite;}
+  @keyframes scan{to{top:100%;}}
+  .pid-demo{background:var(--ambre-pale);border:1px dashed #e0b25c;border-radius:12px;padding:9px 12px;font-size:12.5px;line-height:1.45;margin:4px 0 14px;}
+  .pid-head{display:flex;gap:12px;align-items:center;margin:2px 0 16px;}
+  .pid-head img{width:68px;height:68px;border-radius:16px;object-fit:cover;flex:0 0 auto;}
+  .stade{display:inline-block;background:var(--vert-pale);color:var(--vert);font-weight:800;font-size:12.5px;padding:5px 10px;border-radius:999px;margin-bottom:4px;}
+  .pid-head p{font-size:13.5px;line-height:1.45;color:var(--texte-doux);}
+  .cands{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:16px;}
+  .cand .n{min-height:0;}
+  .cand .pct{display:flex;align-items:center;gap:6px;padding:0 9px 10px;font-size:11.5px;font-weight:800;color:var(--texte-doux);}
+  .cand .bar{flex:1;height:5px;border-radius:5px;background:var(--bord);overflow:hidden;}
+  .cand .bar i{display:block;height:100%;background:var(--vert);border-radius:5px;transition:width .4s;}
+  .cand.top{border:2px solid var(--vert);}
+  .pid-q{background:var(--blanc);border:1px solid var(--bord);border-radius:20px;padding:16px 16px 6px;box-shadow:var(--ombre-douce);margin-bottom:14px;}
+  .pid-q .k{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--vert);margin-bottom:4px;}
+  .pid-q h3{font-size:17px;line-height:1.3;margin-bottom:12px;}
+  .pid-cmp{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0 14px;}
+  .pid-cmp figure{margin:0;}
+  .pid-cmp img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:16px;display:block;}
+  .pid-cmp figcaption{font-size:12px;font-weight:700;color:var(--texte-doux);text-align:center;margin-top:5px;}
+  .pid-win{background:var(--blanc);border:2px solid var(--vert);border-radius:22px;padding:18px;margin-bottom:14px;}
+  .pid-win .etiq{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--vert);}
+  .pid-win h2{font-size:24px;line-height:1.2;margin:4px 0 2px;}
+  .pid-win .meta{font-size:13.5px;color:var(--texte-doux);}
+  @media (min-width:560px){ .esp-tools{grid-template-columns:1.5fr 1fr;} }
+  @media (min-width:768px){ .esp-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;} .esp-filters{margin:0;padding:0;} .esp-row{flex-wrap:wrap;overflow:visible;padding-right:0;} .id-entry{max-width:620px;} }
+  @media (min-width:1100px){ .esp-grid{grid-template-columns:repeat(6,minmax(0,1fr));} #photoId{max-width:820px;} }
+  @media (hover:hover){ .esp-card:hover{border-color:var(--vert-clair);} .fchip:hover{border-color:var(--vert-clair);} }
+  /* ===== GRANDS ECRANS (tablette et ordinateur) =====
+     Rien ici ne s'applique sous 768 px : l'iPhone reste strictement identique. */
+  @media (min-width:768px){
+    .app{max-width:none;}
+    .screen{max-width:720px;margin:0 auto;padding:8px 32px 34px;}
+    h1.title,h2.title{font-size:29px;}
+    p.sub{font-size:16px;}
+    .stage{padding-bottom:124px;}
+    .tabbar{bottom:16px;left:16px;right:16px;max-width:560px;height:78px;padding-bottom:0;border:1px solid var(--bord);border-radius:26px;box-shadow:0 18px 40px -18px rgba(30,50,40,.35);}
+    #map{height:380px;}
+    .wt{align-items:center;padding:24px;}
+    .wt-sheet{border-radius:26px;max-width:480px;}
+    .grid{grid-template-columns:repeat(3,1fr);}
+  }
+  @media (min-width:768px) and (max-width:1099px){
+    .home-side{display:grid;grid-template-columns:1fr 1fr;column-gap:12px;}
+    .home-side .section-label,.home-side #actusHome,.home-side .btn,.home-side #adHome{grid-column:1/-1;}
+    .home-side .opt{margin-bottom:12px;}
+  }
+  @media (hover:hover) and (min-width:768px){
+    .opt,.tile,.btn,.tab{transition:border-color .15s,background .15s,transform .08s;}
+    .opt:hover,.tile:hover{border-color:var(--vert-clair);}
+  }
+  @media (min-width:1100px){
+    .topbar{position:fixed;left:0;right:0;top:0;height:72px;padding:14px 28px;border-bottom:1px solid var(--bord);background:rgba(247,245,239,.92);backdrop-filter:blur(8px);z-index:40;}
+    html[data-theme="dark"] .topbar{background:rgba(15,21,18,.92);}
+    .stage{margin-left:264px;padding-top:92px;padding-bottom:56px;}
+    .tabbar{top:72px;bottom:0;left:0;right:auto;width:264px;max-width:none;height:auto;margin:0;flex-direction:column;align-items:stretch;gap:4px;padding:22px 16px;border:none;border-right:1px solid var(--bord);border-radius:0;box-shadow:none;background:var(--beige);backdrop-filter:none;}
+    html[data-theme="dark"] .tabbar{background:var(--beige);}
+    .tab{flex:0 0 auto;flex-direction:row;justify-content:flex-start;gap:12px;padding:12px 14px;border-radius:14px;font-size:15px;font-weight:700;color:var(--texte-doux);}
+    .tab svg{width:21px;height:21px;}
+    .tab:hover{background:var(--blanc);}
+    .tab.active{background:var(--vert-pale);color:var(--vert);}
+    .tab-center{order:-1;margin-bottom:16px;}
+    .tab-center small{display:none;}
+    .tab-fab{width:100%;height:auto;margin:0;padding:16px;border-radius:16px;display:flex;align-items:center;justify-content:center;gap:10px;font-family:inherit;font-weight:800;font-size:15.5px;}
+    .tab-fab svg{width:22px;height:22px;}
+    .tab-fab::after{content:"J'ai trouvé un oiseau";}
+    .screen{max-width:760px;}
+    #home,#centres,#especes,#benevoles,#assos,#actus,#admin{max-width:1140px;}
+    #home.active{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);column-gap:44px;align-items:start;}
+    #home .home-main{position:sticky;top:16px;}
+    #home .home-foot{grid-column:1/-1;}
+    #home .home-side .section-label:first-child{margin-top:8px;}
+    .home-hero{padding:34px 32px;border-radius:30px;}
+    .home-hero h2{font-size:30px;}
+    .home-hero p{font-size:15.5px;max-width:34ch;}
+    .home-hero .plume{width:190px;height:190px;}
+    #map{height:480px;}
+  }
+
 </style>
 </head>
 <body>
 <div class="app">
   <div class="topbar">
+    <button class="nav-back" id="navBack" onclick="goBack()" aria-label="Retour"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg><span id="navBackLbl">Accueil</span></button>
+    <div class="nav-title" id="navTitle" aria-live="polite"></div>
     <div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg></div>
     <div class="brand">Coup de Patte<small>J'ai trouvé un oiseau</small></div>
     <div style="margin-left:auto;display:flex;align-items:center;gap:2px">
-      <button class="back" id="backBtn" onclick="goBack()">Retour</button>
+      
       <button id="gearBtn" onclick="showScreen('reglages')" aria-label="Réglages" style="background:none;border:none;color:var(--texte-doux);cursor:pointer;padding:8px;display:flex"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 7 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 1.1-2.7H1a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 2.6 7a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H7a1.6 1.6 0 0 0 1-1.5V1a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 2.7 1.1 1.6 1.6 0 0 0 .3-1.8l-.1.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V7a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg></button>
     </div>
   </div>
 
   <div class="stage" id="stage">
+    <nav class="crumbs" id="crumbs" aria-label="Fil d'Ariane"></nav>
 
     <!-- ACCUEIL -->
     <section class="screen active" id="home">
+      <div class="home-main">
       <div class="install" id="installBox"></div>
       <div class="weather" id="weatherBox" style="display:none"></div>
       <h1 class="title">Tu as trouvé un oiseau ?</h1>
@@ -388,6 +544,7 @@
       </div>
       <div class="tip"><div class="k">Le bon réflexe</div><p>Un oisillon au sol n'est presque jamais abandonné. Avant de le prendre, observe : ses parents sont souvent tout près. Le principe est simple, je le laisse, je le protège.</p></div>
       <button class="opt" onclick="showScreen('bague')" style="border-color:var(--vert)"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="8" ry="4.5"/><path d="M4 12v2.5c0 2.5 3.6 4.5 8 4.5s8-2 8-4.5V12"/><path d="M15 9.5l1.5 4"/></svg></span><span><b>Tu as trouvé un oiseau bagué ?</b><br><span class="meta" style="font-weight:400">Mort ou vivant, voici quoi faire</span></span><span class="chev">&rsaquo;</span></button>
+      </div><div class="home-side">
   <div class="section-label">Explorer</div>
       <button class="opt" onclick="showScreen('identifier')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3" stroke-linecap="round"/></svg></span><b>Identifier l'oiseau</b><span class="chev">&rsaquo;</span></button>
       <button class="opt" onclick="showScreen('gestes')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span><b>Les bons gestes</b><span class="chev">&rsaquo;</span></button>
@@ -400,8 +557,10 @@
       <div id="actusHome"><a class="opt" href="/actualites/"><b>La faune sauvage en ville, chaque jour</b><span class="chev">&rsaquo;</span></a></div>
       <button class="btn btn-ghost" onclick="showScreen('actus')">Toutes les actualités</button>
       <div id="adHome"></div>
+      </div><div class="home-foot">
       <p class="disclaimer">Coup de Patte informe et oriente, sans remplacer l'avis d'un centre de sauvegarde ou d'un vétérinaire. Conseils fondés sur la LPO et l'OFB.</p>
       <p class="disclaimer"><a href="/especes/" style="color:inherit">Fiches espèces</a> · <a href="/centres/" style="color:inherit">Centres de soins par département</a> · <a href="/actualites/" style="color:inherit">Actualités</a></p>
+      </div>
     </section>
 
     <!-- URGENCE 1 a 4 -->
@@ -544,7 +703,7 @@
     <!-- IDENTIFIER (guide) -->
     <section class="screen" id="identifier">
       <h2 class="title">Identifier l'oiseau</h2>
-      <p class="sub">Réponds à quelques questions, on te propose les espèces les plus probables. L'identification photo par IA arrive dans un prochain lot.</p>
+      <p class="sub">Réponds à quelques questions, on te propose les espèces les plus probables. <span class="pid-only">Tu peux aussi <b style="color:var(--vert);cursor:pointer" onclick="photoIdStart()">le prendre en photo</b>.</span></p>
       <div class="section-label">Sa taille</div>
       <div id="q-taille"><span class="chip" data-g="taille" data-v="tp">Très petit (mésange)</span><span class="chip" data-g="taille" data-v="p">Petit (moineau)</span><span class="chip" data-g="taille" data-v="m">Moyen (merle)</span><span class="chip" data-g="taille" data-v="g">Grand (pigeon, corneille)</span><span class="chip" data-g="taille" data-v="tg">Très grand (goéland, héron)</span></div>
       <div class="section-label">Couleur dominante</div>
@@ -558,11 +717,32 @@
 
     <!-- ESPECES liste -->
     <section class="screen" id="especes">
-      <h2 class="title">Fiches espèces</h2>
-      <p class="sub">Cherche un oiseau par nom, ou par département pour voir ceux qu'on y rencontre.</p>
-      <div class="seg"><button class="on" id="segNom" onclick="setEspMode('nom')">Par nom</button><button id="segDept" onclick="setEspMode('dept')">Par département</button></div><input class="field" id="especeSearch" placeholder="Rechercher un oiseau (ex : étourneau)" oninput="renderEspeces()" style="margin-bottom:12px"><select class="field" id="especeDept" onchange="renderEspeces()" style="margin-bottom:12px;display:none"><option value="">Choisis ton département</option><option value="01">01 - Ain</option><option value="02">02 - Aisne</option><option value="03">03 - Allier</option><option value="04">04 - Alpes-de-Haute-Provence</option><option value="05">05 - Hautes-Alpes</option><option value="06">06 - Alpes-Maritimes</option><option value="07">07 - Ardèche</option><option value="08">08 - Ardennes</option><option value="09">09 - Ariège</option><option value="10">10 - Aube</option><option value="11">11 - Aude</option><option value="12">12 - Aveyron</option><option value="13">13 - Bouches-du-Rhône</option><option value="14">14 - Calvados</option><option value="15">15 - Cantal</option><option value="16">16 - Charente</option><option value="17">17 - Charente-Maritime</option><option value="18">18 - Cher</option><option value="19">19 - Corrèze</option><option value="21">21 - Côte-d'Or</option><option value="22">22 - Côtes-d'Armor</option><option value="23">23 - Creuse</option><option value="24">24 - Dordogne</option><option value="25">25 - Doubs</option><option value="26">26 - Drôme</option><option value="27">27 - Eure</option><option value="28">28 - Eure-et-Loir</option><option value="29">29 - Finistère</option><option value="2A">2A - Corse-du-Sud</option><option value="2B">2B - Haute-Corse</option><option value="30">30 - Gard</option><option value="31">31 - Haute-Garonne</option><option value="32">32 - Gers</option><option value="33">33 - Gironde</option><option value="34">34 - Hérault</option><option value="35">35 - Ille-et-Vilaine</option><option value="36">36 - Indre</option><option value="37">37 - Indre-et-Loire</option><option value="38">38 - Isère</option><option value="39">39 - Jura</option><option value="40">40 - Landes</option><option value="41">41 - Loir-et-Cher</option><option value="42">42 - Loire</option><option value="43">43 - Haute-Loire</option><option value="44">44 - Loire-Atlantique</option><option value="45">45 - Loiret</option><option value="46">46 - Lot</option><option value="47">47 - Lot-et-Garonne</option><option value="48">48 - Lozère</option><option value="49">49 - Maine-et-Loire</option><option value="50">50 - Manche</option><option value="51">51 - Marne</option><option value="52">52 - Haute-Marne</option><option value="53">53 - Mayenne</option><option value="54">54 - Meurthe-et-Moselle</option><option value="55">55 - Meuse</option><option value="56">56 - Morbihan</option><option value="57">57 - Moselle</option><option value="58">58 - Nièvre</option><option value="59">59 - Nord</option><option value="60">60 - Oise</option><option value="61">61 - Orne</option><option value="62">62 - Pas-de-Calais</option><option value="63">63 - Puy-de-Dôme</option><option value="64">64 - Pyrénées-Atlantiques</option><option value="65">65 - Hautes-Pyrénées</option><option value="66">66 - Pyrénées-Orientales</option><option value="67">67 - Bas-Rhin</option><option value="68">68 - Haut-Rhin</option><option value="69">69 - Rhône</option><option value="70">70 - Haute-Saône</option><option value="71">71 - Saône-et-Loire</option><option value="72">72 - Sarthe</option><option value="73">73 - Savoie</option><option value="74">74 - Haute-Savoie</option><option value="75">75 - Paris</option><option value="76">76 - Seine-Maritime</option><option value="77">77 - Seine-et-Marne</option><option value="78">78 - Yvelines</option><option value="79">79 - Deux-Sèvres</option><option value="80">80 - Somme</option><option value="81">81 - Tarn</option><option value="82">82 - Tarn-et-Garonne</option><option value="83">83 - Var</option><option value="84">84 - Vaucluse</option><option value="85">85 - Vendée</option><option value="86">86 - Vienne</option><option value="87">87 - Haute-Vienne</option><option value="88">88 - Vosges</option><option value="89">89 - Yonne</option><option value="90">90 - Territoire de Belfort</option><option value="91">91 - Essonne</option><option value="92">92 - Hauts-de-Seine</option><option value="93">93 - Seine-Saint-Denis</option><option value="94">94 - Val-de-Marne</option><option value="95">95 - Val-d'Oise</option></select>
-      <div id="especesList"></div>
-      <p class="disclaimer">Contenu fondé sur la LPO, l'OFB et le Muséum national d'Histoire naturelle.</p>
+      <h2 class="title">Quel est cet oiseau ?</h2>
+      <p class="sub">Reconnais-le d'un coup d'œil parmi les photos, ou laisse-nous l'identifier.</p>
+      <div class="id-entry">
+        <button class="id-cam pid-only" onclick="photoIdStart()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.6"/></svg><span><b>Prendre une photo</b><small>On le reconnaît pour toi</small></span></button>
+        <button class="id-quiz" onclick="showScreen('identifier')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14"/><circle cx="12" cy="17" r=".6" fill="currentColor"/></svg><span><b>3 questions</b><small>Sans photo</small></span></button>
+      </div>
+      <div class="esp-tools">
+        <input class="field" id="especeSearch" type="search" placeholder="Nom de l'oiseau (ex : merle)" oninput="renderEspeces()" autocomplete="off">
+        <select class="field" id="especeDept" onchange="renderEspeces()"><option value="">Tous les départements</option><option value="01">01 - Ain</option><option value="02">02 - Aisne</option><option value="03">03 - Allier</option><option value="04">04 - Alpes-de-Haute-Provence</option><option value="05">05 - Hautes-Alpes</option><option value="06">06 - Alpes-Maritimes</option><option value="07">07 - Ardèche</option><option value="08">08 - Ardennes</option><option value="09">09 - Ariège</option><option value="10">10 - Aube</option><option value="11">11 - Aude</option><option value="12">12 - Aveyron</option><option value="13">13 - Bouches-du-Rhône</option><option value="14">14 - Calvados</option><option value="15">15 - Cantal</option><option value="16">16 - Charente</option><option value="17">17 - Charente-Maritime</option><option value="18">18 - Cher</option><option value="19">19 - Corrèze</option><option value="21">21 - Côte-d'Or</option><option value="22">22 - Côtes-d'Armor</option><option value="23">23 - Creuse</option><option value="24">24 - Dordogne</option><option value="25">25 - Doubs</option><option value="26">26 - Drôme</option><option value="27">27 - Eure</option><option value="28">28 - Eure-et-Loir</option><option value="29">29 - Finistère</option><option value="2A">2A - Corse-du-Sud</option><option value="2B">2B - Haute-Corse</option><option value="30">30 - Gard</option><option value="31">31 - Haute-Garonne</option><option value="32">32 - Gers</option><option value="33">33 - Gironde</option><option value="34">34 - Hérault</option><option value="35">35 - Ille-et-Vilaine</option><option value="36">36 - Indre</option><option value="37">37 - Indre-et-Loire</option><option value="38">38 - Isère</option><option value="39">39 - Jura</option><option value="40">40 - Landes</option><option value="41">41 - Loir-et-Cher</option><option value="42">42 - Loire</option><option value="43">43 - Haute-Loire</option><option value="44">44 - Loire-Atlantique</option><option value="45">45 - Loiret</option><option value="46">46 - Lot</option><option value="47">47 - Lot-et-Garonne</option><option value="48">48 - Lozère</option><option value="49">49 - Maine-et-Loire</option><option value="50">50 - Manche</option><option value="51">51 - Marne</option><option value="52">52 - Haute-Marne</option><option value="53">53 - Mayenne</option><option value="54">54 - Meurthe-et-Moselle</option><option value="55">55 - Meuse</option><option value="56">56 - Morbihan</option><option value="57">57 - Moselle</option><option value="58">58 - Nièvre</option><option value="59">59 - Nord</option><option value="60">60 - Oise</option><option value="61">61 - Orne</option><option value="62">62 - Pas-de-Calais</option><option value="63">63 - Puy-de-Dôme</option><option value="64">64 - Pyrénées-Atlantiques</option><option value="65">65 - Hautes-Pyrénées</option><option value="66">66 - Pyrénées-Orientales</option><option value="67">67 - Bas-Rhin</option><option value="68">68 - Haut-Rhin</option><option value="69">69 - Rhône</option><option value="70">70 - Haute-Saône</option><option value="71">71 - Saône-et-Loire</option><option value="72">72 - Sarthe</option><option value="73">73 - Savoie</option><option value="74">74 - Haute-Savoie</option><option value="75">75 - Paris</option><option value="76">76 - Seine-Maritime</option><option value="77">77 - Seine-et-Marne</option><option value="78">78 - Yvelines</option><option value="79">79 - Deux-Sèvres</option><option value="80">80 - Somme</option><option value="81">81 - Tarn</option><option value="82">82 - Tarn-et-Garonne</option><option value="83">83 - Var</option><option value="84">84 - Vaucluse</option><option value="85">85 - Vendée</option><option value="86">86 - Vienne</option><option value="87">87 - Haute-Vienne</option><option value="88">88 - Vosges</option><option value="89">89 - Yonne</option><option value="90">90 - Territoire de Belfort</option><option value="91">91 - Essonne</option><option value="92">92 - Hauts-de-Seine</option><option value="93">93 - Seine-Saint-Denis</option><option value="94">94 - Val-de-Marne</option><option value="95">95 - Val-d'Oise</option></select>
+      </div>
+      <div class="esp-filters">
+        <div class="esp-row"><span class="fl">Taille</span><button class="fchip" data-g="t" data-v="tp" onclick="espFiltre(this)"><i class="sz" style="--s:7px"></i>Très petit</button><button class="fchip" data-g="t" data-v="p" onclick="espFiltre(this)"><i class="sz" style="--s:10px"></i>Petit</button><button class="fchip" data-g="t" data-v="m" onclick="espFiltre(this)"><i class="sz" style="--s:13px"></i>Moyen</button><button class="fchip" data-g="t" data-v="g" onclick="espFiltre(this)"><i class="sz" style="--s:16px"></i>Grand</button><button class="fchip" data-g="t" data-v="tg" onclick="espFiltre(this)"><i class="sz" style="--s:19px"></i>Très grand</button></div>
+        <div class="esp-row"><span class="fl">Couleur</span><button class="fchip" data-g="c" data-v="noir" onclick="espFiltre(this)"><i class="sw" style="background:#26272a"></i>Noir</button><button class="fchip" data-g="c" data-v="brun" onclick="espFiltre(this)"><i class="sw" style="background:#8a5a35"></i>Brun, roux</button><button class="fchip" data-g="c" data-v="gris" onclick="espFiltre(this)"><i class="sw" style="background:#9aa1a3"></i>Gris</button><button class="fchip" data-g="c" data-v="blanc" onclick="espFiltre(this)"><i class="sw" style="background:#f6f5f0"></i>Blanc</button><button class="fchip" data-g="c" data-v="colore" onclick="espFiltre(this)"><i class="sw" style="background:conic-gradient(#f2c230,#e0503a,#3b82c4,#1f9e67,#f2c230)"></i>Coloré</button></div>
+        <div class="esp-row"><span class="fl">Où</span><button class="fchip" data-g="m" data-v="ville" onclick="espFiltre(this)">Ville</button><button class="fchip" data-g="m" data-v="jardin" onclick="espFiltre(this)">Jardin</button><button class="fchip" data-g="m" data-v="campagne" onclick="espFiltre(this)">Campagne</button><button class="fchip" data-g="m" data-v="foret" onclick="espFiltre(this)">Forêt</button><button class="fchip" data-g="m" data-v="eau" onclick="espFiltre(this)">Eau, mer</button><button class="fchip" data-g="m" data-v="toit" onclick="espFiltre(this)">Sous un toit</button></div>
+      </div>
+      <div class="esp-count"><span id="espCount"></span><button id="espReset" onclick="espReset()" style="display:none">Effacer les filtres</button></div>
+      <div class="esp-grid" id="especesList"></div>
+      <p class="disclaimer">Contenu fondé sur la LPO, l'OFB et le Muséum national d'Histoire naturelle. Photos sous licence libre. <a href="#" style="color:inherit" onclick="espCredits();return false">Voir les crédits photos</a></p>
+      <div id="espCreditsBox"></div>
+    </section>
+
+    <!-- IDENTIFICATION PAR PHOTO -->
+    <section class="screen" id="photoId">
+      <div id="pidBody"></div>
+      <input type="file" id="pidCam" accept="image/*" capture="environment" hidden onchange="photoIdFile(this)">
+      <input type="file" id="pidLib" accept="image/*" hidden onchange="photoIdFile(this)">
     </section>
     <section class="screen" id="espece">
       <div class="fiche-photo" id="e-photo"></div>
@@ -786,11 +966,11 @@
   <div class="wt" id="walk"><div class="wt-sheet" id="wtSheet"></div></div>
 
   <div class="tabbar">
-    <button class="tab active" id="tab-home" onclick="showScreen('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg>Accueil</button>
-    <button class="tab" id="tab-especes" onclick="showScreen('especes')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg>Espèces</button>
+    <button class="tab active" id="tab-home" onclick="navTab('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg>Accueil</button>
+    <button class="tab" id="tab-especes" onclick="navTab('especes')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg>Espèces</button>
     <div class="tab-center"><button class="tab-fab" onclick="startUrgence()" aria-label="J'ai trouvé un oiseau"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 7h.01"/><path d="M3.4 18H12a8 8 0 0 0 8-8V7a4 4 0 0 0-7.28-2.3L2 20"/><path d="m20 7 2 .5-2 .5"/><path d="M10 18v3"/><path d="M14 17.75V21"/><path d="M7 18a6 6 0 0 0 3.84-10.61"/></svg></button><small>Trouvé</small></div>
-    <button class="tab" id="tab-secours" onclick="showScreen('secours')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Secours</button>
-    <button class="tab" id="tab-compte" onclick="showScreen('compte')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.6 3.1-5.5 7-5.5s7 1.9 7 5.5"/></svg>Compte</button>
+    <button class="tab" id="tab-secours" onclick="navTab('secours')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Secours</button>
+    <button class="tab" id="tab-compte" onclick="navTab('compte')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.6 3.1-5.5 7-5.5s7 1.9 7 5.5"/></svg>Compte</button>
   </div>
 </div>
 
@@ -921,15 +1101,14 @@
   var userPos = null;
   var leafletMap = null;
 
-  function showScreen(id, isBack){
+  function showScreen(id, isBack, opt){
     var el = document.getElementById(id); if(!el) return;
     document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
-    el.classList.add('active');
+    el.classList.remove('in-fwd','in-back'); void el.offsetWidth; el.classList.add('active', (opt&&opt.dir==='back')||isBack ? 'in-back' : 'in-fwd');
     document.getElementById('stage').scrollTop = 0;
-    if(!isBack) history_stack.push(id);
+    if(!isBack && history_stack[history_stack.length-1]!==id){ history_stack.push(id); try{ history.pushState({cdp:1,stack:history_stack.slice(),lin:true},'',navUrl(id)); }catch(_){} }
     Object.keys(tabs).forEach(function(k){ document.getElementById(tabs[k]).classList.remove('active'); });
     if(tabs[id]) document.getElementById(tabs[id]).classList.add('active');
-    document.getElementById('backBtn').style.display = (id==='home') ? 'none' : 'block';
     if(id==='especes') renderEspeces();
     if(id==='centres') setTimeout(initMap, 60);
     if(id==='compte' && typeof renderCompte==='function') renderCompte();
@@ -938,6 +1117,7 @@
     if(id==='admin' && typeof renderAdmin==='function') renderAdmin();
     if(id==='actus') renderActus();
     if(typeof renderAds==='function') renderAds();
+    renderNav(id);
   }
   // ---------- Oiseau bague : consignes officielles (CRBPO/MNHN, LPO, OFB, FCF), verifiees le 01/10/2026 ----------
   var _bg = {type:null, etat:null};
@@ -1037,10 +1217,165 @@
     location.href='mailto:'+CRBPO_MAIL+'?subject='+encodeURIComponent('Reprise de bague'+(v('bgCode')?' '+v('bgCode'):''))+'&body='+encodeURIComponent(corps);
   }
   function startUrgence(){ showScreen('u1'); }
-  function goBack(){
-    if(history_stack.length>1){ history_stack.pop(); showScreen(history_stack[history_stack.length-1], true); }
-    else { showScreen('home', true); }
+
+  /* ===== Identification par photo (prototype : resultat simule) ===== */
+  var PHOTO_ID_ON=false; /* passer a true quand la fonction serveur « identifier-oiseau » est en service */
+  if(PHOTO_ID_ON) document.documentElement.classList.add('pid-on');
+  var _pid={};
+  var PID_CAM='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.6"/></svg>';
+  function espById(id){ return ESPECES.filter(function(x){return x.id===id;})[0]; }
+  function photoIdStart(){ _pid={}; pidIntro(); showScreen('photoId'); }
+  function pidIntro(){
+    document.getElementById('pidBody').innerHTML=
+      '<div class="pid-hero">'+PID_CAM+'</div>'+
+      '<h2 class="title">Prends l\'oiseau en photo</h2>'+
+      '<p class="sub">On reconnaît l\'espèce et son âge. Si on hésite, on te pose une ou deux questions pour trancher.</p>'+
+      '<ul class="pid-tips"><li><i>1</i><span>Approche-toi doucement, <b>sans flash</b>, et prends la photo en quelques secondes.</span></li>'+
+      '<li><i>2</i><span>Cadre l\'oiseau <b>en entier</b>, de profil si possible, à la lumière du jour.</span></li>'+
+      '<li><i>3</i><span>S\'il est dans une boîte, ouvre-la juste le temps de la photo, puis referme.</span></li></ul>'+
+      '<button class="btn btn-primary" onclick="document.getElementById(\'pidCam\').click()">'+PID_CAM.replace('<svg ','<svg style="width:22px;height:22px" ')+'Ouvrir l\'appareil photo</button>'+
+      '<div style="height:10px"></div><button class="btn btn-ghost" onclick="document.getElementById(\'pidLib\').click()">Choisir dans mes photos</button>'+
+      '<button class="pid-link" onclick="pidDemo()">Voir une démonstration</button>';
   }
+  function photoIdFile(inp){
+    var f=inp.files&&inp.files[0]; inp.value=''; if(!f) return;
+    var r=new FileReader();
+    r.onload=function(){ var im=new Image(); im.onload=function(){ var k=Math.min(1,1024/Math.max(im.width,im.height)), c=document.createElement('canvas'); c.width=Math.round(im.width*k); c.height=Math.round(im.height*k); c.getContext('2d').drawImage(im,0,0,c.width,c.height); _pid={photo:c.toDataURL('image/jpeg',.82), user:true}; pidAnalyse(); }; im.src=r.result; };
+    r.readAsDataURL(f);
+  }
+  function pidDemo(){ _pid={photo:espImg('grive'), demo:true}; pidAnalyse(); }
+  function pidAnalyse(){
+    document.getElementById('pidBody').innerHTML='<h2 class="title">Analyse en cours…</h2><p class="sub">On compare ta photo aux oiseaux de France.</p><div class="pid-scan"><img src="'+_pid.photo+'" alt=""></div>';
+    /* En production : envoi de la photo a la fonction serveur « identifier-oiseau », qui renvoie
+       l'age (stade), 1 a 3 especes candidates parmi les fiches et les questions qui les departagent. */
+    setTimeout(function(){ _pid.res=pidResultatDemo(); _pid.qi=0; pidResultat(); }, 1800);
+  }
+  function pidResultatDemo(){
+    return { stade:{label:'Jeune hors du nid, déjà emplumé', txt:'À cet âge, il apprend à voler. Ses parents le nourrissent encore, souvent tout près.'},
+      cands:[{id:'grive',p:58},{id:'merle',p:27,note:'jeune'},{id:'draine',p:15}],
+      questions:[
+        {q:'Comment est sa poitrine ?', opts:[{l:'Crème, petites taches en pointe de flèche',f:{grive:55}},{l:'Brun roux, taches floues',f:{merle:55}},{l:'Blanchâtre, grosses taches rondes',f:{draine:55}},{l:'Je ne vois pas bien',f:{}}]},
+        {q:'S\'il ouvre une aile, le dessous est plutôt…', opts:[{l:'Orangé',f:{grive:45}},{l:'Blanc',f:{draine:45}},{l:'Brun sombre',f:{merle:45}},{l:'Je ne vois pas',f:{}}]}
+      ]};
+  }
+  function pidNorm(){ var t=0; _pid.res.cands.forEach(function(c){t+=c.p;}); _pid.res.cands.forEach(function(c){c.p=Math.round(c.p*100/t);}); _pid.res.cands.sort(function(a,b){return b.p-a.p;}); }
+  function pidRepondre(i){
+    var f=_pid.res.questions[_pid.qi].opts[i].f;
+    _pid.res.cands.forEach(function(c){ c.p+= (f[c.id]||0); });
+    pidNorm(); _pid.qi++; pidResultat();
+  }
+  function pidResultat(){
+    var r=_pid.res, top=r.cands[0], e=espById(top.id), html='';
+    if(_pid.demo) html+='<div class="pid-demo"><b>Démonstration.</b> Résultat simulé pour montrer le parcours. La vraie reconnaissance sera branchée à l\'étape suivante.</div>';
+    else if(_pid.user) html+='<div class="pid-demo"><b>Prototype.</b> L\'analyse réelle n\'est pas encore branchée : le résultat ci-dessous est un exemple, il ne correspond pas à ta photo.</div>';
+    html+='<div class="pid-head"><img src="'+_pid.photo+'" alt="Ta photo"><div><span class="stade">'+escapeH(r.stade.label)+'</span><p>'+escapeH(r.stade.txt)+'</p></div></div>';
+    var sure = top.p>=80 || _pid.qi>=r.questions.length;
+    if(sure){
+      html+='<div class="pid-win"><div class="etiq">'+(top.p>=80?'C\'est très probablement':'Le plus probable')+'</div><h2>'+escapeH(e.nom)+(top.note?' ('+top.note+')':'')+'</h2><div class="meta">'+escapeH(e.latin)+' · confiance '+top.p+' %</div>'+
+        '<div class="pid-cmp"><figure><img src="'+_pid.photo+'" alt=""><figcaption>Ta photo</figcaption></figure><figure><img src="'+espImg(e.id)+'" alt=""><figcaption>Photo de référence</figcaption></figure></div>'+
+        '<button class="btn btn-primary" onclick="openEspece(\''+e.id+'\')">Oui, c\'est lui : voir sa fiche</button></div>';
+      var autres=r.cands.slice(1).filter(function(c){return c.p>=5;});
+      if(autres.length) html+='<div class="section-label">Ce n\'est pas lui ? Peut-être</div><div class="cands">'+autres.map(pidCand).join('')+'</div>';
+    } else {
+      html+='<div class="section-label">On hésite entre '+r.cands.length+' oiseaux</div><div class="cands">'+r.cands.map(pidCand).join('')+'</div>';
+      var q=r.questions[_pid.qi];
+      html+='<div class="pid-q"><div class="k">Question '+(_pid.qi+1)+' pour trancher</div><h3>'+escapeH(q.q)+'</h3>'+q.opts.map(function(o,i){ return '<button class="opt" onclick="pidRepondre('+i+')"><b>'+escapeH(o.l)+'</b><span class="chev">&rsaquo;</span></button>'; }).join('')+'</div>';
+    }
+    html+='<div class="callout">Quelle que soit l\'espèce, les premiers bons gestes sont les mêmes.</div><button class="btn btn-corail" onclick="startUrgence()">Que faire maintenant</button>'+
+      '<button class="pid-link" onclick="navTab(\'especes\')">Parcourir toutes les photos</button><button class="pid-link" style="padding-top:0" onclick="pidIntro()">Reprendre une photo</button>';
+    document.getElementById('pidBody').innerHTML=html;
+    document.getElementById('stage').scrollTop=0; window.scrollTo(0,0);
+  }
+  function pidCand(c, i){
+    var e=espById(c.id); if(!e) return '';
+    return '<button class="esp-card cand'+(i===0&&_pid.res.cands[0]===c?' top':'')+'" onclick="openEspece(\''+e.id+'\')"><span class="ph"><img src="'+espImg(e.id)+'" alt="" loading="lazy" onerror="this.remove()"></span><span class="n">'+escapeH(e.nom)+(c.note?' ('+c.note+')':'')+'</span><span class="pct"><span class="bar"><i style="width:'+c.p+'%"></i></span>'+c.p+' %</span></button>';
+  }
+  /* ===== Navigation : retour en arriere ===== */
+  var NAV_LBL={home:'Accueil',u1:'Étape 1',u2:'Étape 2',u3:'Étape 3',u4:'Étape 4',rA:'Conseils',rB:'Conseils',rNid:'Oisillon',bague:'Oiseau bagué',secours:'Secours',centres:'Carte des centres',identifier:'Identifier',especes:'Espèces',espece:'Fiche',conseils:'Conseils',gestes:'Bons gestes',reglages:'Réglages',compte:'Compte',benevoles:'Bénévoles',assos:'Associations',admin:'Administration',signaler:'Signaler',mentions:'Mentions légales',actus:'Actualités',cgu:'CGU',photoId:'Photo'};
+  var NAV_WIDE={home:1,centres:1,especes:1,benevoles:1,assos:1,actus:1,admin:1};
+  function navLabel(id){
+    if(id==='espece'){ var h=document.getElementById('e-nom'); if(h&&h.textContent.trim()) return h.textContent.trim(); }
+    return NAV_LBL[id]||id;
+  }
+  function navUrl(id){
+    if(id==='home') return location.pathname+location.search;
+    if(id==='espece' && typeof _curEspece!=='undefined' && _curEspece) return '#/espece/'+_curEspece.id;
+    return '#/'+id;
+  }
+  function renderNav(id){
+    var sub=id!=='home', root=document.documentElement;
+    root.classList.toggle('sub',sub);
+    if(!tabs[id]){ for(var k=history_stack.length-1;k>=0;k--){ if(tabs[history_stack[k]] && history_stack[k]!=='home'){ var te=document.getElementById(tabs[history_stack[k]]); if(te){ Object.keys(tabs).forEach(function(x){document.getElementById(tabs[x]).classList.remove('active');}); te.classList.add('active'); } break; } } }
+    var prev=history_stack.length>1?history_stack[history_stack.length-2]:'home';
+    var lb=document.getElementById('navBackLbl'); if(lb) lb.textContent=navLabel(prev);
+    var nb=document.getElementById('navBack'); if(nb) nb.setAttribute('aria-label','Retour : '+navLabel(prev));
+    var nt=document.getElementById('navTitle'); if(nt) nt.textContent=sub?navLabel(id):'';
+    var cr=document.getElementById('crumbs'); if(!cr) return;
+    cr.classList.toggle('wide',!!NAV_WIDE[id]);
+    if(!sub){ cr.innerHTML=''; return; }
+    var st=history_stack, idx=st.map(function(_,i){return i;});
+    if(st.length>4) idx=[0,-1,st.length-2,st.length-1];
+    var parts=idx.map(function(i){
+      if(i<0) return '<span class="cr-sep">›</span><span class="cr-more">…</span>';
+      var sep=i>0?'<span class="cr-sep">›</span>':'';
+      if(i===st.length-1) return sep+'<span class="cr-here" aria-current="page">'+escapeH(navLabel(st[i]))+'</span>';
+      return sep+'<button class="cr-link" onclick="goBackTo('+i+')">'+escapeH(navLabel(st[i]))+'</button>';
+    }).join('');
+    cr.innerHTML='<button class="cr-back" onclick="goBack()" aria-label="Retour">'+'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>'+'Retour</button><div class="cr-path">'+parts+'</div>';
+  }
+  function navTab(id){
+    history_stack = id==='home' ? ['home'] : ['home', id];
+    showScreen(id, true, {dir:'fwd'});
+    try{ history.pushState({cdp:1,stack:history_stack.slice(),lin:false},'',navUrl(id)); }catch(_){}
+  }
+  function goBack(){
+    if(history_stack.length<=1){ if(document.getElementById('home').classList.contains('active')) return; history_stack=['home']; showScreen('home',true); return; }
+    var hs=history.state;
+    if(hs && hs.cdp && hs.lin && hs.stack && hs.stack.length===history_stack.length){ history.back(); return; }
+    goBackTo(history_stack.length-2);
+  }
+  function goBackTo(i){
+    if(i<0 || i>=history_stack.length-1) return;
+    history_stack=history_stack.slice(0,i+1);
+    var t=history_stack[history_stack.length-1];
+    showScreen(t, true);
+    try{ history.replaceState({cdp:1,stack:history_stack.slice(),lin:false},'',navUrl(t)); }catch(_){}
+  }
+  window.addEventListener('popstate', function(e){
+    var st=e.state;
+    if(st && st.cdp && st.stack && st.stack.length){
+      history_stack=st.stack.slice();
+      var t=history_stack[history_stack.length-1];
+      if(t==='espece'){ var m=location.hash.match(/^#\/espece\/([\w-]+)/); if(m && (!_curEspece || _curEspece.id!==m[1])){ var e2=ESPECES.filter(function(x){return x.id===m[1];})[0]; if(e2){ history_stack.pop(); openEspece(e2.id); history.replaceState({cdp:1,stack:history_stack.slice(),lin:true},'',navUrl('espece')); return; } } }
+      showScreen(t, true);
+    } else { history_stack=['home']; showScreen('home', true); }
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key!=='Escape') return;
+    var t=e.target; if(t && /INPUT|TEXTAREA|SELECT/.test(t.tagName)) return;
+    if(document.querySelector('.wt[style*="flex"]')) return;
+    goBack();
+  });
+  /* Geste « glisser depuis le bord gauche » quand l'app est installee sur l'ecran d'accueil
+     (en mode installe, iOS n'offre pas ce geste ; dans Safari, c'est le geste natif qui joue via l'historique) */
+  (function(){
+    var standalone = window.navigator.standalone || (window.matchMedia && matchMedia('(display-mode: standalone)').matches);
+    if(!standalone) return;
+    var x0=null, y0=0, dx=0, el=null;
+    document.addEventListener('touchstart', function(e){ var t=e.touches[0]; if(t.clientX>24 || history_stack.length<=1){ x0=null; return; } x0=t.clientX; y0=t.clientY; dx=0; el=document.querySelector('.screen.active'); }, {passive:true});
+    document.addEventListener('touchmove', function(e){ if(x0===null||!el) return; var t=e.touches[0]; dx=t.clientX-x0; if(Math.abs(t.clientY-y0)>Math.abs(dx)){ x0=null; el.style.transform=''; return; } if(dx>0){ el.style.transition='none'; el.style.transform='translateX('+dx+'px)'; el.style.opacity=String(1-Math.min(dx/400,.5)); } }, {passive:true});
+    document.addEventListener('touchend', function(){ if(x0===null||!el) return; el.style.transition='transform .2s, opacity .2s'; el.style.transform=''; el.style.opacity=''; var d=dx; x0=null; if(d>90) goBack(); }, {passive:true});
+  })();
+  window.addEventListener('load', function(){
+    var m=location.hash.match(/^#\/([\w-]+)(?:\/([\w-]+))?$/);
+    try{ history.replaceState({cdp:1,stack:['home'],lin:false},'', m ? location.pathname+location.search : location.href); }catch(_){}
+    if(m){
+      if(m[1]==='espece' && m[2]){ openEspece(m[2]); }
+      else if(document.getElementById(m[1]) && m[1]!=='espece'){ showScreen(m[1]); }
+    }
+    renderNav(document.querySelector('.screen.active').id);
+  });
+
 
   // Distance Haversine (km)
   function distKm(a, b, c, d){
@@ -1155,21 +1490,44 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
   var _espMode='nom';
   function setEspMode(m){ _espMode=m; var a=document.getElementById('segNom'),b=document.getElementById('segDept'),ss=document.getElementById('especeSearch'),d=document.getElementById('especeDept'); if(a)a.classList.toggle('on',m==='nom'); if(b)b.classList.toggle('on',m==='dept'); if(ss)ss.style.display=m==='nom'?'':'none'; if(d)d.style.display=m==='dept'?'':'none'; renderEspeces(); }
   function especeCarte(e){ return '<div class="centre" style="cursor:pointer" onclick="openEspece(\''+e.id+'\')"><div style="flex:1"><h4>'+e.nom+'</h4><div class="meta">'+e.latin+'</div></div><span class="chev" style="color:#c3cbc5;font-size:20px;align-self:center">&rsaquo;</span></div>'; }
+  var _espF={t:'',c:'',m:''};
+  function espNorm(x){ return (x||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+  function espFiltre(btn){
+    var g=btn.getAttribute('data-g'), v=btn.getAttribute('data-v');
+    _espF[g] = _espF[g]===v ? '' : v;
+    document.querySelectorAll('.fchip[data-g="'+g+'"]').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-v')===_espF[g]); });
+    renderEspeces();
+  }
+  function espReset(){ _espF={t:'',c:'',m:''}; document.querySelectorAll('.fchip').forEach(function(b){b.classList.remove('on');}); var q=document.getElementById('especeSearch'); if(q) q.value=''; var d=document.getElementById('especeDept'); if(d) d.value=''; renderEspeces(); }
+  function espCredits(){
+    var box=document.getElementById('espCreditsBox'); if(!box) return;
+    if(box.innerHTML){ box.innerHTML=''; return; }
+    var c=ESP_CREDITS||{};
+    box.innerHTML='<div class="card" style="font-size:12.5px;line-height:1.6;margin-top:10px"><b>Crédits des photos</b><br>'+ESPECES.map(function(e){ var x=c[e.id]; if(!x) return ''; return escapeH(e.nom)+' : '+escapeH(x.a||'auteur inconnu')+(x.l?' ('+escapeH(x.l)+')':'')+(x.u?' <a href="'+escapeH(x.u)+'" target="_blank" rel="noopener" style="color:var(--vert)">source</a>':''); }).filter(Boolean).join('<br>')+'</div>';
+  }
+  function espImg(id){ return '/especes-img/'+id+'.webp'; }
+  function espCard(e){
+    return '<button class="esp-card" onclick="openEspece(\''+e.id+'\')"><span class="ph"><img src="'+espImg(e.id)+'" alt="" loading="lazy" onerror="this.remove()"></span><span class="n">'+escapeH(e.nom)+'</span></button>';
+  }
   function renderEspeces(){
     var el=document.getElementById('especesList'); if(!el) return;
-    var list;
-    if(_espMode==='dept'){
-      var code=(document.getElementById('especeDept')||{}).value;
-      if(!code){ el.innerHTML='<div class="callout">Choisis ton département pour voir les oiseaux qu\'on y rencontre.</div>'; return; }
-      var dep=null; for(var i=0;i<DEPTS.length;i++){ if(DEPTS[i][0]===code){ dep=DEPTS[i]; break; } }
-      var zones=dep?dep[2]:[];
-      list=ESPECES.filter(function(e){ var z=ESPECE_ZONE[e.id]; return !z || zones.indexOf(z)>=0; });
-    } else {
-      var q=(((document.getElementById('especeSearch')||{}).value)||'').toLowerCase().trim();
-      list=ESPECES.filter(function(e){ return !q || e.nom.toLowerCase().indexOf(q)>=0 || (e.latin||'').toLowerCase().indexOf(q)>=0; });
-    }
-    el.innerHTML='<div class="card" style="padding:6px 16px">'+(list.length?list.map(especeCarte).join(''):'<p class="meta" style="padding:8px 4px">Aucune espèce trouvée.</p>')+'</div>';
+    var q=espNorm(((document.getElementById('especeSearch')||{}).value||'').trim());
+    var code=(document.getElementById('especeDept')||{}).value, zones=null;
+    if(code){ for(var i=0;i<DEPTS.length;i++){ if(DEPTS[i][0]===code){ zones=DEPTS[i][2]; break; } } }
+    var list=ESPECES.filter(function(e){
+      if(q && espNorm(e.nom).indexOf(q)<0 && espNorm(e.latin).indexOf(q)<0) return false;
+      if(zones){ var z=ESPECE_ZONE[e.id]; if(z && zones.indexOf(z)<0) return false; }
+      if(_espF.t && e.t!==_espF.t) return false;
+      if(_espF.c && (','+e.c+',').indexOf(','+_espF.c+',')<0) return false;
+      if(_espF.m && (','+e.m+',').indexOf(','+_espF.m+',')<0) return false;
+      return true;
+    });
+    var any=q||code||_espF.t||_espF.c||_espF.m;
+    document.getElementById('espCount').textContent = list.length + (list.length>1?' oiseaux':' oiseau') + (any?' correspondent':'');
+    document.getElementById('espReset').style.display = any?'inline':'none';
+    el.innerHTML = list.length ? list.map(espCard).join('') : '<div class="callout" style="grid-column:1/-1">Aucun oiseau ne correspond. Retire un filtre, <span class="pid-only">ou <b style="cursor:pointer" onclick="photoIdStart()">prends-le en photo</b></span>.</div>';
   }
+
   var _curEspece=null;
   function especeOptions(sel){ return ESPECES.map(function(e){ return '<option'+(sel&&sel===e.nom?' selected':'')+'>'+e.nom+'</option>'; }).join(''); }
   var _editId=null;
@@ -1198,6 +1556,16 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
     loadEspecePhoto(e);
     showScreen('espece');
   }
+  var ESP_CREDITS=null;
+  try{ fetch('/especes-img/credits.json').then(function(r){return r.ok?r.json():{};}).then(function(j){ESP_CREDITS=j||{};}).catch(function(){ESP_CREDITS={};}); }catch(_){}
+  var _loadEspecePhotoWeb=null;
+  function loadEspecePhotoLocal(e){
+    var box=document.getElementById('e-photo'), cr=document.getElementById('e-credit'); if(!box) return;
+    var im=new Image(); im.alt=''; im.onload=function(){ box.innerHTML=''; box.appendChild(im); var c=ESP_CREDITS&&ESP_CREDITS[e.id]; if(cr) cr.innerHTML = c ? 'Photo : '+escapeH(c.a||'auteur inconnu')+(c.l?' · '+escapeH(c.l):'')+(c.u?' · <a href="'+escapeH(c.u)+'" target="_blank" rel="noopener">source</a>':'') : ''; };
+    im.onerror=function(){ if(_loadEspecePhotoWeb) _loadEspecePhotoWeb(e); };
+    box.innerHTML=''; if(cr) cr.innerHTML=''; im.src=espImg(e.id);
+  }
+  _loadEspecePhotoWeb=function(e){ loadEspecePhoto(e); };
   function loadEspecePhoto(e){
     var box=document.getElementById('e-photo'), cr=document.getElementById('e-credit');
     if(!box) return;
