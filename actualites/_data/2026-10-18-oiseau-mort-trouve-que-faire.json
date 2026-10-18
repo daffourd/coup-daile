@@ -1,0 +1,122 @@
+{
+  "slug": "oiseau-mort-trouve-que-faire",
+  "date": "2026-10-18",
+  "heure": "16:00",
+  "rubrique": "guide",
+  "origine": "claude",
+  "titre": "Oiseau mort trouvé dans le jardin ou dans la rue : que faire ?",
+  "chapo": "Ne le touche pas à mains nues et ne l'emmène nulle part. Prends une photo, note le lieu exact, puis signale-le à la mairie ou au réseau SAGIR de ton département : avec la grippe aviaire, ce petit geste aide les autorités à surveiller la santé des oiseaux sauvages.",
+  "meta_description": "Oiseau sauvage mort trouvé en ville ou au jardin : ne pas le toucher, qui prévenir (mairie, OFB, réseau SAGIR) et quelles précautions prendre face à la grippe aviaire.",
+  "mots_cles": [
+    "oiseau mort que faire",
+    "oiseau mort dans le jardin",
+    "signaler un oiseau mort",
+    "oiseau mort grippe aviaire",
+    "qui appeler pour un oiseau mort",
+    "réseau SAGIR"
+  ],
+  "especes": [
+    "Canard",
+    "Cygne",
+    "Goéland",
+    "Mouette rieuse",
+    "Héron",
+    "Corneille",
+    "Buse"
+  ],
+  "zone": "France",
+  "sections": [
+    {
+      "titre": "Pourquoi un oiseau mort mérite un signalement",
+      "paragraphes": [
+        "En automne et en hiver, les oiseaux migrateurs traversent la France, et avec eux circule parfois le virus de l'influenza aviaire, plus connu sous le nom de grippe aviaire. Pour suivre sa présence dans la nature, le ministère de l'Agriculture a confié la surveillance de la faune sauvage à l'Office français de la biodiversité (OFB).",
+        "Cette surveillance passe par le réseau SAGIR, qui associe l'OFB, les fédérations de chasseurs et des laboratoires vétérinaires. Selon l'OFB, elle repose surtout sur la collecte d'oiseaux trouvés morts. Autrement dit, ton signalement est une information précieuse : il permet de repérer tôt un foyer et de protéger les autres oiseaux, sauvages comme domestiques."
+      ]
+    },
+    {
+      "titre": "Les bons réflexes sur place",
+      "paragraphes": [
+        "Premier réflexe : ne ramasse pas l'oiseau et ne le touche pas. Les autorités demandent d'éviter tout contact avec les oiseaux sauvages morts ou malades, y compris avec leurs plumes et leurs déjections. Garde aussi ton chien à distance le temps de faire ton signalement.",
+        "Deuxième réflexe : prends une photo et note l'endroit précis, idéalement avec les coordonnées GPS de ton téléphone. L'OFB recommande de transmettre ces éléments, qui aident à identifier l'espèce et à décider de la suite. Compte aussi le nombre d'oiseaux si tu en vois plusieurs.",
+        "Troisième réflexe : ne transporte pas l'oiseau vers un centre de soins sans accord préalable. C'est une consigne de l'OFB : le signalement passe d'abord par les autorités sanitaires."
+      ]
+    },
+    {
+      "titre": "Qui prévenir et quelles espèces signaler",
+      "paragraphes": [
+        "Signale ta découverte à la mairie de la commune, au service départemental de l'OFB ou à la fédération des chasseurs de ton département, qui relaient le réseau SAGIR. C'est ton interlocuteur qui te dira s'il faut collecter le cadavre pour le faire analyser. Certaines préfectures, comme celle du Morbihan, publient un numéro dédié dans leurs communiqués sur la grippe aviaire.",
+        "Certaines familles d'oiseaux intéressent particulièrement la surveillance : les canards, oies et cygnes, les mouettes et goélands, les poules d'eau et foulques, les hérons et aigrettes, les corneilles et pies, les limicoles et les rapaces. Dans le Val-d'Oise, les services de l'État demandent par exemple de signaler systématiquement tout cadavre appartenant à ces familles en période de risque élevé. Plusieurs oiseaux morts au même endroit doivent toujours être signalés rapidement."
+      ]
+    },
+    {
+      "titre": "Et si personne ne vient le chercher ?",
+      "paragraphes": [
+        "Les cadavres ne sont pas toujours enlevés, surtout hors des villes, car ils nourrissent de nombreuses espèces, rappelle l'OFB. En ville, c'est à la mairie de prendre en charge les cadavres non récupérés par les autorités pour les envoyer à l'équarrissage.",
+        "Si ton interlocuteur t'indique qu'aucune collecte n'est prévue pour un oiseau isolé dans ton jardin, certaines communes conseillent de le manipuler avec des gants, de le placer dans un sac hermétique puis de le jeter à la poubelle. Lave-toi ensuite soigneusement les mains à l'eau et au savon. Si tu as des poules, évite de t'en approcher juste après.",
+        "Et si l'oiseau est encore vivant mais semble malade, notamment en pleine ville, l'OFB conseille de prévenir un centre de soins de la faune sauvage et, si besoin, la mairie. L'application Coup de Patte t'aide à trouver le centre le plus proche de chez toi."
+      ]
+    }
+  ],
+  "gestes": [
+    "Ne touche pas l'oiseau mort à mains nues et tiens tes animaux à distance.",
+    "Prends une photo et note le lieu exact, si possible avec les coordonnées GPS.",
+    "Signale la découverte à la mairie, à l'OFB ou à la fédération des chasseurs de ton département.",
+    "N'apporte jamais un cadavre à un centre de soins sans accord préalable.",
+    "Lave-toi les mains à l'eau et au savon après tout contact avec un oiseau sauvage."
+  ],
+  "faq": [
+    {
+      "q": "Un oiseau mort dans mon jardin, est-ce dangereux ?",
+      "r": "Le virus de la grippe aviaire peut évoluer et toucher des mammifères, d'où une surveillance internationale. L'OFB indique qu'aucune transmission avérée entre humains n'a été constatée en France ni en Europe depuis 2007. Par précaution, évite tout contact direct."
+    },
+    {
+      "q": "Qui appeler après avoir trouvé un oiseau mort ?",
+      "r": "La mairie, le service départemental de l'OFB ou la fédération départementale des chasseurs, qui relaient le réseau SAGIR. Ils te diront si l'oiseau doit être collecté pour analyse."
+    },
+    {
+      "q": "Faut-il signaler un seul oiseau mort ?",
+      "r": "Oui, surtout s'il s'agit d'un canard, d'un cygne, d'un goéland, d'une mouette, d'un héron, d'un corvidé ou d'un rapace, familles suivies de près pour la grippe aviaire. Plusieurs oiseaux morts au même endroit sont un signal à transmettre sans attendre."
+    }
+  ],
+  "sources": [
+    {
+      "titre": "Ce qu'il faut savoir sur l'influenza aviaire",
+      "editeur": "Office français de la biodiversité",
+      "url": "https://ofb.gouv.fr/ce-quil-faut-savoir-sur-linfluenza-aviaire",
+      "date": ""
+    },
+    {
+      "titre": "Conduite à tenir lors de mortalités anormales d'oiseaux de la faune sauvage en niveau de risque élevé",
+      "editeur": "DDPP du Val-d'Oise",
+      "url": "https://le-mesnil-aubry.fr/wp-content/uploads/2024/12/DDPP95_Fiche_mortalite_oiseaux_sauvages_risque-eleve_2024-2025.pdf",
+      "date": ""
+    },
+    {
+      "titre": "Influenza aviaire : extension de la zone de protection et de surveillance IAHP en Morbihan",
+      "editeur": "Préfecture du Morbihan",
+      "url": "https://media.inguiniel.fr/2025/11/2024_11_03_IAHP.pdf",
+      "date": "2024-11-03"
+    },
+    {
+      "titre": "Lutter contre l'influenza aviaire",
+      "editeur": "Ville d'Arnouville",
+      "url": "https://arnouville95.fr/article/lutter-contre-linfluenza-aviaire",
+      "date": "2024-03-01"
+    },
+    {
+      "titre": "Principes de la collecte de cadavres d'oiseaux en période de circulation du virus de l'influenza aviaire dans la faune sauvage",
+      "editeur": "Ville de Fouesnant",
+      "url": "https://ville-fouesnant.fr/wp-content/uploads/2022/09/fiche_collecte_oiseaux_morts_mairies_ddpp_ars_220927.pdf",
+      "date": ""
+    }
+  ],
+  "social": "Un oiseau mort dans ton jardin ou sur le trottoir ? Ne le touche pas, prends une photo, note le lieu et signale-le à ta mairie ou à l'OFB. En pleine saison de migration, ce simple réflexe aide à surveiller la grippe aviaire et à protéger les autres oiseaux.",
+  "hashtags": [
+    "oiseaux",
+    "grippeaviaire",
+    "faunesauvage",
+    "bonsgestes",
+    "biodiversite",
+    "coupdepatte"
+  ]
+}
