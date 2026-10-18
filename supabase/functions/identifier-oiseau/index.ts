@@ -35,7 +35,8 @@ Liste des espèces (id | nom | critères) :
 ${REFERENTIEL}`;
 
 function cors(origine: string | null) {
-  const o = origine && ORIGINES.includes(origine) ? origine : ORIGINES[0];
+  const local = !!origine && /^http:\/\/localhost(:\d+)?$/.test(origine);
+  const o = origine && (ORIGINES.includes(origine) || local) ? origine : ORIGINES[0];
   return {
     "Access-Control-Allow-Origin": o,
     "Access-Control-Allow-Methods": "POST, OPTIONS",
