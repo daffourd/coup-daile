@@ -1227,7 +1227,11 @@
   function startUrgence(){ showScreen('u1'); }
 
   /* ===== Identification par photo (prototype : resultat simule) ===== */
-  var PHOTO_ID_ON=false; /* passer a true quand la fonction serveur « identifier-oiseau » est en service */
+  /* Reconnaissance photo : ouverte au public quand PHOTO_ID_PUBLIC passe a true.
+     En attendant, mode test reserve : ouvrir coupdepatte.eu/?photo=test (et ?photo=off pour sortir). */
+  var PHOTO_ID_PUBLIC=false;
+  try{ var _pm=(location.search.match(/[?&]photo=(test|off)/)||[])[1]; if(_pm==='test') localStorage.setItem('cdp-photo-test','1'); if(_pm==='off') localStorage.removeItem('cdp-photo-test'); }catch(_){}
+  var PHOTO_ID_ON=PHOTO_ID_PUBLIC; try{ if(localStorage.getItem('cdp-photo-test')==='1') PHOTO_ID_ON=true; }catch(_){}
   if(PHOTO_ID_ON) document.documentElement.classList.add('pid-on');
   var _pid={};
   var PID_CAM='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.6"/></svg>';
@@ -1287,6 +1291,7 @@
   }
   function pidResultat(){
     var r=_pid.res; r.questions=r.questions||[]; r.stade=r.stade||{label:'Âge à préciser',txt:''}; var top=r.cands[0], e=espById(top.id), html='';
+    if(PHOTO_ID_ON && !PHOTO_ID_PUBLIC && !_pid.demo) html+='<div class="pid-demo"><b>Mode test.</b> Reconnaissance réelle, réservée à l\'équipe pour l\'instant. Note si le résultat est juste.</div>';
     if(_pid.demo) html+='<div class="pid-demo"><b>Démonstration.</b> Résultat simulé pour montrer le parcours. La vraie reconnaissance sera branchée à l\'étape suivante.</div>';
     else if(_pid.user && !PHOTO_ID_ON) html+='<div class="pid-demo"><b>Prototype.</b> L\'analyse réelle n\'est pas encore branchée : le résultat ci-dessous est un exemple, il ne correspond pas à ta photo.</div>';
     html+='<div class="pid-head"><img src="'+_pid.photo+'" alt="Ta photo"><div><span class="stade">'+escapeH(r.stade.label)+'</span><p>'+escapeH(r.stade.txt)+'</p></div></div>';
