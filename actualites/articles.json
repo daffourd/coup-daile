@@ -1,6 +1,15 @@
 {
- "maj": "2026-10-17",
+ "maj": "2026-10-18",
  "articles": [
+  {
+   "slug": "chauves-souris-en-ville-abri-contre-la-meteo-etude",
+   "titre": "Chauves-souris en ville : une étude montre que la ville les abrite des caprices de la météo",
+   "chapo": "Une étude parue en octobre 2026 dans la revue iScience a écouté les chauves-souris de 27 sites urbains et ruraux en Israël. En ville, les espèces généralistes chassent même quand il fait plus frais ou plus venteux, mais la campagne reste plus riche en espèces.",
+   "date": "2026-10-18",
+   "rubrique": "Science et découvertes",
+   "url": "/actualites/chauves-souris-en-ville-abri-contre-la-meteo-etude/",
+   "image": "/actualites/img/chauves-souris-en-ville-abri-contre-la-meteo-etude.png"
+  },
   {
    "slug": "oiseau-cogne-contre-une-vitre-que-faire",
    "titre": "Oiseau qui s'est cogné contre une vitre : que faire ?",
