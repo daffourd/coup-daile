@@ -369,13 +369,22 @@
   .nav-back:active{opacity:.55;}
   .nav-title{display:none;position:absolute;left:50%;transform:translateX(-50%);bottom:22px;font-weight:800;font-size:16px;max-width:46%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none;}
   .brand-wrap{display:flex;align-items:center;gap:10px;color:inherit;text-decoration:none;}
-  html.sub .brand-wrap{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);gap:8px;}
+  .bar-center{display:contents;}
+  html.sub .bar-center{display:flex;align-items:center;gap:8px;position:absolute;left:50%;bottom:18px;transform:translateX(-50%);max-width:calc(100% - 150px);}
+  html.sub .brand-wrap{gap:8px;flex:0 0 auto;}
+  html.sub .bar-center .nav-title{position:static;transform:none;bottom:auto;max-width:none;min-width:0;opacity:0;transition:opacity .2s;}
+  html.sub.title-in-bar .bar-center .nav-title{display:block;opacity:1;}
+  html.sub.title-in-bar .topbar .brand{display:none;}
+  /* Barre du haut teintee, avec un trait quand on fait defiler */
+  .topbar{background:color-mix(in srgb, var(--vert-pale) 60%, var(--beige));transition:box-shadow .2s;}
+  html.scrolled .topbar{box-shadow:0 1px 0 var(--bord), 0 6px 14px -12px rgba(30,50,40,.35);}
+  @media (min-width:521px) and (max-width:1099px){ .topbar{border-image:conic-gradient(color-mix(in srgb, var(--vert-pale) 60%, var(--beige)) 0 0) fill 0//0 100vw;} html.scrolled .topbar{box-shadow:none;border-bottom:1px solid var(--bord);} }
   html.sub .nav-back{max-width:calc(50% - 92px);}
   html.sub .topbar .logo{width:32px;height:32px;border-radius:10px;}
   html.sub .topbar .logo svg{width:19px;height:19px;}
   html.sub .topbar .brand{font-size:16px;white-space:nowrap;}
   html.sub .topbar .brand small{display:none;}
-  @media (max-width:499px){ html.sub .topbar .brand{display:none;} html.sub .nav-back{max-width:calc(50% - 30px);} }
+  @media (max-width:499px){ html.sub .topbar .brand{display:none;} html.sub .nav-back{max-width:calc(50% - 30px);} html.sub.title-in-bar .nav-back span{display:none;} html.sub.title-in-bar .bar-center{max-width:calc(100% - 120px);} }
   html.sub .nav-back{display:flex;}
   html.sub .nav-title{display:none;}
   .crumbs{display:none;}
@@ -385,6 +394,9 @@
   .screen.in-back{animation:inBack .26s ease;}
   @media (prefers-reduced-motion:reduce){.screen.in-fwd,.screen.in-back{animation:none;}}
   @media (min-width:1100px){
+    html.sub .bar-center{display:contents;}
+    html.sub .bar-center .nav-title{display:none !important;}
+    html.sub.title-in-bar .topbar .brand{display:block;}
     html.sub .brand-wrap{position:static;transform:none;gap:10px;}
     html.sub .nav-back{max-width:none;}
     html.sub .topbar .logo{width:38px;height:38px;border-radius:12px;}
@@ -501,8 +513,8 @@
     .opt:hover,.tile:hover{border-color:var(--vert-clair);}
   }
   @media (min-width:1100px){
-    .topbar{position:fixed;left:0;right:0;top:0;height:72px;padding:14px 28px;border-bottom:1px solid var(--bord);background:rgba(247,245,239,.92);backdrop-filter:blur(8px);z-index:40;}
-    html[data-theme="dark"] .topbar{background:rgba(15,21,18,.92);}
+    .topbar{position:fixed;left:0;right:0;top:0;height:72px;padding:14px 28px;border-bottom:1px solid var(--bord);background:color-mix(in srgb, var(--vert-pale) 60%, var(--beige));backdrop-filter:blur(8px);z-index:40;}
+
     .stage{margin-left:264px;padding-top:92px;padding-bottom:56px;}
     .tabbar{top:72px;bottom:0;left:0;right:auto;width:264px;max-width:none;height:auto;margin:0;flex-direction:column;align-items:stretch;gap:4px;padding:22px 16px;border:none;border-right:1px solid var(--bord);border-radius:0;box-shadow:none;background:var(--beige);backdrop-filter:none;}
     html[data-theme="dark"] .tabbar{background:var(--beige);}
@@ -534,11 +546,13 @@
 <div class="app">
   <div class="topbar">
     <button class="nav-back" id="navBack" onclick="goBack()" aria-label="Retour"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg><span id="navBackLbl">Accueil</span></button>
-    <div class="nav-title" id="navTitle" aria-live="polite"></div>
-    <a class="brand-wrap" href="/" onclick="navTab('home');return false" aria-label="Coup de Patte, accueil">
-      <div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg></div>
-      <div class="brand">Coup de Patte<small>J'ai trouvé un oiseau</small></div>
-    </a>
+    <div class="bar-center">
+      <a class="brand-wrap" href="/" onclick="navTab('home');return false" aria-label="Coup de Patte, accueil">
+        <div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg></div>
+        <div class="brand">Coup de Patte<small>J'ai trouvé un oiseau</small></div>
+      </a>
+      <div class="nav-title" id="navTitle" aria-live="polite"></div>
+    </div>
     <div style="margin-left:auto;display:flex;align-items:center;gap:2px">
       
       <button id="gearBtn" onclick="showScreen('reglages')" aria-label="Réglages" style="background:none;border:none;color:var(--texte-doux);cursor:pointer;padding:8px;display:flex"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 7 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 1.1-2.7H1a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 2.6 7a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H7a1.6 1.6 0 0 0 1-1.5V1a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 2.7 1.1 1.6 1.6 0 0 0 .3-1.8l-.1.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V7a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg></button>
@@ -1349,6 +1363,7 @@
     var lb=document.getElementById('navBackLbl'); if(lb) lb.textContent=navLabel(prev);
     var nb=document.getElementById('navBack'); if(nb) nb.setAttribute('aria-label','Retour : '+navLabel(prev));
     var nt=document.getElementById('navTitle'); if(nt) nt.textContent=sub?navLabel(id):'';
+    try{ requestAnimationFrame(navScrollCheck); }catch(_){}
     var cr=document.getElementById('crumbs'); if(!cr) return;
     cr.classList.toggle('wide',!!NAV_WIDE[id]);
     if(!sub){ cr.innerHTML=''; return; }
@@ -1362,6 +1377,17 @@
     }).join('');
     cr.innerHTML='<button class="cr-back" onclick="goBack()" aria-label="Retour">'+'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>'+'Retour</button><div class="cr-path">'+parts+'</div>';
   }
+  function navScrollCheck(){
+    var root=document.documentElement, st=document.getElementById('stage');
+    var y=Math.max(window.scrollY||0, st?st.scrollTop:0);
+    root.classList.toggle('scrolled', y>4);
+    var sc=document.querySelector('.screen.active'), t=sc&&sc.querySelector('.title');
+    var bar=document.querySelector('.topbar');
+    var inBar=!!(root.classList.contains('sub') && t && bar && t.getBoundingClientRect().bottom < bar.getBoundingClientRect().bottom);
+    root.classList.toggle('title-in-bar', inBar);
+  }
+  window.addEventListener('scroll', navScrollCheck, {passive:true});
+  document.addEventListener('scroll', navScrollCheck, {passive:true, capture:true});
   function navTab(id){
     history_stack = id==='home' ? ['home'] : ['home', id];
     showScreen(id, true, {dir:'fwd'});
