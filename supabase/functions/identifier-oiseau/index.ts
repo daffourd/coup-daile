@@ -9,6 +9,8 @@ const especes = [{"id": "merle", "nom": "Merle noir", "latin": "Turdus merula", 
 
 const ORIGINES = ["https://coupdepatte.eu", "https://www.coupdepatte.eu"];
 const MODELE = "claude-sonnet-5-5";
+// Espace de travail Anthropic (identifiant public, pas un secret). Remplaçable par le secret ANTHROPIC_WORKSPACE_ID.
+const ESPACE = Deno.env.get("ANTHROPIC_WORKSPACE_ID") ?? "wrkspc_017MwqpnUrkmC39icYRx6t21";
 const TAILLE_MAX = 1_600_000; // octets de base64, environ 1,2 Mo d'image
 
 const IDS = new Set((especes as { id: string }[]).map((e) => e.id));
@@ -73,6 +75,7 @@ Deno.serve(async (req) => {
       headers: {
         "x-api-key": Deno.env.get("ANTHROPIC_API_KEY") ?? "",
         "anthropic-version": "2023-06-01",
+        "anthropic-workspace-id": ESPACE,
         "content-type": "application/json",
       },
       body: JSON.stringify({
