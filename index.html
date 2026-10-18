@@ -472,7 +472,8 @@
   .pid-q .k{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--vert);margin-bottom:4px;}
   .pid-q h3{font-size:17px;line-height:1.3;margin-bottom:12px;}
   .pid-cmp{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0 14px;}
-  .pid-cmp figure{margin:0;}
+  .pid-cmp figure{margin:0;position:relative;}
+  .pid-cmp .zoom-hint{bottom:30px;}
   .pid-cmp img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:16px;display:block;}
   .pid-cmp figcaption{font-size:12px;font-weight:700;color:var(--texte-doux);text-align:center;margin-top:5px;}
   .pid-win{background:var(--blanc);border:2px solid var(--vert);border-radius:22px;padding:18px;margin-bottom:14px;}
@@ -489,6 +490,24 @@
   .ph{position:relative;}
   .age-tag{position:absolute;left:6px;top:6px;z-index:1;background:var(--vert);color:#fff;font-size:10.5px;font-weight:800;padding:3px 7px;border-radius:999px;}
   .age-tag.muted{background:rgba(35,48,41,.72);}
+
+  /* ===== Photo agrandie ===== */
+  .zoomable{cursor:zoom-in;position:relative;}
+  .zoom-hint{position:absolute;right:10px;bottom:10px;width:34px;height:34px;border-radius:12px;background:rgba(20,30,25,.55);backdrop-filter:blur(4px);color:#fff;display:grid;place-items:center;pointer-events:none;}
+  .zoom-hint svg{width:18px;height:18px;}
+  .lb{position:fixed;inset:0;z-index:5000;background:rgba(10,16,13,.97);display:flex;flex-direction:column;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px);animation:lbIn .18s ease;}
+  .lb[hidden]{display:none;}
+  @keyframes lbIn{from{opacity:0;}to{opacity:1;}}
+  .lb-stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:64px 14px 8px;}
+  .lb-stage img{max-width:100%;max-height:100%;object-fit:contain;border-radius:10px;touch-action:pinch-zoom;user-select:none;-webkit-user-select:none;}
+  .lb-x{position:absolute;top:calc(env(safe-area-inset-top,0px) + 12px);right:calc(env(safe-area-inset-right,0px) + 12px);width:46px;height:46px;border-radius:50%;border:none;background:rgba(255,255,255,.16);color:#fff;display:grid;place-items:center;cursor:pointer;}
+  .lb-x svg{width:22px;height:22px;}
+  .lb-x:focus-visible{outline:2px solid #fff;outline-offset:2px;}
+  .lb-cap{color:#e7efe9;text-align:center;font-size:14px;line-height:1.45;padding:10px 18px 18px;}
+  .lb-cap b{display:block;font-size:16px;color:#fff;}
+  .lb-cap small{display:block;font-size:11.5px;opacity:.7;margin-top:3px;}
+  .lb-cap a{color:#9fe0bf;}
+  @media (prefers-reduced-motion:reduce){.lb{animation:none;}}
   /* ===== GRANDS ECRANS (tablette et ordinateur) =====
      Rien ici ne s'applique sous 768 px : l'iPhone reste strictement identique. */
   @media (min-width:768px){
@@ -557,6 +576,12 @@
       
       <button id="gearBtn" onclick="showScreen('reglages')" aria-label="Réglages" style="background:none;border:none;color:var(--texte-doux);cursor:pointer;padding:8px;display:flex"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 7 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 1.1-2.7H1a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 2.6 7a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H7a1.6 1.6 0 0 0 1-1.5V1a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 2.7 1.1 1.6 1.6 0 0 0 .3-1.8l-.1.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V7a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg></button>
     </div>
+  </div>
+
+  <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo agrandie" hidden onclick="if(event.target===this||event.target.id==='lbStage'||event.target.id==='lbCap')lbClose()">
+    <button class="lb-x" onclick="lbClose()" aria-label="Fermer la photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <div class="lb-stage" id="lbStage"><img id="lbImg" alt=""></div>
+    <div class="lb-cap" id="lbCap"></div>
   </div>
 
   <div class="stage" id="stage">
@@ -1321,11 +1346,11 @@
     if(PHOTO_ID_ON && !PHOTO_ID_PUBLIC && !_pid.demo) html+='<div class="pid-demo"><b>Mode test.</b> Reconnaissance réelle, réservée à l\'équipe pour l\'instant. Note si le résultat est juste.</div>';
     if(_pid.demo) html+='<div class="pid-demo"><b>Démonstration.</b> Résultat simulé pour montrer le parcours. La vraie reconnaissance sera branchée à l\'étape suivante.</div>';
     else if(_pid.user && !PHOTO_ID_ON) html+='<div class="pid-demo"><b>Prototype.</b> L\'analyse réelle n\'est pas encore branchée : le résultat ci-dessous est un exemple, il ne correspond pas à ta photo.</div>';
-    html+='<div class="pid-head"><img src="'+_pid.photo+'" alt="Ta photo"><div><span class="stade">'+escapeH(r.stade.label)+'</span><p>'+escapeH(r.stade.txt)+'</p></div></div>';
+    html+='<div class="pid-head"><img class="zoomable" src="'+_pid.photo+'" alt="Ta photo" data-zoom="'+_pid.photo+'" data-zoom-title="Ta photo"><div><span class="stade">'+escapeH(r.stade.label)+'</span><p>'+escapeH(r.stade.txt)+'</p></div></div>';
     var sure = top.p>=80 || _pid.qi>=r.questions.length;
     if(sure){
       html+='<div class="pid-win"><div class="etiq">'+(top.p>=80?'C\'est très probablement':'Le plus probable')+'</div><h2>'+escapeH(e.nom)+(top.note?' ('+top.note+')':'')+'</h2><div class="meta">'+escapeH(e.latin)+' · confiance '+top.p+' %</div>'+
-        '<div class="pid-cmp"><figure><img src="'+_pid.photo+'" alt=""><figcaption>Ta photo</figcaption></figure><figure><img src="'+(top.note==='jeune'?espAgeImg(e.id,'jeune').u:espImg(e.id))+'" alt=""><figcaption>Photo de référence</figcaption></figure></div>'+
+        '<div class="pid-cmp"><figure class="zoomable" data-zoom="'+_pid.photo+'" data-zoom-title="Ta photo"><img src="'+_pid.photo+'" alt=""><span class="zoom-hint">'+ZOOM_SVG+'</span><figcaption>Ta photo</figcaption></figure><figure class="zoomable" data-zoom="'+pidFull(e.id, top.note==='jeune'?'jeune':'adulte')+'" data-zoom-title="'+escapeH(e.nom)+'"><img src="'+(top.note==='jeune'?espAgeImg(e.id,'jeune').u:espImg(e.id))+'" alt=""><span class="zoom-hint">'+ZOOM_SVG+'</span><figcaption>Photo de référence</figcaption></figure></div>'+
         '<button class="btn btn-primary" onclick="openEspece(\''+e.id+'\')">Oui, c\'est lui : voir sa fiche</button></div>';
       var autres=r.cands.slice(1).filter(function(c){return c.p>=5;});
       if(autres.length) html+='<div class="section-label">Ce n\'est pas lui ? Peut-être</div><div class="cands">'+autres.map(pidCand).join('')+'</div>';
@@ -1343,6 +1368,42 @@
     var e=espById(c.id); if(!e) return '';
     return '<button class="esp-card cand'+(i===0&&_pid.res.cands[0]===c?' top':'')+'" onclick="openEspece(\''+e.id+'\')"><span class="ph"><img src="'+espImg(e.id)+'" alt="" loading="lazy" onerror="this.remove()"></span><span class="n">'+escapeH(e.nom)+(c.note?' ('+c.note+')':'')+'</span><span class="pct"><span class="bar"><i style="width:'+c.p+'%"></i></span>'+c.p+' %</span></button>';
   }
+
+  /* ===== Photo agrandie (fiche, reconnaissance photo) ===== */
+  var _lbOpen=false;
+  var ZOOM_SVG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5M11 8.5v5M8.5 11h5"/></svg>';
+  function lbOpen(src, titre, credit){
+    if(!src) return;
+    var lb=document.getElementById('lb'), im=document.getElementById('lbImg');
+    im.onerror=function(){ var fb=src.replace('-full.webp','.webp'); if(fb!==src && im.getAttribute('src')!==fb){ im.src=fb; } };
+    im.src=src; im.alt=titre||'Photo agrandie';
+    document.getElementById('lbCap').innerHTML=(titre?'<b>'+escapeH(titre)+'</b>':'')+(credit?'<small>'+credit+'</small>':'');
+    lb.hidden=false; _lbOpen=true; document.documentElement.style.overflow='hidden';
+    try{ history.pushState({cdp:1,stack:history_stack.slice(),lin:true,lb:1},'',location.href); }catch(_){}
+    setTimeout(function(){ var x=lb.querySelector('.lb-x'); if(x) x.focus(); },30);
+  }
+  function lbHide(){ var lb=document.getElementById('lb'); if(!lb) return; lb.hidden=true; _lbOpen=false; document.documentElement.style.overflow=''; document.getElementById('lbImg').removeAttribute('src'); }
+  function lbClose(){ if(!_lbOpen) return; var hs=history.state; if(hs&&hs.lb){ history.back(); } else { lbHide(); } }
+  /* Echap ferme la photo avant tout autre retour */
+  document.addEventListener('keydown', function(e){ if(_lbOpen && e.key==='Escape'){ e.stopImmediatePropagation(); e.preventDefault(); lbClose(); } }, true);
+  /* Clic sur une photo agrandissable */
+  document.addEventListener('click', function(e){
+    var t=e.target;
+    var box=t.closest && t.closest('#e-photo');
+    if(box){ var im=box.querySelector('img'); if(!im) return;
+      var src=im.getAttribute('data-full')||im.currentSrc||im.src;
+      var age=(document.getElementById('e-ages')||{}).getAttribute ? document.getElementById('e-ages').getAttribute('data-shown') : '';
+      var nom=(typeof _curEspece!=='undefined'&&_curEspece)?_curEspece.nom:'';
+      var cr=document.getElementById('e-credit');
+      lbOpen(src, nom+(age&&age!=='adulte'?' ('+(AGE_LBL[age]||age).toLowerCase()+')':''), cr?cr.innerHTML:'');
+      return; }
+    var z=t.closest && t.closest('[data-zoom]');
+    if(z){ e.preventDefault(); e.stopPropagation(); lbOpen(z.getAttribute('data-zoom'), z.getAttribute('data-zoom-title')||'', ''); }
+  }, true);
+  /* Indice visuel sur la photo de la fiche */
+  (function(){ var b=document.getElementById('e-photo'); if(b){ b.classList.add('zoomable'); b.setAttribute('role','button'); b.setAttribute('aria-label','Agrandir la photo'); b.setAttribute('tabindex','0');
+    b.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); b.click(); } });
+    new MutationObserver(function(){ if(b.querySelector('img') && !b.querySelector('.zoom-hint')){ var h=document.createElement('span'); h.className='zoom-hint'; h.innerHTML=ZOOM_SVG; b.appendChild(h); } }).observe(b,{childList:true}); } })();
   /* ===== Navigation : retour en arriere ===== */
   var NAV_LBL={home:'Accueil',u1:'Étape 1',u2:'Étape 2',u3:'Étape 3',u4:'Étape 4',rA:'Conseils',rB:'Conseils',rNid:'Oisillon',bague:'Oiseau bagué',secours:'Secours',centres:'Carte des centres',identifier:'Identifier',especes:'Espèces',espece:'Fiche',conseils:'Conseils',gestes:'Bons gestes',reglages:'Réglages',compte:'Compte',benevoles:'Bénévoles',assos:'Associations',admin:'Administration',signaler:'Signaler',mentions:'Mentions légales',actus:'Actualités',cgu:'CGU',photoId:'Photo'};
   var NAV_WIDE={home:1,centres:1,especes:1,benevoles:1,assos:1,actus:1,admin:1};
@@ -1408,6 +1469,7 @@
   }
   window.addEventListener('popstate', function(e){
     var st=e.state;
+    if(_lbOpen){ lbHide(); var cur=document.querySelector('.screen.active'); if(st && st.stack && cur && st.stack[st.stack.length-1]===cur.id){ history_stack=st.stack.slice(); return; } }
     if(st && st.cdp && st.stack && st.stack.length){
       history_stack=st.stack.slice();
       var t=history_stack[history_stack.length-1];
@@ -1574,6 +1636,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
   var ESP_AGES={}, _espAge='adulte';
   try{ fetch('/especes-img/ages.json').then(function(r){return r.ok?r.json():{};}).then(function(j){ ESP_AGES=j||{}; if(_espAge!=='adulte') renderEspeces(); }).catch(function(){}); }catch(_){}
   function espAgeImg(id, age){ var a=ESP_AGES[id]||[]; if(age==='jeune'){ if(a.indexOf('jeune')>=0) return {u:'/especes-img/'+id+'-jeune.webp',k:'jeune'}; if(a.indexOf('oisillon')>=0) return {u:'/especes-img/'+id+'-oisillon.webp',k:'oisillon'}; } else if(age && a.indexOf(age)>=0) return {u:'/especes-img/'+id+'-'+age+'.webp',k:age}; return {u:espImg(id),k:'adulte'}; }
+  function pidFull(id, age){ var im=espAgeImg(id, age); return im.u.replace('.webp','-full.webp'); }
   function espSetAge(a){ _espAge=a; document.querySelectorAll('#espAgeSeg button').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-age')===a); }); renderEspeces(); }
   var AGE_LBL={adulte:'Adulte',jeune:'Jeune',oisillon:'Oisillon'};
   function espCard(e){
@@ -1646,7 +1709,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
     if(age==='adulte'){ if(box.getAttribute('data-shown')!=='adulte'||box.getAttribute('data-id')!==e.id) loadEspecePhoto(e); }
     else {
       var ph=document.getElementById('e-photo'), cr=document.getElementById('e-credit'), c=(ESP_CREDITS||{})[e.id+'-'+age];
-      ph.innerHTML='<img alt="" src="/especes-img/'+e.id+'-'+age+'.webp">';
+      ph.innerHTML='<img alt="" src="/especes-img/'+e.id+'-'+age+'.webp" data-full="/especes-img/'+e.id+'-'+age+'-full.webp">';
       if(cr) cr.innerHTML = c ? 'Photo : '+escapeH(c.a||'auteur inconnu')+(c.l?' · '+escapeH(c.l):'')+(c.u?' · <a href="'+escapeH(c.u)+'" target="_blank" rel="noopener">source</a>':'') : '';
     }
     box.setAttribute('data-shown',age); box.setAttribute('data-id',e.id);
