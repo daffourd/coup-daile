@@ -39,7 +39,7 @@ function cors(origine: string | null) {
   return {
     "Access-Control-Allow-Origin": o,
     "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": "authorization, apikey, content-type",
+    "Access-Control-Allow-Headers": "authorization, apikey, content-type, x-client-info, x-supabase-api-version",
   };
 }
 
