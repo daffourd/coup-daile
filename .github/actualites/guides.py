@@ -37,9 +37,9 @@ SRC = {
 GUIDES = [
     {
         "slug": "oisillon-tombe-du-nid",
-        "titre": "Oisillon tombé du nid : que faire ?",
+        "titre": "Oisillon ou bébé oiseau tombé du nid : que faire ?",
         "court": "Oisillon tombé du nid",
-        "desc": "Tu as trouvé un oisillon au sol ? Emplumé, il n'est presque jamais abandonné. Nu ou en duvet, il faut le remettre au nid. Les bons gestes en 1 minute.",
+        "desc": "Bébé oiseau par terre ? Emplumé, il n'est presque jamais abandonné : laisse-le. Nu ou en duvet, remets-le au nid. Comment s'en occuper, quand appeler un centre de soins.",
         "chapo": "Un oisillon au sol n'est pas forcément en danger. Avant de le ramasser, regarde s'il a des plumes : c'est ce détail qui décide de tout.",
         "sections": [
             ("Il a ses plumes et il sautille : laisse-le", [
@@ -72,6 +72,8 @@ GUIDES = [
              "Non. Ne lui donne ni eau ni nourriture : l'eau peut partir dans ses voies respiratoires, et le pain ou le lait le rendent malade. Chaque espèce a un régime précis. En cas de doute, appelle un centre de soins."),
             ("Puis-je le garder pour l'élever moi-même ?",
              "Non. La détention d'un oiseau sauvage est interdite, et un oisillon élevé par l'humain ne peut généralement plus être relâché. Le centre de soins a les compétences et les autorisations."),
+            ("Comment s'occuper d'un oisillon tombé du nid ?",
+             "Le mieux est de ne pas s'en occuper toi-même : remets-le au nid, ou laisse-le près de l'endroit où tu l'as trouvé s'il a ses plumes, pour que ses parents continuent de le nourrir. S'il est seul, blessé ou froid, garde-le au chaud, au calme et dans le noir sans le nourrir, et appelle un centre de soins de la faune sauvage."),
             ("Combien de temps un jeune reste-t-il au sol ?",
              "Quelques jours chez beaucoup de passereaux, le temps que ses plumes de vol poussent. C'est une étape normale de sa croissance."),
         ],
@@ -80,16 +82,17 @@ GUIDES = [
     },
     {
         "slug": "oiseau-blesse",
-        "titre": "Oiseau blessé : que faire ?",
+        "titre": "J'ai trouvé un oiseau blessé : que faire et qui appeler ?",
         "court": "Oiseau blessé",
-        "desc": "Tu as trouvé un oiseau blessé ? Carton aéré, au calme, au chaud et dans le noir, ni eau ni nourriture, puis appelle un centre de soins. Le guide gratuit Coup de Patte.",
+        "h1": "J'ai trouvé un oiseau blessé : que faire ?",
+        "desc": "Oiseau blessé dans ton jardin ou dans la rue ? Comment t'en occuper en attendant : carton aéré, calme, chaleur, ni eau ni nourriture. Et qui appeler près de chez toi.",
         "chapo": "Un oiseau blessé a besoin de calme et d'un centre de soins de la faune sauvage, pas de soins improvisés. Voici les gestes qui l'aident vraiment, dans l'ordre.",
         "sections": [
             ("D'abord, observe : est-il vraiment en détresse ?", [
                 "Trop d'oiseaux sont ramassés inutilement. Interviens s'il est manifestement blessé (aile qui pend, saignement, patte abîmée), s'il ne s'enfuit pas à ton approche, s'il est en danger immédiat (route, chat, plein soleil) ou s'il a été attrapé par un chat, même sans blessure visible.",
                 "Un oiseau qui vient de percuter une vitre peut être simplement sonné : mets-le dans un carton aéré, au calme et dans le noir, et vérifie au bout d'une heure ou deux s'il peut repartir.",
             ]),
-            ("Le capturer sans danger, pour toi et pour lui", [
+            ("Comment s'occuper d'un oiseau blessé en attendant le centre", [
                 "Protège-toi d'abord : des gants, et attention aux serres des rapaces et au bec des hérons, qui visent le visage. Jette un tissu épais (serviette, vêtement) sur l'oiseau : dans l'obscurité, il se calme. Maintiens les ailes collées au corps.",
                 "Place-le dans un carton percé de trous, tapissé d'un linge, jamais dans une cage. Garde-le au calme, au chaud et dans le noir, loin des enfants et des animaux.",
             ]),
@@ -97,7 +100,7 @@ GUIDES = [
                 "Appelle un centre avant de te déplacer : il te dit quoi faire et s'il peut accueillir l'oiseau. Note le lieu exact de la découverte, il servira pour le relâcher. L'application Coup de Patte t'indique le centre le plus proche et son numéro. À défaut, la LPO oriente au " + LPO_TEL + ".",
                 "Pendant le trajet, reste au calme, sans musique, et n'ouvre pas le carton pour vérifier.",
             ]),
-            ("Ce qu'il ne faut surtout pas faire", [
+            ("Que lui donner à manger ? Rien, et ce n'est pas de la cruauté", [
                 "Ne le force jamais à boire : l'eau peut partir dans ses voies respiratoires. Pas de pain, pas de lait, pas de viande hachée : en cas de doute, ni à manger ni à boire.",
                 "Ne bloque jamais le bec, ne le montre pas, ne multiplie pas les photos : le stress aggrave son état. Ne tente pas de le soigner ni de le garder : la détention d'un oiseau sauvage est interdite et il a besoin de soins adaptés.",
             ]),
@@ -117,11 +120,66 @@ GUIDES = [
              "Oui. La morsure d'un chat transmet des bactéries qui provoquent très vite une infection grave, même sans plaie visible. Le traitement relève d'un centre de soins : appelle-le sans attendre."),
             ("Puis-je le soigner chez moi ?",
              "Non. La loi interdit de détenir un oiseau sauvage, et les soins demandent des compétences et des médicaments spécifiques. Ton rôle est de le mettre à l'abri et de le confier à un centre."),
+            ("Comment soigner un oiseau blessé ?",
+             "Tu n'as pas à le soigner toi-même, et ce serait risqué pour lui : une aile cassée, une infection ou un choc demandent un examen et des soins de professionnels. Ton rôle est de le mettre à l'abri dans un carton, au calme, au chaud et dans le noir, puis d'appeler un centre de soins de la faune sauvage."),
+            ("Que donner à manger à un oiseau blessé ?",
+             "Rien. Un oiseau blessé est en état de choc : le nourrir ou le faire boire de force peut le tuer, et chaque espèce a un régime différent. Ni pain, ni lait, ni viande hachée. Le centre de soins te dira quoi faire."),
+            ("Un oiseau blessé dans mon jardin ne s'envole plus, que faire ?",
+             "Rentre d'abord les chats et les chiens. Observe-le quelques minutes de loin : un jeune emplumé qui sautille n'est pas blessé, ses parents s'en occupent. S'il a une aile qui pend, saigne, ne fuit pas à ton approche ou a été attrapé par un chat, mets-le dans un carton aéré et appelle un centre de soins."),
+            ("Oiseau avec une aile cassée : que faire ?",
+             "Ne tente pas de bander ou de remettre l'aile. Maintiens doucement les ailes contre le corps avec un tissu, place l'oiseau dans un carton aéré, au calme et dans le noir, et appelle vite un centre de soins de la faune sauvage."),
             ("Et si c'est un pigeon ?",
              "Les mêmes gestes s'appliquent. Appelle un centre de soins avant de te déplacer pour savoir s'il accueille les pigeons."),
         ],
         "sources": ["lpo_secourir", "lpo_guide", "lpo_centres"],
-        "liens": [("/actualites/pigeon-blesse-en-ville-que-faire/", "Pigeon blessé en ville"), ("/actualites/oiseau-cogne-contre-une-vitre-que-faire/", "Oiseau qui a heurté une vitre"), ("/actualites/mon-chat-a-attrape-un-oiseau-que-faire/", "Mon chat a attrapé un oiseau"), ("/centres/", "Centres de soins par département")],
+        "liens": [("/guides/oiseau-au-sol-ne-vole-pas/", "Oiseau par terre qui ne s'envole pas"), ("/actualites/pigeon-blesse-en-ville-que-faire/", "Pigeon blessé en ville"), ("/actualites/oiseau-cogne-contre-une-vitre-que-faire/", "Oiseau qui a heurté une vitre"), ("/actualites/mon-chat-a-attrape-un-oiseau-que-faire/", "Mon chat a attrapé un oiseau"), ("/centres/", "Centres de soins par département")],
+    },
+    {
+        "slug": "oiseau-au-sol-ne-vole-pas",
+        "titre": "Oiseau par terre qui ne s'envole pas : que faire ?",
+        "court": "Oiseau au sol qui ne vole pas",
+        "desc": "Un oiseau au sol dans ton jardin ou dans la rue, qui ne s'envole plus ? Jeune qui apprend à voler, oiseau assommé, blessé ou martinet : reconnaître le cas et faire le bon geste.",
+        "chapo": "Un oiseau qui reste par terre n'est pas toujours en danger. Avant d'agir, prends une minute pour comprendre ce que tu as devant toi : le bon geste n'est pas le même pour un jeune qui apprend à voler, un oiseau sonné ou un oiseau blessé.",
+        "sections": [
+            ("1. Il a ses plumes, il sautille ou volette : c'est un jeune", [
+                "C'est le cas le plus fréquent au printemps et en été. Le jeune a quitté le nid avant de savoir bien voler et ses parents le nourrissent tout près. Laisse-le, rentre les chats, et s'il est exposé, pose-le en hauteur dans un buisson tout proche.",
+            ]),
+            ("2. Il est nu ou en duvet : il est tombé du nid", [
+                "Remets-le au nid s'il est accessible, ou recrée un nid sommaire au même endroit. S'il est seul et froid, garde-le au chaud dans un linge et appelle un centre de soins.",
+            ]),
+            ("3. Il vient de heurter une vitre : il est peut-être sonné", [
+                "Un oiseau assommé reste immobile, parfois les yeux mi-clos. Mets-le dans un carton aéré, au calme et dans le noir, à l'abri des chats, et regarde au bout d'une heure ou deux s'il peut repartir en ouvrant le carton dehors. S'il ne repart pas, appelle un centre de soins.",
+            ]),
+            ("4. Aile qui pend, sang, ne fuit pas : il est blessé", [
+                "Couvre-le d'un tissu, mets-le dans un carton aéré tapissé d'un linge, au calme, au chaud et dans le noir, sans eau ni nourriture, et appelle un centre de soins de la faune sauvage avant de te déplacer.",
+            ]),
+            ("5. Ailes en croissant, toutes petites pattes : c'est un martinet", [
+                "Un martinet ne peut pas redécoller du sol. Ne le lance jamais en l'air. Mets-le dans un carton aéré et appelle un centre de soins.",
+            ]),
+            ("6. Il a été attrapé par un chat", [
+                "Même sans blessure visible, il doit aller en centre de soins : la morsure d'un chat transmet des bactéries qui provoquent très vite une infection grave.",
+            ]),
+        ],
+        "gestes": [
+            "Rentre les chats et les chiens.",
+            "Observe une minute de loin avant de toucher.",
+            "Jeune emplumé qui sautille : laisse-le, ses parents veillent.",
+            "Sonné, blessé, martinet ou attrapé par un chat : carton aéré, calme, noir.",
+            "Ni eau ni nourriture.",
+            "En cas de doute, appelle un centre de soins de la faune sauvage.",
+        ],
+        "faq": [
+            ("J'ai trouvé un oiseau par terre, que faire ?",
+             "Observe-le d'abord de loin : s'il a ses plumes et sautille, c'est un jeune surveillé par ses parents, laisse-le. S'il est nu, remets-le au nid. S'il est sonné, blessé, si c'est un martinet ou s'il a été attrapé par un chat, mets-le dans un carton aéré au calme et appelle un centre de soins."),
+            ("Pourquoi un oiseau reste-t-il au sol sans s'envoler ?",
+             "Le plus souvent parce que c'est un jeune qui apprend à voler. Sinon, il peut être sonné après un choc contre une vitre, blessé, affaibli, ou être un martinet, incapable de décoller du sol."),
+            ("Comment aider un oiseau qui ne vole plus ?",
+             "Mets-le à l'abri des prédateurs dans un carton aéré, au calme et dans le noir, sans lui donner à manger ni à boire, et appelle un centre de soins de la faune sauvage. L'application Coup de Patte t'indique le plus proche."),
+            ("Faut-il le lancer en l'air pour l'aider à s'envoler ?",
+             "Non, jamais. Un oiseau qui ne s'envole pas a une raison : le lancer peut le blesser gravement, surtout un martinet ou un jeune."),
+        ],
+        "sources": ["lpo_secourir", "lpo_oisillon", "lpo_martinets", "lpo_guide"],
+        "liens": [("/guides/oiseau-blesse/", "J'ai trouvé un oiseau blessé"), ("/guides/oisillon-tombe-du-nid/", "Oisillon tombé du nid"), ("/guides/martinet-au-sol/", "Martinet au sol"), ("/actualites/oiseau-cogne-contre-une-vitre-que-faire/", "Oiseau qui a heurté une vitre"), ("/actualites/mon-chat-a-attrape-un-oiseau-que-faire/", "Mon chat a attrapé un oiseau")],
     },
     {
         "slug": "martinet-au-sol",
@@ -248,7 +306,7 @@ def render_guide(g, ctx):
     out.append('<main><article>')
     out.append('<nav class="fil"><a href="/">Coup de Patte</a> › <a href="/guides/">Guides</a></nav>')
     out.append('<span class="etiq">Guide d\'urgence</span>')
-    out.append('<h1>%s</h1>' % esc(g["titre"]))
+    out.append('<h1>%s</h1>' % esc(g.get("h1") or g["titre"]))
     out.append('<p class="meta">Rédaction Coup de Patte · <a href="#sources">%d sources</a></p>' % len(g["sources"]))
     out.append('<p class="chapo">%s</p>' % esc(g["chapo"]))
     out.append('<section class="geste"><h2>L\'essentiel en 30 secondes</h2><ol>%s</ol></section>'
@@ -338,7 +396,7 @@ def render_association(ctx):
 def render_benevole(ctx):
     esc, SITE, head, FOOT = ctx["esc"], ctx["SITE"], ctx["head"], ctx["FOOT"]
     url = SITE + "/benevole/"
-    titre = "Devenir bénévole pour la faune sauvage près de chez toi"
+    titre = "Bénévolat animaux sauvages : devenir bénévole près de chez toi"
     desc = "Transporter un oiseau blessé vers un centre de soins, accueillir, sensibiliser : deviens bénévole avec Coup de Patte. Inscription gratuite, à partir de 18 ans, partout en France."
     faq = [
         ("Que fait un bénévole Coup de Patte ?",
@@ -399,11 +457,11 @@ def build(ctx):
         write(os.path.join(root, "guides", g["slug"], "index.html"), render_guide(g, ctx))
         pages.append(("%s/guides/%s/" % (SITE, g["slug"]), g["titre"], g["desc"]))
     write(os.path.join(root, "guides", "index.html"), render_guides_index(ctx))
-    pages.insert(0, (SITE + "/guides/", "Guides d'urgence", "Oisillon tombé du nid, oiseau blessé, martinet au sol, oiseau bagué : les gestes qui sauvent."))
+    pages.insert(0, (SITE + "/guides/", "Guides d'urgence", "Oiseau blessé, oiseau par terre qui ne s'envole pas, oisillon tombé du nid, martinet au sol, oiseau bagué : les gestes qui sauvent."))
     write(os.path.join(root, "association", "index.html"), render_association(ctx))
     pages.append((SITE + "/association/", "L'association Coup de Patte", "Association loi 1901 de Saint-Aunès (Hérault) dédiée au secours de la faune sauvage, éditrice de l'application gratuite coupdepatte.eu. À ne pas confondre avec les refuges homonymes."))
     write(os.path.join(root, "benevole", "index.html"), render_benevole(ctx))
-    pages.append((SITE + "/benevole/", "Devenir bénévole pour la faune sauvage", "Transport vers les centres de soins, aide aux personnes qui trouvent un animal, sensibilisation. Inscription gratuite dès 18 ans."))
+    pages.append((SITE + "/benevole/", "Bénévolat animaux sauvages", "Transport vers les centres de soins, aide aux personnes qui trouvent un animal, sensibilisation. Inscription gratuite dès 18 ans."))
     write(os.path.join(root, "soutenir", "index.html"), render_soutenir(ctx))
     pages.append((SITE + "/soutenir/", "Soutenir l'association Coup de Patte", "Partager l'application, devenir bénévole, parrainer, soutenir les centres de soins."))
     return pages

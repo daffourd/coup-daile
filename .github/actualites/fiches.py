@@ -195,7 +195,7 @@ def render_centres_dept(code, centres, ctx):
     nomd = DEPTS.get(code, code)
     url = "%s/centres/%s/" % (SITE, dept_slug(code, slugify))
     n = len(centres)
-    titre = "Oiseau blessé, %s (%s) : centres de soins de la faune sauvage | Coup de Patte" % (nomd, code)
+    titre = "Oiseau blessé, %s (%s) : qui appeler ? Centres de soins faune sauvage | Coup de Patte" % (nomd, code)
     villes = ", ".join(sorted(set(c["ville"] for c in centres)))
     desc = ("Oiseau ou animal sauvage blessé dans le département %s (%s) ? %d centre%s de soins à appeler (%s), "
             "les bons gestes avant d'y aller. Liste gratuite Coup de Patte.") % (nomd, code, n, "s" if n > 1 else "", villes)
