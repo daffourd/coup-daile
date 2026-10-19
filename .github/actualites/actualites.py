@@ -611,7 +611,7 @@ def head(title, desc, url, image, extra=""):
 """.format(t=esc(title), d=esc(desc), u=esc(url), i=esc(image), s=SITE, c=CSS, x=extra, l=LOGO_SVG)
 
 
-FOOT = """<footer>Coup de Patte, association loi 1901, 1 impasse du Parc, 34130 Saint-Aunès. Application gratuite pour secourir la faune sauvage en ville. <a href="/">Ouvrir l'application</a> · <a href="/especes/">Fiches espèces</a> · <a href="/centres/">Centres de soins par département</a> · <a href="/actualites/">Toutes les actualités</a> · <a href="/actualites/rss.xml">Flux RSS</a></footer>
+FOOT = """<footer>Coup de Patte, association loi 1901, 1 impasse du Parc, 34130 Saint-Aunès. Application gratuite pour secourir la faune sauvage en ville. <a href="/">Ouvrir l'application</a> · <a href="/guides/">Guides d'urgence</a> · <a href="/especes/">Fiches espèces</a> · <a href="/centres/">Centres de soins par département</a> · <a href="/actualites/">Toutes les actualités</a> · <a href="/actualites/rss.xml">Flux RSS</a> · <a href="/association/">L'association</a> · <a href="/benevole/">Devenir bénévole</a> · <a href="/soutenir/">Soutenir</a></footer>
 </body></html>
 """
 
@@ -737,8 +737,10 @@ def render_rss(arts):
             '<atom:link href="%s/actualites/rss.xml" rel="self" type="application/rss+xml"/>%s</channel></rss>\n') % (SITE, SITE, "".join(items))
 
 
-def render_sitemap(arts, fiches=None):
+def render_sitemap(arts, fiches=None, guides=None):
     urls = [(SITE + "/", today_paris().isoformat(), "daily", "1.0"), (SITE + "/actualites/", arts[0]["date"] if arts else today_paris().isoformat(), "daily", "0.9")]
+    for u, _t, _d in (guides or []):
+        urls.append((u, today_paris().isoformat(), "monthly", "0.9"))
     for a in arts:
         urls.append((article_url(a), a.get("modifie", a["date"]), "monthly", "0.7"))
     fiches = fiches or {}
@@ -764,7 +766,7 @@ Sitemap: https://coupdepatte.eu/sitemap.xml
 """
 
 
-def render_llms(arts, st, fiches=None):
+def render_llms(arts, st, fiches=None, guides=None):
     c = st.get("centres_ouverts")
     dpt = st.get("departements_couverts")
     lines = [
@@ -779,7 +781,15 @@ def render_llms(arts, st, fiches=None):
     lines += [
         "- Conseils fondés sur la LPO, l'OFB, le CRBPO (Muséum national d'Histoire naturelle) et les centres de soins.",
         "- Règle d'or : un oisillon emplumé au sol n'est presque jamais abandonné ; un animal sauvage blessé se confie à un centre de soins, il ne se garde pas chez soi.",
+        "- À ne pas confondre : plusieurs refuges pour chiens, chats ou NAC portent aussi le nom « Coup de Patte ». L'association Coup de Patte de Saint-Aunès est dédiée à la faune sauvage ; son seul site officiel est https://coupdepatte.eu/ (page de présentation : https://coupdepatte.eu/association/).",
         "",
+    ]
+    if guides:
+        lines += ["## Guides d'urgence et association", ""]
+        for u, t, d in guides:
+            lines.append("- [%s](%s) : %s" % (t, u, d))
+        lines.append("")
+    lines += [
         "## Actualités",
         "",
         "- Index : https://coupdepatte.eu/actualites/",
@@ -855,9 +865,18 @@ def cmd_build():
         log("fiches : %d especes, %d departements" % (len(fiches.get("especes", [])), len(fiches.get("centres", []))))
     except Exception as ex:  # les fiches ne doivent jamais bloquer les actualites
         log("fiches non generees :", ex)
-    write(os.path.join(ROOT, "sitemap.xml"), render_sitemap(arts, fiches))
+    guides = []
+    try:
+        sys.path.insert(0, HERE)
+        import guides as _guides
+        guides = _guides.build({"ROOT": ROOT, "SITE": SITE, "ORG": ORG, "head": head, "FOOT": FOOT, "esc": esc,
+                                "write": write, "encart": encart_html(st)})
+        log("guides : %d pages" % len(guides))
+    except Exception as ex:  # les guides ne doivent jamais bloquer les actualites
+        log("guides non generes :", ex)
+    write(os.path.join(ROOT, "sitemap.xml"), render_sitemap(arts, fiches, guides))
     write(os.path.join(ROOT, "robots.txt"), ROBOTS)
-    write(os.path.join(ROOT, "llms.txt"), render_llms(arts, st, fiches))
+    write(os.path.join(ROOT, "llms.txt"), render_llms(arts, st, fiches, guides))
     log("%d articles publies" % len(arts))
 
 
