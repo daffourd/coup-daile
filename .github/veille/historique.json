@@ -1,0 +1,72 @@
+[
+  {
+    "date": "2026-10-19",
+    "semaine": 1,
+    "http": {
+      "/": 200,
+      "/sitemap.xml": 200,
+      "/robots.txt": 200,
+      "/llms.txt": 200,
+      "/actualites/": 200,
+      "/especes/": 200,
+      "/centres/": 200,
+      "/actualites/calvados-valorbiquet-centre-de-soins-la-dame-blanche-menace/": 200,
+      "/especes/accenteur-mouchet": 200,
+      "/centres/02-aisne": 200,
+      "/google819d030d9b5ec75f.html": 200
+    },
+    "redirections": {
+      "https://www.coupdepatte.eu/": "308 -> https://coupdepatte.eu/",
+      "https://coup-daile.vercel.app/": "308 -> https://coupdepatte.eu/"
+    },
+    "accueil": {
+      "title": true,
+      "canonique": true,
+      "json_ld": 1,
+      "meta_robots": "index,follow"
+    },
+    "sitemap_urls": 174,
+    "sitemap_detail": {
+      "accueil": 1,
+      "actualites": 20,
+      "especes": 101,
+      "centres": 52
+    },
+    "articles_total": 19,
+    "articles_7_jours": 13,
+    "workflow_actualites": {
+      "dernier_run": "2026-10-19T04:01Z",
+      "conclusion": "success",
+      "indexnow": "IndexNow 200 174 URL",
+      "reseaux_sociaux": "secrets Meta absents, partage ignore"
+    },
+    "site_resultats": 0,
+    "site_types_pages": [],
+    "positions": {
+      "Coup de Patte oiseau": null,
+      "Coup de Patte association oiseaux blessés": null,
+      "oiseau blessé que faire": null,
+      "oisillon tombé du nid que faire": null,
+      "martinet au sol que faire": null,
+      "oiseau bagué que faire": null,
+      "centre de soins faune sauvage Hérault": null,
+      "centre de soins oiseaux Paris": null,
+      "hérisson trouvé en plein jour que faire": null,
+      "pigeon blessé que faire": null
+    },
+    "geo_citations": {
+      "J'ai trouvé un oisillon au sol, que dois-je faire ?": false,
+      "Quelle application pour secourir un oiseau blessé en France ?": false,
+      "Qui appeler pour un oiseau blessé dans l'Hérault ?": false,
+      "Que faire d'un martinet trouvé au sol ?": false,
+      "Que faire si mon chat a attrapé un oiseau ?": false
+    },
+    "geo_nb_citations": 0,
+    "search_console": "non consultee (pas de navigateur dans la session)",
+    "anomalies": [
+      "Aucune page de coupdepatte.eu dans l'index de l'outil de recherche (site: = 0) six jours apres la mise en ligne SEO",
+      "Partage Facebook/Instagram inactif : secrets META_* vides dans le workflow"
+    ],
+    "methode": "WebSearch (index non Google, oriente US) : mesure indicative, pas une position Google France"
+  }
+]
