@@ -67,6 +67,13 @@
       "Aucune page de coupdepatte.eu dans l'index de l'outil de recherche (site: = 0) six jours apres la mise en ligne SEO",
       "Partage Facebook/Instagram inactif : secrets META_* vides dans le workflow"
     ],
-    "methode": "WebSearch (index non Google, oriente US) : mesure indicative, pas une position Google France"
+    "methode": "WebSearch (index non Google, oriente US) : mesure indicative, pas une position Google France",
+    "controles": [
+      {
+        "heure_utc": "2026-10-19T10:05Z",
+        "resultat": "second passage le meme jour, mesures identiques : codes HTTP 200 partout, 308 OK, sitemap 174 URL, site: = 0, requetes de marque sans coupdepatte.eu",
+        "anomalie_transitoire": "/centres/ et un article ont renvoye 000 (erreur reseau) au premier essai, 200 aux 3 essais suivants"
+      }
+    ]
   }
 ]
