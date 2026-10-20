@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>La boutique | Coup de Patte</title>
-<meta name="description" content="T-shirts, sweats, tote bags, mugs, porte-clés et autocollants aux couleurs de Coup de Patte, imprimés à la demande. Chaque achat soutient l'association et fait connaître le bon geste pour les oiseaux.">
+<meta name="description" content="T-shirts, sweats, tote bags et mugs aux couleurs de Coup de Patte, imprimés à la demande. Chaque achat soutient l'association et fait connaître le bon geste pour les oiseaux.">
 <link rel="canonical" href="https://boutique.coupdepatte.eu/">
 <meta name="theme-color" content="#1F9E67">
 <meta property="og:type" content="website">
@@ -42,6 +42,7 @@ h1{font-family:Fraunces,Georgia,serif;font-size:clamp(30px,6vw,44px);line-height
 .corps h2{font-size:18px;font-weight:900;line-height:1.25}
 .corps p{font-size:14.5px;color:var(--doux)}
 .prix{font-weight:900;color:var(--vert);font-size:17px}
+.prix .port{font-weight:700;font-size:13px;color:var(--doux)}
 label{font-size:13px;font-weight:700;color:var(--doux)}
 select{font:inherit;font-size:16px;padding:10px 12px;border-radius:12px;border:1px solid var(--bord);background:var(--blanc);color:var(--texte);width:100%}
 .btn{margin-top:auto;display:block;width:100%;border:none;border-radius:14px;padding:14px;font:inherit;font-weight:800;font-size:16px;background:var(--vert);color:#fff;cursor:pointer;min-height:48px}
@@ -90,22 +91,20 @@ footer p{margin:4px 0}
   var IMG = 'https://coupdepatte.eu/boutique/apercus/';
   var CLE = 'sb_publishable_OBbJMFqX9UIOkj6FF2T34Q_KTrqUbvL';
   var DEFAUT = [
-    {id:'tshirt-plume', nom:'T-shirt La plume', description:'La plume blanche, petite et haut sur la poitrine, sur coton vert. Coupe unisexe.', image:IMG+'tshirt.jpg', tailles:['S','M','L','XL','XXL'], prix_cts:null},
-    {id:'sweat-oiseaux', nom:'Sweat Oiseaux de nos jardins', description:'Rouge-gorge, mésange, hirondelle et martinet, centrés sur le torse. Molleton écru.', image:IMG+'sweat.jpg', tailles:['S','M','L','XL','XXL'], prix_cts:null},
-    {id:'tote-ilovebirds', nom:'Tote bag I love birds', description:'Coton biologique naturel, pour les courses, les marchés et les sorties nature. Cinq modèles : un par oiseau, ou les quatre ensemble.', image:IMG+'tote-hirondelle.jpg', tailles:[], prix_cts:null, variantes:[
+    {id:'tshirt-plume', nom:'T-shirt La plume', description:'La plume blanche, petite et haut sur la poitrine, sur coton vert. Coupe unisexe.', image:IMG+'tshirt.jpg', tailles:['S','M','L','XL','XXL'], prix_cts:2900},
+    {id:'sweat-oiseaux', nom:'Sweat Oiseaux de nos jardins', description:'Rouge-gorge, mésange, hirondelle et martinet, centrés sur le torse. Molleton écru.', image:IMG+'sweat.jpg', tailles:['S','M','L','XL','XXL'], prix_cts:4900},
+    {id:'tote-ilovebirds', nom:'Tote bag I love birds', description:'Coton biologique naturel, pour les courses, les marchés et les sorties nature. Cinq modèles : un par oiseau, ou les quatre ensemble.', image:IMG+'tote-hirondelle.jpg', tailles:[], prix_cts:3900, variantes:[
       {id:'hirondelle', nom:'Hirondelle', image:IMG+'tote-hirondelle.jpg'},
       {id:'rouge-gorge', nom:'Rouge-gorge', image:IMG+'tote-rouge-gorge.jpg'},
       {id:'mesange', nom:'Mésange bleue', image:IMG+'tote-mesange.jpg'},
       {id:'martinet', nom:'Martinet noir', image:IMG+'tote-martinet.jpg'},
       {id:'quatre-oiseaux', nom:'Les quatre oiseaux', image:IMG+'tote-quatre-oiseaux.jpg'}]},
-    {id:'mug-plume', nom:'Mug La plume', description:'Céramique blanche, la plume du logo dans sa pastille verte.', image:IMG+'mug.jpg', tailles:[], prix_cts:null},
-    {id:'porte-cles', nom:'Porte-clés', description:'Acrylique, un petit cadeau qui fait connaître l\'association.', image:IMG+'porte-cles.jpg', tailles:[], prix_cts:null},
-    {id:'autocollants', nom:'Autocollants', description:'Vinyle découpé : le slogan, les oiseaux et la plume.', image:IMG+'autocollants.jpg', tailles:[], prix_cts:null}
+    {id:'mug-plume', nom:'Mug La plume', description:'Céramique blanche, la plume du logo dans sa pastille verte.', image:IMG+'mug.jpg', tailles:[], prix_cts:1900}
   ];
   var produits = DEFAUT, envoi = false, choix = {};
   function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
   function img(u){ u=String(u||''); return u.charAt(0)==='/' ? 'https://coupdepatte.eu'+u : u; }
-  function prix(c){ if(c==null) return 'Prix bientôt'; var e=(c/100).toFixed(2).replace('.',','); return e.replace(',00','')+' €'; }
+  function prix(c){ if(c==null) return 'Prix bientôt'; var e=(c/100).toFixed(2).replace('.',','); return e.replace(',00','')+' € <small class="port">livraison comprise</small>'; }
   function rendre(){
     var q=location.search, b='';
     if(/commande=merci/.test(q)) b='<div class="bandeau ok">Merci pour ton soutien. Ta commande est enregistrée, tu recevras un e-mail de confirmation.</div>';
