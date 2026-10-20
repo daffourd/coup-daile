@@ -830,7 +830,7 @@
       <div id="adHome"></div>
       </div><div class="home-foot">
       <p class="disclaimer">Coup de Patte informe et oriente, sans remplacer l'avis d'un centre de sauvegarde ou d'un vétérinaire. Conseils fondés sur la LPO et l'OFB.</p>
-      <p class="disclaimer"><a href="/guides/" style="color:inherit">Guides d'urgence</a> · <a href="/especes/" style="color:inherit">Fiches espèces</a> · <a href="/centres/" style="color:inherit">Centres de soins par département</a> · <a href="/actualites/" style="color:inherit">Actualités</a> · <a href="/association/" style="color:inherit">L'association</a><span class="btq-entree"> · <a href="#/boutique" onclick="showScreen('boutique');return false;" style="color:inherit">Boutique</a></span> · <a href="/benevole/" style="color:inherit">Devenir bénévole</a></p>
+      <p class="disclaimer"><a href="/guides/" style="color:inherit">Guides d'urgence</a> · <a href="/especes/" style="color:inherit">Fiches espèces</a> · <a href="/centres/" style="color:inherit">Centres de soins par département</a> · <a href="/actualites/" style="color:inherit">Actualités</a> · <a href="/association/" style="color:inherit">L'association</a><span class="btq-entree"> · <a href="https://boutique.coupdepatte.eu/" target="_blank" rel="noopener" style="color:inherit">Boutique</a></span> · <a href="/benevole/" style="color:inherit">Devenir bénévole</a></p>
       </div>
     </section>
 
@@ -1405,8 +1405,9 @@
   // Tant que les deux sont a false, l'ecran reste accessible par #/boutique pour apercu.
   var BOUTIQUE_OUVERTE = false;
   var BOUTIQUE_ENTREES = false;
+  var BOUTIQUE_URL = 'https://boutique.coupdepatte.eu/';
   var BOUTIQUE_DEFAUT = [
-    {id:'tshirt-plume', nom:'T-shirt La plume', motif:'La plume', description:'La plume blanche sur coton vert, coupe unisexe.', image:'/boutique/apercus/tshirt.jpg', tailles:['S','M','L','XL','XXL'], prix_cts:null, ordre:1},
+    {id:'tshirt-plume', nom:'T-shirt La plume', motif:'La plume', description:'La plume blanche, petite et haut sur la poitrine, sur coton vert. Coupe unisexe.', image:'/boutique/apercus/tshirt.jpg', tailles:['S','M','L','XL','XXL'], prix_cts:null, ordre:1},
     {id:'sweat-oiseaux', nom:'Sweat Oiseaux de nos jardins', motif:'Oiseaux de nos jardins', description:'Rouge-gorge, mésange, hirondelle et martinet sur molleton écru.', image:'/boutique/apercus/sweat.jpg', tailles:['S','M','L','XL','XXL'], prix_cts:null, ordre:2},
     {id:'tote-ilovebirds', nom:'Tote bag I love birds', motif:'I love birds', description:'Coton naturel, pour les courses, les marchés et les sorties nature.', image:'/boutique/apercus/tote.jpg', tailles:[], prix_cts:null, ordre:3},
     {id:'mug-plume', nom:'Mug La plume', motif:'La plume', description:'Céramique blanche, la plume du logo dans sa pastille verte.', image:'/boutique/apercus/mug.jpg', tailles:[], prix_cts:null, ordre:4},
@@ -1441,33 +1442,22 @@
       return '<div class="btq-card"><img src="'+escapeH(p.image||'')+'" alt="'+escapeH(p.nom)+'" loading="lazy" width="720" height="720">'
         +'<div class="btq-body"><h3>'+escapeH(p.nom)+'</h3>'
         +'<div class="meta">'+escapeH(p.description||'')+'</div>'
-        +'<div class="btq-prix">'+boutiquePrix(p.prix_cts)+'</div>'+sel
-        +'<button class="btn btn-primary btn-sm"'+(actif?' onclick="commanderBoutique(\''+pid+'\')"':' disabled aria-disabled="true" style="opacity:.55;cursor:default"')+'>'+(actif?'Commander':'Bientôt disponible')+'</button>'
+        +'<div class="btq-prix">'+boutiquePrix(p.prix_cts)+'</div>'
+        +'<a class="btn btn-primary btn-sm" href="'+BOUTIQUE_URL+'#'+pid+'" target="_blank" rel="noopener">'+(actif?'Commander':'Voir dans la boutique')+'</a>'
         +'</div></div>';
     }).join('')+'</div>';
     h+='<div id="btqMsg" class="meta" style="margin-bottom:10px"></div>';
-    h+='<p class="disclaimer">Paiement sécurisé par Stripe, impression et livraison par notre partenaire Prodigi. Tu disposes de 14 jours pour changer d\'avis après réception.</p>';
+    h+='<p class="disclaimer">La boutique est opérée par DIVA DIAA SAS pour l\'association, sur <a href="'+BOUTIQUE_URL+'" target="_blank" rel="noopener">boutique.coupdepatte.eu</a>. Paiement sécurisé par Stripe, 14 jours pour changer d\'avis après réception.</p>';
     el.innerHTML=h;
-  }
-  function commanderBoutique(id){
-    var m=document.getElementById('btqMsg');
-    if(!BOUTIQUE_OUVERTE || !db || _btq.envoi) return;
-    var t=document.getElementById('btqT_'+id), taille=t?t.value:null;
-    _btq.envoi=id; if(m){ m.style.color=''; m.textContent='Préparation du paiement sécurisé...'; }
-    db.functions.invoke('boutique-commande',{body:{produit:id, taille:taille}}).then(function(r){
-      _btq.envoi=null;
-      if(r.error || !r.data || !r.data.url){ if(m){ m.style.color='#c0392b'; m.textContent='Le paiement n\'a pas pu démarrer. Réessaie dans un instant.'; } return; }
-      location.href=r.data.url;
-    }, function(){ _btq.envoi=null; if(m){ m.style.color='#c0392b'; m.textContent='Connexion impossible. Vérifie ton réseau.'; } });
   }
   function boutiqueMerciHtml(issue){
     if(!BOUTIQUE_ENTREES) return '';
     if(issue!=='Confié à un centre' && issue!=='Laissé en place' && issue!=='Remis au nid') return '';
-    return '<br><span style="color:var(--texte-doux)">Merci pour lui. Envie d\'aller plus loin ? <a href="#/boutique" onclick="showScreen(\'boutique\');return false;">Porte les couleurs de l\'association</a>.</span>';
+    return '<br><span style="color:var(--texte-doux)">Merci pour lui. Envie d\'aller plus loin ? <a href="'+BOUTIQUE_URL+'" target="_blank" rel="noopener">Porte les couleurs de l\'association</a>.</span>';
   }
   function boutiqueBenevoleHtml(){
     if(!BOUTIQUE_ENTREES) return '';
-    return '<button class="opt" onclick="showScreen(\'boutique\')"><span class="dot">'+_ico('<path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 0 1 6 0"/>',20)+'</span><span><b>Tote bags et autocollants</b><br><span class="meta" style="font-weight:400">Pour tes stands et tes sorties, aux couleurs de l\'association</span></span><span class="chev">&rsaquo;</span></button>';
+    return '<a class="opt" href="'+BOUTIQUE_URL+'" target="_blank" rel="noopener"><span class="dot">'+_ico('<path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 0 1 6 0"/>',20)+'</span><span><b>Tote bags et autocollants</b><br><span class="meta" style="font-weight:400">Pour tes stands et tes sorties, aux couleurs de l\'association</span></span><span class="chev">&rsaquo;</span></a>';
   }
   // ---------- Oiseau bague : consignes officielles (CRBPO/MNHN, LPO, OFB, FCF), verifiees le 01/10/2026 ----------
   var _bg = {type:null, etat:null};

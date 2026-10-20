@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>La boutique | Coup de Patte</title>
+<meta name="description" content="T-shirts, sweats, tote bags, mugs, porte-clés et autocollants aux couleurs de Coup de Patte, imprimés à la demande. Chaque achat soutient l'association et fait connaître le bon geste pour les oiseaux.">
+<link rel="canonical" href="https://boutique.coupdepatte.eu/">
+<meta name="theme-color" content="#1F9E67">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Coup de Patte">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="La boutique | Coup de Patte">
+<meta property="og:description" content="Des objets à nos couleurs, imprimés à la demande. Chaque achat soutient l'association.">
+<meta property="og:url" content="https://boutique.coupdepatte.eu/">
+<meta property="og:image" content="https://coupdepatte.eu/boutique/apercus/tote.jpg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://coupdepatte.eu/favicon-32.png">
+<link rel="apple-touch-icon" href="https://coupdepatte.eu/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--vert:#1F9E67;--vert-fonce:#12885A;--vert-pale:#E7F1EB;--beige:#F7F5EF;--creme:#FAF6EC;--ambre-pale:#FBEFD8;--texte:#233029;--doux:#5C6B63;--blanc:#fff;--bord:#E6E3DA;--erreur:#B5482F;}
+@media (prefers-color-scheme:dark){:root{--beige:#0f1512;--blanc:#1e2823;--texte:#eaf1ec;--doux:#a7b6ac;--bord:#2c3a32;--vert-pale:#20302a;--ambre-pale:#2f2a1c;--erreur:#FF9E86;}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--beige);color:var(--texte);line-height:1.55;font-size:16px}
+a{color:var(--vert)}
+.top{display:flex;align-items:center;gap:10px;padding:14px 16px;max-width:1080px;margin:0 auto}
+.logo{width:38px;height:38px;border-radius:12px;background:var(--vert);display:grid;place-items:center;flex:0 0 auto}
+.logo svg{width:22px;height:22px}
+.marque{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:19px;color:var(--texte);text-decoration:none;line-height:1.1}
+.marque small{display:block;font-family:Nunito,sans-serif;font-weight:700;font-size:12px;color:var(--doux)}
+.cartouche{margin-left:auto;display:inline-block;border:1.5px solid var(--vert);color:var(--vert);text-decoration:none;font-weight:800;font-size:13px;padding:6px 12px;border-radius:999px;white-space:nowrap}
+main{max-width:1080px;margin:0 auto;padding:6px 16px 40px}
+h1{font-family:Fraunces,Georgia,serif;font-size:clamp(30px,6vw,44px);line-height:1.12;letter-spacing:-.5px;margin:10px 0 8px}
+.chapo{font-size:18px;color:var(--doux);max-width:720px;margin-bottom:18px}
+.bandeau{background:var(--ambre-pale);border-radius:16px;padding:14px 16px;margin:0 0 18px;font-weight:700}
+.bandeau.ok{background:var(--vert-pale)}
+.grille{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.carte{background:var(--blanc);border:1px solid var(--bord);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 2px 10px rgba(30,50,40,.06)}
+.carte img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;display:block;background:var(--creme)}
+.corps{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.corps h2{font-size:18px;font-weight:900;line-height:1.25}
+.corps p{font-size:14.5px;color:var(--doux)}
+.prix{font-weight:900;color:var(--vert);font-size:17px}
+label{font-size:13px;font-weight:700;color:var(--doux)}
+select{font:inherit;font-size:16px;padding:10px 12px;border-radius:12px;border:1px solid var(--bord);background:var(--blanc);color:var(--texte);width:100%}
+.btn{margin-top:auto;display:block;width:100%;border:none;border-radius:14px;padding:14px;font:inherit;font-weight:800;font-size:16px;background:var(--vert);color:#fff;cursor:pointer;min-height:48px}
+.btn[disabled]{opacity:.55;cursor:default}
+.msg{min-height:20px;margin:12px 0 0;font-weight:700}
+.msg.err{color:var(--erreur)}
+.rassure{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:26px 0 8px}
+.rassure div{background:var(--blanc);border:1px solid var(--bord);border-radius:16px;padding:14px 16px;font-size:14.5px}
+.rassure b{display:block;font-size:15px}
+footer{max-width:1080px;margin:0 auto;padding:20px 16px 34px;border-top:1px solid var(--bord);font-size:13.5px;color:var(--doux)}
+footer a{color:var(--texte)}
+footer p{margin:4px 0}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="https://coupdepatte.eu/" aria-label="Coup de Patte, retour à l'application"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg></a>
+  <a class="marque" href="/">Coup de Patte<small>La boutique</small></a>
+  <a class="cartouche" href="https://coupdepatte.eu/">coupdepatte.eu</a>
+</header>
+<main>
+  <h1>La boutique</h1>
+  <p class="chapo">Des objets à nos couleurs, imprimés à la demande et livrés chez toi. Chaque achat soutient l'association Coup de Patte et fait connaître le bon geste pour les oiseaux.</p>
+  <div id="bandeau"></div>
+  <div class="grille" id="grille"></div>
+  <p class="msg" id="msg" role="status" aria-live="polite"></p>
+  <div class="rassure">
+    <div><b>Paiement sécurisé</b>Par carte, sur la page de paiement de Stripe.</div>
+    <div><b>Imprimé à la demande</b>Chaque objet est fabriqué pour toi, sans stock ni gaspillage.</div>
+    <div><b>14 jours pour changer d'avis</b>Après réception, selon nos <a href="/cgv/">conditions générales de vente</a>.</div>
+  </div>
+</main>
+<footer>
+  <p>Boutique opérée par DIVA DIAA SAS pour l'association Coup de Patte. <a href="/cgv/">Conditions générales de vente et mentions légales</a>.</p>
+  <p>Une question sur une commande : <a href="mailto:bonjour@coupdepatte.eu">bonjour@coupdepatte.eu</a>. Tu as trouvé un oiseau ? <a href="https://coupdepatte.eu/">Ouvre l'application</a>.</p>
+</footer>
+<script>
+  // Boutique Coup de Patte (boutique.coupdepatte.eu). ES5, sans dépendance.
+  // OUVERTE passe à true quand Stripe et Prodigi sont branchés en production.
+  var OUVERTE = false;
+  var SUPA = 'https://sgxohmndhngpxgkobkbm.supabase.co';
+  var IMG = 'https://coupdepatte.eu/boutique/apercus/';
+  var CLE = 'sb_publishable_OBbJMFqX9UIOkj6FF2T34Q_KTrqUbvL';
+  var DEFAUT = [
+    {id:'tshirt-plume', nom:'T-shirt La plume', description:'La plume blanche, petite et haut sur la poitrine, sur coton vert. Coupe unisexe.', image:IMG+'tshirt.jpg', tailles:['S','M','L','XL','XXL'], prix_cts:null},
+    {id:'sweat-oiseaux', nom:'Sweat Oiseaux de nos jardins', description:'Rouge-gorge, mésange, hirondelle et martinet sur molleton écru.', image:IMG+'sweat.jpg', tailles:['S','M','L','XL','XXL'], prix_cts:null},
+    {id:'tote-ilovebirds', nom:'Tote bag I love birds', description:'Coton naturel, pour les courses, les marchés et les sorties nature.', image:IMG+'tote.jpg', tailles:[], prix_cts:null},
+    {id:'mug-plume', nom:'Mug La plume', description:'Céramique blanche, la plume du logo dans sa pastille verte.', image:IMG+'mug.jpg', tailles:[], prix_cts:null},
+    {id:'porte-cles', nom:'Porte-clés', description:'Acrylique, un petit cadeau qui fait connaître l\'association.', image:IMG+'porte-cles.jpg', tailles:[], prix_cts:null},
+    {id:'autocollants', nom:'Autocollants', description:'Vinyle découpé : le slogan, les oiseaux et la plume.', image:IMG+'autocollants.jpg', tailles:[], prix_cts:null}
+  ];
+  var produits = DEFAUT, envoi = false;
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function img(u){ u=String(u||''); return u.charAt(0)==='/' ? 'https://coupdepatte.eu'+u : u; }
+  function prix(c){ if(c==null) return 'Prix bientôt'; var e=(c/100).toFixed(2).replace('.',','); return e.replace(',00','')+' €'; }
+  function rendre(){
+    var q=location.search, b='';
+    if(/commande=merci/.test(q)) b='<div class="bandeau ok">Merci pour ton soutien. Ta commande est enregistrée, tu recevras un e-mail de confirmation.</div>';
+    else if(/commande=annulee/.test(q)) b='<div class="bandeau">Commande annulée. Rien n\'a été débité.</div>';
+    else if(!OUVERTE) b='<div class="bandeau">La boutique ouvre très bientôt. Les objets sont en préparation.</div>';
+    document.getElementById('bandeau').innerHTML=b;
+    document.getElementById('grille').innerHTML=produits.map(function(p){
+      var id=esc(p.id), t=p.tailles||[], actif=OUVERTE && p.prix_cts!=null;
+      var sel=t.length?'<label for="t_'+id+'">Taille</label><select id="t_'+id+'">'+t.map(function(x){ return '<option'+(x==='M'?' selected':'')+'>'+esc(x)+'</option>'; }).join('')+'</select>':'';
+      return '<article class="carte" id="'+id+'"><img src="'+esc(img(p.image))+'" alt="'+esc(p.nom)+'" width="720" height="720" loading="lazy">'
+        +'<div class="corps"><h2>'+esc(p.nom)+'</h2><p>'+esc(p.description)+'</p><div class="prix">'+prix(p.prix_cts)+'</div>'+sel
+        +'<button class="btn" type="button"'+(actif?' onclick="commander(\''+id+'\')"':' disabled')+'>'+(actif?'Commander':'Bientôt disponible')+'</button></div></article>';
+    }).join('');
+  }
+  function charger(){
+    var x=new XMLHttpRequest();
+    x.open('GET', SUPA+'/rest/v1/boutique_produits?select=id,nom,description,image,tailles,prix_cts,ordre&actif=eq.true&order=ordre');
+    x.setRequestHeader('apikey', CLE);
+    x.onload=function(){ try{ var d=JSON.parse(x.responseText); if(x.status===200 && d && d.length){ produits=d; rendre(); } }catch(_){} };
+    x.send();
+  }
+  function commander(id){
+    var m=document.getElementById('msg');
+    if(!OUVERTE || envoi) return;
+    var s=document.getElementById('t_'+id), taille=s?s.value:null;
+    envoi=true; m.className='msg'; m.textContent='Préparation du paiement sécurisé...';
+    var x=new XMLHttpRequest();
+    x.open('POST', SUPA+'/functions/v1/boutique-commande');
+    x.setRequestHeader('apikey', CLE); x.setRequestHeader('Authorization', 'Bearer '+CLE); x.setRequestHeader('Content-Type','application/json');
+    x.onload=function(){ envoi=false; var d=null; try{ d=JSON.parse(x.responseText); }catch(_){} if(d && d.url){ location.href=d.url; return; } m.className='msg err'; m.textContent='Le paiement n\'a pas pu démarrer. Réessaie dans un instant.'; };
+    x.onerror=function(){ envoi=false; m.className='msg err'; m.textContent='Connexion impossible. Vérifie ton réseau.'; };
+    x.send(JSON.stringify({produit:id, taille:taille}));
+  }
+  rendre(); charger();
+</script>
+</body>
+</html>
