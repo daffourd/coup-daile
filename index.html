@@ -761,6 +761,17 @@
   .ann-soon .btn{margin-top:8px;}
   .ann-ok{display:flex;align-items:center;justify-content:center;gap:6px;color:var(--vert)!important;font-weight:800;}
 
+  /* Boutique (discrete) */
+  .btq-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:6px 0 16px;}
+  .btq-card{background:var(--blanc);border:1px solid var(--bord);border-radius:var(--rayon);box-shadow:var(--ombre-douce);overflow:hidden;display:flex;flex-direction:column;}
+  .btq-card img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;display:block;background:#FAF6EC;}
+  .btq-body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1;}
+  .btq-body h3{margin:0;font-size:17px;font-weight:800;}
+  .btq-prix{font-weight:800;color:var(--vert);font-size:16px;}
+  .btq-body .field{margin:2px 0 4px;}
+  .btq-body .btn{margin-top:auto;}
+  .btq-entree{display:none;}
+  html.btq-on .btq-entree{display:inline;}
 </style>
 </head>
 <body>
@@ -819,7 +830,7 @@
       <div id="adHome"></div>
       </div><div class="home-foot">
       <p class="disclaimer">Coup de Patte informe et oriente, sans remplacer l'avis d'un centre de sauvegarde ou d'un vétérinaire. Conseils fondés sur la LPO et l'OFB.</p>
-      <p class="disclaimer"><a href="/guides/" style="color:inherit">Guides d'urgence</a> · <a href="/especes/" style="color:inherit">Fiches espèces</a> · <a href="/centres/" style="color:inherit">Centres de soins par département</a> · <a href="/actualites/" style="color:inherit">Actualités</a> · <a href="/association/" style="color:inherit">L'association</a> · <a href="/benevole/" style="color:inherit">Devenir bénévole</a></p>
+      <p class="disclaimer"><a href="/guides/" style="color:inherit">Guides d'urgence</a> · <a href="/especes/" style="color:inherit">Fiches espèces</a> · <a href="/centres/" style="color:inherit">Centres de soins par département</a> · <a href="/actualites/" style="color:inherit">Actualités</a> · <a href="/association/" style="color:inherit">L'association</a><span class="btq-entree"> · <a href="#/boutique" onclick="showScreen('boutique');return false;" style="color:inherit">Boutique</a></span> · <a href="/benevole/" style="color:inherit">Devenir bénévole</a></p>
       </div>
     </section>
 
@@ -1196,6 +1207,8 @@
     </section>
 
     <!-- ACTUALITES -->
+    <section class="screen" id="boutique"><div id="boutiqueView"></div></section>
+
     <section class="screen" id="actus">
       <h2 class="title">Actualités</h2>
       <p class="sub">Chaque jour, une actualité de la faune sauvage en ville, en France, en Europe et dans le monde, et les gestes qui la sauvent.</p>
@@ -1381,8 +1394,80 @@
     if(id==='assos' && typeof renderAssos==='function') renderAssos();
     if(id==='admin' && typeof renderAdmin==='function') renderAdmin();
     if(id==='actus') renderActus();
+    if(id==='boutique') renderBoutique();
     if(typeof renderAds==='function') renderAds();
     renderNav(id);
+  }
+  // ---------- Boutique : objets imprimes a la demande (Prodigi), paiement Stripe ----------
+  // Volontairement discrete : jamais pendant un sauvetage. Trois entrees seulement :
+  // pied de page, message apres enregistrement au carnet, espace benevole.
+  // BOUTIQUE_ENTREES affiche ces entrees ; BOUTIQUE_OUVERTE active la commande.
+  // Tant que les deux sont a false, l'ecran reste accessible par #/boutique pour apercu.
+  var BOUTIQUE_OUVERTE = false;
+  var BOUTIQUE_ENTREES = false;
+  var BOUTIQUE_DEFAUT = [
+    {id:'tshirt-plume', nom:'T-shirt La plume', motif:'La plume', description:'La plume blanche sur coton vert, coupe unisexe.', image:'/boutique/apercus/tshirt.jpg', tailles:['S','M','L','XL','XXL'], prix_cts:null, ordre:1},
+    {id:'sweat-oiseaux', nom:'Sweat Oiseaux de nos jardins', motif:'Oiseaux de nos jardins', description:'Rouge-gorge, mésange, hirondelle et martinet sur molleton écru.', image:'/boutique/apercus/sweat.jpg', tailles:['S','M','L','XL','XXL'], prix_cts:null, ordre:2},
+    {id:'tote-ilovebirds', nom:'Tote bag I love birds', motif:'I love birds', description:'Coton naturel, pour les courses, les marchés et les sorties nature.', image:'/boutique/apercus/tote.jpg', tailles:[], prix_cts:null, ordre:3},
+    {id:'mug-plume', nom:'Mug La plume', motif:'La plume', description:'Céramique blanche, la plume du logo dans sa pastille verte.', image:'/boutique/apercus/mug.jpg', tailles:[], prix_cts:null, ordre:4},
+    {id:'porte-cles', nom:'Porte-clés', motif:'Rouge-gorge ou plume', description:'Acrylique, un petit cadeau qui fait connaître l\'association.', image:'/boutique/apercus/porte-cles.jpg', tailles:[], prix_cts:null, ordre:5},
+    {id:'autocollants', nom:'Autocollants', motif:'I love birds et oiseaux', description:'Vinyle découpé : le slogan, les oiseaux et la plume.', image:'/boutique/apercus/autocollants.jpg', tailles:[], prix_cts:null, ordre:6}
+  ];
+  var _btq = {produits:null, charge:false, envoi:null};
+  try{ if(BOUTIQUE_ENTREES) document.documentElement.classList.add('btq-on'); }catch(_){}
+  function boutiquePrix(c){ if(c==null) return 'Prix bientôt'; return (c/100).toFixed(2).replace('.',',').replace(',00','')+' €'; }
+  function loadBoutique(cb){
+    if(_btq.charge || !db){ _btq.charge=true; cb(); return; }
+    db.from('boutique_produits').select('id,nom,motif,description,image,tailles,prix_cts,ordre').eq('actif',true).order('ordre').then(function(r){
+      _btq.charge=true;
+      if(!r.error && r.data && r.data.length) _btq.produits=r.data;
+      cb();
+    }, function(){ _btq.charge=true; cb(); });
+  }
+  function renderBoutique(){
+    var el=document.getElementById('boutiqueView'); if(!el) return;
+    if(!_btq.charge){ el.innerHTML='<h2 class="title">La boutique</h2><p class="meta">Chargement...</p>'; loadBoutique(renderBoutique); return; }
+    var liste=_btq.produits||BOUTIQUE_DEFAUT;
+    var q=location.search||'';
+    var h='<h2 class="title">La boutique</h2>'
+      +'<p class="sub">Des objets à nos couleurs, imprimés à la demande et livrés chez toi. Chaque achat soutient l\'association et fait connaître le bon geste.</p>';
+    if(/commande=merci/.test(q)) h+='<div class="callout"><b>Merci pour ton soutien.</b> Ta commande est enregistrée. Tu recevras un e-mail dès son expédition.</div>';
+    else if(/commande=annulee/.test(q)) h+='<div class="callout">Commande annulée. Rien n\'a été débité.</div>';
+    if(!BOUTIQUE_OUVERTE) h+='<div class="tip"><div class="k">Bientôt</div><p>La boutique ouvre très bientôt. Les objets sont en préparation.</p></div>';
+    h+='<div class="btq-grid">'+liste.map(function(p){
+      var pid=escapeH(p.id), tailles=p.tailles||[];
+      var sel=tailles.length?'<label class="meta" for="btqT_'+pid+'">Taille</label><select class="field" id="btqT_'+pid+'">'+tailles.map(function(t){ return '<option value="'+escapeH(t)+'"'+(t==='M'?' selected':'')+'>'+escapeH(t)+'</option>'; }).join('')+'</select>':'';
+      var actif=BOUTIQUE_OUVERTE && p.prix_cts!=null;
+      return '<div class="btq-card"><img src="'+escapeH(p.image||'')+'" alt="'+escapeH(p.nom)+'" loading="lazy" width="720" height="720">'
+        +'<div class="btq-body"><h3>'+escapeH(p.nom)+'</h3>'
+        +'<div class="meta">'+escapeH(p.description||'')+'</div>'
+        +'<div class="btq-prix">'+boutiquePrix(p.prix_cts)+'</div>'+sel
+        +'<button class="btn btn-primary btn-sm"'+(actif?' onclick="commanderBoutique(\''+pid+'\')"':' disabled aria-disabled="true" style="opacity:.55;cursor:default"')+'>'+(actif?'Commander':'Bientôt disponible')+'</button>'
+        +'</div></div>';
+    }).join('')+'</div>';
+    h+='<div id="btqMsg" class="meta" style="margin-bottom:10px"></div>';
+    h+='<p class="disclaimer">Paiement sécurisé par Stripe, impression et livraison par notre partenaire Prodigi. Tu disposes de 14 jours pour changer d\'avis après réception.</p>';
+    el.innerHTML=h;
+  }
+  function commanderBoutique(id){
+    var m=document.getElementById('btqMsg');
+    if(!BOUTIQUE_OUVERTE || !db || _btq.envoi) return;
+    var t=document.getElementById('btqT_'+id), taille=t?t.value:null;
+    _btq.envoi=id; if(m){ m.style.color=''; m.textContent='Préparation du paiement sécurisé...'; }
+    db.functions.invoke('boutique-commande',{body:{produit:id, taille:taille}}).then(function(r){
+      _btq.envoi=null;
+      if(r.error || !r.data || !r.data.url){ if(m){ m.style.color='#c0392b'; m.textContent='Le paiement n\'a pas pu démarrer. Réessaie dans un instant.'; } return; }
+      location.href=r.data.url;
+    }, function(){ _btq.envoi=null; if(m){ m.style.color='#c0392b'; m.textContent='Connexion impossible. Vérifie ton réseau.'; } });
+  }
+  function boutiqueMerciHtml(issue){
+    if(!BOUTIQUE_ENTREES) return '';
+    if(issue!=='Confié à un centre' && issue!=='Laissé en place' && issue!=='Remis au nid') return '';
+    return '<br><span style="color:var(--texte-doux)">Merci pour lui. Envie d\'aller plus loin ? <a href="#/boutique" onclick="showScreen(\'boutique\');return false;">Porte les couleurs de l\'association</a>.</span>';
+  }
+  function boutiqueBenevoleHtml(){
+    if(!BOUTIQUE_ENTREES) return '';
+    return '<button class="opt" onclick="showScreen(\'boutique\')"><span class="dot">'+_ico('<path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 0 1 6 0"/>',20)+'</span><span><b>Tote bags et autocollants</b><br><span class="meta" style="font-weight:400">Pour tes stands et tes sorties, aux couleurs de l\'association</span></span><span class="chev">&rsaquo;</span></button>';
   }
   // ---------- Oiseau bague : consignes officielles (CRBPO/MNHN, LPO, OFB, FCF), verifiees le 01/10/2026 ----------
   var _bg = {type:null, etat:null};
@@ -1610,8 +1695,8 @@
     b.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); b.click(); } });
     new MutationObserver(function(){ if(b.querySelector('img') && !b.querySelector('.zoom-hint')){ var h=document.createElement('span'); h.className='zoom-hint'; h.innerHTML=ZOOM_SVG; b.appendChild(h); } }).observe(b,{childList:true}); } })();
   /* ===== Navigation : retour en arriere ===== */
-  var NAV_LBL={home:'Accueil',u1:'Étape 1',u2:'Étape 2',u3:'Étape 3',u4:'Étape 4',rA:'Conseils',rB:'Conseils',rNid:'Oisillon',bague:'Oiseau bagué',secours:'Secours',centres:'Carte des centres',identifier:'Identifier',especes:'Espèces',espece:'Fiche',conseils:'Conseils',gestes:'Bons gestes',reglages:'Réglages',compte:'Compte',benevoles:'Bénévoles',devenir:'Devenir bénévole',assos:'Associations',admin:'Administration',signaler:'Signaler',mentions:'Mentions légales',actus:'Actualités',cgu:'CGU',photoId:'Photo'};
-  var NAV_WIDE={home:1,centres:1,especes:1,benevoles:1,assos:1,actus:1,admin:1};
+  var NAV_LBL={home:'Accueil',u1:'Étape 1',u2:'Étape 2',u3:'Étape 3',u4:'Étape 4',rA:'Conseils',rB:'Conseils',rNid:'Oisillon',bague:'Oiseau bagué',secours:'Secours',centres:'Carte des centres',identifier:'Identifier',especes:'Espèces',espece:'Fiche',conseils:'Conseils',gestes:'Bons gestes',reglages:'Réglages',compte:'Compte',benevoles:'Bénévoles',devenir:'Devenir bénévole',assos:'Associations',admin:'Administration',signaler:'Signaler',mentions:'Mentions légales',actus:'Actualités',cgu:'CGU',photoId:'Photo',boutique:'Boutique'};
+  var NAV_WIDE={home:1,centres:1,especes:1,benevoles:1,assos:1,actus:1,admin:1,boutique:1};
   function navLabel(id){
     if(id==='espece'){ var h=document.getElementById('e-nom'); if(h&&h.textContent.trim()) return h.textContent.trim(); }
     return NAV_LBL[id]||id;
@@ -2041,7 +2126,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
   }
   function loadObs(){ if(!db||!currentUser) return; db.from('observations').select('*').order('created_at',{ascending:false}).then(function(r){ myObs=r.data||[]; renderCompte(); }); }
   function reloadObs(cb){ if(!db||!currentUser){ if(cb)cb(); return; } db.from('observations').select('*').order('created_at',{ascending:false}).then(function(rr){ myObs=rr.data||[]; renderCompte(); if(cb)cb(); }); }
-  function addObs(){ var m=document.getElementById('obsMsg'); if(!currentUser){ if(m)m.textContent='Connecte-toi d\'abord pour tenir ton carnet.'; return; } var espece=(document.getElementById('obsEspece')||{}).value, issue=(document.getElementById('obsIssue')||{}).value, lieu=(document.getElementById('obsLieu')||{}).value; if(!espece){ if(m){m.style.color='';m.textContent='Choisis une espèce dans la liste.';} return; } if(m){m.style.color='';m.textContent=_editId?'Mise à jour...':'Enregistrement...';} var done=function(verbe){ reloadObs(function(){ var mm=document.getElementById('obsMsg'); if(mm){ mm.style.color='#1F9E67'; mm.innerHTML='&#10003; '+escapeH(espece)+' '+verbe+'.'; } var cs=document.getElementById('monCarnet'); if(cs&&cs.scrollIntoView){ try{cs.scrollIntoView({behavior:'smooth',block:'start'});}catch(_){cs.scrollIntoView();} } }); }; if(_editId){ var eid=_editId; _editId=null; db.from('observations').update({espece:espece,issue:issue,lieu:lieu}).eq('id',eid).eq('user_id',currentUser.id).select().then(function(r){ if(r.error){ _editId=eid; if(m){m.style.color='#c0392b';m.textContent='Erreur : '+r.error.message;} return; } if(!r.data||!r.data.length){ _editId=eid; if(m){m.style.color='#c0392b';m.textContent='Modification refusée par la base. La règle obs_update_own est absente.';} return; } done('mis à jour'); }); } else { db.from('observations').insert({espece:espece,issue:issue,lieu:lieu,user_id:currentUser.id}).select().then(function(r){ if(r.error){ if(m){m.style.color='#c0392b';m.textContent='Erreur : '+r.error.message;} return; } done('ajouté à ton carnet'); }); } }
+  function addObs(){ var m=document.getElementById('obsMsg'); if(!currentUser){ if(m)m.textContent='Connecte-toi d\'abord pour tenir ton carnet.'; return; } var espece=(document.getElementById('obsEspece')||{}).value, issue=(document.getElementById('obsIssue')||{}).value, lieu=(document.getElementById('obsLieu')||{}).value; if(!espece){ if(m){m.style.color='';m.textContent='Choisis une espèce dans la liste.';} return; } if(m){m.style.color='';m.textContent=_editId?'Mise à jour...':'Enregistrement...';} var done=function(verbe){ reloadObs(function(){ var mm=document.getElementById('obsMsg'); if(mm){ mm.style.color='#1F9E67'; mm.innerHTML='&#10003; '+escapeH(espece)+' '+verbe+'.'+boutiqueMerciHtml(issue); } var cs=document.getElementById('monCarnet'); if(cs&&cs.scrollIntoView){ try{cs.scrollIntoView({behavior:'smooth',block:'start'});}catch(_){cs.scrollIntoView();} } }); }; if(_editId){ var eid=_editId; _editId=null; db.from('observations').update({espece:espece,issue:issue,lieu:lieu}).eq('id',eid).eq('user_id',currentUser.id).select().then(function(r){ if(r.error){ _editId=eid; if(m){m.style.color='#c0392b';m.textContent='Erreur : '+r.error.message;} return; } if(!r.data||!r.data.length){ _editId=eid; if(m){m.style.color='#c0392b';m.textContent='Modification refusée par la base. La règle obs_update_own est absente.';} return; } done('mis à jour'); }); } else { db.from('observations').insert({espece:espece,issue:issue,lieu:lieu,user_id:currentUser.id}).select().then(function(r){ if(r.error){ if(m){m.style.color='#c0392b';m.textContent='Erreur : '+r.error.message;} return; } done('ajouté à ton carnet'); }); } }
   function editObs(id){ var o=myObs.filter(function(x){return x.id===id;})[0]; if(!o) return; _editId=id; renderCompte(); var f=document.getElementById('ajoutCarnet'); if(f&&f.scrollIntoView){ try{f.scrollIntoView({behavior:'smooth',block:'start'});}catch(_){} } var m=document.getElementById('obsMsg'); if(m){ m.style.color=''; m.textContent='Modifie les champs puis Mettre à jour.'; } }
   function cancelEdit(){ _editId=null; renderCompte(); }
   function delObs(id){
@@ -2631,6 +2716,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
       +'<input class="field" id="benLien" readonly value="'+escapeH(lien)+'" style="margin:10px 0 8px" onclick="this.select()">'
       +'<div style="display:flex;gap:8px"><button class="btn btn-primary" style="flex:1" onclick="benPartager()">Partager</button><button class="btn btn-ghost" style="flex:1" onclick="benCopier()">Copier le lien</button></div>'
       +'<div id="benQR" style="display:flex;justify-content:center;margin-top:14px"></div><div id="benShareMsg" class="meta" style="margin-top:6px;text-align:center"></div></div>'
+      +boutiqueBenevoleHtml()
       +benVoirBtn();
   }
   function loadMonParrainage(){
