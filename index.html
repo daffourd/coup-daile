@@ -1608,7 +1608,7 @@
   /* ===== Identification par photo (prototype : resultat simule) ===== */
   /* Reconnaissance photo : ouverte au public quand PHOTO_ID_PUBLIC passe a true.
      En attendant, mode test reserve : ouvrir coupdepatte.eu/?photo=test (et ?photo=off pour sortir). */
-  var PHOTO_ID_PUBLIC=false;
+  var PHOTO_ID_PUBLIC=true;
   try{ var _pm=(location.search.match(/[?&]photo=(test|off)/)||[])[1]; if(_pm==='test') localStorage.setItem('cdp-photo-test','1'); if(_pm==='off') localStorage.removeItem('cdp-photo-test'); }catch(_){}
   var PHOTO_ID_ON=PHOTO_ID_PUBLIC; try{ if(localStorage.getItem('cdp-photo-test')==='1') PHOTO_ID_ON=true; }catch(_){}
   if(PHOTO_ID_ON) document.documentElement.classList.add('pid-on');
