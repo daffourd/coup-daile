@@ -752,6 +752,14 @@
   .net-card .goal{font-size:12.5px;color:var(--texte-doux);}
   .net-card .btn{min-height:50px;}
   @media (min-width:1100px){ #devenir{max-width:960px;} }
+  .ann-soon{position:relative;text-align:center;background:linear-gradient(165deg,var(--vert-pale),var(--blanc) 70%);border:1px solid var(--bord);border-radius:26px;padding:30px 22px 24px;box-shadow:0 14px 30px -24px rgba(20,40,30,.45);max-width:620px;margin:6px auto 0;}
+  .ann-pill{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8A5A10;background:var(--ambre-pale);border-radius:999px;padding:6px 12px;margin-bottom:16px;}
+  html[data-theme="dark"] .ann-pill{color:#EDB54B;}
+  .ann-ic{width:64px;height:64px;border-radius:20px;margin:0 auto 14px;display:grid;place-items:center;color:#fff;background:linear-gradient(150deg,#25B87A,#12885A);box-shadow:0 14px 26px -14px rgba(18,136,90,.7);}
+  .ann-soon h3{font-family:Fraunces,Georgia,serif;font-size:23px;line-height:1.2;font-weight:700;margin-bottom:10px;}
+  .ann-soon p{font-size:14.5px;line-height:1.55;color:var(--texte-doux);max-width:46ch;margin:0 auto 12px;}
+  .ann-soon .btn{margin-top:8px;}
+  .ann-ok{display:flex;align-items:center;justify-content:center;gap:6px;color:var(--vert)!important;font-weight:800;}
 
 </style>
 </head>
@@ -803,7 +811,7 @@
       <button class="opt" onclick="showScreen('especes')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg></span><b>Fiches espèces</b><span class="chev">&rsaquo;</span></button>
       <div class="section-label">Agir</div>
       <button class="opt" onclick="benAllerFormulaire()" style="border-color:var(--vert)"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg></span><span><b>Je deviens bénévole</b><br><span class="meta" style="font-weight:400">5 questions, moins d'une minute</span></span><span class="chev">&rsaquo;</span></button>
-      <button class="opt" onclick="showScreen('benevoles')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5"/><circle cx="17" cy="9" r="2.4"/><path d="M16 15c3 0 5 1.5 5 4"/></svg></span><b>Les bénévoles près de chez toi</b><span class="chev">&rsaquo;</span></button>
+      <button class="opt" onclick="showScreen('benevoles')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5"/><circle cx="17" cy="9" r="2.4"/><path d="M16 15c3 0 5 1.5 5 4"/></svg></span><span><b>Les bénévoles près de chez toi</b><br><span class="meta" style="font-weight:400">Bientôt accessible aux membres</span></span><span class="chev">&rsaquo;</span></button>
       <button class="opt" onclick="_assoMode='annuaire';showScreen('assos')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></svg></span><span><b>Associations et refuges</b><br><span class="meta" style="font-weight:400">Partout en France, par département</span></span><span class="chev">&rsaquo;</span></button>
       <div class="section-label">Actualités</div>
       <div id="actusHome"><a class="opt" href="/actualites/"><b>La faune sauvage en ville, chaque jour</b><span class="chev">&rsaquo;</span></a></div>
@@ -1137,10 +1145,10 @@
 
     <section class="screen" id="benevoles">
       <h2 class="title">Bénévoles</h2>
-      <p class="sub">Des personnes prêtes à aider les oiseaux, près de chez toi. Contacte-les via le canal qu'elles ont choisi. Aucun échange ne passe par l'app.</p>
+      <p class="sub" id="benSub">Des personnes prêtes à aider les oiseaux, près de chez toi. Contacte-les via le canal qu'elles ont choisi. Aucun échange ne passe par l'app.</p>
       <div id="reseauStats"></div>
       <div id="benevolesList"></div>
-      <p class="disclaimer">Profils publiés volontairement par leurs auteurs, réservés aux 18 ans et plus.</p>
+      <p class="disclaimer" id="benDisc">Profils publiés volontairement par leurs auteurs, réservés aux 18 ans et plus.</p>
     </section>
 
     <section class="screen" id="devenir"><div id="devenirView"></div></section>
@@ -2091,7 +2099,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
       +'<input class="field" id="asBesoins" placeholder="Besoins (ex : transport, accueil)" value="'+v(a.besoins)+'" style="margin-bottom:8px">'
       +'<button class="btn btn-primary" onclick="saveAsso()">'+(a.id?'Mettre à jour':'Inscrire ma structure')+'</button>'
       +'<div id="asMsg" class="meta" style="margin-top:8px">'+(a.id?(a.verifiee?'Structure vérifiée et publiée dans l\'annuaire.':'En attente de vérification par l\'équipe.'):'')+'</div></div>'
-      +'<button class="btn btn-ghost" onclick="showScreen(\'benevoles\')">Voir les bénévoles</button>'
+      +benVoirBtn()
       +'<p class="disclaimer">Les échanges avec les bénévoles se font hors plateforme.</p>'
       +partnerCard('merlin');
   }
@@ -2604,7 +2612,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
     if(!actif || benEdit){
       if(!benForm) benInitForm();
       return '<div class="section-label" id="devenirBenevole">'+(actif?'Modifier mon bénévolat':'Devenir bénévole')+'</div><div class="card"><div id="benWizard">'+benWizardInner()+'</div></div>'
-        +'<button class="btn btn-ghost" onclick="showScreen(\'benevoles\')">Voir les bénévoles</button>';
+        +benVoirBtn();
     }
     if(benParr===null){ benParr={}; loadMonParrainage(); }
     var lien=location.origin+'/?p='+encodeURIComponent((benParr&&benParr.code)||b.code_parrain||'');
@@ -2623,7 +2631,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
       +'<input class="field" id="benLien" readonly value="'+escapeH(lien)+'" style="margin:10px 0 8px" onclick="this.select()">'
       +'<div style="display:flex;gap:8px"><button class="btn btn-primary" style="flex:1" onclick="benPartager()">Partager</button><button class="btn btn-ghost" style="flex:1" onclick="benCopier()">Copier le lien</button></div>'
       +'<div id="benQR" style="display:flex;justify-content:center;margin-top:14px"></div><div id="benShareMsg" class="meta" style="margin-top:6px;text-align:center"></div></div>'
-      +'<button class="btn btn-ghost" onclick="showScreen(\'benevoles\')">Voir les bénévoles</button>';
+      +benVoirBtn();
   }
   function loadMonParrainage(){
     if(!db||!currentUser) return;
@@ -2676,7 +2684,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
     var el=document.getElementById('reseauStats'); if(!el||!db) return;
     _reseau=null;
     loadReseau(function(d){
-      if(!d){ el.innerHTML=''; return; }
+      if(!d || !ANNUAIRE_OUVERT || (d.benevoles||0)<RESEAU_SEUIL_AFFICHAGE){ el.innerHTML=''; return; }
       el.innerHTML='<div class="net-card"><div>'+reseauCardHtml(d)+'</div>'+((myBenevole&&myBenevole.actif)?'':'<button class="btn btn-primary" onclick="showScreen(\'devenir\')">Je deviens bénévole</button>')+'</div>';
     });
   }
@@ -3094,6 +3102,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
   }
   function reseauCardHtml(d, withCta){
     var b=(d&&d.benevoles)||0, dp=(d&&d.departements)||0, pct=Math.max(2,Math.round(dp/101*100));
+    if(b<RESEAU_SEUIL_AFFICHAGE) return '<div class="nums"><div><b>101</b><small>départements à couvrir</small></div></div><div class="goal" style="margin-top:10px">Le réseau se lance. Objectif : au moins un bénévole dans chaque département de France. Les premiers inscrits ouvrent la voie dans le leur.</div>';
     return '<div class="nums"><div><b>'+b+'</b><small>bénévole'+(b>1?'s':'')+' inscrit'+(b>1?'s':'')+'</small></div><div><b>'+dp+'<span style="font-size:15px;color:var(--texte-doux);font-weight:700"> / 101</span></b><small>départements couverts</small></div></div>'
       +'<div class="dv-bar"><i style="width:'+pct+'%"></i></div><div class="goal">Objectif : au moins un bénévole dans chaque département de France.</div>';
   }
@@ -3108,16 +3117,16 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
       +'<div class="dv-k">Réseau de bénévoles Coup de Patte</div>'
       +'<h2>Deviens bénévole pour les oiseaux sauvages</h2>'
       +'<p>Chaque jour, des oiseaux blessés ou tombés du nid ont besoin d\'une main pour rejoindre un centre de soins. Cette main peut être la tienne, près de chez toi et à ton rythme.</p>'
-      +'<div class="dv-cta"><button class="btn btn-w" onclick="devVersInscription()">Je m\'inscris en 1 minute</button><button class="btn btn-o" onclick="showScreen(\'benevoles\')">Voir les bénévoles</button></div>'
+      +'<div class="dv-cta"><button class="btn btn-w" onclick="devVersInscription()">Je m\'inscris en 1 minute</button><button class="btn btn-o" onclick="var e=document.getElementById(\'devSteps\');if(e)e.scrollIntoView({behavior:\'smooth\',block:\'start\'})">Comment ça marche</button></div>'
       +'<div class="dv-trust"><span>'+chk+'Gratuit</span><span>'+chk+'Sans engagement</span><span>'+chk+'5 questions</span><span>'+chk+'Dès 18 ans</span></div>'
       +'</div>';
     h+='<div class="dv-net" id="devNet">'+reseauCardHtml(_reseau)+'</div>';
     h+='<div class="dv-sec"><h3>Choisis ta façon d\'aider</h3><p class="sub">Une seule mission ou plusieurs, c\'est toi qui décides. Aucun soin n\'est demandé : ils restent réservés aux centres autorisés.</p><div class="dv-miss">'
       +BEN_TYPES.map(function(t){ var m=DV_MISSIONS[t[0]]||{t:t[1],p:'',c:'#1F9E67',cp:'#E3F1EA'}; return '<div class="dv-m" style="--c:'+m.c+';--cp:'+m.cp+'"><div class="ic">'+_ico(MISS_IC[t[0]]||IC.coeur,21)+'</div><div><h4>'+escapeH(m.t)+'</h4><p>'+escapeH(m.p)+'</p></div></div>'; }).join('')
       +'</div></div>';
-    h+='<div class="dv-sec"><h3>Comment ça marche</h3><ol class="dv-steps">'
+    h+='<div class="dv-sec" id="devSteps" style="scroll-margin-top:80px"><h3>Comment ça marche</h3><ol class="dv-steps">'
       +'<li><span>1</span><b>Tu t\'inscris en 5 questions</b><p>Ta commune, tes missions, ton temps, tes disponibilités et la façon de te joindre.</p></li>'
-      +'<li><span>2</span><b>Tu rejoins l\'annuaire</b><p>Les personnes qui trouvent un oiseau, les centres et les associations proches de chez toi peuvent te solliciter.</p></li>'
+      +'<li><span>2</span><b>Tu rejoins le réseau</b><p>Ta fiche figure dans l\'annuaire des bénévoles, réservé aux membres. Les personnes, les centres et les associations proches de chez toi peuvent te solliciter.</p></li>'
       +'<li><span>3</span><b>Tu aides quand tu peux</b><p>Aucune obligation : tu acceptes ou non chaque demande, et tu fais une pause quand tu veux.</p></li>'
       +'</ol></div>';
     var bBen=BADGES.filter(function(x){return x.id==='benevole';})[0];
@@ -3128,7 +3137,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
       +'<div><div class="m-ic" style="--m1:#3BCB8B;--m2:#17935D">'+_ico(IC.check,22)+'</div><b>Des gestes justes</b><small>Consignes fondées sur la LPO et l\'OFB</small></div>'
       +'</div></div>';
     h+='<div class="dv-sec"><h3>Nos engagements envers toi</h3><div class="dv-prom">'
-      +'<div>'+shield+'<span><b>Tes coordonnées sont protégées.</b> Elles ne s\'affichent qu\'à la demande, une fiche à la fois, jamais sous forme de liste.</span></div>'
+      +'<div>'+shield+'<span><b>Tes coordonnées sont protégées.</b> L\'annuaire est réservé aux membres connectés, et tes coordonnées ne s\'affichent qu\'à la demande, une fiche à la fois, jamais sous forme de liste.</span></div>'
       +'<div>'+shield+'<span><b>Tu restes maître de ta fiche.</b> Tu la modifies ou tu te retires de l\'annuaire en un geste, depuis ton espace.</span></div>'
       +'<div>'+shield+'<span><b>Un accompagnement à chaque étape.</b> L\'app te guide pas à pas et te met en relation avec le centre de soins le plus proche.</span></div>'
       +'<div>'+shield+'<span><b>Ton email reste privé.</b> Il sert à te connecter, et à la newsletter seulement si tu la choisis.</span></div>'
@@ -3139,7 +3148,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
       +'<details><summary>Je n\'ai pas de voiture, puis-je aider ?</summary><p>Oui. Récupérer un oiseau à pied près de chez toi, faire connaître l\'association, aider en ligne ou tenir un stand ne demandent pas de véhicule.</p></details>'
       +'<details><summary>Vais-je soigner des oiseaux ?</summary><p>Non. Les soins sont réservés aux centres de sauvegarde autorisés. Ton rôle est de protéger l\'oiseau, de le mettre à l\'abri et de faciliter son arrivée au centre.</p></details>'
       +'<details><summary>Pourquoi faut-il avoir 18 ans ?</summary><p>Les missions impliquent des déplacements et des échanges entre personnes qui ne se connaissent pas. Pour protéger les plus jeunes, l\'inscription est réservée aux adultes.</p></details>'
-      +'<details><summary>Comment arrêter ?</summary><p>Dans ton espace, onglet Bénévolat, touche « Me retirer de l\'annuaire ». Ta fiche disparaît aussitôt de la liste publique.</p></details>'
+      +'<details><summary>Comment arrêter ?</summary><p>Dans ton espace, onglet Bénévolat, touche « Me retirer de l\'annuaire ». Ta fiche disparaît aussitôt de l\'annuaire.</p></details>'
       +'</div></div>';
     h+='<div class="dv-sec dv-insc" id="devInscr"></div>';
     h+='<div class="dv-sticky" id="devSticky"><button class="btn btn-primary" onclick="devVersInscription()">Je deviens bénévole</button></div>';
@@ -3175,12 +3184,33 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
   }
 
   // ======================= ANNUAIRE DES BENEVOLES =======================
+  // Annuaire : ferme tant que le reseau est trop petit (bandeau « bientot »). Une fois ouvert, reserve aux membres connectes.
+  var ANNUAIRE_OUVERT=false;
+  // Les compteurs du reseau ne s'affichent qu'a partir de ce nombre de benevoles.
+  var RESEAU_SEUIL_AFFICHAGE=20;
+  function benVoirBtn(){ return ANNUAIRE_OUVERT?'<button class="btn btn-ghost" onclick="showScreen(\'benevoles\')">Voir les bénévoles</button>':''; }
+  function annuaireBientotHtml(){
+    var actif=!!(myBenevole&&myBenevole.actif);
+    return '<div class="ann-soon"><span class="ann-pill">Bientôt accessible</span>'
+      +'<div class="ann-ic">'+_ico(IC.gens,30)+'</div>'
+      +'<h3>L\'annuaire des bénévoles ouvre bientôt</h3>'
+      +'<p>Le réseau Coup de Patte se constitue en ce moment, département par département. Dès qu\'il comptera assez de bénévoles pour trouver de l\'aide près de chez toi, l\'annuaire ouvrira ici, réservé aux membres connectés.</p>'
+      +(actif
+        ?'<p class="ann-ok">'+_ico(IC.check,16)+'Tu es déjà inscrit : ta fiche sera visible dès l\'ouverture. Merci !</p><button class="btn btn-primary" onclick="_compteTab=\'benevolat\';showScreen(\'compte\')">Inviter des proches à rejoindre le réseau</button>'
+        :'<p>Inscris-toi dès maintenant : tu feras partie des premiers bénévoles visibles dans ton département le jour de l\'ouverture.</p><button class="btn btn-primary" onclick="showScreen(\'devenir\')">Je deviens bénévole</button>')
+      +'</div>';
+  }
   var _benList=null, _benDep='', _benStats=false, _benF={q:'',mission:'',veh:false,cren:'',tri:'recent'};
   function benHue(s){ var h=0; s=String(s||''); for(var i=0;i<s.length;i++){ h=(h*31+s.charCodeAt(i))%360; } return h; }
   function benMois(d){ if(!d) return ''; try{ return new Date(d).toLocaleDateString('fr-FR',{month:'long',year:'numeric'}); }catch(e){ return ''; } }
   function renderBenevoles(){
     var el=document.getElementById('benevolesList'); if(!el) return;
+    var sub=document.getElementById('benSub');
+    if(sub) sub.style.display=ANNUAIRE_OUVERT?'':'none';
+    var dsc=document.getElementById('benDisc'); if(dsc) dsc.style.display=ANNUAIRE_OUVERT?'':'none';
+    if(!ANNUAIRE_OUVERT){ el.innerHTML=annuaireBientotHtml(); return; }
     if(!db){ el.innerHTML='<div class="callout">Service indisponible.</div>'; return; }
+    if(!currentUser){ el.innerHTML='<div class="ann-soon"><div class="ann-ic">'+_ico(IC.cle,28)+'</div><h3>Annuaire réservé aux membres</h3><p>Connecte-toi pour voir les bénévoles près de chez toi et les contacter.</p><button class="btn btn-primary" onclick="showScreen(\'compte\')">Me connecter</button></div>'; return; }
     if(_benList===null){
       el.innerHTML='<p class="meta" style="padding:6px 0">Chargement...</p>';
       var fin=function(list,stats){ if(!Array.isArray(list)){ try{ list=JSON.parse(list); }catch(e){ list=[]; } } _benList=list||[]; _benStats=!!stats; renderBenevoles(); };
