@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>La boutique | Coup de Patte</title>
-<meta name="description" content="T-shirts, sweats, tote bags et mugs aux couleurs de Coup de Patte, imprimés à la demande. Chaque achat soutient l'association et fait connaître le bon geste pour les oiseaux.">
+<meta name="description" content="T-shirts, sweats, tote bags et mugs aux couleurs de Coup de Patte, avec la plume ou les oiseaux de nos jardins, imprimés à la demande. Chaque achat soutient l'association et fait connaître le bon geste pour les oiseaux.">
 <link rel="canonical" href="https://boutique.coupdepatte.eu/">
 <meta name="theme-color" content="#1F9E67">
 <meta property="og:type" content="website">
@@ -127,10 +127,23 @@ footer p{margin:4px 0}
   var MOTIF = 'https://coupdepatte.eu/boutique/motifs/';
   var CLE = 'sb_publishable_OBbJMFqX9UIOkj6FF2T34Q_KTrqUbvL';
   var DEFAUT = [
-    {id:'tshirt-plume', nom:'T-shirt La plume', description:'La plume blanche, petite et haut sur la poitrine, sur coton vert. Coupe unisexe.', image:IMG+'tshirt.jpg', tailles:['S','M','L','XL','XXL'], prix_cts:2900,
-      details:[['Matière','100 % coton, coupe unisexe (Gildan Softstyle)'],['Couleur','Vert'],['Impression','Plume et adresse du site, en haut de la poitrine']]},
-    {id:'sweat-oiseaux', nom:'Sweat Oiseaux de nos jardins', description:'Rouge-gorge, mésange, hirondelle et martinet, centrés sur le torse. Molleton écru.', image:IMG+'sweat.jpg', tailles:['S','M','L','XL','XXL'], prix_cts:4900,
-      details:[['Matière','Molleton 80 % coton, 20 % polyester, col rond (AWDis)'],['Couleur','Écru'],['Impression','Les quatre oiseaux et l\'adresse du site, sur le torse']]},
+    {id:'tshirt-plume', nom:'T-shirt vert', description:'Coton vert, coupe unisexe. Six modèles : la plume, un oiseau ou les quatre ensemble, petit et haut sur la poitrine.', image:IMG+'tshirt-plume.jpg', tailles:['S','M','L','XL','XXL'], prix_cts:2900,
+      details:[['Matière','100 % coton, coupe unisexe (Gildan Softstyle)'],['Couleur','Vert'],['Impression','Le motif choisi et l\'adresse du site, en haut de la poitrine']],
+      variantes:[
+      {id:'plume', nom:'La plume', image:IMG+'tshirt-plume.jpg'},
+      {id:'rouge-gorge', nom:'Rouge-gorge', image:IMG+'tshirt-rouge-gorge.jpg'},
+      {id:'mesange', nom:'Mésange bleue', image:IMG+'tshirt-mesange.jpg'},
+      {id:'hirondelle', nom:'Hirondelle', image:IMG+'tshirt-hirondelle.jpg'},
+      {id:'martinet', nom:'Martinet noir', image:IMG+'tshirt-martinet.jpg'},
+      {id:'quatre-oiseaux', nom:'Les quatre oiseaux', image:IMG+'tshirt-quatre-oiseaux.jpg'}]},
+    {id:'sweat-oiseaux', nom:'Sweat écru', description:'Molleton écru. Cinq modèles : les quatre oiseaux ensemble ou un seul, centré sur le torse.', image:IMG+'sweat-quatre-oiseaux.jpg', tailles:['S','M','L','XL','XXL'], prix_cts:4900,
+      details:[['Matière','Molleton 80 % coton, 20 % polyester, col rond (AWDis)'],['Couleur','Écru'],['Impression','Le ou les oiseaux et l\'adresse du site, sur le torse']],
+      variantes:[
+      {id:'quatre-oiseaux', nom:'Les quatre oiseaux', image:IMG+'sweat-quatre-oiseaux.jpg'},
+      {id:'rouge-gorge', nom:'Rouge-gorge', image:IMG+'sweat-rouge-gorge.jpg'},
+      {id:'mesange', nom:'Mésange bleue', image:IMG+'sweat-mesange.jpg'},
+      {id:'hirondelle', nom:'Hirondelle', image:IMG+'sweat-hirondelle.jpg'},
+      {id:'martinet', nom:'Martinet noir', image:IMG+'sweat-martinet.jpg'}]},
     {id:'tote-ilovebirds', nom:'Tote bag I love birds', description:'Coton biologique naturel, pour les courses, les marchés et les sorties nature. Cinq modèles : un par oiseau, ou les quatre ensemble.', image:IMG+'tote-hirondelle.jpg', tailles:[], prix_cts:3900,
       details:[['Matière','Coton biologique tissé, couleur naturelle (Stanley/Stella)'],['Dimensions','42 x 37 cm, anses de 65 cm'],['Impression','Le slogan, l\'oiseau choisi et l\'adresse du site']],
       variantes:[
@@ -139,8 +152,15 @@ footer p{margin:4px 0}
       {id:'mesange', nom:'Mésange bleue', image:IMG+'tote-mesange.jpg'},
       {id:'martinet', nom:'Martinet noir', image:IMG+'tote-martinet.jpg'},
       {id:'quatre-oiseaux', nom:'Les quatre oiseaux', image:IMG+'tote-quatre-oiseaux.jpg'}]},
-    {id:'mug-plume', nom:'Mug La plume', description:'Céramique blanche, la plume du logo dans sa pastille verte.', image:IMG+'mug.jpg', tailles:[], prix_cts:1900,
-      details:[['Matière','Céramique blanche, 33 cl'],['Impression','La pastille plume et l\'adresse du site, sur les deux faces']]}
+    {id:'mug-plume', nom:'Mug blanc', description:'Céramique blanche, le motif sur les deux faces. Six modèles : la plume, un oiseau ou les quatre ensemble.', image:IMG+'mug-plume.jpg', tailles:[], prix_cts:1900,
+      details:[['Matière','Céramique blanche, 33 cl'],['Impression','Le motif choisi et l\'adresse du site, sur les deux faces']],
+      variantes:[
+      {id:'plume', nom:'La plume', image:IMG+'mug-plume.jpg'},
+      {id:'rouge-gorge', nom:'Rouge-gorge', image:IMG+'mug-rouge-gorge.jpg'},
+      {id:'mesange', nom:'Mésange bleue', image:IMG+'mug-mesange.jpg'},
+      {id:'hirondelle', nom:'Hirondelle', image:IMG+'mug-hirondelle.jpg'},
+      {id:'martinet', nom:'Martinet noir', image:IMG+'mug-martinet.jpg'},
+      {id:'quatre-oiseaux', nom:'Les quatre oiseaux', image:IMG+'mug-quatre-oiseaux.jpg'}]}
   ];
   var produits = DEFAUT, envoi = false, choix = {}, vue = {}, scrollListe = 0;
   function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
