@@ -51,6 +51,36 @@ select{font:inherit;font-size:16px;padding:10px 12px;border-radius:12px;border:1
 .modele{font:inherit;font-size:13.5px;font-weight:800;padding:8px 12px;min-height:38px;border-radius:999px;border:1.5px solid var(--bord);background:var(--blanc);color:var(--texte);cursor:pointer}
 .modele[aria-pressed="true"]{border-color:var(--vert);background:var(--vert-pale);color:var(--vert-fonce)}
 @media (prefers-color-scheme:dark){.modele[aria-pressed="true"]{color:#8fd8b4}}
+.visuel{display:block;position:relative;background:var(--creme);cursor:pointer}
+.visuel img{transition:opacity .18s}
+.carte h2 a{color:inherit;text-decoration:none}
+.carte h2 a:hover{text-decoration:underline}
+.btn.sec{background:transparent;color:var(--vert);border:1.5px solid var(--vert)}
+a.btn{text-align:center;text-decoration:none}
+.retour{display:inline-flex;align-items:center;gap:6px;font-weight:800;text-decoration:none;color:var(--vert);margin:6px 0 14px;min-height:44px}
+.fiche{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:820px){.fiche{grid-template-columns:1fr;gap:18px}}
+.galerie{position:sticky;top:12px}
+@media (max-width:820px){.galerie{position:static}}
+.grand{display:block;width:100%;border:none;padding:0;border-radius:22px;overflow:hidden;background:var(--creme);cursor:zoom-in}
+.grand img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:contain}
+.vignettes{display:flex;gap:10px;margin-top:10px}
+.vignette{flex:0 0 auto;width:84px;border:2px solid var(--bord);border-radius:14px;padding:0;overflow:hidden;background:var(--creme);cursor:pointer;font:inherit}
+.vignette img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover}
+.vignette span{display:block;font-size:12px;font-weight:800;padding:4px 0;color:var(--doux);background:var(--blanc)}
+.vignette[aria-pressed="true"]{border-color:var(--vert)}
+.infos h1{font-size:clamp(28px,4.5vw,40px);margin:0 0 6px}
+.infos .prix{font-size:22px;margin:4px 0 10px}
+.infos .desc{font-size:16.5px;color:var(--doux);margin-bottom:14px}
+.infos .champ{margin:10px 0 12px}
+.infos .btn{margin-top:14px}
+.faits{list-style:none;margin:18px 0 0;padding:0;border-top:1px solid var(--bord)}
+.faits li{padding:10px 0;border-bottom:1px solid var(--bord);font-size:14.5px}
+.faits b{display:block;font-size:13px;color:var(--doux)}
+.zoom{position:fixed;inset:0;z-index:50;background:rgba(15,21,18,.92);display:none;align-items:center;justify-content:center;padding:16px}
+.zoom.ouvert{display:flex}
+.zoom img{max-width:100%;max-height:100%;width:auto;height:auto;border-radius:14px;background:var(--creme)}
+.zoom button{position:absolute;top:12px;right:12px;width:48px;height:48px;border-radius:50%;border:none;background:#fff;color:#1B2620;font-size:26px;line-height:1;cursor:pointer}
 .msg{min-height:20px;margin:12px 0 0;font-weight:700}
 .msg.err{color:var(--erreur)}
 .rassure{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:26px 0 8px}
@@ -68,17 +98,21 @@ footer p{margin:4px 0}
   <a class="cartouche" href="https://coupdepatte.eu/">coupdepatte.eu</a>
 </header>
 <main>
+  <div id="vueListe">
   <h1>La boutique</h1>
   <p class="chapo">Des objets à nos couleurs, imprimés à la demande et livrés chez toi. Chaque achat soutient l'association Coup de Patte et fait connaître le bon geste pour les oiseaux.</p>
   <div id="bandeau"></div>
   <div class="grille" id="grille"></div>
-  <p class="msg" id="msg" role="status" aria-live="polite"></p>
   <div class="rassure">
     <div><b>Paiement sécurisé</b>Par carte, sur la page de paiement de Stripe.</div>
     <div><b>Imprimé à la demande</b>Chaque objet est fabriqué pour toi, sans stock ni gaspillage.</div>
     <div><b>14 jours pour changer d'avis</b>Après réception, selon nos <a href="/cgv/">conditions générales de vente</a>.</div>
   </div>
+  </div>
+  <div id="vueFiche" hidden></div>
+  <p class="msg" id="msg" role="status" aria-live="polite"></p>
 </main>
+<div class="zoom" id="zoom" role="dialog" aria-modal="true" aria-label="Visuel en grand"><img id="zoomImg" alt=""><button type="button" id="zoomFermer" aria-label="Fermer">&times;</button></div>
 <footer>
   <p>Boutique opérée par DIVA DIAA SAS pour l'association Coup de Patte. <a href="/cgv/">Conditions générales de vente et mentions légales</a>.</p>
   <p>Une question sur une commande : <a href="mailto:bonjour@coupdepatte.eu">bonjour@coupdepatte.eu</a>. Tu as trouvé un oiseau ? <a href="https://coupdepatte.eu/">Ouvre l'application</a>.</p>
@@ -86,64 +120,141 @@ footer p{margin:4px 0}
 <script>
   // Boutique Coup de Patte (boutique.coupdepatte.eu). ES5, sans dépendance.
   // OUVERTE passe à true quand Stripe et Prodigi sont branchés en production.
+  // Navigation : la liste à la racine, la fiche d'un produit à l'adresse #id-du-produit.
   var OUVERTE = false;
   var SUPA = 'https://sgxohmndhngpxgkobkbm.supabase.co';
   var IMG = 'https://coupdepatte.eu/boutique/apercus/';
+  var MOTIF = 'https://coupdepatte.eu/boutique/motifs/';
   var CLE = 'sb_publishable_OBbJMFqX9UIOkj6FF2T34Q_KTrqUbvL';
   var DEFAUT = [
-    {id:'tshirt-plume', nom:'T-shirt La plume', description:'La plume blanche, petite et haut sur la poitrine, sur coton vert. Coupe unisexe.', image:IMG+'tshirt.jpg', tailles:['S','M','L','XL','XXL'], prix_cts:2900},
-    {id:'sweat-oiseaux', nom:'Sweat Oiseaux de nos jardins', description:'Rouge-gorge, mésange, hirondelle et martinet, centrés sur le torse. Molleton écru.', image:IMG+'sweat.jpg', tailles:['S','M','L','XL','XXL'], prix_cts:4900},
-    {id:'tote-ilovebirds', nom:'Tote bag I love birds', description:'Coton biologique naturel, pour les courses, les marchés et les sorties nature. Cinq modèles : un par oiseau, ou les quatre ensemble.', image:IMG+'tote-hirondelle.jpg', tailles:[], prix_cts:3900, variantes:[
+    {id:'tshirt-plume', nom:'T-shirt La plume', description:'La plume blanche, petite et haut sur la poitrine, sur coton vert. Coupe unisexe.', image:IMG+'tshirt.jpg', tailles:['S','M','L','XL','XXL'], prix_cts:2900,
+      details:[['Matière','100 % coton, coupe unisexe (Gildan Softstyle)'],['Couleur','Vert'],['Impression','Plume et adresse du site, en haut de la poitrine']]},
+    {id:'sweat-oiseaux', nom:'Sweat Oiseaux de nos jardins', description:'Rouge-gorge, mésange, hirondelle et martinet, centrés sur le torse. Molleton écru.', image:IMG+'sweat.jpg', tailles:['S','M','L','XL','XXL'], prix_cts:4900,
+      details:[['Matière','Molleton 80 % coton, 20 % polyester, col rond (AWDis)'],['Couleur','Écru'],['Impression','Les quatre oiseaux et l\'adresse du site, sur le torse']]},
+    {id:'tote-ilovebirds', nom:'Tote bag I love birds', description:'Coton biologique naturel, pour les courses, les marchés et les sorties nature. Cinq modèles : un par oiseau, ou les quatre ensemble.', image:IMG+'tote-hirondelle.jpg', tailles:[], prix_cts:3900,
+      details:[['Matière','Coton biologique tissé, couleur naturelle (Stanley/Stella)'],['Dimensions','42 x 37 cm, anses de 65 cm'],['Impression','Le slogan, l\'oiseau choisi et l\'adresse du site']],
+      variantes:[
       {id:'hirondelle', nom:'Hirondelle', image:IMG+'tote-hirondelle.jpg'},
       {id:'rouge-gorge', nom:'Rouge-gorge', image:IMG+'tote-rouge-gorge.jpg'},
       {id:'mesange', nom:'Mésange bleue', image:IMG+'tote-mesange.jpg'},
       {id:'martinet', nom:'Martinet noir', image:IMG+'tote-martinet.jpg'},
       {id:'quatre-oiseaux', nom:'Les quatre oiseaux', image:IMG+'tote-quatre-oiseaux.jpg'}]},
-    {id:'mug-plume', nom:'Mug La plume', description:'Céramique blanche, la plume du logo dans sa pastille verte.', image:IMG+'mug.jpg', tailles:[], prix_cts:1900}
+    {id:'mug-plume', nom:'Mug La plume', description:'Céramique blanche, la plume du logo dans sa pastille verte.', image:IMG+'mug.jpg', tailles:[], prix_cts:1900,
+      details:[['Matière','Céramique blanche, 33 cl'],['Impression','La pastille plume et l\'adresse du site, sur les deux faces']]}
   ];
-  var produits = DEFAUT, envoi = false, choix = {};
+  var produits = DEFAUT, envoi = false, choix = {}, vue = {}, scrollListe = 0;
   function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
   function img(u){ u=String(u||''); return u.charAt(0)==='/' ? 'https://coupdepatte.eu'+u : u; }
   function prix(c){ if(c==null) return 'Prix bientôt'; var e=(c/100).toFixed(2).replace('.',','); return e.replace(',00','')+' € <small class="port">livraison comprise</small>'; }
-  function rendre(){
+  function produit(id){ for(var i=0;i<produits.length;i++) if(produits[i].id===id) return produits[i]; return null; }
+  function variante(p){ var v=p.variantes||[], c=choix[p.id], i; for(i=0;i<v.length;i++) if(v[i].id===c) return v[i]; return v[0]||null; }
+  function apercu(p){ var v=variante(p); return img((v&&v.image)||p.image); }
+  function motif(p){ var v=variante(p); return MOTIF+p.id+(v?'-'+v.id:'')+'.jpg'; }
+  // Précharge les visuels de chaque modèle : changer de modèle est alors instantané.
+  function precharger(){ produits.forEach(function(p){ (p.variantes||[]).forEach(function(v){ var a=new Image(); a.src=img(v.image); }); }); }
+  function boutonsModele(p, ou){
+    var v=p.variantes||[], cv=variante(p);
+    if(!v.length) return '';
+    return '<label>Modèle</label><div class="modeles" role="group" aria-label="Modèle">'+v.map(function(x){
+      return '<button type="button" class="modele" data-p="'+esc(p.id)+'" data-v="'+esc(x.id)+'" aria-pressed="'+(cv&&x.id===cv.id)+'" onclick="choisir(\''+esc(p.id)+'\',\''+esc(x.id)+'\')">'+esc(x.nom)+'</button>';
+    }).join('')+'</div>';
+  }
+  function bandeau(){
     var q=location.search, b='';
     if(/commande=merci/.test(q)) b='<div class="bandeau ok">Merci pour ton soutien. Ta commande est enregistrée, tu recevras un e-mail de confirmation.</div>';
     else if(/commande=annulee/.test(q)) b='<div class="bandeau">Commande annulée. Rien n\'a été débité.</div>';
     else if(!OUVERTE) b='<div class="bandeau">La boutique ouvre très bientôt. Les objets sont en préparation.</div>';
-    document.getElementById('bandeau').innerHTML=b;
+    return b;
+  }
+  function rendreListe(){
+    document.getElementById('bandeau').innerHTML=bandeau();
     document.getElementById('grille').innerHTML=produits.map(function(p){
-      var id=esc(p.id), t=p.tailles||[], actif=OUVERTE && p.prix_cts!=null;
-      var v=p.variantes||[], cv=choix[p.id]||(v[0]&&v[0].id), image=p.image;
-      var mod=v.length?'<label>Modèle</label><div class="modeles" role="group" aria-label="Modèle">'+v.map(function(x){ if(x.id===cv && x.image) image=x.image; return '<button type="button" class="modele" aria-pressed="'+(x.id===cv)+'" onclick="choisir(\''+id+'\',\''+esc(x.id)+'\')">'+esc(x.nom)+'</button>'; }).join('')+'</div>':'';
-      var sel=t.length?'<label for="t_'+id+'">Taille</label><select id="t_'+id+'">'+t.map(function(x){ return '<option'+(x==='M'?' selected':'')+'>'+esc(x)+'</option>'; }).join('')+'</select>':'';
-      return '<article class="carte" id="'+id+'"><img src="'+esc(img(image))+'" alt="'+esc(p.nom)+'" width="720" height="720" loading="lazy">'
-        +'<div class="corps"><h2>'+esc(p.nom)+'</h2><p>'+esc(p.description)+'</p><div class="prix">'+prix(p.prix_cts)+'</div>'+mod+sel
-        +'<button class="btn" type="button"'+(actif?' onclick="commander(\''+id+'\')"':' disabled')+'>'+(actif?'Commander':'Bientôt disponible')+'</button></div></article>';
+      var id=esc(p.id);
+      return '<article class="carte" id="'+id+'"><a class="visuel" href="#'+id+'" aria-label="Voir '+esc(p.nom)+'"><img data-apercu="'+id+'" src="'+esc(apercu(p))+'" alt="'+esc(p.nom)+'" width="1200" height="1200" loading="lazy"></a>'
+        +'<div class="corps"><h2><a href="#'+id+'">'+esc(p.nom)+'</a></h2><p>'+esc(p.description)+'</p><div class="prix">'+prix(p.prix_cts)+'</div>'+boutonsModele(p)
+        +'<a class="btn sec" href="#'+id+'">Voir le produit</a></div></article>';
     }).join('');
   }
-  function choisir(id, v){ choix[id]=v; rendre(); }
+  function rendreFiche(p){
+    var id=esc(p.id), t=p.tailles||[], actif=OUVERTE && p.prix_cts!=null, sur=vue[p.id]||'apercu';
+    var sel=t.length?'<div class="champ"><label for="t_'+id+'">Taille</label><select id="t_'+id+'">'+t.map(function(x){ return '<option'+(x==='M'?' selected':'')+'>'+esc(x)+'</option>'; }).join('')+'</select></div>':'';
+    var faits=(p.details||[]).concat([['Fabrication','Imprimé à la demande, sans stock'],['Livraison','Comprise, en France métropolitaine, sous 5 à 12 jours ouvrés'],['Retour','14 jours pour changer d\'avis après réception']]);
+    document.getElementById('vueFiche').innerHTML=
+      '<a class="retour" href="#">&lsaquo; Toute la boutique</a>'+bandeau()
+      +'<div class="fiche"><div class="galerie">'
+      +'<button type="button" class="grand" id="grand" aria-label="Agrandir le visuel"><img id="grandImg" src="'+esc(sur==='motif'?motif(p):apercu(p))+'" alt="'+esc(p.nom)+'" width="1200" height="1200"></button>'
+      +'<div class="vignettes" role="group" aria-label="Vues">'
+      +'<button type="button" class="vignette" data-vue="apercu" aria-pressed="'+(sur==='apercu')+'" onclick="voir(\''+id+'\',\'apercu\')"><img id="vigApercu" src="'+esc(apercu(p))+'" alt=""><span>L\'objet</span></button>'
+      +'<button type="button" class="vignette" data-vue="motif" aria-pressed="'+(sur==='motif')+'" onclick="voir(\''+id+'\',\'motif\')"><img id="vigMotif" src="'+esc(motif(p))+'" alt=""><span>Le motif</span></button>'
+      +'</div></div>'
+      +'<div class="infos"><h1>'+esc(p.nom)+'</h1><div class="prix">'+prix(p.prix_cts)+'</div><p class="desc">'+esc(p.description)+'</p>'
+      +boutonsModele(p)+sel
+      +'<button class="btn" type="button"'+(actif?' onclick="commander(\''+id+'\')"':' disabled')+'>'+(actif?'Commander':'Bientôt disponible')+'</button>'
+      +'<ul class="faits">'+faits.map(function(f){ return '<li><b>'+esc(f[0])+'</b>'+esc(f[1])+'</li>'; }).join('')+'</ul>'
+      +'</div></div>';
+    document.getElementById('grand').onclick=function(){ zoomer(document.getElementById('grandImg').src); };
+    var mo=new Image(); mo.src=motif(p);
+  }
+  // Change de modèle sans tout redessiner : seules les images et les boutons concernés bougent.
+  function choisir(id, v){
+    choix[id]=v;
+    var p=produit(id); if(!p) return;
+    var btns=document.querySelectorAll('.modele[data-p="'+id+'"]'), i;
+    for(i=0;i<btns.length;i++) btns[i].setAttribute('aria-pressed', btns[i].getAttribute('data-v')===v ? 'true':'false');
+    var a=document.querySelector('img[data-apercu="'+id+'"]'); if(a) a.src=apercu(p);
+    var g=document.getElementById('grandImg');
+    if(g && route()===id){
+      document.getElementById('vigApercu').src=apercu(p);
+      document.getElementById('vigMotif').src=motif(p);
+      g.src=(vue[id]==='motif')?motif(p):apercu(p);
+    }
+  }
+  function voir(id, quoi){
+    var p=produit(id); if(!p) return; vue[id]=quoi;
+    document.getElementById('grandImg').src=(quoi==='motif')?motif(p):apercu(p);
+    var b=document.querySelectorAll('.vignette'), i;
+    for(i=0;i<b.length;i++) b[i].setAttribute('aria-pressed', b[i].getAttribute('data-vue')===quoi ? 'true':'false');
+  }
+  function zoomer(src){ var z=document.getElementById('zoom'); document.getElementById('zoomImg').src=src; z.className='zoom ouvert'; document.getElementById('zoomFermer').focus(); }
+  function fermerZoom(){ document.getElementById('zoom').className='zoom'; }
+  function route(){ var h=decodeURIComponent(location.hash.replace(/^#\/?/,'')); return produit(h) ? h : ''; }
+  function afficher(){
+    var id=route(), liste=document.getElementById('vueListe'), fiche=document.getElementById('vueFiche');
+    fermerZoom(); document.getElementById('msg').textContent='';
+    if(id){
+      if(!liste.hidden) scrollListe=window.pageYOffset||0;
+      rendreFiche(produit(id)); liste.hidden=true; fiche.hidden=false;
+      document.title=produit(id).nom+' | La boutique Coup de Patte'; window.scrollTo(0,0);
+    } else {
+      fiche.hidden=true; liste.hidden=false; document.title='La boutique | Coup de Patte'; window.scrollTo(0,scrollListe);
+    }
+  }
   function charger(){
     var x=new XMLHttpRequest();
     x.open('GET', SUPA+'/rest/v1/boutique_produits?select=id,nom,description,image,tailles,variantes,prix_cts,ordre&actif=eq.true&order=ordre');
     x.setRequestHeader('apikey', CLE);
-    x.onload=function(){ try{ var d=JSON.parse(x.responseText); if(x.status===200 && d && d.length){ produits=d; rendre(); } }catch(_){} };
+    x.onload=function(){ try{ var d=JSON.parse(x.responseText); if(x.status===200 && d && d.length){
+      // La base fait foi (prix, modèles) ; les détails de fiche viennent de la liste par défaut.
+      produits=d.map(function(p){ var b=null, i; for(i=0;i<DEFAUT.length;i++) if(DEFAUT[i].id===p.id) b=DEFAUT[i]; if(b && !p.details) p.details=b.details; return p; });
+      rendreListe(); afficher(); precharger(); } }catch(_){} };
     x.send();
   }
   function commander(id){
     var m=document.getElementById('msg');
     if(!OUVERTE || envoi) return;
-    var s=document.getElementById('t_'+id), taille=s?s.value:null, p=null, i;
-    for(i=0;i<produits.length;i++) if(produits[i].id===id) p=produits[i];
-    var v=(p&&p.variantes)||[], variante=v.length?(choix[id]||v[0].id):null;
+    var s=document.getElementById('t_'+id), taille=s?s.value:null, p=produit(id), v=p?variante(p):null;
     envoi=true; m.className='msg'; m.textContent='Préparation du paiement sécurisé...';
     var x=new XMLHttpRequest();
     x.open('POST', SUPA+'/functions/v1/boutique-commande');
     x.setRequestHeader('apikey', CLE); x.setRequestHeader('Authorization', 'Bearer '+CLE); x.setRequestHeader('Content-Type','application/json');
     x.onload=function(){ envoi=false; var d=null; try{ d=JSON.parse(x.responseText); }catch(_){} if(d && d.url){ location.href=d.url; return; } m.className='msg err'; m.textContent='Le paiement n\'a pas pu démarrer. Réessaie dans un instant.'; };
     x.onerror=function(){ envoi=false; m.className='msg err'; m.textContent='Connexion impossible. Vérifie ton réseau.'; };
-    x.send(JSON.stringify({produit:id, taille:taille, variante:variante}));
+    x.send(JSON.stringify({produit:id, taille:taille, variante:v?v.id:null}));
   }
-  rendre(); charger();
+  document.getElementById('zoom').onclick=function(e){ if(e.target.id!=='zoomImg') fermerZoom(); };
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' || e.keyCode===27) fermerZoom(); });
+  window.addEventListener('hashchange', afficher);
+  rendreListe(); afficher(); precharger(); charger();
 </script>
 </body>
 </html>
