@@ -559,6 +559,200 @@
     #map{height:480px;}
   }
 
+  /* ===== v38 : tableau de bord, badges, partenaires, devenir bénévole, annuaire ===== */
+  /* Compteurs en anneaux */
+  .kpi3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:2px 0 0;}
+  .kpi{--k:#1F9E67;--k-pale:#E3F1EA;background:var(--blanc);border:1px solid var(--bord);border-radius:22px;padding:14px 8px 12px;text-align:center;box-shadow:0 1px 2px rgba(20,40,30,.04),0 10px 26px -18px rgba(20,40,30,.35);min-width:0;}
+  .kpi.k-oiseau{--k:#E0703F;--k-pale:#FBE6DB;}
+  .kpi.k-badge{--k:#D0901A;--k-pale:#FBEFD3;}
+  html[data-theme="dark"] .kpi{--k-pale:#22332b;}
+  html[data-theme="dark"] .kpi.k-plume{--k:#5FD39E;}
+  html[data-theme="dark"] .kpi.k-oiseau{--k:#F0936B;--k-pale:#3a2720;}
+  html[data-theme="dark"] .kpi.k-badge{--k:#EDB54B;--k-pale:#382f1b;}
+  .kpi-ring{position:relative;width:64px;height:64px;margin:0 auto 9px;}
+  .kpi-ring>svg{width:100%;height:100%;transform:rotate(-90deg);display:block;overflow:visible;}
+  .kpi-ring circle{fill:none;stroke-width:6;stroke-linecap:round;}
+  .kpi-ring .trk{stroke:var(--k-pale);}
+  .kpi-ring .val{stroke:var(--k);}
+  .kpi-ring.anim .val{animation:ringIn 1s cubic-bezier(.2,.8,.2,1) both;}
+  @keyframes ringIn{from{stroke-dashoffset:var(--full);}}
+  .kpi-ring i{position:absolute;inset:0;display:grid;place-items:center;color:var(--k);font-style:normal;}
+  .kpi b{display:block;font-size:26px;font-weight:800;letter-spacing:-.8px;line-height:1;color:var(--texte);font-variant-numeric:tabular-nums;}
+  .kpi b span{font-size:15px;color:var(--texte-doux);font-weight:700;letter-spacing:0;}
+  .kpi small{display:block;font-size:12px;font-weight:700;color:var(--texte-doux);margin-top:5px;line-height:1.2;}
+  .kpi em{display:block;font-style:normal;font-size:11px;font-weight:800;color:var(--k);margin-top:7px;line-height:1.25;overflow-wrap:anywhere;}
+  .lvl-line{display:flex;align-items:center;justify-content:center;gap:7px;margin:12px 4px 0;font-size:12.5px;font-weight:700;color:var(--texte-doux);text-align:center;}
+  .lvl-line svg{color:var(--vert);flex:none;}
+  @media (max-width:359px){ .kpi-ring{width:54px;height:54px;} .kpi b{font-size:22px;} .kpi3{gap:7px;} }
+  @media (min-width:620px){ .kpi{padding:18px 12px 16px;} .kpi-ring{width:76px;height:76px;} .kpi b{font-size:30px;} .kpi small{font-size:13px;} .kpi em{font-size:12px;} }
+
+  /* Médailles */
+  .bdg-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:24px 4px 10px;}
+  .bdg-head h3{font-size:12.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--texte-doux);font-weight:800;}
+  .bdg-head span{font-size:13px;font-weight:800;color:var(--texte);}
+  .medals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;}
+  @media (min-width:620px){ .medals{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));} }
+  .medal{--m1:#3BCB8B;--m2:#17935D;background:var(--blanc);border:1px solid var(--bord);border-radius:20px;padding:16px 8px 13px;text-align:center;min-width:0;box-shadow:0 1px 2px rgba(20,40,30,.04);}
+  .medal.on{box-shadow:0 1px 2px rgba(20,40,30,.04),0 12px 24px -18px var(--m2);}
+  .m-ic{position:relative;width:58px;height:58px;margin:0 auto 10px;border-radius:50%;display:grid;place-items:center;color:#fff;background:linear-gradient(145deg,var(--m1),var(--m2));box-shadow:inset 0 1.5px 0 rgba(255,255,255,.45),inset 0 -4px 8px rgba(0,0,0,.14),0 8px 16px -10px var(--m2);}
+  .m-ic::before{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--m1);opacity:.28;}
+  .m-ic .m-num{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:24px;line-height:1;}
+  .medal.off .m-ic{background:var(--beige);color:#a5aea8;box-shadow:inset 0 0 0 1px var(--bord);}
+  .medal.off .m-ic::before{border-color:var(--bord);opacity:1;}
+  .m-st{position:absolute;right:-3px;bottom:-3px;width:21px;height:21px;border-radius:50%;background:var(--blanc);display:grid;place-items:center;box-shadow:0 1px 4px rgba(0,0,0,.18);color:var(--texte-doux);}
+  .medal.on .m-st{color:var(--vert);}
+  .medal b{display:block;font-size:12.5px;font-weight:800;line-height:1.2;color:var(--texte);}
+  .medal.off b{color:var(--texte-doux);}
+  .medal p{font-size:11px;color:var(--texte-doux);line-height:1.3;margin-top:4px;}
+  .m-prog{height:4px;border-radius:4px;background:var(--bord);margin:9px 12px 0;overflow:hidden;}
+  .m-prog i{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,var(--m1),var(--m2));}
+  .m-cnt{font-size:10.5px;font-weight:800;color:var(--texte-doux);margin-top:4px;font-variant-numeric:tabular-nums;}
+
+  /* Carte partenaire */
+  .partner{margin-top:18px;background:var(--blanc);border:1px solid var(--bord);border-radius:22px;padding:16px;box-shadow:0 1px 2px rgba(20,40,30,.04),0 14px 30px -22px rgba(20,40,30,.45);display:grid;grid-template-columns:60px minmax(0,1fr);column-gap:14px;row-gap:12px;align-items:start;text-align:left;}
+  .partner-ic{width:60px;height:60px;border-radius:17px;display:grid;place-items:center;color:#fff;background:linear-gradient(150deg,#4C9BE6,#1F5FA8);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 10px 18px -12px #1F5FA8;}
+  .partner-body{min-width:0;}
+  .partner-k{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--texte-doux);}
+  .partner-k i{width:6px;height:6px;border-radius:50%;background:#2F7FD0;display:inline-block;}
+  .partner h4{font-size:17px;font-weight:800;letter-spacing:-.2px;margin-top:3px;line-height:1.2;}
+  .partner .p-by{font-size:12.5px;color:var(--texte-doux);margin-top:2px;}
+  .partner .p-desc{grid-column:1/-1;font-size:14px;line-height:1.5;color:var(--texte);}
+  .partner .p-feat{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px;}
+  .partner .p-feat span{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;background:#EAF2FC;color:#1F5FA8;}
+  html[data-theme="dark"] .partner .p-feat span{background:#1c2a3a;color:#8FC0F2;}
+  .partner .p-cta{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px;}
+  .partner .p-cta .btn{flex:1 1 150px;width:auto;min-height:48px;padding:12px 14px;font-size:15px;}
+  .partner .p-note{grid-column:1/-1;font-size:11px;color:var(--texte-doux);}
+  @media (min-width:760px){
+    .partner{grid-template-columns:64px minmax(0,1fr) 220px;padding:20px 22px;column-gap:18px;align-items:center;}
+    .partner-ic{width:64px;height:64px;}
+    .partner .p-desc,.partner .p-feat{grid-column:2/3;}
+    .partner .p-cta{grid-column:3/4;grid-row:1/4;flex-direction:column;}
+    .partner .p-cta .btn{flex:none;width:100%;}
+    .partner .p-note{grid-column:2/4;}
+  }
+
+  /* Devenir bénévole */
+  .dv-hero{position:relative;overflow:hidden;border-radius:28px;padding:26px 22px 22px;color:#fff;background:radial-gradient(120% 90% at 100% 0%,#38C98A 0%,rgba(56,201,138,0) 55%),linear-gradient(155deg,#1FA56B,#0F7A4E);box-shadow:0 22px 40px -26px rgba(15,122,78,.8);margin-top:6px;}
+  .dv-hero .dv-k{font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;opacity:.85;}
+  .dv-hero h2{font-family:Fraunces,Georgia,serif;font-size:29px;line-height:1.1;font-weight:700;letter-spacing:-.4px;margin:8px 0 10px;max-width:16ch;}
+  .dv-hero p{font-size:15px;line-height:1.55;opacity:.95;max-width:44ch;}
+  .dv-hero .dv-plume{position:absolute;right:-18px;bottom:-22px;width:150px;height:150px;opacity:.14;}
+  .dv-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;position:relative;}
+  .dv-cta .btn{width:auto;flex:1 1 170px;min-height:52px;}
+  .dv-cta .btn-w{background:#fff;color:#0F7A4E;box-shadow:0 10px 20px -12px rgba(0,0,0,.45);}
+  .dv-cta .btn-o{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.4);}
+  .dv-trust{display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:16px;font-size:12.5px;font-weight:700;position:relative;}
+  .dv-trust span{display:inline-flex;align-items:center;gap:5px;}
+  .dv-sec{margin-top:28px;}
+  .dv-sec>h3{font-family:Fraunces,Georgia,serif;font-size:22px;font-weight:700;letter-spacing:-.2px;line-height:1.2;}
+  .dv-sec>p.sub{margin-top:6px;}
+  .dv-net{background:var(--blanc);border:1px solid var(--bord);border-radius:22px;padding:18px;box-shadow:var(--ombre-douce);margin-top:14px;}
+  .dv-net .nums{display:flex;gap:26px;align-items:flex-end;flex-wrap:wrap;}
+  .dv-net .nums b{display:block;font-size:34px;font-weight:800;letter-spacing:-1px;line-height:1;color:var(--vert);font-variant-numeric:tabular-nums;}
+  .dv-net .nums small{display:block;font-size:12.5px;font-weight:700;color:var(--texte-doux);margin-top:4px;}
+  .dv-bar{height:8px;border-radius:8px;background:var(--vert-pale);overflow:hidden;margin:14px 0 8px;}
+  .dv-bar i{display:block;height:100%;border-radius:8px;background:linear-gradient(90deg,#3BCB8B,#17935D);}
+  .dv-net .goal{font-size:13px;color:var(--texte-doux);line-height:1.45;}
+  .dv-miss{display:grid;grid-template-columns:1fr;gap:10px;margin-top:14px;}
+  @media (min-width:560px){ .dv-miss{grid-template-columns:1fr 1fr;} }
+  .dv-m{display:flex;gap:13px;align-items:flex-start;background:var(--blanc);border:1px solid var(--bord);border-radius:20px;padding:15px;box-shadow:0 1px 2px rgba(20,40,30,.04);}
+  .dv-m .ic{flex:0 0 42px;height:42px;border-radius:13px;display:grid;place-items:center;color:var(--c);background:var(--cp);}
+  .dv-m h4{font-size:15px;font-weight:800;line-height:1.25;}
+  .dv-m p{font-size:13.5px;line-height:1.5;color:var(--texte-doux);margin-top:3px;}
+  .dv-steps{list-style:none;margin-top:14px;display:grid;gap:10px;}
+  @media (min-width:760px){ .dv-steps{grid-template-columns:repeat(3,1fr);} }
+  .dv-steps li{background:var(--blanc);border:1px solid var(--bord);border-radius:20px;padding:16px;}
+  .dv-steps li span{width:30px;height:30px;border-radius:50%;background:var(--vert);color:#fff;font-weight:800;font-size:14px;display:grid;place-items:center;margin-bottom:10px;}
+  .dv-steps li b{display:block;font-size:15px;line-height:1.25;}
+  .dv-steps li p{font-size:13.5px;line-height:1.5;color:var(--texte-doux);margin-top:4px;}
+  .dv-gain{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;}
+  @media (min-width:760px){ .dv-gain{grid-template-columns:repeat(4,1fr);} }
+  .dv-gain>div{background:var(--blanc);border:1px solid var(--bord);border-radius:20px;padding:15px 13px;text-align:center;}
+  .dv-gain .m-ic{width:48px;height:48px;margin-bottom:9px;}
+  .dv-gain b{display:block;font-size:13.5px;line-height:1.25;}
+  .dv-gain small{display:block;font-size:12px;line-height:1.4;color:var(--texte-doux);margin-top:3px;}
+  .dv-prom{background:var(--blanc);border:1px solid var(--bord);border-radius:22px;padding:6px 16px;margin-top:14px;}
+  .dv-prom div{display:flex;gap:12px;align-items:flex-start;padding:13px 0;font-size:14px;line-height:1.5;}
+  .dv-prom div+div{border-top:1px solid var(--bord);}
+  .dv-prom svg{flex:none;color:var(--vert);margin-top:1px;}
+  .dv-faq{margin-top:14px;background:var(--blanc);border:1px solid var(--bord);border-radius:22px;padding:2px 16px;}
+  .dv-faq details+details{border-top:1px solid var(--bord);}
+  .dv-faq summary{list-style:none;cursor:pointer;padding:15px 28px 15px 0;font-weight:800;font-size:14.5px;position:relative;line-height:1.35;}
+  .dv-faq summary::-webkit-details-marker{display:none;}
+  .dv-faq summary::after{content:"+";position:absolute;right:2px;top:12px;font-size:20px;font-weight:600;color:var(--vert);transition:transform .2s;}
+  .dv-faq details[open] summary::after{transform:rotate(45deg);}
+  .dv-faq details p{font-size:14px;line-height:1.55;color:var(--texte-doux);padding:0 0 15px;}
+  .dv-insc{scroll-margin-top:80px;}
+  .dv-welcome{text-align:center;background:linear-gradient(160deg,var(--vert-pale),var(--blanc));border:1px solid var(--bord);border-radius:24px;padding:22px 18px;margin-top:14px;}
+  .dv-welcome .m-ic{width:64px;height:64px;}
+  .dv-welcome h4{font-family:Fraunces,Georgia,serif;font-size:21px;margin:4px 0 6px;}
+  .dv-welcome p{font-size:14px;line-height:1.5;color:var(--texte-doux);}
+  .dv-sticky{display:none;}
+  @media (max-width:759px){
+    .dv-sticky{display:block;position:sticky;bottom:calc(84px + env(safe-area-inset-bottom));z-index:5;margin-top:18px;}
+    .dv-sticky .btn{box-shadow:0 14px 28px -12px rgba(15,122,78,.7);}
+  }
+  @media (min-width:760px){ .dv-hero{padding:38px 36px 32px;} .dv-hero h2{font-size:38px;} .dv-hero .dv-plume{width:230px;height:230px;} }
+
+  /* Annuaire des bénévoles */
+  .bf-bar{display:grid;grid-template-columns:1fr;gap:8px;margin:4px 0 10px;}
+  @media (min-width:700px){ .bf-bar{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,.9fr);} }
+  .bf-search{position:relative;}
+  .bf-search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--texte-doux);pointer-events:none;}
+  .bf-search .field{padding-left:42px;}
+  .bf-bar .field{margin:0;}
+  .bf-chips{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px;margin:0 -2px;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+  .bf-chips::-webkit-scrollbar{display:none;}
+  .bf-chips button{flex:none;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--bord);background:var(--blanc);color:var(--texte);font-family:inherit;font-weight:700;font-size:13px;padding:8px 13px;border-radius:999px;cursor:pointer;white-space:nowrap;}
+  .bf-chips button.on{background:var(--vert);border-color:var(--vert);color:#fff;}
+  .bf-sum{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--texte-doux);font-weight:700;margin:2px 2px 12px;}
+  .bf-sum b{color:var(--texte);}
+  .ben-grid{display:grid;grid-template-columns:1fr;gap:12px;}
+  @media (min-width:700px){ .ben-grid{grid-template-columns:repeat(2,minmax(0,1fr));} }
+  @media (min-width:1100px){ .ben-grid{grid-template-columns:repeat(3,minmax(0,1fr));} }
+  .bcard{background:var(--blanc);border:1px solid var(--bord);border-radius:22px;padding:16px;box-shadow:0 1px 2px rgba(20,40,30,.04),0 12px 26px -20px rgba(20,40,30,.4);display:flex;flex-direction:column;min-width:0;}
+  .bcard.moi{border-color:var(--vert-clair);box-shadow:0 0 0 3px var(--vert-pale);}
+  .bc-top{display:flex;gap:12px;align-items:center;}
+  .bc-av{flex:0 0 52px;height:52px;border-radius:17px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:21px;background:linear-gradient(150deg,hsl(var(--h) 55% 55%),hsl(calc(var(--h) + 25) 60% 38%));background-size:cover;background-position:center;}
+  .bc-id{flex:1;min-width:0;}
+  .bc-id h4{font-size:16.5px;font-weight:800;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .bc-lvl{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--vert);margin-top:2px;}
+  .bc-loc{display:flex;align-items:center;gap:4px;font-size:13px;color:var(--texte-doux);margin-top:3px;min-width:0;}
+  .bc-loc span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .bc-loc svg{flex:none;}
+  .bc-me{font-size:10.5px;font-weight:800;background:var(--vert);color:#fff;border-radius:999px;padding:3px 8px;flex:none;}
+  .bc-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:14px;background:var(--beige);border-radius:16px;}
+  .bc-stats div{text-align:center;padding:10px 4px;}
+  .bc-stats div+div{border-left:1px solid var(--bord);}
+  .bc-stats b{display:block;font-size:18px;font-weight:800;letter-spacing:-.4px;color:var(--texte);font-variant-numeric:tabular-nums;}
+  .bc-stats b span{font-size:12px;color:var(--texte-doux);font-weight:700;}
+  .bc-stats small{display:block;font-size:11px;font-weight:700;color:var(--texte-doux);margin-top:2px;}
+  .bc-k{display:block;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--texte-doux);margin:14px 0 7px;}
+  .bc-miss,.bc-dispo{display:flex;flex-wrap:wrap;gap:6px;}
+  .bc-miss span{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;padding:5px 10px 5px 7px;border-radius:999px;background:var(--vert-pale);color:var(--vert);}
+  .bc-dispo span{font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;background:var(--beige);border:1px solid var(--bord);color:var(--texte);}
+  .bc-dispo span.veh{background:#EAF2FC;border-color:#D3E3F6;color:#1F5FA8;}
+  html[data-theme="dark"] .bc-dispo span.veh{background:#1c2a3a;border-color:#27384c;color:#8FC0F2;}
+  .bc-mot{font-size:13.5px;line-height:1.5;color:var(--texte);margin-top:12px;padding:10px 12px;border-radius:14px;background:var(--beige);font-style:italic;}
+  .bc-foot{margin-top:auto;padding-top:14px;}
+  .bc-foot .btn{min-height:46px;}
+  .bc-mini{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+  .bc-mini span{font-size:11.5px;font-weight:800;padding:4px 9px;border-radius:999px;background:var(--ambre-pale);color:#8A5A10;}
+  html[data-theme="dark"] .bc-mini span{color:#EDB54B;}
+  .ben-join{display:flex;flex-direction:column;justify-content:center;text-align:center;background:linear-gradient(160deg,var(--vert-pale),var(--blanc));border:1.5px dashed var(--vert-clair);border-radius:22px;padding:22px 18px;}
+  .ben-join b{font-family:Fraunces,Georgia,serif;font-size:19px;}
+  .ben-join p{font-size:13.5px;line-height:1.5;color:var(--texte-doux);margin:6px 0 14px;}
+  .net-card{background:var(--blanc);border:1px solid var(--bord);border-radius:22px;padding:16px 18px;box-shadow:var(--ombre-douce);margin-bottom:14px;display:grid;grid-template-columns:1fr;gap:12px;}
+  @media (min-width:700px){ .net-card{grid-template-columns:minmax(0,1fr) 240px;align-items:center;} }
+  .net-card .nums{display:flex;gap:22px;flex-wrap:wrap;}
+  .net-card .nums b{display:block;font-size:28px;font-weight:800;letter-spacing:-.8px;line-height:1;color:var(--vert);font-variant-numeric:tabular-nums;}
+  .net-card .nums small{display:block;font-size:12px;font-weight:700;color:var(--texte-doux);margin-top:4px;}
+  .net-card .dv-bar{margin:12px 0 6px;}
+  .net-card .goal{font-size:12.5px;color:var(--texte-doux);}
+  .net-card .btn{min-height:50px;}
+  @media (min-width:1100px){ #devenir{max-width:960px;} }
+
 </style>
 </head>
 <body>
@@ -770,7 +964,7 @@
       <div id="q-lieu"><span class="chip" data-g="lieu" data-v="ville">Ville, rue</span><span class="chip" data-g="lieu" data-v="jardin">Jardin</span><span class="chip" data-g="lieu" data-v="campagne">Campagne</span><span class="chip" data-g="lieu" data-v="foret">Forêt</span><span class="chip" data-g="lieu" data-v="eau">Bord de l'eau ou mer</span><span class="chip" data-g="lieu" data-v="toit">Sous un toit</span></div>
       <button class="btn btn-primary" style="margin-top:16px" onclick="proposeEspeces()">Voir les espèces probables</button>
       <div id="idResult"></div>
-      <div class="callout" style="margin-top:16px">Pour une identification par le chant ou la photo, l'app <b>Merlin Bird ID</b> (gratuite, Cornell) est une excellente référence.</div>
+      <div id="partIdent"></div>
     </section>
 
     <!-- ESPECES liste -->
@@ -948,6 +1142,8 @@
       <div id="benevolesList"></div>
       <p class="disclaimer">Profils publiés volontairement par leurs auteurs, réservés aux 18 ans et plus.</p>
     </section>
+
+    <section class="screen" id="devenir"><div id="devenirView"></div></section>
 
     <section class="screen" id="assos">
       <h2 class="title">Espace associations</h2>
@@ -1173,6 +1369,7 @@
     if(id==='centres') setTimeout(initMap, 60);
     if(id==='compte' && typeof renderCompte==='function') renderCompte();
     if(id==='benevoles'){ _benList=null; renderBenevoles(); loadReseauStats(); }
+    if(id==='devenir'){ renderDevenir(); }
     if(id==='assos' && typeof renderAssos==='function') renderAssos();
     if(id==='admin' && typeof renderAdmin==='function') renderAdmin();
     if(id==='actus') renderActus();
@@ -1405,7 +1602,7 @@
     b.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); b.click(); } });
     new MutationObserver(function(){ if(b.querySelector('img') && !b.querySelector('.zoom-hint')){ var h=document.createElement('span'); h.className='zoom-hint'; h.innerHTML=ZOOM_SVG; b.appendChild(h); } }).observe(b,{childList:true}); } })();
   /* ===== Navigation : retour en arriere ===== */
-  var NAV_LBL={home:'Accueil',u1:'Étape 1',u2:'Étape 2',u3:'Étape 3',u4:'Étape 4',rA:'Conseils',rB:'Conseils',rNid:'Oisillon',bague:'Oiseau bagué',secours:'Secours',centres:'Carte des centres',identifier:'Identifier',especes:'Espèces',espece:'Fiche',conseils:'Conseils',gestes:'Bons gestes',reglages:'Réglages',compte:'Compte',benevoles:'Bénévoles',assos:'Associations',admin:'Administration',signaler:'Signaler',mentions:'Mentions légales',actus:'Actualités',cgu:'CGU',photoId:'Photo'};
+  var NAV_LBL={home:'Accueil',u1:'Étape 1',u2:'Étape 2',u3:'Étape 3',u4:'Étape 4',rA:'Conseils',rB:'Conseils',rNid:'Oisillon',bague:'Oiseau bagué',secours:'Secours',centres:'Carte des centres',identifier:'Identifier',especes:'Espèces',espece:'Fiche',conseils:'Conseils',gestes:'Bons gestes',reglages:'Réglages',compte:'Compte',benevoles:'Bénévoles',devenir:'Devenir bénévole',assos:'Associations',admin:'Administration',signaler:'Signaler',mentions:'Mentions légales',actus:'Actualités',cgu:'CGU',photoId:'Photo'};
   var NAV_WIDE={home:1,centres:1,especes:1,benevoles:1,assos:1,actus:1,admin:1};
   function navLabel(id){
     if(id==='espece'){ var h=document.getElementById('e-nom'); if(h&&h.textContent.trim()) return h.textContent.trim(); }
@@ -1494,6 +1691,7 @@
     document.addEventListener('touchend', function(){ if(x0===null||!el) return; el.style.transition='transform .2s, opacity .2s'; el.style.transform=''; el.style.opacity=''; var d=dx; x0=null; if(d>90) goBack(); }, {passive:true});
   })();
   window.addEventListener('load', function(){
+    try{ var pi=document.getElementById('partIdent'); if(pi) pi.innerHTML=partnerCard('merlin'); }catch(_){}
     var m=location.hash.match(/^#\/([\w-]+)(?:\/([\w-]+))?$/);
     try{ history.replaceState({cdp:1,stack:['home'],lin:false},'', m ? location.pathname+location.search : location.href); }catch(_){}
     if(m){
@@ -1763,17 +1961,47 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
   var NIVEAUX=[[0,'Nouveau membre'],[3,'Pioupiou'],[8,'Observateur'],[15,'Explorateur'],[30,'Jeune sauveur'],[50,'Sauveur'],[90,'Protecteur des oiseaux'],[150,'Gardien des oiseaux'],[250,"Ambassadeur Coup de Patte"],[400,"Fondateur Coup de Patte"]];
   function niveauInfo(pl){ var idx=0; for(var i=0;i<NIVEAUX.length;i++){ if(pl>=NIVEAUX[i][0]) idx=i; } var next=NIVEAUX[idx+1]||null; return {nom:NIVEAUX[idx][1], seuil:NIVEAUX[idx][0], next:next?next[1]:null, nextSeuil:next?next[0]:null}; }
   function niveauNom(pl){ return niveauInfo(pl).nom; }
+  // Badges : chaque badge a sa medaille (couleurs, pictogramme ou chiffre), sa condition et sa progression.
+  var BADGE_IC={
+    oiseau:'<path d="M16 7h.01"/><path d="M3.4 18H12a8 8 0 0 0 8-8V7a4 4 0 0 0-7.28-2.3L2 20"/><path d="m20 7 2 .5-2 .5"/><path d="M10 18v3"/><path d="M14 17.75V21"/>',
+    secours:'<path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/><path d="M12 9v5M9.5 11.5h5"/>',
+    veilleur:'<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+    mains:'<path d="M11 14h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 16"/><path d="m7 20 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"/><path d="m2 15 6 6"/><path d="M19.5 8.5c.7-.7 1.5-1.6 1.5-2.7A2.73 2.73 0 0 0 16 4a2.78 2.78 0 0 0-5 1.8c0 1.2.8 2 1.5 2.8L16 12Z"/>',
+    gens:'<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5"/><circle cx="17" cy="9" r="2.4"/><path d="M16 15c3 0 5 1.5 5 4"/>',
+    etoile:'<path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/>'
+  };
   var BADGES=[
-    {id:'envol', nom:'Premier envol', test:function(c){return c.n>=1;}},
-    {id:'secours', nom:'Premier secours', test:function(c){return c.confies>=1;}},
-    {id:'veilleur', nom:'Veilleur', test:function(c){return c.laisses>=1;}},
-    {id:'c5', nom:'Carnet de 5', test:function(c){return c.n>=5;}},
-    {id:'samaritain', nom:'Bon samaritain', test:function(c){return c.confies>=3;}},
-    {id:'c10', nom:'Carnet de 10', test:function(c){return c.n>=10;}},
-    {id:'benevole', nom:'Bénévole engagé', test:function(c){return c.benevole;}},
-    {id:'c25', nom:'Carnet de 25', test:function(c){return c.n>=25;}},
-    {id:'ambassadeur', nom:'Ambassadeur', test:function(c){return c.plumes>=250;}}
+    {id:'envol', nom:'Premier envol', desc:'Ton premier oiseau au carnet', c:['#3BCB8B','#17935D'], ic:'oiseau', prog:function(c){return [c.n,1];}},
+    {id:'secours', nom:'Premier secours', desc:'Un oiseau confié à un centre', c:['#F08A6E','#D3553F'], ic:'secours', prog:function(c){return [c.confies,1];}},
+    {id:'veilleur', nom:'Veilleur', desc:'Un oisillon laissé ou remis au nid', c:['#4CC3CF','#1F8FA0'], ic:'veilleur', prog:function(c){return [c.laisses,1];}},
+    {id:'c5', nom:'Carnet de 5', desc:'5 oiseaux au carnet', c:['#F6C463','#DE9221'], num:'5', prog:function(c){return [c.n,5];}},
+    {id:'samaritain', nom:'Bon samaritain', desc:'3 oiseaux confiés à un centre', c:['#F07FA0','#C9466E'], ic:'mains', prog:function(c){return [c.confies,3];}},
+    {id:'c10', nom:'Carnet de 10', desc:'10 oiseaux au carnet', c:['#F2A65A','#C9701A'], num:'10', prog:function(c){return [c.n,10];}},
+    {id:'benevole', nom:'Bénévole engagé', desc:'Inscrit dans le réseau', c:['#8C9BF5','#4A59C9'], ic:'gens', prog:function(c){return [c.benevole?1:0,1];}},
+    {id:'c25', nom:'Carnet de 25', desc:'25 oiseaux au carnet', c:['#B993F2','#7B4FC9'], num:'25', prog:function(c){return [c.n,25];}},
+    {id:'ambassadeur', nom:'Ambassadeur', desc:'250 plumes gagnées', c:['#F7D774','#C9971A'], ic:'etoile', prog:function(c){return [c.plumes,250];}}
   ];
+  BADGES.forEach(function(b){ b.test=function(c){ var p=b.prog(c); return p[0]>=p[1]; }; });
+  function badgeIcHtml(b, size){
+    var s=size||26;
+    var inner=b.num?'<span class="m-num"'+(s<26?' style="font-size:'+Math.round(s*.85)+'px"':'')+'>'+b.num+'</span>':'<svg viewBox="0 0 24 24" width="'+s+'" height="'+s+'" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+BADGE_IC[b.ic]+'</svg>';
+    return inner;
+  }
+  function medalHtml(b, ctx){
+    var p=b.prog(ctx), ok=p[0]>=p[1], cur=Math.min(p[0],p[1]);
+    var st=ok?'<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>'
+             :'<svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
+    return '<div class="medal '+(ok?'on':'off')+'" style="--m1:'+b.c[0]+';--m2:'+b.c[1]+'" title="'+escapeH(b.desc)+'">'
+      +'<div class="m-ic">'+badgeIcHtml(b,26)+'<span class="m-st">'+st+'</span></div>'
+      +'<b>'+escapeH(b.nom)+'</b><p>'+escapeH(b.desc)+'</p>'
+      +(ok?'':(p[1]>1?'<div class="m-prog"><i style="width:'+Math.round(cur/p[1]*100)+'%"></i></div><div class="m-cnt">'+cur+' / '+p[1]+'</div>':''))
+      +'</div>';
+  }
+  function nextBadge(ctx){
+    var best=null, bestR=-1;
+    BADGES.forEach(function(b){ var p=b.prog(ctx); if(p[0]>=p[1]) return; var r=p[0]/p[1]; if(r>bestR){ bestR=r; best=b; } });
+    return best;
+  }
   // Traduit une erreur d'authentification en message actionnable.
   // "Failed to fetch" ne veut pas dire que le serveur a refuse : la requete n'est
   // jamais partie. Presque toujours : hors-ligne, bloqueur de contenu, VPN ou relais prive.
@@ -1865,19 +2093,11 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
       +'<div id="asMsg" class="meta" style="margin-top:8px">'+(a.id?(a.verifiee?'Structure vérifiée et publiée dans l\'annuaire.':'En attente de vérification par l\'équipe.'):'')+'</div></div>'
       +'<button class="btn btn-ghost" onclick="showScreen(\'benevoles\')">Voir les bénévoles</button>'
       +'<p class="disclaimer">Les échanges avec les bénévoles se font hors plateforme.</p>'
-      +merlinReco();
-  }
-  // Recommandation discrète : Merlin Bird ID (Cornell Lab), appli gratuite et complémentaire
-  function merlinReco(){
-    var android=/android/i.test(navigator.userAgent);
-    var url=android?'https://play.google.com/store/apps/details?id=com.labs.merlinbirdid.app':'https://apps.apple.com/app/id773457673';
-    return '<div style="margin-top:18px;padding:12px 14px;border:1px dashed var(--bord);border-radius:14px;display:flex;gap:12px;align-items:center">'
-      +'<div style="flex:1;min-width:0"><div class="meta" style="text-transform:uppercase;letter-spacing:.06em;font-size:11px">À découvrir</div>'
-      +'<div style="font-size:14px;line-height:1.45;margin-top:2px"><strong>Merlin Bird ID</strong>, l\'appli gratuite du Cornell Lab pour reconnaître un oiseau à la vue ou à son chant.</div></div>'
-      +'<a class="btn btn-ghost btn-sm" href="'+url+'" target="_blank" rel="noopener" style="flex:none">Voir</a></div>';
+      +partnerCard('merlin');
   }
   function saveAsso(){ var m=document.getElementById('asMsg'); if(!currentUser) return; var row={user_id:currentUser.id, nom:val('asNom'), type:val('asType'), rna_siren:val('asRna'), ville:val('asVille'), dept:val('asDept'), tel:val('asTel'), email:val('asEmail'), site:val('asSite'), zone:val('asZone'), description:val('asDesc'), besoins:val('asBesoins')}; if(!row.nom){ if(m)m.textContent='Indique au moins le nom.'; return; } if(m)m.textContent='Enregistrement...'; var q = myAsso ? db.from('associations').update(row).eq('user_id',currentUser.id).select() : db.from('associations').insert(row).select(); q.then(function(r){ if(r.error){ if(m)m.textContent='Erreur : '+r.error.message; return; } if(!r.data||!r.data.length){ if(m)m.textContent='Enregistrement refusé par la base.'; return; } myAsso=r.data[0]; _assoList=null; if(m)m.textContent='Enregistré. En attente de vérification.'; renderAssoForm(); }); }
 
+  if(db){ db.auth.onAuthStateChange(function(_e,s){ if(!s||!s.user) return; try{ var rt=localStorage.getItem('cdp_retour')||''; if(rt.indexOf('devenir|')===0){ localStorage.removeItem('cdp_retour'); if(Date.now()-parseInt(rt.split('|')[1],10)<3*3600*1000){ setTimeout(function(){ var dv=document.getElementById('devenir'); if(!(dv&&dv.classList.contains('active'))) showScreen('devenir'); setTimeout(devVersInscription,350); },400); } } }catch(_){} }); }
   if(db){ db.auth.getSession().then(function(r){ currentUser=r.data.session?r.data.session.user:null; renderCompte(); refreshAdminFlag(updateAdminUI); if(currentUser){ loadObs(); loadMyBenevole(); loadMyAsso(); } }); db.auth.onAuthStateChange(function(_e,s){ currentUser=s?s.user:null; renderCompte(); refreshAdminFlag(updateAdminUI); if(currentUser){ loadObs(); loadMyBenevole(); loadMyAsso(); } }); }
 
   // ================= Regie sponsors (parrainage direct, sans cookie ni pistage) =================
@@ -2292,7 +2512,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
     benForm={ step:1, communes:[],
       code_postal:b.code_postal||'', ville:b.ville||'', code_insee:b.code_insee||'', departement:b.departement||'', departement_nom:b.departement_nom||'', region:b.region||'', lat:b.lat||null, lon:b.lon||null,
       types_aide:(b.types_aide||[]).slice(), temps:b.temps||'', creneaux:(b.creneaux||[]).slice(), rayon_km:b.rayon_km||15, vehicule:!!b.vehicule,
-      pseudo:b.pseudo||'', newsletter:b.newsletter!==false, profil_public:b.profil_public!==false, majeur:!!b.majeur, mot:b.mot||'',
+      pseudo:b.pseudo||(_monProfil&&_monProfil.pseudo)||'', newsletter:b.newsletter!==false, profil_public:b.profil_public!==false, majeur:!!b.majeur, mot:b.mot||'',
       contact_tel:b.contact_tel||'', contact_email:b.contact_email||'', contact_insta:b.contact_insta||'' };
   }
   function benCollect(){
@@ -2445,7 +2665,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
     var q = myBenevole ? db.from('benevoles').update(row).eq('user_id',currentUser.id).select() : db.from('benevoles').insert(row).select();
     q.then(function(r){
       if(r.error){ if(m) m.textContent='Erreur : '+r.error.message; return; }
-      myBenevole=(r.data&&r.data[0])||row; benEdit=false; benForm=null; benParr=null;
+      var etaitNouveau=!(myBenevole&&myBenevole.actif); myBenevole=(r.data&&r.data[0])||row; benEdit=false; benForm=null; benParr=null; _benJustJoined=etaitNouveau; _reseau=null;
       try{ localStorage.removeItem('cdp_parrain'); }catch(e){}
       renderCompte();
     });
@@ -2454,14 +2674,12 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
   // --- Compteur public du reseau (ecran Benevoles) ---
   function loadReseauStats(){
     var el=document.getElementById('reseauStats'); if(!el||!db) return;
-    db.rpc('stats_reseau').then(function(r){
-      var d=r.data; if(typeof d==='string'){ try{ d=JSON.parse(d); }catch(e){ d=null; } } if(r.error||!d) { el.innerHTML=''; return; }
-      el.innerHTML='<div class="card" style="background:var(--vert);color:#fff;border:none"><div style="display:flex;gap:18px;align-items:flex-end"><div><div style="font-size:30px;font-weight:800">'+(d.benevoles||0)+'</div><div style="font-size:13px;font-weight:700">bénévoles</div></div><div><div style="font-size:30px;font-weight:800">'+(d.departements||0)+'</div><div style="font-size:13px;font-weight:700">départements sur 101</div></div></div>'
-        +'<div style="font-size:13.5px;margin-top:8px;opacity:.95">Objectif : un bénévole dans chaque département de France.</div>'
-        +'<button class="btn" style="margin-top:12px;background:#fff;color:var(--vert)" onclick="benAllerFormulaire()">Je deviens bénévole</button></div>';
+    _reseau=null;
+    loadReseau(function(d){
+      if(!d){ el.innerHTML=''; return; }
+      el.innerHTML='<div class="net-card"><div>'+reseauCardHtml(d)+'</div>'+((myBenevole&&myBenevole.actif)?'':'<button class="btn btn-primary" onclick="showScreen(\'devenir\')">Je deviens bénévole</button>')+'</div>';
     });
   }
-  function benAllerFormulaire(){ showScreen('compte'); setTimeout(function(){ var a=document.getElementById('devenirBenevole')||document.getElementById('compteView'); if(a&&a.scrollIntoView) a.scrollIntoView({behavior:'smooth'}); },150); }
 
   // --- Back-office : reseau de benevoles ---
   var admBen=[], admBenF={region:'',dep:'',q:'',temps:'',type:'',vehicule:false,newsletter:false,statut:''}, admBenOpen=null;
@@ -2580,10 +2798,11 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
   // ----------------------------- CONNEXION -----------------------------
   var _lastEmail='', _authSent=false, _authCooldown=0, _authTimer=null, _showCode=false;
   try{ _lastEmail=localStorage.getItem('cdp_last_email')||''; }catch(e){}
-  function renderLogin(el){
-    var h='<div class="acc-hero"><div class="acc-hero-ic">'+_ico(IC.plume,26)+'</div>'
+  function renderLogin(el, opts){
+    opts=opts||{};
+    var h=opts.compact?'':('<div class="acc-hero"><div class="acc-hero-ic">'+_ico(IC.plume,26)+'</div>'
       +'<h2 class="title" style="margin:10px 0 4px">Ton espace Coup de Patte</h2>'
-      +'<p class="sub" style="margin:0">Ton carnet d\'oiseaux secourus, tes plumes et tes badges, ton engagement bénévole.</p></div>';
+      +'<p class="sub" style="margin:0">Ton carnet d\'oiseaux secourus, tes plumes et tes badges, ton engagement bénévole.</p></div>');
     if(!_authSent){
       h+='<div class="card acc-card"><label class="acc-lab" for="magicEmail">Ton adresse email</label>'
         +'<input class="field" id="magicEmail" type="email" inputmode="email" autocomplete="email" autocapitalize="off" placeholder="ton@email.fr" value="'+escapeH(_lastEmail)+'" onkeydown="if(event.key===\'Enter\'){sendMagic();}">'
@@ -2591,7 +2810,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
         +'<div id="authMsg" class="meta acc-msg"></div>'
         +'<div class="acc-how"><b>Comment ça marche ?</b> Pas de mot de passe. Tu reçois un email avec un <b>lien magique</b> : un seul clic, et tu es connecté. Le lien fonctionne une fois et expire au bout d\'une heure.</div>'
         +'</div>';
-      h+='<div class="acc-benef">'
+      if(!opts.compact) h+='<div class="acc-benef">'
         +'<div><span>'+_ico(IC.carnet,18)+'</span><b>Ton carnet</b><small>Garde la trace des oiseaux aidés</small></div>'
         +'<div><span>'+_ico(IC.plume,18)+'</span><b>Plumes et badges</b><small>Chaque geste compte</small></div>'
         +'<div><span>'+_ico(IC.coeur,18)+'</span><b>Bénévolat</b><small>Aide près de chez toi</small></div>'
@@ -2634,7 +2853,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
     var m=document.getElementById('authMsg');
     var e=resend ? _lastEmail : ((document.getElementById('magicEmail')||{}).value||'').trim().toLowerCase();
     if(!e || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e)){ if(m){ m.className='meta acc-msg err'; m.textContent='Cette adresse email ne semble pas valide.'; } return; }
-    _lastEmail=e; try{ localStorage.setItem('cdp_last_email', e); }catch(x){}
+    _lastEmail=e; try{ localStorage.setItem('cdp_last_email', e); var dva=document.getElementById('devenir'); if(dva&&dva.classList.contains('active')) localStorage.setItem('cdp_retour', 'devenir|'+Date.now()); }catch(x){}
     var btn=document.getElementById(resend?'resendBtn':'magicBtn'); if(btn) btn.disabled=true;
     if(m){ m.className='meta acc-msg'; m.textContent='Envoi en cours...'; }
     // Redirection calculee depuis l'adresse reellement visitee (coupdepatte.eu, www, ou vercel.app).
@@ -2674,6 +2893,9 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
   }
   function renderCompte(){
     var el=document.getElementById('compteView'); if(!el) return;
+    var dvs=document.getElementById('devenir');
+    if(dvs && dvs.classList.contains('active')){ renderDevenirInscr(); return; }
+    var dvi=document.getElementById('devInscr'); if(dvi) dvi.innerHTML='';
     if(!db){ el.innerHTML='<h2 class="title">Mon compte</h2><p class="sub">Service momentanément indisponible. Vérifie ta connexion.</p>'; return; }
     if(!currentUser){ renderLogin(el); return; }
     if(_monProfil===null){ _monProfil={}; loadMonProfil(); }
@@ -2696,8 +2918,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
       +'<button class="acc-av" onclick="document.getElementById(\'avatarInput\').click()" aria-label="Changer ma photo"'+(av?' style="background-image:url(\''+escapeH(av)+'\')"':'')+'>'+(av?'':'<span>'+escapeH(ini)+'</span>')+'<i>'+_ico('<path d="M12 5v14M5 12h14"/>',12)+'</i></button>'
       +'<div style="flex:1;min-width:0"><div class="acc-lvl">'+escapeH(ni.nom)+(benActif?' · Bénévole':'')+'</div><div class="acc-nom">Bonjour '+escapeH(nom)+'</div></div>'
       +'<input type="file" id="avatarInput" accept="image/*" style="display:none" onchange="uploadAvatar(this.files[0])"></div>'
-      +'<div class="acc-stats"><div><b>'+plumes+'</b><small>plumes</small></div><div><b>'+n+'</b><small>oiseau'+(n>1?'x':'')+' au carnet</small></div><div><b>'+unlocked.length+'<span>/'+BADGES.length+'</span></b><small>badges</small></div></div>'
-      +'<div class="acc-prog"><div style="width:'+prog+'%"></div></div><div class="acc-next">'+escapeH(nextTxt)+'</div>'
+      +compteKpiHtml(plumes, n, unlocked, ni, ctx)
       +'<div id="avatarMsg" class="meta" style="margin-top:4px"></div>';
 
     h+='<div class="acc-qa">'
@@ -2741,7 +2962,8 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
       +'<div id="obsMsg" class="meta" style="margin-top:8px"></div>'
       +'<p class="meta" style="margin-top:8px">+3 plumes si l\'oiseau est laissé en place, remis au nid ou confié à un centre. +1 sinon.</p></div>';
     h+='<div class="section-label" id="monCarnet">Mon carnet'+(n?' · '+n:'')+'</div><div class="card" style="padding:4px 14px">'+rows+'</div>';
-    h+='<div class="section-label">Mes badges</div><div class="badge-grid">'+BADGES.map(function(b){ var ok=b.test(ctx); return '<div class="bdg'+(ok?' on':'')+'"><span>'+_ico(ok?IC.check:'<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',18)+'</span><small>'+escapeH(b.nom)+'</small></div>'; }).join('')+'</div>';
+    var nbOk=BADGES.filter(function(b){return b.test(ctx);}).length;
+    h+='<div class="bdg-head"><h3>Mes badges</h3><span>'+nbOk+' sur '+BADGES.length+'</span></div><div class="medals">'+BADGES.map(function(b){ return medalHtml(b,ctx); }).join('')+'</div>';
     if(n) h+='<button class="btn btn-ghost" style="margin-top:12px" onclick="exportCarnet()">Télécharger mon carnet (CSV)</button>';
     return h;
   }
@@ -2749,7 +2971,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
     var b=myBenevole, actif=!!(b&&b.actif);
     var h='';
     if(!actif && !benEdit){
-      h+='<div class="acc-pitch"><b>Rejoins le réseau des bénévoles</b><p>Récupérer un oiseau, le conduire à un centre, tenir un stand, aider en ligne : chaque coup de main compte. 5 questions, moins d\'une minute.</p></div>';
+      h+='<div class="acc-pitch"><b>Rejoins le réseau des bénévoles</b><p>Récupérer un oiseau, le conduire à un centre, tenir un stand, aider en ligne : chaque coup de main compte. 5 questions, moins d\'une minute.</p><button class="acc-link" style="color:#fff;margin-top:8px" onclick="showScreen(\'devenir\')">Pourquoi devenir bénévole ?</button></div>';
     }
     return h+benevolatCardHtml();
   }
@@ -2788,46 +3010,285 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
   }
   function signOut(){ db.auth.signOut().then(function(){ currentUser=null; myObs=[]; myBenevole=null; _monProfil=null; _authSent=false; _compteTab='carnet'; renderCompte(); }); }
 
-  // ----------------------- ANNUAIRE DES BENEVOLES -----------------------
-  var _benList=null, _benDep='';
+
+  // ======================= PARTENAIRES MIS EN AVANT =======================
+  // Un partenaire = une fiche. Ajouter un partenaire : une entree de plus ici, puis partnerCard('cle').
+  var PARTENAIRES={
+    merlin:{
+      nom:'Merlin Bird ID', par:'Cornell Lab of Ornithology', prix:'Gratuit', kicker:'Partenaire recommandé',
+      desc:'Reconnais un oiseau en le prenant en photo ou en enregistrant son chant. Le complément idéal de Coup de Patte pour savoir qui tu as devant toi.',
+      feats:['Par la photo','Par le chant','Hors ligne avec les packs régionaux'],
+      ios:'https://apps.apple.com/app/id773457673',
+      android:'https://play.google.com/store/apps/details?id=com.labs.merlinbirdid.app',
+      web:'https://merlin.allaboutbirds.org/'
+    }
+  };
+  function partnerCard(key){
+    var p=PARTENAIRES[key]; if(!p) return '';
+    var ua=navigator.userAgent||'', android=/android/i.test(ua), ios=/iphone|ipad|ipod/i.test(ua)||(/macintosh/i.test(ua)&&navigator.maxTouchPoints>1);
+    var dl='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5"/><path d="M5 20h14"/></svg>';
+    var ext='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg>';
+    function a(url,cls,label,ic){ return '<a class="btn '+cls+'" href="'+url+'" target="_blank" rel="noopener">'+ic+label+'</a>'; }
+    var btns;
+    if(ios) btns=a(p.ios,'btn-primary','Télécharger sur l\'App Store',dl);
+    else if(android) btns=a(p.android,'btn-primary','Télécharger sur Google Play',dl);
+    else btns=a(p.ios,'btn-primary','App Store',dl)+a(p.android,'btn-ghost','Google Play',dl);
+    if(!ios && !android && p.web) btns+=a(p.web,'btn-ghost','Découvrir',ext);
+    return '<div class="partner">'
+      +'<div class="partner-ic" aria-hidden="true">'+_ico(IC.oiseau,30)+'</div>'
+      +'<div class="partner-body"><div class="partner-k"><i></i>'+escapeH(p.kicker)+'</div><h4>'+escapeH(p.nom)+'</h4><div class="p-by">'+escapeH(p.par)+' · '+escapeH(p.prix)+'</div></div>'
+      +'<p class="p-desc">'+escapeH(p.desc)+'</p>'
+      +'<div class="p-feat">'+p.feats.map(function(f){ return '<span>'+_ico(IC.check,13)+escapeH(f)+'</span>'; }).join('')+'</div>'
+      +'<div class="p-cta">'+btns+'</div>'
+      +'</div>';
+  }
+  function merlinReco(){ return partnerCard('merlin'); }
+
+  // ======================= COMPTEURS EN ANNEAUX =======================
+  var _kpiAnim=true;
+  function kpiRing(ratio, ic){
+    var r=27, C=2*Math.PI*r, off=C*(1-Math.max(0,Math.min(1,ratio)));
+    return '<div class="kpi-ring'+(_kpiAnim?' anim':'')+'"><svg viewBox="0 0 64 64" aria-hidden="true"><circle class="trk" cx="32" cy="32" r="'+r+'"/>'
+      +'<circle class="val" cx="32" cy="32" r="'+r+'" stroke-dasharray="'+C.toFixed(1)+'" style="stroke-dashoffset:'+off.toFixed(1)+';--full:'+C.toFixed(1)+'"'+(ratio<=0?' stroke-opacity="0"':'')+'/></svg><i>'+_ico(ic,22)+'</i></div>';
+  }
+  function compteKpiHtml(plumes, n, unlocked, ni, ctx){
+    var levelRatio=ni.nextSeuil!=null?(plumes-ni.seuil)/(ni.nextSeuil-ni.seuil):1;
+    var paliers=[1,5,10,25,50,100,250], nextN=null; for(var i=0;i<paliers.length;i++){ if(n<paliers[i]){ nextN=paliers[i]; break; } }
+    var prevN=0; for(var j=0;j<paliers.length;j++){ if(paliers[j]<=n) prevN=paliers[j]; }
+    var nRatio=nextN?(n-prevN)/(nextN-prevN):1;
+    var nb=nextBadge(ctx);
+    var h='<div class="kpi3">'
+      +'<div class="kpi k-plume">'+kpiRing(levelRatio, IC.plume)+'<b>'+plumes+'</b><small>plume'+(plumes>1?'s':'')+'</small><em>'+escapeH(ni.nom)+'</em></div>'
+      +'<div class="kpi k-oiseau">'+kpiRing(n?nRatio:0, IC.oiseau)+'<b>'+n+'</b><small>oiseau'+(n>1?'x':'')+' au carnet</small><em>'+(n===0?'Ajoute le premier':(nextN?'Objectif : '+nextN:'Carnet légendaire'))+'</em></div>'
+      +'<div class="kpi k-badge">'+kpiRing(unlocked.length/BADGES.length, BADGE_IC.etoile)+'<b>'+unlocked.length+'<span> / '+BADGES.length+'</span></b><small>badges</small><em>'+(nb?'Bientôt : '+escapeH(nb.nom):'Collection complète')+'</em></div>'
+      +'</div>';
+    var nextTxt=ni.next?('Encore '+(ni.nextSeuil-plumes)+' plume'+((ni.nextSeuil-plumes)>1?'s':'')+' pour devenir '+ni.next):'Niveau maximum atteint, bravo';
+    h+='<div class="lvl-line">'+_ico(IC.plume,15)+'<span>'+escapeH(nextTxt)+'</span></div>';
+    _kpiAnim=false;
+    return h;
+  }
+
+  // ======================= DEVENIR BENEVOLE =======================
+  var DV_MISSIONS={
+    recuperer:{t:'Récupérer un oiseau en détresse', p:'Tu interviens près de chez toi quand une personne trouve un oiseau et ne sait pas quoi faire, en suivant les bons gestes de l\'app.', c:'#E0703F', cp:'#FBE6DB'},
+    transport:{t:'Transporter vers un centre de soins', p:'Le geste le plus utile : conduire l\'oiseau, dans un carton fermé, jusqu\'au centre de soins le plus proche.', c:'#2F7FD0', cp:'#E3EEFA'},
+    relais:{t:'Famille relais', p:'Accueillir un oiseau quelques heures ou quelques jours, toujours sur demande et sous l\'autorité d\'un centre de soins.', c:'#1F9E67', cp:'#E3F1EA'},
+    faire_connaitre:{t:'Faire connaître l\'association', p:'Partager les bons réflexes autour de toi : quartier, école, entreprise, réseaux sociaux.', c:'#C9466E', cp:'#FBE3EA'},
+    en_ligne:{t:'Aider en ligne', p:'Rédaction, design, traduction, photo : ton savoir-faire numérique sert la cause depuis chez toi.', c:'#4A59C9', cp:'#E8EAFB'},
+    stand:{t:'Tenir un stand', p:'Accueillir le public lors d\'un marché, d\'une fête de la nature ou d\'un événement local.', c:'#C9971A', cp:'#FBF1D6'}
+  };
+  var MISS_IC={
+    recuperer:'<path d="M16 7h.01"/><path d="M3.4 18H12a8 8 0 0 0 8-8V7a4 4 0 0 0-7.28-2.3L2 20"/><path d="m20 7 2 .5-2 .5"/><path d="M10 18v3"/><path d="M14 17.75V21"/>',
+    transport:'<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/>',
+    relais:'<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/>',
+    faire_connaitre:'<path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>',
+    en_ligne:'<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/>',
+    stand:'<path d="M3 9l2-5h14l2 5"/><path d="M3 9h18v1.5a3 3 0 0 1-6 0 3 3 0 0 1-6 0 3 3 0 0 1-6 0z"/><path d="M5 13v7h14v-7"/>'
+  };
+  var MISS_COURT={recuperer:'Récupérer', transport:'Transport', relais:'Famille relais', faire_connaitre:'Faire connaître', en_ligne:'En ligne', stand:'Stand'};
+  var _benJustJoined=false, _reseau=null;
+  function loadReseau(cb){
+    if(_reseau){ cb(_reseau); return; }
+    if(!db){ cb(null); return; }
+    db.rpc('stats_reseau').then(function(r){ var d=r.data; if(typeof d==='string'){ try{ d=JSON.parse(d); }catch(e){ d=null; } } if(!r.error&&d){ _reseau=d; } cb(_reseau); }, function(){ cb(null); });
+  }
+  function reseauCardHtml(d, withCta){
+    var b=(d&&d.benevoles)||0, dp=(d&&d.departements)||0, pct=Math.max(2,Math.round(dp/101*100));
+    return '<div class="nums"><div><b>'+b+'</b><small>bénévole'+(b>1?'s':'')+' inscrit'+(b>1?'s':'')+'</small></div><div><b>'+dp+'<span style="font-size:15px;color:var(--texte-doux);font-weight:700"> / 101</span></b><small>départements couverts</small></div></div>'
+      +'<div class="dv-bar"><i style="width:'+pct+'%"></i></div><div class="goal">Objectif : au moins un bénévole dans chaque département de France.</div>';
+  }
+  function benAllerFormulaire(){ showScreen('devenir'); }
+  function devVersInscription(){ var a=document.getElementById('devInscr'); if(a&&a.scrollIntoView){ try{ a.scrollIntoView({behavior:'smooth',block:'start'}); }catch(_){ a.scrollIntoView(); } } }
+  function renderDevenir(){
+    var el=document.getElementById('devenirView'); if(!el) return;
+    var chk='<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>';
+    var shield='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>';
+    var h='<div class="dv-hero">'
+      +'<svg class="dv-plume" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg>'
+      +'<div class="dv-k">Réseau de bénévoles Coup de Patte</div>'
+      +'<h2>Deviens bénévole pour les oiseaux sauvages</h2>'
+      +'<p>Chaque jour, des oiseaux blessés ou tombés du nid ont besoin d\'une main pour rejoindre un centre de soins. Cette main peut être la tienne, près de chez toi et à ton rythme.</p>'
+      +'<div class="dv-cta"><button class="btn btn-w" onclick="devVersInscription()">Je m\'inscris en 1 minute</button><button class="btn btn-o" onclick="showScreen(\'benevoles\')">Voir les bénévoles</button></div>'
+      +'<div class="dv-trust"><span>'+chk+'Gratuit</span><span>'+chk+'Sans engagement</span><span>'+chk+'5 questions</span><span>'+chk+'Dès 18 ans</span></div>'
+      +'</div>';
+    h+='<div class="dv-net" id="devNet">'+reseauCardHtml(_reseau)+'</div>';
+    h+='<div class="dv-sec"><h3>Choisis ta façon d\'aider</h3><p class="sub">Une seule mission ou plusieurs, c\'est toi qui décides. Aucun soin n\'est demandé : ils restent réservés aux centres autorisés.</p><div class="dv-miss">'
+      +BEN_TYPES.map(function(t){ var m=DV_MISSIONS[t[0]]||{t:t[1],p:'',c:'#1F9E67',cp:'#E3F1EA'}; return '<div class="dv-m" style="--c:'+m.c+';--cp:'+m.cp+'"><div class="ic">'+_ico(MISS_IC[t[0]]||IC.coeur,21)+'</div><div><h4>'+escapeH(m.t)+'</h4><p>'+escapeH(m.p)+'</p></div></div>'; }).join('')
+      +'</div></div>';
+    h+='<div class="dv-sec"><h3>Comment ça marche</h3><ol class="dv-steps">'
+      +'<li><span>1</span><b>Tu t\'inscris en 5 questions</b><p>Ta commune, tes missions, ton temps, tes disponibilités et la façon de te joindre.</p></li>'
+      +'<li><span>2</span><b>Tu rejoins l\'annuaire</b><p>Les personnes qui trouvent un oiseau, les centres et les associations proches de chez toi peuvent te solliciter.</p></li>'
+      +'<li><span>3</span><b>Tu aides quand tu peux</b><p>Aucune obligation : tu acceptes ou non chaque demande, et tu fais une pause quand tu veux.</p></li>'
+      +'</ol></div>';
+    var bBen=BADGES.filter(function(x){return x.id==='benevole';})[0];
+    h+='<div class="dv-sec"><h3>Ce que tu y gagnes</h3><div class="dv-gain">'
+      +'<div><div class="m-ic" style="--m1:'+bBen.c[0]+';--m2:'+bBen.c[1]+'">'+badgeIcHtml(bBen,22)+'</div><b>Le badge Bénévole engagé</b><small>Affiché sur ta fiche et dans ton espace</small></div>'
+      +'<div><div class="m-ic" style="--m1:#F7D774;--m2:#C9971A">'+_ico(IC.gens,22)+'</div><b>Ton lien de parrainage</b><small>Paliers Plume, Aile, Envol et Nuée</small></div>'
+      +'<div><div class="m-ic" style="--m1:#4CC3CF;--m2:#1F8FA0">'+_ico(IC.mail,22)+'</div><b>La Plume du samedi</b><small>Les nouvelles du réseau chaque semaine</small></div>'
+      +'<div><div class="m-ic" style="--m1:#3BCB8B;--m2:#17935D">'+_ico(IC.check,22)+'</div><b>Des gestes justes</b><small>Consignes fondées sur la LPO et l\'OFB</small></div>'
+      +'</div></div>';
+    h+='<div class="dv-sec"><h3>Nos engagements envers toi</h3><div class="dv-prom">'
+      +'<div>'+shield+'<span><b>Tes coordonnées sont protégées.</b> Elles ne s\'affichent qu\'à la demande, une fiche à la fois, jamais sous forme de liste.</span></div>'
+      +'<div>'+shield+'<span><b>Tu restes maître de ta fiche.</b> Tu la modifies ou tu te retires de l\'annuaire en un geste, depuis ton espace.</span></div>'
+      +'<div>'+shield+'<span><b>Un accompagnement à chaque étape.</b> L\'app te guide pas à pas et te met en relation avec le centre de soins le plus proche.</span></div>'
+      +'<div>'+shield+'<span><b>Ton email reste privé.</b> Il sert à te connecter, et à la newsletter seulement si tu la choisis.</span></div>'
+      +'</div></div>';
+    h+='<div class="dv-sec"><h3>Questions fréquentes</h3><div class="dv-faq">'
+      +'<details><summary>Faut-il des compétences particulières ?</summary><p>Non. La bonne volonté, un peu de disponibilité et le respect des bons gestes suffisent. L\'application rappelle les consignes à chaque étape.</p></details>'
+      +'<details><summary>Combien de temps faut-il y consacrer ?</summary><p>C\'est toi qui choisis : quelques heures par mois, une ou deux heures par semaine, ou seulement en cas d\'urgence. Tu peux changer d\'avis à tout moment.</p></details>'
+      +'<details><summary>Je n\'ai pas de voiture, puis-je aider ?</summary><p>Oui. Récupérer un oiseau à pied près de chez toi, faire connaître l\'association, aider en ligne ou tenir un stand ne demandent pas de véhicule.</p></details>'
+      +'<details><summary>Vais-je soigner des oiseaux ?</summary><p>Non. Les soins sont réservés aux centres de sauvegarde autorisés. Ton rôle est de protéger l\'oiseau, de le mettre à l\'abri et de faciliter son arrivée au centre.</p></details>'
+      +'<details><summary>Pourquoi faut-il avoir 18 ans ?</summary><p>Les missions impliquent des déplacements et des échanges entre personnes qui ne se connaissent pas. Pour protéger les plus jeunes, l\'inscription est réservée aux adultes.</p></details>'
+      +'<details><summary>Comment arrêter ?</summary><p>Dans ton espace, onglet Bénévolat, touche « Me retirer de l\'annuaire ». Ta fiche disparaît aussitôt de la liste publique.</p></details>'
+      +'</div></div>';
+    h+='<div class="dv-sec dv-insc" id="devInscr"></div>';
+    h+='<div class="dv-sticky" id="devSticky"><button class="btn btn-primary" onclick="devVersInscription()">Je deviens bénévole</button></div>';
+    el.innerHTML=h;
+    renderDevenirInscr();
+    loadReseau(function(d){ var n=document.getElementById('devNet'); if(n&&d) n.innerHTML=reseauCardHtml(d); });
+    devStickyWatch();
+  }
+  function devStickyWatch(){
+    var s=document.getElementById('devSticky'), t=document.getElementById('devInscr'); if(!s||!t||!('IntersectionObserver' in window)) return;
+    try{ new IntersectionObserver(function(es){ es.forEach(function(e){ s.style.visibility=e.isIntersecting?'hidden':'visible'; }); },{root:document.getElementById('stage'),threshold:0.05}).observe(t); }catch(_){}
+  }
+  function renderDevenirInscr(){
+    var box=document.getElementById('devInscr'); if(!box) return;
+    var cv=document.getElementById('compteView'); if(cv) cv.innerHTML='';
+    if(!db){ box.innerHTML='<div class="callout">Service momentanément indisponible. Vérifie ta connexion.</div>'; return; }
+    var b=myBenevole, actif=!!(b&&b.actif);
+    if(!currentUser){
+      box.innerHTML='<h3>Inscris-toi en moins d\'une minute</h3><p class="sub">D\'abord ton email : tu reçois un lien de connexion, sans mot de passe. Ensuite, 5 questions et c\'est fait.</p><div id="devLogin"></div>';
+      renderLogin(document.getElementById('devLogin'),{compact:true});
+      return;
+    }
+    if(actif && !benEdit){
+      var bb=BADGES.filter(function(x){return x.id==='benevole';})[0];
+      var head=_benJustJoined
+        ? '<div class="dv-welcome"><div class="m-ic" style="--m1:'+bb.c[0]+';--m2:'+bb.c[1]+'">'+badgeIcHtml(bb,26)+'</div><h4>Bienvenue dans le réseau</h4><p>Ta fiche est en ligne et tu viens de débloquer le badge Bénévole engagé. Partage ton lien pour faire grandir le réseau près de chez toi.</p></div>'
+        : '<h3>Tu fais partie du réseau</h3><p class="sub">Merci pour ton engagement. Retrouve ta fiche et ton lien de parrainage ci-dessous.</p>';
+      box.innerHTML=head+benevolatCardHtml();
+      setTimeout(benDrawQR,60);
+      return;
+    }
+    box.innerHTML='<h3>'+(actif?'Modifier mon bénévolat':'Plus que 5 questions')+'</h3><p class="sub">Moins d\'une minute. Tu pourras tout modifier ensuite depuis ton espace.</p>'+benevolatCardHtml();
+  }
+
+  // ======================= ANNUAIRE DES BENEVOLES =======================
+  var _benList=null, _benDep='', _benStats=false, _benF={q:'',mission:'',veh:false,cren:'',tri:'recent'};
+  function benHue(s){ var h=0; s=String(s||''); for(var i=0;i<s.length;i++){ h=(h*31+s.charCodeAt(i))%360; } return h; }
+  function benMois(d){ if(!d) return ''; try{ return new Date(d).toLocaleDateString('fr-FR',{month:'long',year:'numeric'}); }catch(e){ return ''; } }
   function renderBenevoles(){
     var el=document.getElementById('benevolesList'); if(!el) return;
     if(!db){ el.innerHTML='<div class="callout">Service indisponible.</div>'; return; }
     if(_benList===null){
       el.innerHTML='<p class="meta" style="padding:6px 0">Chargement...</p>';
-      db.rpc('benevoles_publics').then(function(r){
-        if(r.error){ el.innerHTML='<div class="callout">Liste des bénévoles momentanément indisponible.</div>'; _benList=null; return; }
-        var list=r.data||[]; if(!Array.isArray(list)){ try{ list=JSON.parse(list); }catch(e){ list=[]; } }
-        _benList=list; renderBenevoles();
+      var fin=function(list,stats){ if(!Array.isArray(list)){ try{ list=JSON.parse(list); }catch(e){ list=[]; } } _benList=list||[]; _benStats=!!stats; renderBenevoles(); };
+      db.rpc('benevoles_annuaire').then(function(r){
+        if(!r.error){ fin(r.data,true); return; }
+        db.rpc('benevoles_publics').then(function(r2){
+          if(r2.error){ el.innerHTML='<div class="callout">Liste des bénévoles momentanément indisponible.</div>'; _benList=null; return; }
+          fin(r2.data,false);
+        });
       });
       return;
     }
     var deps={}; _benList.forEach(function(b){ if(b.departement) deps[b.departement]=(deps[b.departement]||0)+1; });
-    var list=_benList.filter(function(b){ return !_benDep || b.departement===_benDep; });
     var h='';
     var moiAbsent = currentUser && !(myBenevole&&myBenevole.actif);
-    if(moiAbsent) h+='<div class="callout">Tu n\'apparais pas encore dans cette liste : seules les personnes qui ont rempli leur fiche bénévole y figurent. <a href="#" onclick="benAllerFormulaire();return false;">Remplir ma fiche</a></div>';
-    if(Object.keys(deps).length>1){
-      h+='<select class="field" style="margin-bottom:12px" onchange="_benDep=this.value;renderBenevoles()"><option value="">Toute la France ('+_benList.length+')</option>'
-        +Object.keys(deps).sort().map(function(k){ return '<option value="'+escapeH(k)+'"'+(k===_benDep?' selected':'')+'>'+escapeH(k+' · '+(deptNom(k)||k))+' ('+deps[k]+')</option>'; }).join('')+'</select>';
-    }
-    if(!list.length){
-      h+='<div class="acc-empty">'+_ico(IC.gens,28)+'<b>Pas encore de bénévole '+(_benDep?'dans ce département':'inscrit')+'</b><span>Sois la première ou le premier : ta fiche aide les centres à trouver du renfort près de chez toi.</span><button class="btn btn-primary btn-sm" style="margin-top:12px;width:auto" onclick="benAllerFormulaire()">Je deviens bénévole</button></div>';
+    if(moiAbsent) h+='<div class="callout">Tu n\'apparais pas encore dans cette liste : seules les personnes qui ont rempli leur fiche bénévole y figurent. <a href="#" onclick="showScreen(\'devenir\');return false;">Remplir ma fiche</a></div>';
+    if(!_benList.length){
+      h+='<div class="acc-empty">'+_ico(IC.gens,28)+'<b>Pas encore de bénévole inscrit</b><span>Sois la première ou le premier : ta fiche aide les centres à trouver du renfort près de chez toi.</span><button class="btn btn-primary btn-sm" style="margin-top:12px;width:auto" onclick="showScreen(\'devenir\')">Je deviens bénévole</button></div>';
       el.innerHTML=h; return;
     }
-    h+='<p class="meta" style="padding:2px 0 8px">'+list.length+' bénévole'+(list.length>1?'s':'')+' prêt'+(list.length>1?'s':'')+' à aider. Touche « Voir le contact » pour savoir comment le joindre.</p>';
-    h+=list.map(function(b){
-      var nom=String(b.pseudo||'Bénévole').trim();
-      var lieu=b.ville?(b.ville+(b.departement?' ('+b.departement+')':'')):(b.departement?((deptNom(b.departement)||b.departement)+' ('+b.departement+')'):(b.zone||''));
-      var tags=(b.types_aide&&b.types_aide.length)?b.types_aide.map(function(k){ return benLabel(BEN_TYPES,k); }):(b.aides?String(b.aides).split(/\s*,\s*/):[]);
-      var peut=b.a_tel||b.a_email||b.a_insta;
-      return '<div class="ben-card"><div class="ben-top"><div class="ben-av">'+escapeH(nom.charAt(0).toUpperCase())+'</div><div style="flex:1;min-width:0"><h4>'+escapeH(nom)+'</h4><div class="meta">'+escapeH(lieu)+(b.temps?' · '+escapeH(benLabel(BEN_TEMPS,b.temps)):(b.dispos?' · '+escapeH(b.dispos):''))+'</div></div>'+(b.vehicule?'<span class="adm-tag ok">Véhiculé</span>':'')+'</div>'
-        +(tags.length?'<div class="ben-tags">'+tags.slice(0,4).map(function(t){ return '<span>'+escapeH(t)+'</span>'; }).join('')+'</div>':'')
-        +(b.mot?'<p class="meta" style="margin-top:8px;font-style:italic">« '+escapeH(b.mot)+' »</p>':'')
-        +(peut?'<div class="row-btns" style="margin-top:10px"><button class="btn btn-primary btn-sm" onclick="voirContact(\''+b.id+'\',this)">Voir le contact</button></div>':'<div class="meta" style="margin-top:8px">Aucun moyen de contact renseigné.</div>')
-        +'<div id="ct_'+b.id+'"></div></div>';
-    }).join('');
+    var srch='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>';
+    h+='<div class="bf-bar">'
+      +'<div class="bf-search">'+srch+'<input class="field" id="benQ" type="search" placeholder="Rechercher un prénom ou une ville" value="'+escapeH(_benF.q)+'" oninput="_benF.q=this.value;benApplyFilters()"></div>'
+      +'<select class="field" aria-label="Département" onchange="_benDep=this.value;benApplyFilters()"><option value="">Toute la France ('+_benList.length+')</option>'
+      +Object.keys(deps).sort().map(function(k){ return '<option value="'+escapeH(k)+'"'+(k===_benDep?' selected':'')+'>'+escapeH(k+' · '+(deptNom(k)||k))+' ('+deps[k]+')</option>'; }).join('')+'</select>'
+      +'<select class="field" aria-label="Trier" onchange="_benF.tri=this.value;benApplyFilters()">'
+      +[['recent','Les plus récents'],['plumes','Les plus actifs'],['nom','Par prénom']].filter(function(o){ return _benStats||o[0]!=='plumes'; }).map(function(o){ return '<option value="'+o[0]+'"'+(_benF.tri===o[0]?' selected':'')+'>'+o[1]+'</option>'; }).join('')+'</select>'
+      +'</div>';
+    h+='<div class="bf-chips" id="benChips"></div>';
+    h+='<div class="bf-sum" id="benSum"></div><div class="ben-grid" id="benGrid"></div>';
     el.innerHTML=h;
+    benApplyFilters();
+  }
+  function benChipsHtml(){
+    function c(on,act,label,ic){ return '<button class="'+(on?'on':'')+'" onclick="'+act+'">'+(ic?_ico(ic,15):'')+escapeH(label)+'</button>'; }
+    var h=c(!_benF.mission&&!_benF.veh&&!_benF.cren,'_benF.mission=\'\';_benF.veh=false;_benF.cren=\'\';benApplyFilters()','Tous');
+    BEN_TYPES.forEach(function(t){ h+=c(_benF.mission===t[0],'_benF.mission=(_benF.mission===\''+t[0]+'\'?\'\':\''+t[0]+'\');benApplyFilters()',MISS_COURT[t[0]]||t[1],MISS_IC[t[0]]); });
+    h+=c(_benF.veh,'_benF.veh=!_benF.veh;benApplyFilters()','Véhiculé',MISS_IC.transport);
+    BEN_CREN.forEach(function(t){ h+=c(_benF.cren===t[0],'_benF.cren=(_benF.cren===\''+t[0]+'\'?\'\':\''+t[0]+'\');benApplyFilters()',t[1]); });
+    return h;
+  }
+  function benMatchMission(b,k){
+    if(b.types_aide&&b.types_aide.length) return b.types_aide.indexOf(k)>=0;
+    var txt=String(b.aides||'').toLowerCase(); var lab=String(benLabel(BEN_TYPES,k)).toLowerCase();
+    return txt.indexOf(lab.split(' ')[0])>=0 || (k==='transport'&&txt.indexOf('transport')>=0);
+  }
+  function benApplyFilters(){
+    var grid=document.getElementById('benGrid'); if(!grid||!_benList) return;
+    var ch=document.getElementById('benChips'); if(ch) ch.innerHTML=benChipsHtml();
+    var q=String(_benF.q||'').toLowerCase().trim();
+    var list=_benList.filter(function(b){
+      if(_benDep && b.departement!==_benDep) return false;
+      if(_benF.mission && !benMatchMission(b,_benF.mission)) return false;
+      if(_benF.veh && !b.vehicule) return false;
+      if(_benF.cren && !((b.creneaux||[]).indexOf(_benF.cren)>=0)) return false;
+      if(q){ var hay=[b.pseudo,b.ville,b.departement_nom,deptNom(b.departement),b.region,b.zone].join(' ').toLowerCase(); if(hay.indexOf(q)<0) return false; }
+      return true;
+    });
+    if(_benF.tri==='plumes') list.sort(function(a,b){ return (b.plumes||0)-(a.plumes||0); });
+    else if(_benF.tri==='nom') list.sort(function(a,b){ return String(a.pseudo||'').localeCompare(String(b.pseudo||''),'fr'); });
+    else list.sort(function(a,b){ return String(b.depuis||'').localeCompare(String(a.depuis||'')); });
+    var depsN={}, veh=0; list.forEach(function(b){ if(b.departement) depsN[b.departement]=1; if(b.vehicule) veh++; });
+    var sum=document.getElementById('benSum');
+    if(sum) sum.innerHTML='<span><b>'+list.length+'</b> bénévole'+(list.length>1?'s':'')+'</span><span><b>'+Object.keys(depsN).length+'</b> département'+(Object.keys(depsN).length>1?'s':'')+'</span><span><b>'+veh+'</b> véhiculé'+(veh>1?'s':'')+'</span>';
+    if(!list.length){
+      grid.innerHTML='<div class="acc-empty" style="grid-column:1/-1">'+_ico(IC.gens,28)+'<b>Aucun bénévole ne correspond</b><span>Élargis ta recherche ou, mieux encore, deviens la première personne de ce secteur.</span><button class="btn btn-primary btn-sm" style="margin-top:12px;width:auto" onclick="showScreen(\'devenir\')">Je deviens bénévole</button></div>';
+      return;
+    }
+    var html=list.map(benCardHtml).join('');
+    if(!(myBenevole&&myBenevole.actif)) html+='<div class="ben-join"><b>Et toi ?</b><p>Rejoins le réseau en 5 questions et apparais ici, près de chez toi.</p><button class="btn btn-primary" onclick="showScreen(\'devenir\')">Je deviens bénévole</button></div>';
+    grid.innerHTML=html;
+  }
+  function benCardHtml(b){
+    var nom=String(b.pseudo||'Bénévole').trim()||'Bénévole';
+    var moi=myBenevole&&myBenevole.id&&b.id===myBenevole.id;
+    var dep=b.departement?((b.departement_nom||deptNom(b.departement)||'')):'';
+    var lieu=b.ville?(b.ville+(b.departement?' ('+b.departement+')':'')):(b.departement?(dep+' ('+b.departement+')'):(b.zone||''));
+    if(b.rayon_km) lieu+=' · '+b.rayon_km+' km';
+    var pin='<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>';
+    var av=b.avatar_url?'<div class="bc-av" style="--h:'+benHue(nom)+';background-image:url(\''+escapeH(b.avatar_url)+'\')"></div>':'<div class="bc-av" style="--h:'+benHue(nom)+'">'+escapeH(nom.charAt(0).toUpperCase())+'</div>';
+    var lvl='Bénévole', stats='';
+    if(_benStats){
+      var ctx={n:b.n_obs||0, confies:b.confies||0, laisses:b.laisses||0, plumes:b.plumes||0, benevole:true};
+      var nb=BADGES.filter(function(x){return x.test(ctx);}).length;
+      lvl=niveauNom(ctx.plumes);
+      stats='<div class="bc-stats"><div><b>'+ctx.plumes+'</b><small>plumes</small></div><div><b>'+nb+'<span>/'+BADGES.length+'</span></b><small>badges</small></div><div><b>'+ctx.n+'</b><small>oiseau'+(ctx.n>1?'x':'')+' aidé'+(ctx.n>1?'s':'')+'</small></div></div>';
+    }
+    var depuis=benMois(b.depuis);
+    var miss=(b.types_aide&&b.types_aide.length)
+      ? b.types_aide.map(function(k){ return '<span>'+_ico(MISS_IC[k]||IC.coeur,14)+escapeH(MISS_COURT[k]||benLabel(BEN_TYPES,k))+'</span>'; }).join('')
+      : (b.aides?String(b.aides).split(/\s*,\s*/).filter(Boolean).map(function(t){ return '<span>'+escapeH(t)+'</span>'; }).join(''):'');
+    var disp=[];
+    (b.creneaux||[]).forEach(function(k){ disp.push('<span>'+escapeH(benLabel(BEN_CREN,k))+'</span>'); });
+    if(!disp.length && b.dispos) String(b.dispos).split(/\s*,\s*/).filter(function(x){return x.trim();}).forEach(function(x){ disp.push('<span>'+escapeH(x)+'</span>'); });
+    if(b.temps) disp.push('<span>'+escapeH(benLabel(BEN_TEMPS,b.temps))+'</span>');
+    if(b.vehicule) disp.push('<span class="veh">Véhiculé</span>');
+    var mini=[]; if(_benStats && b.filleuls>0){ var pal=benPalier(b.filleuls); mini.push('Parrain '+(pal?pal+' · ':'')+b.filleuls+' filleul'+(b.filleuls>1?'s':'')); }
+    var peut=b.a_tel||b.a_email||b.a_insta;
+    return '<article class="bcard'+(moi?' moi':'')+'">'
+      +'<div class="bc-top">'+av+'<div class="bc-id"><h4>'+escapeH(nom)+'</h4><div class="bc-lvl">'+escapeH(lvl)+(depuis?' · depuis '+escapeH(depuis):'')+'</div>'+(lieu?'<div class="bc-loc">'+pin+'<span>'+escapeH(lieu)+'</span></div>':'')+'</div>'+(moi?'<span class="bc-me">Moi</span>':'')+'</div>'
+      +stats
+      +(miss?'<span class="bc-k">Peut aider pour</span><div class="bc-miss">'+miss+'</div>':'')
+      +(disp.length?'<span class="bc-k">Disponibilités</span><div class="bc-dispo">'+disp.join('')+'</div>':'')
+      +(mini.length?'<div class="bc-mini">'+mini.map(function(m){ return '<span>'+escapeH(m)+'</span>'; }).join('')+'</div>':'')
+      +(b.mot?'<div class="bc-mot">« '+escapeH(b.mot)+' »</div>':'')
+      +'<div class="bc-foot">'+(peut?'<button class="btn btn-primary btn-sm" onclick="voirContact(\''+escapeH(b.id)+'\',this)">'+_ico(IC.tel,17)+'Voir le contact</button>':'<div class="meta">Aucun moyen de contact renseigné.</div>')
+      +'<div id="ct_'+escapeH(b.id)+'"></div></div>'
+      +'</article>';
   }
 
   // -------------------- ANNUAIRE NATIONAL DES ASSOCIATIONS --------------------

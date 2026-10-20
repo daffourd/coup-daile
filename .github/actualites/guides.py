@@ -418,7 +418,7 @@ def render_benevole(ctx):
                '<li>Aider une personne qui vient de trouver un animal à faire les bons gestes.</li>'
                '<li>Relayer les besoins des centres : matériel, nourriture, familles d\'accueil autorisées, collectes.</li>'
                '<li>Sensibiliser : école, quartier, réseaux sociaux.</li></ul>')
-    out.append('<p><a class="btn" href="/#/benevoles">M\'inscrire comme bénévole</a></p>')
+    out.append('<p><a class="btn" href="/#/devenir">M\'inscrire comme bénévole</a></p>')
     out.append('<h2>Associations et centres de soins</h2><p>Tu représentes une structure qui agit pour la faune sauvage ? <a href="/#/assos">Inscris-la dans l\'espace associations</a> pour être visible et trouver des bénévoles près de chez toi.</p>')
     out.append(_faq_html(esc, faq))
     out.append('<p><a href="/association/">Découvrir l\'association Coup de Patte</a> · <a href="/soutenir/">Soutenir l\'association</a></p>')
