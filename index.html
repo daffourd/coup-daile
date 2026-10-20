@@ -772,6 +772,45 @@
   .btq-body .btn{margin-top:auto;}
   .btq-entree{display:none;}
   html.btq-on .btq-entree{display:inline;}
+  /* ---------- Passe la plume ---------- */
+  .pl-hero{position:relative;border-radius:var(--rayon);padding:22px 20px 20px;color:#fff;background:linear-gradient(150deg,#23A86E 0%,#1F9E67 45%,#167A50 100%);box-shadow:0 14px 28px -14px rgba(22,122,80,.7);margin:2px 0 14px;overflow:hidden;}
+  .pl-hero::after{content:"";position:absolute;right:-60px;top:-70px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 70%);pointer-events:none;}
+  .pl-hero .pl-logo{width:52px;height:52px;border-radius:16px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
+  .pl-hero .k{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;opacity:.92;}
+  .pl-hero h2{font-family:Fraunces,Georgia,serif;font-size:24px;line-height:1.18;margin:6px 0 8px;}
+  .pl-hero p{font-size:14.5px;line-height:1.5;opacity:.96;}
+  .pl-compteur{display:flex;align-items:baseline;gap:10px;background:var(--blanc);border:1px solid var(--bord);border-radius:16px;padding:14px 16px;margin-bottom:14px;box-shadow:var(--ombre-douce);}
+  .pl-compteur b{font-size:28px;font-weight:800;color:var(--vert);}
+  .pl-compteur span{font-size:14px;color:var(--texte-doux);font-weight:600;}
+  .pl-geste{text-align:center;padding:8px 6px 4px;}
+  .pl-num{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:var(--vert);margin:4px 0 10px;}
+  .pl-geste .pl-ic{width:86px;height:86px;border-radius:28px;margin:4px auto 16px;background:var(--vert-pale);color:var(--vert);display:flex;align-items:center;justify-content:center;}
+  .pl-geste .title{font-size:24px;}
+  .pl-geste .sub{font-size:16px;line-height:1.55;margin-bottom:22px;}
+  .opt.pl-ok{border-color:var(--vert);background:var(--vert-pale);}
+  .opt.pl-ok .dot{background:var(--vert);color:#fff;}
+  .opt.pl-ko{border-color:var(--corail);background:var(--corail-pale);}
+  .opt.pl-ko .dot{background:var(--corail);color:#fff;}
+  .pl-label{display:block;font-size:14px;font-weight:700;margin:14px 2px 8px;}
+  .pl-label:first-child{margin-top:2px;}
+  .pl-birds{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+  .pl-birds button{border:2px solid var(--bord);background:var(--beige);border-radius:16px;padding:6px 4px 8px;cursor:pointer;font-family:inherit;font-size:11.5px;font-weight:700;color:var(--texte);display:flex;flex-direction:column;align-items:center;gap:4px;}
+  .pl-birds button img{width:100%;max-width:72px;aspect-ratio:1;display:block;}
+  .pl-birds button.on{border-color:var(--vert);background:var(--vert-pale);}
+  .pl-apercu{display:flex;justify-content:center;margin:6px 0 14px;}
+  .pl-apercu canvas{width:100%;max-width:300px;height:auto;border-radius:18px;box-shadow:0 12px 26px -10px rgba(20,60,40,.45);}
+  .pl-chiffres{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .pl-chiffres div{background:var(--vert-pale);border-radius:14px;padding:12px;text-align:center;}
+  .pl-chiffres b{display:block;font-size:30px;font-weight:800;color:var(--vert);line-height:1.1;}
+  .pl-chiffres span{font-size:12.5px;color:var(--texte-doux);font-weight:600;}
+  .pl-paliers{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap;}
+  .pl-paliers span{flex:1;min-width:60px;text-align:center;border:1.5px dashed var(--bord);border-radius:12px;padding:8px 4px;font-size:12.5px;font-weight:800;color:var(--texte-doux);}
+  .pl-paliers span small{display:block;font-size:10.5px;font-weight:700;opacity:.8;}
+  .pl-paliers span.on{border-style:solid;border-color:var(--ambre);background:var(--ambre-pale);color:#8a5a0e;}
+  .pl-public{margin-top:14px;padding-top:12px;border-top:1px solid var(--bord);font-size:14px;line-height:1.5;}
+  .pl-public b{color:var(--vert);}
+  html[data-theme="dark"] .pl-paliers span.on{color:#f0c27a;}
+  html[data-theme="dark"] .pl-chiffres b,html[data-theme="dark"] .pl-compteur b,html[data-theme="dark"] .pl-num,html[data-theme="dark"] .pl-public b{color:#6FD6A6;}
 </style>
 </head>
 <body>
@@ -821,6 +860,7 @@
       <button class="opt" onclick="showScreen('gestes')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span><b>Les bons gestes</b><span class="chev">&rsaquo;</span></button>
       <button class="opt" onclick="showScreen('especes')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg></span><b>Fiches espèces</b><span class="chev">&rsaquo;</span></button>
       <div class="section-label">Agir</div>
+      <button class="opt" onclick="showScreen('plume')" style="border-color:var(--vert);background:var(--vert-pale)"><span class="dot" style="background:var(--vert);color:#fff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg></span><span><b>Passe la plume</b><br><span class="meta" style="font-weight:400">Apprends les 4 gestes en 60 s, puis transmets-les</span></span><span class="chev">&rsaquo;</span></button>
       <button class="opt" onclick="benAllerFormulaire()" style="border-color:var(--vert)"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg></span><span><b>Je deviens bénévole</b><br><span class="meta" style="font-weight:400">5 questions, moins d'une minute</span></span><span class="chev">&rsaquo;</span></button>
       <button class="opt" onclick="showScreen('benevoles')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5"/><circle cx="17" cy="9" r="2.4"/><path d="M16 15c3 0 5 1.5 5 4"/></svg></span><span><b>Les bénévoles près de chez toi</b><br><span class="meta" style="font-weight:400">Bientôt accessible aux membres</span></span><span class="chev">&rsaquo;</span></button>
       <button class="opt" onclick="_assoMode='annuaire';showScreen('assos')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></svg></span><span><b>Associations et refuges</b><br><span class="meta" style="font-weight:400">Partout en France, par département</span></span><span class="chev">&rsaquo;</span></button>
@@ -830,7 +870,7 @@
       <div id="adHome"></div>
       </div><div class="home-foot">
       <p class="disclaimer">Coup de Patte informe et oriente, sans remplacer l'avis d'un centre de sauvegarde ou d'un vétérinaire. Conseils fondés sur la LPO et l'OFB.</p>
-      <p class="disclaimer"><a href="/guides/" style="color:inherit">Guides d'urgence</a> · <a href="/especes/" style="color:inherit">Fiches espèces</a> · <a href="/centres/" style="color:inherit">Centres de soins par département</a> · <a href="/actualites/" style="color:inherit">Actualités</a> · <a href="/association/" style="color:inherit">L'association</a><span class="btq-entree"> · <a href="https://boutique.coupdepatte.eu/" target="_blank" rel="noopener" style="color:inherit">Boutique</a></span> · <a href="/benevole/" style="color:inherit">Devenir bénévole</a></p>
+      <p class="disclaimer"><a href="/guides/" style="color:inherit">Guides d'urgence</a> · <a href="/especes/" style="color:inherit">Fiches espèces</a> · <a href="/centres/" style="color:inherit">Centres de soins par département</a> · <a href="/actualites/" style="color:inherit">Actualités</a> · <a href="/association/" style="color:inherit">L'association</a><span class="btq-entree"> · <a href="https://boutique.coupdepatte.eu/" target="_blank" rel="noopener" style="color:inherit">Boutique</a></span> · <a href="/benevole/" style="color:inherit">Devenir bénévole</a> · <a href="/plume/" style="color:inherit">Passe la plume</a></p>
       </div>
     </section>
 
@@ -1107,6 +1147,8 @@
 
       <div class="callout"><b>La détention est interdite.</b> Presque tous les oiseaux sauvages sont protégés. On les confie à un centre de sauvegarde habilité, seul autorisé à les soigner et à les relâcher.</div>
       <button class="btn btn-primary" onclick="showScreen('secours')">Trouver un secours près de moi</button>
+      <div style="height:10px"></div>
+      <button class="btn btn-ghost" onclick="showScreen('plume')">Passe la plume : transmets ces gestes en 60 s</button>
 
       <div class="section-label">Sources</div>
       <div class="card g-srclist" style="font-size:13.5px;line-height:1.6">
@@ -1208,6 +1250,9 @@
 
     <!-- ACTUALITES -->
     <section class="screen" id="boutique"><div id="boutiqueView"></div></section>
+
+    <!-- PASSE LA PLUME -->
+    <section class="screen" id="plume"><div id="plumeView"></div></section>
 
     <section class="screen" id="actus">
       <h2 class="title">Actualités</h2>
@@ -1395,6 +1440,7 @@
     if(id==='admin' && typeof renderAdmin==='function') renderAdmin();
     if(id==='actus') renderActus();
     if(id==='boutique') renderBoutique();
+    if(id==='plume') renderPlume();
     if(typeof renderAds==='function') renderAds();
     renderNav(id);
   }
@@ -1683,7 +1729,7 @@
     b.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); b.click(); } });
     new MutationObserver(function(){ if(b.querySelector('img') && !b.querySelector('.zoom-hint')){ var h=document.createElement('span'); h.className='zoom-hint'; h.innerHTML=ZOOM_SVG; b.appendChild(h); } }).observe(b,{childList:true}); } })();
   /* ===== Navigation : retour en arriere ===== */
-  var NAV_LBL={home:'Accueil',u1:'Étape 1',u2:'Étape 2',u3:'Étape 3',u4:'Étape 4',rA:'Conseils',rB:'Conseils',rNid:'Oisillon',bague:'Oiseau bagué',secours:'Secours',centres:'Carte des centres',identifier:'Identifier',especes:'Espèces',espece:'Fiche',conseils:'Conseils',gestes:'Bons gestes',reglages:'Réglages',compte:'Compte',benevoles:'Bénévoles',devenir:'Devenir bénévole',assos:'Associations',admin:'Administration',signaler:'Signaler',mentions:'Mentions légales',actus:'Actualités',cgu:'CGU',photoId:'Photo',boutique:'Boutique'};
+  var NAV_LBL={home:'Accueil',u1:'Étape 1',u2:'Étape 2',u3:'Étape 3',u4:'Étape 4',rA:'Conseils',rB:'Conseils',rNid:'Oisillon',bague:'Oiseau bagué',secours:'Secours',centres:'Carte des centres',identifier:'Identifier',especes:'Espèces',espece:'Fiche',conseils:'Conseils',gestes:'Bons gestes',reglages:'Réglages',compte:'Compte',benevoles:'Bénévoles',devenir:'Devenir bénévole',assos:'Associations',admin:'Administration',signaler:'Signaler',mentions:'Mentions légales',actus:'Actualités',cgu:'CGU',photoId:'Photo',boutique:'Boutique',plume:'Passe la plume'};
   var NAV_WIDE={home:1,centres:1,especes:1,benevoles:1,assos:1,actus:1,admin:1,boutique:1};
   function navLabel(id){
     if(id==='espece'){ var h=document.getElementById('e-nom'); if(h&&h.textContent.trim()) return h.textContent.trim(); }
@@ -2531,7 +2577,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
   function openWalk(i){ wtIdx=i||0; renderWalk(); document.getElementById('walk').classList.add('on'); }
   function replayWalk(){ openWalk(0); }
   document.getElementById('walk').addEventListener('click', function(e){ if(e.target===this){ wtClose(); } });
-  (function(){ var show=true; try{ show = localStorage.getItem('cda-wt-hide')!=='1'; }catch(e){} if(show){ setTimeout(function(){ openWalk(0); }, 500); } })();
+  (function(){ var show=true; try{ show = localStorage.getItem('cda-wt-hide')!=='1'; }catch(e){} if(/[?&]pp=/.test(location.search) || location.hash==='#/plume') show=false; if(show){ setTimeout(function(){ openWalk(0); }, 500); } })();
 
   // ---------- Actualites : flux statique /actualites/articles.json, regenere chaque matin ----------
   var _actus = null;
@@ -3511,6 +3557,290 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
   }
   var myAsso = null;
   if(db){ db.auth.onAuthStateChange(function(ev){ if(ev==='SIGNED_IN'){ _authSent=false; _showCode=false; } if(ev==='SIGNED_OUT'){ _monProfil=null; } }); }
+
+  // ================= Passe la plume =================
+  // Chaine de transmission des 4 gestes : parcours de 60 secondes, quiz de 3 questions,
+  // carte personnalisee a partager, lien suivi. Anonyme : un code aleatoire par personne,
+  // le code de la personne qui a passe la plume, et facultativement le departement.
+  var PL_ALPHA='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  var PL_OISEAUX=[{id:'rougegorge',nom:'Rouge-gorge'},{id:'mesange',nom:'Mésange bleue'},{id:'hirondelle',nom:'Hirondelle'},{id:'martinet',nom:'Martinet'}];
+  var PL_PALIERS=[{n:1,nom:'Plume'},{n:5,nom:'Aile'},{n:20,nom:'Envol'},{n:50,nom:'Plume d\'or'}];
+  var PL_GESTES=[
+    {t:'Observe avant de toucher', p:'Un oisillon au sol n\'est presque jamais abandonné : ses parents sont tout près. Interviens seulement s\'il est blessé, en danger immédiat, ou tout jeune et nu.', c:'Observer d\'abord',
+     ico:'<circle cx="12" cy="12" r="3"/><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/>'},
+    {t:'Un carton percé, au calme, dans le noir', p:'S\'il est blessé, glisse-le délicatement dans un carton percé de petits trous, au chaud. Le noir et le silence le rassurent. Lave-toi les mains après.', c:'Carton, calme et noir',
+     ico:'<path d="M3 8l9-4 9 4v9l-9 4-9-4z"/><path d="M3 8l9 4 9-4M12 12v9"/>'},
+    {t:'Ni eau ni nourriture', p:'Même s\'il a l\'air affamé, ne lui donne rien. Une goutte d\'eau peut passer dans ses voies respiratoires, et un mauvais aliment peut le tuer.', c:'Ni eau ni nourriture',
+     ico:'<path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/><path d="M4 4l16 16"/>'},
+    {t:'Appelle un centre de soins', p:'Seul un centre de sauvegarde peut le soigner, et garder un oiseau sauvage chez soi est interdit. Coup de Patte te trouve le plus proche en un geste.', c:'Appeler un centre',
+     ico:'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>'}
+  ];
+  var PL_QUIZ=[
+    {q:'Un jeune merle bien emplumé sautille dans ton jardin, sans blessure. Que fais-tu ?',
+     r:['Je le ramène chez moi pour le protéger','Je le laisse : ses parents le nourrissent tout près','Je lui donne un peu d\'eau'], ok:1,
+     e:'Il apprend à voler. S\'il est exposé (chat, route), pose-le simplement en hauteur, tout près.'},
+    {q:'Un oiseau est blessé et doit être mis à l\'abri. Où le places-tu ?',
+     r:['Dans une cage, à la lumière, pour le surveiller','Dans un carton percé, au calme et dans le noir','Dans une boîte fermée, près du radiateur'], ok:1,
+     e:'Le noir et le calme réduisent son stress, les trous lui laissent de l\'air. Pas de chaleur directe.'},
+    {q:'Il a l\'air affamé et assoiffé. Que lui donnes-tu ?',
+     r:['Du pain trempé dans du lait','Quelques vers de terre','Rien : j\'appelle un centre de soins'], ok:2,
+     e:'Ni eau ni nourriture : c\'est le centre de soins qui sait quoi lui donner, et quand.'}
+  ];
+  var _pl={etape:0, rep:[], oiseau:'rougegorge', pour:'', dep:'', format:'story', stats:null, enreg:false, img:{}};
+  function plGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function plSet(k,v){ try{ if(v==null) localStorage.removeItem(k); else localStorage.setItem(k,v); }catch(e){} }
+  function plCodeValide(c){ return /^[A-HJ-NP-Z2-9]{8}$/.test(c||''); }
+  function plMonCode(){
+    var c=plGet('cdp_plume_code'); if(plCodeValide(c)) return c;
+    var a=new Uint8Array(8); try{ crypto.getRandomValues(a); }catch(e){ for(var i=0;i<8;i++) a[i]=Math.floor(Math.random()*256); }
+    c=''; for(var j=0;j<8;j++) c+=PL_ALPHA[a[j]%32];
+    plSet('cdp_plume_code',c); return c;
+  }
+  function plParent(){ var p=plGet('cdp_plume_parent'); return plCodeValide(p) && p!==plGet('cdp_plume_code') ? p : null; }
+  function plLien(){ return 'https://coupdepatte.eu/plume/'+plMonCode(); }
+  // Arrivee par un lien partage : /plume/CODE redirige vers /?pp=CODE#/plume
+  (function(){ try{ var m=location.search.match(/[?&]pp=([A-Za-z0-9]{8})/); if(m){ var c=m[1].toUpperCase(); if(plCodeValide(c) && c!==plGet('cdp_plume_code')) plSet('cdp_plume_parent',c); } }catch(e){} })();
+  function plDepNom(d){ var o=document.querySelector('#especeDept option[value="'+d+'"]'); return o ? o.textContent.replace(/^\S+ - /,'') : d; }
+  function plDepOptions(sel){
+    var s=document.getElementById('especeDept'); var h='<option value="">Je préfère ne pas le dire</option>';
+    if(s) Array.prototype.forEach.call(s.options,function(o){ if(o.value) h+='<option value="'+o.value+'"'+(o.value===sel?' selected':'')+'>'+escapeH(o.textContent)+'</option>'; });
+    return h;
+  }
+  function plChargerStats(cb){
+    if(!db){ cb&&cb(); return; }
+    var code=plGet('cdp_plume_code');
+    db.rpc('plume_stats',{p_code: plCodeValide(code)?code:null}).then(function(r){ if(!r.error && r.data){ _pl.stats=typeof r.data==='string'?JSON.parse(r.data):r.data; } cb&&cb(); },function(){ cb&&cb(); });
+  }
+  function plEnregistrer(cb){
+    var code=plMonCode();
+    if(!db){ cb&&cb(); return; }
+    db.rpc('plume_enregistrer',{p_code:code, p_parent:plParent(), p_dep:_pl.dep||null, p_oiseau:_pl.oiseau||null}).then(function(r){
+      if(!r.error){ plSet('cdp_plume_ok','1'); if(r.data) _pl.stats=typeof r.data==='string'?JSON.parse(r.data):r.data; }
+      cb&&cb();
+    },function(){ cb&&cb(); });
+  }
+  function plSteps(){
+    var h='<div class="steps">'; for(var i=1;i<=7;i++) h+='<span'+(i<=_pl.etape?' class="on"':'')+'></span>'; return h+'</div>';
+  }
+  function plIco(p,w){ return '<svg viewBox="0 0 24 24" width="'+(w||24)+'" height="'+(w||24)+'" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>'; }
+  var PL_PLUME_SVG='<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/>';
+  function plStart(){ _pl.etape=1; _pl.rep=[]; renderPlume(); }
+  function plSuivant(){ _pl.etape++; renderPlume(); }
+  function plRepondre(i){
+    var q=_pl.etape-5; if(_pl.rep[q]!=null) return;
+    _pl.rep[q]=i; renderPlume();
+  }
+  function renderPlume(){
+    var box=document.getElementById('plumeView'); if(!box) return;
+    if(_pl.etape===0 && plGet('cdp_plume_code') && plGet('cdp_plume_fini')) _pl.etape=8;
+    var h='';
+    if(_pl.etape===0){
+      var st=_pl.stats;
+      h+='<div class="pl-hero"><div class="pl-logo">'+plIco(PL_PLUME_SVG,30)+'</div><div class="k">Passe la plume</div>'
+        +'<h2>Apprends les 4 gestes qui sauvent un oiseau, en 60 secondes.</h2>'
+        +'<p>Puis transmets-les à tes proches avec ta carte personnalisée. Chaque personne formée, c\'est un oiseau de plus qui a une chance.</p></div>';
+      if(plParent()) h+='<div class="callout"><b>Un proche t\'a passé la plume.</b> À toi d\'apprendre les bons gestes, puis de la transmettre à ton tour.</div>';
+      if(st && st.total>0) h+='<div class="pl-compteur"><b>'+st.total.toLocaleString('fr-FR')+'</b><span>personne'+(st.total>1?'s':'')+' déjà formée'+(st.total>1?'s':'')+(st.nb_depts>1?' dans '+st.nb_depts+' départements':'')+'</span></div>';
+      h+='<button class="btn btn-primary" onclick="plStart()">Commencer, c\'est parti</button>';
+      h+='<p class="disclaimer">4 gestes, 3 questions, aucune inscription. Conseils fondés sur la LPO et l\'OFB.</p>';
+      if(!st) plChargerStats(function(){ if(_pl.etape===0 && document.getElementById('plume').classList.contains('active')) renderPlume(); });
+    }
+    else if(_pl.etape>=1 && _pl.etape<=4){
+      var g=PL_GESTES[_pl.etape-1];
+      h+=plSteps()+'<div class="pl-geste"><div class="pl-num">Geste '+_pl.etape+' sur 4</div><div class="pl-ic">'+plIco(g.ico,34)+'</div>'
+        +'<h2 class="title">'+escapeH(g.t)+'</h2><p class="sub">'+escapeH(g.p)+'</p></div>'
+        +'<button class="btn btn-primary" onclick="plSuivant()">'+(_pl.etape<4?'Geste suivant':'Je teste mes réflexes')+'</button>';
+      if(_pl.etape===4) h+='<div style="height:10px"></div><button class="btn btn-ghost" onclick="showScreen(\'secours\')">Voir les centres près de chez moi</button>';
+    }
+    else if(_pl.etape>=5 && _pl.etape<=7){
+      var qi=_pl.etape-5, q=PL_QUIZ[qi], rep=_pl.rep[qi];
+      h+=plSteps()+'<div class="pl-num">Question '+(qi+1)+' sur 3</div><h2 class="title" style="font-size:21px">'+escapeH(q.q)+'</h2><div style="height:8px"></div>';
+      q.r.forEach(function(t,i){
+        var cls='opt'; if(rep!=null){ if(i===q.ok) cls+=' pl-ok'; else if(i===rep) cls+=' pl-ko'; }
+        h+='<button class="'+cls+'" onclick="plRepondre('+i+')"'+(rep!=null?' aria-disabled="true"':'')+'><span class="dot">'+String.fromCharCode(65+i)+'</span><span>'+escapeH(t)+'</span></button>';
+      });
+      if(rep!=null){
+        h+='<div class="callout"><b>'+(rep===q.ok?'Exactement.':'Pas tout à fait.')+'</b> '+escapeH(q.e)+'</div>'
+          +'<button class="btn btn-primary" onclick="plSuivant()">'+(qi<2?'Question suivante':'Voir mon résultat')+'</button>';
+      }
+    }
+    else { h+=plResultatHtml(); }
+    box.innerHTML=h;
+    if(_pl.etape===8){
+      if(!plGet('cdp_plume_fini')){ plSet('cdp_plume_fini','1'); }
+      if(!_pl.enreg){ _pl.enreg=true; plEnregistrer(function(){ plMajStats(); }); }
+      else plMajStats();
+      plDessinerApercu();
+    }
+  }
+  function plResultatHtml(){
+    var bonnes=0; _pl.rep.forEach(function(r,i){ if(r===PL_QUIZ[i].ok) bonnes++; });
+    var h='<div class="pl-hero pl-fin"><div class="pl-logo">'+plIco(PL_PLUME_SVG,30)+'</div><div class="k">'+(_pl.rep.length?bonnes+' bonne'+(bonnes>1?'s':'')+' réponse'+(bonnes>1?'s':'')+' sur 3':'Tu fais partie de la chaîne')+'</div>'
+      +'<h2>Bravo, tu sais sauver un oiseau.</h2><p>Maintenant, passe la plume : ta carte et ton lien personnel apprennent les 4 gestes à tes proches.</p></div>';
+    h+='<div class="section-label">Ta carte</div><div class="card">'
+      +'<div class="pl-label">Ton oiseau</div><div class="pl-birds">';
+    PL_OISEAUX.forEach(function(o){ h+='<button class="'+(o.id===_pl.oiseau?'on':'')+'" onclick="plChoix(\'oiseau\',\''+o.id+'\')" aria-label="'+escapeH(o.nom)+'" aria-pressed="'+(o.id===_pl.oiseau)+'"><img src="/plume/'+o.id+'.png" alt=""><span>'+escapeH(o.nom)+'</span></button>'; });
+    h+='</div><label class="pl-label" for="plPour">À qui passes-tu la plume ? <span class="meta">(facultatif)</span></label>'
+      +'<input class="field" id="plPour" maxlength="40" placeholder="Ex : Léa, Tom et Inès" value="'+escapeH(_pl.pour)+'" oninput="_pl.pour=this.value;plDessinerApercuDiffere()">'
+      +'<label class="pl-label" for="plDep">Ton département <span class="meta">(facultatif, pour la carte des sauveteurs)</span></label>'
+      +'<select class="field" id="plDep" onchange="plChoix(\'dep\',this.value)">'+plDepOptions(_pl.dep)+'</select>'
+      +'<div class="seg" style="margin-top:14px"><button class="'+(_pl.format==='story'?'on':'')+'" onclick="plChoix(\'format\',\'story\')">Story</button><button class="'+(_pl.format==='carre'?'on':'')+'" onclick="plChoix(\'format\',\'carre\')">Publication carrée</button></div>'
+      +'<div class="pl-apercu"><canvas id="plCanvas" aria-label="Aperçu de ta carte Passe la plume"></canvas></div>'
+      +'<button class="btn btn-primary" onclick="plPartager()">'+plIco('<path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/>',20)+'Partager ma carte</button>'
+      +'<div class="row-btns" style="margin-top:10px;display:flex;gap:8px"><button class="btn btn-ghost" style="flex:1" onclick="plTelecharger()">Enregistrer l\'image</button><button class="btn btn-ghost" style="flex:1" onclick="plCopier()">Copier le lien</button></div>'
+      +'<div id="plMsg" class="meta" style="margin-top:8px;text-align:center"></div></div>';
+    h+='<div class="section-label">Ta chaîne</div><div class="card" id="plChaine"><p class="meta">Chargement…</p></div>';
+    h+='<div class="tip"><div class="k">Pour aller plus loin</div><p>Sur Instagram, partage la carte en story et identifie tes amis. Sur WhatsApp, envoie-la à ton groupe famille : c\'est là que la plume voyage le plus vite.</p></div>';
+    h+='<button class="btn btn-ghost" onclick="benAllerFormulaire()">Je veux aussi devenir bénévole</button>'
+      +'<div style="height:10px"></div><button class="btn btn-ghost" onclick="_pl.rep=[];_pl.etape=1;renderPlume()">Refaire le parcours</button>';
+    h+='<p class="disclaimer">Passe la plume est anonyme : aucun nom ni adresse n\'est enregistré, seulement un code aléatoire et, si tu le choisis, ton département.</p>';
+    return h;
+  }
+  function plMajStats(){
+    var el=document.getElementById('plChaine'); if(!el) return;
+    var st=_pl.stats;
+    if(!st){ el.innerHTML='<p class="meta">Ton lien est prêt. Les compteurs s\'afficheront dès que la connexion revient.</p>'; return; }
+    var ch=st.chaine||0, ini=st.inities||0, pal=null, proch=PL_PALIERS[0];
+    PL_PALIERS.forEach(function(p){ if(ch>=p.n) pal=p; });
+    for(var i=0;i<PL_PALIERS.length;i++){ if(ch<PL_PALIERS[i].n){ proch=PL_PALIERS[i]; break; } proch=null; }
+    var h='<div class="pl-chiffres"><div><b>'+ini+'</b><span>personne'+(ini>1?'s':'')+' initiée'+(ini>1?'s':'')+' par toi</span></div><div><b>'+ch+'</b><span>dans toute ta chaîne</span></div></div>';
+    h+='<div class="pl-paliers">'+PL_PALIERS.map(function(p){ return '<span class="'+(ch>=p.n?'on':'')+'">'+escapeH(p.nom)+'<small>'+p.n+'</small></span>'; }).join('')+'</div>';
+    if(proch) h+='<p class="meta" style="margin-top:8px">Encore '+(proch.n-ch)+' personne'+(proch.n-ch>1?'s':'')+' formée'+(proch.n-ch>1?'s':'')+' grâce à ta plume pour obtenir le badge <b>'+escapeH(proch.nom)+'</b>.</p>';
+    else h+='<p class="meta" style="margin-top:8px">Badge <b>Plume d\'or</b> obtenu. Merci, du fond du cœur.</p>';
+    h+='<div class="pl-public"><b>'+(st.total||0).toLocaleString('fr-FR')+'</b> personne'+((st.total||0)>1?'s':'')+' formée'+((st.total||0)>1?'s':'')+' en France'+(st.semaine?', dont '+st.semaine+' cette semaine':'')+'.';
+    if(st.depts && st.depts.length) h+='<br><span class="meta">Départements en tête : '+st.depts.map(function(d){ return escapeH(plDepNom(d.d))+' ('+d.n+')'; }).join(', ')+'</span>';
+    h+='</div>';
+    el.innerHTML=h;
+  }
+  function plChoix(k,v){
+    _pl[k]=v;
+    if(k==='dep' || k==='oiseau'){ if(plGet('cdp_plume_ok')) plEnregistrer(plMajStats); }
+    if(k==='dep'){ plDessinerApercu(); return; }
+    renderPlume();
+  }
+  // ---------- Dessin de la carte (canvas) ----------
+  var _plTimer=null;
+  function plDessinerApercuDiffere(){ clearTimeout(_plTimer); _plTimer=setTimeout(plDessinerApercu,180); }
+  function plImage(id){
+    if(_pl.img[id]) return Promise.resolve(_pl.img[id]);
+    return new Promise(function(ok){ var im=new Image(); im.onload=function(){ _pl.img[id]=im; ok(im); }; im.onerror=function(){ ok(null); }; im.src='/plume/'+id+'.png'; });
+  }
+  function plPolices(){
+    if(!document.fonts || !document.fonts.load) return Promise.resolve();
+    return Promise.all(['700 80px Fraunces','600 60px Fraunces','800 40px Nunito','700 36px Nunito'].map(function(f){ return document.fonts.load(f).catch(function(){}); })).catch(function(){});
+  }
+  function plLignes(ctx, txt, maxW){
+    var mots=String(txt).split(/\s+/), l=[], cur='';
+    mots.forEach(function(m){ var t=cur?cur+' '+m:m; if(ctx.measureText(t).width>maxW && cur){ l.push(cur); cur=m; } else cur=t; });
+    if(cur) l.push(cur); return l;
+  }
+  function plArrondi(ctx,x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
+  function plPlume(ctx,x,y,taille,coul){
+    ctx.save(); ctx.translate(x,y); ctx.scale(taille/24,taille/24);
+    ctx.strokeStyle=coul; ctx.lineWidth=2; ctx.lineCap='round'; ctx.lineJoin='round';
+    ['M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z','M16 8L2 22','M17.5 15H9'].forEach(function(d){ ctx.stroke(new Path2D(d)); });
+    ctx.restore();
+  }
+  function plTexteCentre(ctx, lignes, cx, y, hl){ lignes.forEach(function(l,i){ ctx.fillText(l, cx, y+i*hl); }); return y+lignes.length*hl; }
+  function plCartouche(ctx, cx, y, coulTexte, coulBord, taille){
+    ctx.font='800 '+taille+'px Nunito, sans-serif';
+    var w=ctx.measureText('coupdepatte.eu').width+taille*1.6, h=taille*1.75;
+    plArrondi(ctx,cx-w/2,y-h/2,w,h,h/2); ctx.lineWidth=Math.max(3,taille/10); ctx.strokeStyle=coulBord; ctx.stroke();
+    ctx.fillStyle=coulTexte; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('coupdepatte.eu', cx, y+1); ctx.textBaseline='alphabetic';
+  }
+  function plDessiner(canvas, oiseau){
+    var story=_pl.format==='story', W=1080, H=story?1920:1080;
+    canvas.width=W; canvas.height=H;
+    var ctx=canvas.getContext('2d');
+    var g=ctx.createLinearGradient(0,0,0,H); g.addColorStop(0,'#23A86E'); g.addColorStop(1,'#167A50');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    // halo doux
+    var rg=ctx.createRadialGradient(W*0.8,H*0.12,10,W*0.8,H*0.12,W*0.7); rg.addColorStop(0,'rgba(255,255,255,.16)'); rg.addColorStop(1,'rgba(255,255,255,0)');
+    ctx.fillStyle=rg; ctx.fillRect(0,0,W,H);
+    var pour=(_pl.pour||'').trim().replace(/\s+/g,' ').slice(0,40);
+    var passe=pour ? 'Je passe la plume à '+pour+'.' : 'Je te passe la plume. À toi !';
+    ctx.textAlign='center'; ctx.fillStyle='#fff';
+    if(story){
+      ctx.font='700 46px Fraunces, Georgia, serif'; var mw=ctx.measureText('Coup de Patte').width;
+      plPlume(ctx, W/2-mw/2-78, 150, 60, '#fff'); ctx.textAlign='left'; ctx.fillText('Coup de Patte', W/2-mw/2-6, 198); ctx.textAlign='center';
+      ctx.font='700 84px Fraunces, Georgia, serif';
+      var y=plTexteCentre(ctx, plLignes(ctx,'J\'ai appris à sauver un oiseau en 60 secondes.',900), W/2, 340, 100);
+      var cy=y+250;
+      ctx.beginPath(); ctx.arc(W/2,cy,236,0,Math.PI*2); ctx.fillStyle='rgba(255,255,255,.18)'; ctx.fill();
+      if(oiseau) ctx.drawImage(oiseau, W/2-218, cy-218, 436, 436);
+      var cardY=cy+280, cardH=450;
+      ctx.save(); ctx.shadowColor='rgba(0,0,0,.18)'; ctx.shadowBlur=30; ctx.shadowOffsetY=10;
+      plArrondi(ctx,80,cardY,W-160,cardH,44); ctx.fillStyle='#FAF6EC'; ctx.fill(); ctx.restore();
+      ctx.font='800 34px Nunito, sans-serif'; ctx.fillStyle='#1F9E67'; ctx.fillText('LES 4 BONS GESTES', W/2, cardY+74);
+      PL_GESTES.forEach(function(ge,i){
+        var ly=cardY+144+i*82;
+        ctx.beginPath(); ctx.arc(170,ly-12,30,0,Math.PI*2); ctx.fillStyle='#1F9E67'; ctx.fill();
+        ctx.fillStyle='#fff'; ctx.font='800 32px Nunito, sans-serif'; ctx.textAlign='center'; ctx.fillText(String(i+1),170,ly);
+        ctx.textAlign='left'; ctx.fillStyle='#233029'; ctx.font='700 40px Nunito, sans-serif'; ctx.fillText(ge.c, 226, ly+2);
+      });
+      ctx.textAlign='center'; ctx.fillStyle='#fff'; ctx.font='600 56px Fraunces, Georgia, serif';
+      plTexteCentre(ctx, plLignes(ctx,passe,920).slice(0,2), W/2, cardY+cardH+100, 66);
+      plCartouche(ctx, W/2, cardY+cardH+250, '#fff', 'rgba(255,255,255,.9)', 40);
+    } else {
+      ctx.font='700 36px Fraunces, Georgia, serif'; var mw2=ctx.measureText('Coup de Patte').width;
+      plPlume(ctx, W/2-mw2/2-60, 60, 46, '#fff'); ctx.textAlign='left'; ctx.fillText('Coup de Patte', W/2-mw2/2-4, 98); ctx.textAlign='center';
+      ctx.font='700 62px Fraunces, Georgia, serif';
+      plTexteCentre(ctx, plLignes(ctx,'J\'ai appris à sauver un oiseau en 60 secondes.',940), W/2, 210, 74);
+      var bx=262, by=560;
+      ctx.beginPath(); ctx.arc(bx,by,200,0,Math.PI*2); ctx.fillStyle='rgba(255,255,255,.18)'; ctx.fill();
+      if(oiseau) ctx.drawImage(oiseau, bx-186, by-186, 372, 372);
+      var cx0=490, cw=W-cx0-60, cyy=372, ch=376;
+      ctx.save(); ctx.shadowColor='rgba(0,0,0,.18)'; ctx.shadowBlur=24; ctx.shadowOffsetY=8;
+      plArrondi(ctx,cx0,cyy,cw,ch,34); ctx.fillStyle='#FAF6EC'; ctx.fill(); ctx.restore();
+      ctx.textAlign='left'; ctx.font='800 26px Nunito, sans-serif'; ctx.fillStyle='#1F9E67'; ctx.fillText('LES 4 BONS GESTES', cx0+36, cyy+60);
+      PL_GESTES.forEach(function(ge,i){
+        var ly=cyy+124+i*68;
+        ctx.beginPath(); ctx.arc(cx0+58,ly-10,22,0,Math.PI*2); ctx.fillStyle='#1F9E67'; ctx.fill();
+        ctx.fillStyle='#fff'; ctx.font='800 24px Nunito, sans-serif'; ctx.textAlign='center'; ctx.fillText(String(i+1),cx0+58,ly-1);
+        ctx.textAlign='left'; ctx.fillStyle='#233029'; ctx.font='700 29px Nunito, sans-serif'; ctx.fillText(ge.c, cx0+96, ly);
+      });
+      ctx.textAlign='center'; ctx.fillStyle='#fff'; ctx.font='600 44px Fraunces, Georgia, serif';
+      plTexteCentre(ctx, plLignes(ctx,passe,960).slice(0,2), W/2, 868, 54);
+      plCartouche(ctx, W/2, H-74, '#fff', 'rgba(255,255,255,.9)', 32);
+    }
+  }
+  function plDessinerApercu(){
+    var c=document.getElementById('plCanvas'); if(!c) return;
+    Promise.all([plPolices(), plImage(_pl.oiseau)]).then(function(r){ var cv=document.getElementById('plCanvas'); if(cv) plDessiner(cv, r[1]); });
+  }
+  function plTexte(){ return 'J\'ai appris les 4 gestes pour sauver un oiseau en 60 secondes. Je te passe la plume, à toi : '+plLien()+' #PasseLaPlume #CoupDePatte'; }
+  function plBlob(){
+    return new Promise(function(ok){
+      Promise.all([plPolices(), plImage(_pl.oiseau)]).then(function(r){
+        var cv=document.createElement('canvas'); plDessiner(cv, r[1]);
+        if(cv.toBlob) cv.toBlob(function(b){ ok(b); }, 'image/png'); else ok(null);
+      });
+    });
+  }
+  function plMsg(t){ var m=document.getElementById('plMsg'); if(m) m.textContent=t; }
+  function plPartager(){
+    plMsg('Préparation de ta carte…');
+    plBlob().then(function(b){
+      var f=null; try{ if(b) f=new File([b],'passe-la-plume.png',{type:'image/png'}); }catch(e){}
+      if(f && navigator.canShare && navigator.canShare({files:[f]})){
+        navigator.share({files:[f], title:'Passe la plume', text:plTexte()}).then(function(){ plMsg('Merci, ta plume s\'envole.'); }).catch(function(){ plMsg(''); });
+      } else if(navigator.share){
+        navigator.share({title:'Passe la plume', text:plTexte(), url:plLien()}).then(function(){ plMsg('Merci, ta plume s\'envole. Pense aussi à enregistrer l\'image.'); }).catch(function(){ plMsg(''); });
+      } else { plTelecharger(b); plCopier(); }
+    });
+  }
+  function plTelecharger(b){
+    var go=function(bl){ if(!bl){ plMsg('Ton navigateur ne permet pas d\'enregistrer l\'image.'); return; } var a=document.createElement('a'); a.href=URL.createObjectURL(bl); a.download='passe-la-plume.png'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){ URL.revokeObjectURL(a.href); },4000); plMsg('Image enregistrée.'); };
+    if(b instanceof Blob) go(b); else plBlob().then(go);
+  }
+  function plCopier(){
+    var t=plTexte();
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(function(){ plMsg('Texte et lien copiés, prêts à coller.'); },function(){ plMsg(plLien()); }); }
+    else plMsg(plLien());
+  }
+  // Arrivee par un lien partage : ouvrir directement le parcours
+  window.addEventListener('load', function(){ try{ if(/[?&]pp=/.test(location.search) && !/^#\/\w/.test(location.hash)) showScreen('plume'); }catch(e){} });
+
 </script>
 </body>
 </html>
