@@ -1810,7 +1810,7 @@
   /* Geste « glisser depuis le bord gauche » quand l'app est installee sur l'ecran d'accueil
      (en mode installe, iOS n'offre pas ce geste ; dans Safari, c'est le geste natif qui joue via l'historique) */
   (function(){
-    var standalone = window.navigator.standalone || (window.matchMedia && matchMedia('(display-mode: standalone)').matches);
+    var standalone = window.navigator.standalone || (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || /CoupDePatteApp/.test(navigator.userAgent);
     if(!standalone) return;
     var x0=null, y0=0, dx=0, el=null;
     document.addEventListener('touchstart', function(e){ var t=e.touches[0]; if(t.clientX>24 || history_stack.length<=1){ x0=null; return; } x0=t.clientX; y0=t.clientY; dx=0; el=document.querySelector('.screen.active'); }, {passive:true});
@@ -2069,7 +2069,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
     box.innerHTML='<b>Installe Coup de Patte</b> pour un accès instantané, même hors connexion. <button class="btn btn-ghost btn-sm" style="margin-top:8px" id="installBtn">Ajouter à l\'écran d\'accueil</button>';
     document.getElementById('installBtn').addEventListener('click', function(){ box.style.display='none'; if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null;} });
   });
-  (function(){ var isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent); var standalone=window.navigator.standalone===true||window.matchMedia('(display-mode: standalone)').matches;
+  (function(){ var isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent); var standalone=window.navigator.standalone===true||window.matchMedia('(display-mode: standalone)').matches||/CoupDePatteApp/.test(navigator.userAgent);
     if(isIOS&&!standalone){ var box=document.getElementById('installBox'); box.style.display='block'; box.innerHTML='<b>Ajoute Coup de Patte à ton écran d\'accueil</b> : touche le bouton Partager de Safari, puis « Sur l\'écran d\'accueil ».'; }
   })();
   // Position initiale silencieuse pour meteo et centres (si deja autorisee)
