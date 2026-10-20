@@ -3117,8 +3117,8 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
       +(asso?'<b>'+escapeH(asso.nom||'')+'</b><div class="meta">'+(asso.verifiee?'Publiée dans l\'annuaire':'En attente de vérification')+'</div>':'<p class="meta">Tu fais partie d\'une association, d\'un refuge ou d\'un centre ? Inscris-la dans l\'annuaire national.</p>')
       +'<button class="btn btn-ghost btn-sm" style="margin-top:10px" onclick="_assoMode=\'moi\';showScreen(\'assos\')">'+(asso?'Gérer ma structure':'Inscrire ma structure')+'</button></div>'
       +'<div class="section-label">Mes données</div><div class="card">'
-      +'<p class="meta" style="margin-bottom:10px">Tu peux télécharger ton carnet, ou demander l\'effacement complet de ton compte (carnet, fiche bénévole, photo).</p>'
-      +'<div class="row-btns"><button class="btn btn-ghost btn-sm" onclick="exportCarnet()">Télécharger mon carnet</button><a class="btn btn-ghost btn-sm" href="mailto:bonjour@coupdepatte.eu?subject='+encodeURIComponent('Effacement de mon compte Coup de Patte')+'&body='+encodeURIComponent('Bonjour,\n\nJe souhaite l\'effacement de mon compte et de mes données, liés à l\'adresse '+(currentUser.email||'')+'.\n\nMerci.')+'">Effacer mon compte</a></div></div>'
+      +'<p class="meta" style="margin-bottom:10px">Tu peux télécharger ton carnet, ou supprimer définitivement ton compte et toutes tes données (carnet, fiche bénévole, structure, photo).</p>'
+      +'<div class="row-btns"><button class="btn btn-ghost btn-sm" onclick="exportCarnet()">Télécharger mon carnet</button><button class="btn btn-ghost btn-sm" style="color:var(--corail);border-color:var(--corail)" onclick="supprimerMonCompte()">Supprimer mon compte</button></div><div id="delMsg" class="meta" style="margin-top:8px"></div></div>'
       +'<button class="btn btn-ghost" style="margin-top:6px" onclick="signOut()">Se déconnecter</button>';
   }
   function savePseudo(){
@@ -3135,6 +3135,24 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
     var rows=[['date','espece','issue','lieu']].concat(myObs.map(function(o){ return [o.created_at?new Date(o.created_at).toLocaleString('fr-FR'):'', o.espece||'', o.issue||'', o.lieu||'']; }));
     var csv='﻿'+rows.map(function(r){ return r.map(function(c){ c=String(c); if(/^[=+\-@]/.test(c)) c="'"+c; return '"'+c.replace(/"/g,'""')+'"'; }).join(';'); }).join('\n');
     var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})); a.download='mon-carnet-coupdepatte.csv'; document.body.appendChild(a); a.click(); a.remove();
+  }
+  function supprimerMonCompte(){
+    if(!db||!currentUser) return;
+    if(!confirm('Supprimer définitivement ton compte ?\n\nTon carnet, ta fiche bénévole, ta structure et ta photo seront effacés. Cette action est irréversible.')) return;
+    if(!confirm('Dernière confirmation : ton compte '+(currentUser.email||'')+' va être supprimé.')) return;
+    var m=document.getElementById('delMsg'); if(m){ m.className='meta'; m.textContent='Suppression en cours...'; }
+    db.rpc('supprimer_mon_compte').then(function(r){
+      if(r.error){
+        var mail='mailto:bonjour@coupdepatte.eu?subject='+encodeURIComponent('Effacement de mon compte Coup de Patte')+'&body='+encodeURIComponent('Bonjour,\n\nJe souhaite l\'effacement de mon compte et de mes données, liés à l\'adresse '+(currentUser.email||'')+'.\n\nMerci.');
+        if(m){ m.className='meta acc-msg err'; m.innerHTML='La suppression n\'a pas pu aboutir. <a href="'+mail+'">Écris-nous</a>, nous l\'effaçons sous 72 h.'; }
+        return;
+      }
+      db.auth.signOut().catch(function(){}).then(function(){
+        currentUser=null; myObs=[]; myBenevole=null; _monProfil=null; _authSent=false; _compteTab='carnet';
+        renderCompte();
+        alert('Ton compte et tes données ont été supprimés. Merci d\'avoir aidé les oiseaux avec Coup de Patte.');
+      });
+    });
   }
   function signOut(){ db.auth.signOut().then(function(){ currentUser=null; myObs=[]; myBenevole=null; _monProfil=null; _authSent=false; _compteTab='carnet'; renderCompte(); }); }
 
