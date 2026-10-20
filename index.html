@@ -3065,7 +3065,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
   function deptNom(code){ for(var i=0;i<DEPTS.length;i++){ if(DEPTS[i][0]===code) return DEPTS[i][1]; } return ''; }
 
   // ----------------------------- CONNEXION -----------------------------
-  var _lastEmail='', _authSent=false, _authCooldown=0, _authTimer=null, _showCode=false;
+  var _lastEmail='', _authSent=false, _authCooldown=0, _authTimer=null, _showCode=false; var _pwdMode=false;
   try{ _lastEmail=localStorage.getItem('cdp_last_email')||''; }catch(e){}
   function renderLogin(el, opts){
     opts=opts||{};
@@ -3078,6 +3078,9 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
         +'<button class="btn btn-primary" id="magicBtn" style="margin-top:12px" onclick="sendMagic()">'+_ico(IC.mail,19)+' Recevoir mon lien de connexion</button>'
         +'<div id="authMsg" class="meta acc-msg"></div>'
         +'<div class="acc-how"><b>Comment ça marche ?</b> Pas de mot de passe. Tu reçois un email avec un <b>lien magique</b> : un seul clic, et tu es connecté. Le lien fonctionne une fois et expire au bout d\'une heure.</div>'
+        +(_pwdMode
+          ? '<div class="acc-code" id="pwdBox"><label class="acc-lab" for="pwdInput">Mot de passe du compte de démonstration</label><input class="field" id="pwdInput" type="password" autocomplete="current-password" placeholder="Mot de passe" onkeydown="if(event.key===\'Enter\'){signInPwd();}"><button class="btn btn-primary" id="pwdBtn" style="margin-top:10px" onclick="signInPwd()">Se connecter</button><div class="meta" style="margin-top:6px">Saisis l\'adresse email du compte dans le champ ci-dessus.</div></div>'
+          : '<button class="acc-link" onclick="_pwdMode=true;renderCompte();setTimeout(function(){var i=document.getElementById(\'pwdInput\');if(i)i.focus();},60)">Connexion avec mot de passe (compte de démonstration)</button>')
         +'</div>';
       if(!opts.compact) h+='<div class="acc-benef">'
         +'<div><span>'+_ico(IC.carnet,18)+'</span><b>Ton carnet</b><small>Garde la trace des oiseaux aidés</small></div>'
@@ -3135,6 +3138,21 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
       if(btn) btn.disabled=false;
       var mm=document.getElementById('authMsg'); if(mm){ mm.className='meta acc-msg err'; mm.textContent=authErrLabel(err && err.message ? err.message : String(err)); }
     });
+  }
+  // Connexion par mot de passe : reservee aux comptes crees avec mot de passe (compte de demonstration pour les examinateurs Apple et Google). Ne cree jamais de compte.
+  function signInPwd(){
+    var m=document.getElementById('authMsg');
+    var e=((document.getElementById('magicEmail')||{}).value||'').trim().toLowerCase();
+    var pw=(document.getElementById('pwdInput')||{}).value||'';
+    if(!e || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e)){ if(m){ m.className='meta acc-msg err'; m.textContent='Cette adresse email ne semble pas valide.'; } return; }
+    if(!pw){ if(m){ m.className='meta acc-msg err'; m.textContent='Saisis le mot de passe.'; } return; }
+    var btn=document.getElementById('pwdBtn'); if(btn) btn.disabled=true;
+    if(m){ m.className='meta acc-msg'; m.textContent='Connexion...'; }
+    db.auth.signInWithPassword({email:e, password:pw}).then(function(r){
+      if(btn) btn.disabled=false;
+      if(r.error){ var mm=document.getElementById('authMsg'); if(mm){ mm.className='meta acc-msg err'; mm.textContent='Email ou mot de passe incorrect.'; } return; }
+      _pwdMode=false; _lastEmail=e;
+    }, function(){ if(btn) btn.disabled=false; var mm=document.getElementById('authMsg'); if(mm){ mm.className='meta acc-msg err'; mm.textContent='Connexion impossible pour le moment.'; } });
   }
   function verifyOtp(){
     var m=document.getElementById('authMsg');
@@ -3715,7 +3733,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
     setTimeout(function(){ _assoMap.invalidateSize(); if(_assoF.dep && pts.length){ _assoMap.fitBounds(pts,{padding:[30,30],maxZoom:10}); } else if(userPos){ _assoMap.setView([userPos.lat,userPos.lon],8); } else { _assoMap.setView([46.6,2.4],5); } },80);
   }
   var myAsso = null;
-  if(db){ db.auth.onAuthStateChange(function(ev){ if(ev==='SIGNED_IN'){ _authSent=false; _showCode=false; } if(ev==='SIGNED_OUT'){ _monProfil=null; } }); }
+  if(db){ db.auth.onAuthStateChange(function(ev){ if(ev==='SIGNED_IN'){ _authSent=false; _showCode=false; _pwdMode=false; } if(ev==='SIGNED_OUT'){ _monProfil=null; } }); }
 
   // ================= Passe la plume =================
   // Chaine de transmission des 4 gestes : parcours de 60 secondes, quiz de 3 questions,
