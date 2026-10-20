@@ -2309,13 +2309,142 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
     if(!isAdmin()){ el.innerHTML='<div class="callout">Espace réservé à l\'administrateur. Connecte-toi avec le compte administrateur dans l\'onglet Compte.</div>'; return; }
     el.innerHTML='<p class="sub">Réservé à l\'administrateur. Les statistiques sont anonymisées ; la liste des membres n\'est visible que de toi.</p>'
       +'<div id="admStats"><p class="meta">Chargement des statistiques...</p></div>'
+      +'<div class="section-label">Contacts (CRM)</div><div id="admCrm"><p class="meta">Chargement...</p></div>'
       +'<div class="section-label">Statistiques détaillées</div><div id="admStats2"><p class="meta">Chargement...</p></div>'
       +'<div class="section-label">Réseau de bénévoles</div><div id="admBen"><p class="meta">Chargement...</p></div>'
       +'<div class="section-label">Membres et modération</div><div id="admUsers"><p class="meta">Chargement...</p></div>'
       +'<div class="section-label">Modération des structures</div><div id="admMod"><p class="meta">Chargement...</p></div>'
       +'<div class="section-label">Contributions reçues</div><div id="admSignals"><p class="meta">Chargement...</p></div>'
       +'<div class="section-label">Régie sponsors</div><div id="admSponsors"><p class="meta">Chargement...</p></div>';
-    loadAdminBenevoles(); loadAdminStats(); loadAdminStats2(); loadAdminUsers(); loadAdminMod(); loadAdminSignals(); loadAdminSponsors();
+    loadCrm(); loadAdminBenevoles(); loadAdminStats(); loadAdminStats2(); loadAdminUsers(); loadAdminMod(); loadAdminSignals(); loadAdminSponsors();
+  }
+  // ---------------------------------------------------------------- Mini CRM (back-office)
+  // Tables crm_contacts et crm_interactions (migration v27), lisibles par les seuls
+  // administrateurs. Un contact = une structure ou une personne ; le journal garde
+  // chaque echange (e-mail, appel, rendez-vous). Pense pour Anne et Vincent, sur iPhone.
+  var CRM_TYPES=[['centre','Centres de soins'],['partenaire','Partenaires'],['prospect','Prospects'],['financeur','Financeurs'],['benevole','Bénévoles'],['adherent','Adhérents'],['donateur','Donateurs'],['presse','Presse et médias'],['institution','Institutions'],['curieux','Curieux'],['fournisseur','Fournisseurs']];
+  var CRM_STATUTS=[['a_contacter','À contacter'],['contacte','Contacté'],['en_discussion','En discussion'],['partenaire','Partenaire actif'],['sans_reponse','Sans réponse'],['refus','Refus'],['injoignable','Injoignable'],['inactif','Inactif']];
+  var CRM_CANAUX=[['email','E-mail'],['telephone','Téléphone'],['rdv','Rendez-vous'],['courrier','Courrier'],['reseaux','Réseaux sociaux'],['autre','Autre']];
+  var _crm={list:[], f:{q:'',type:'',statut:'',relance:false}, max:40, open:null};
+  function crmLab(arr,k){ for(var i=0;i<arr.length;i++){ if(arr[i][0]===k) return arr[i][1]; } return k||''; }
+  function crmOpts(arr,sel,vide){ return (vide?'<option value="">'+vide+'</option>':'')+arr.map(function(a){ return '<option value="'+a[0]+'"'+(a[0]===sel?' selected':'')+'>'+escapeH(a[1])+'</option>'; }).join(''); }
+  function crmToday(){ var d=new Date(); return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2); }
+  function crmDateFr(s){ if(!s) return ''; var p=String(s).slice(0,10).split('-'); return p.length===3? p[2]+'/'+p[1]+'/'+p[0] : s; }
+  function crmNom(c){ var p=[c.prenom,c.nom].filter(Boolean).join(' '); return p ? p+(c.organisation?' · '+c.organisation:'') : (c.organisation||'(sans nom)'); }
+  function loadCrm(){
+    var box=document.getElementById('admCrm'); if(!box||!db) return;
+    db.from('crm_contacts').select('*').order('echeance',{ascending:true,nullsFirst:false}).order('organisation').then(function(r){
+      if(r.error){ box.innerHTML='<div class="callout">CRM non configuré. Exécute la migration v27 dans Supabase.</div>'; return; }
+      _crm.list=r.data||[]; renderCrm();
+    });
+  }
+  function renderCrm(){
+    var box=document.getElementById('admCrm'); if(!box) return;
+    var L=_crm.list, today=crmToday();
+    var aRelancer=L.filter(function(c){ return c.echeance && c.echeance<=today && ['refus','inactif'].indexOf(c.statut)<0; }).length;
+    var parType={}; L.forEach(function(c){ parType[c.typologie]=(parType[c.typologie]||0)+1; });
+    var chips='<div style="margin:2px 0 6px">'
+      +'<button class="chip'+(!_crm.f.type&&!_crm.f.relance?' on':'')+'" onclick="crmFiltre(\'type\',\'\')">Tous ('+L.length+')</button>'
+      +'<button class="chip'+(_crm.f.relance?' on':'')+'" onclick="crmFiltre(\'relance\',!_crm.f.relance)">À faire aujourd\'hui ('+aRelancer+')</button>'
+      +CRM_TYPES.filter(function(t){ return parType[t[0]]; }).map(function(t){ return '<button class="chip'+(_crm.f.type===t[0]?' on':'')+'" onclick="crmFiltre(\'type\',\''+t[0]+'\')">'+escapeH(t[1])+' ('+parType[t[0]]+')</button>'; }).join('')+'</div>';
+    box.innerHTML='<p class="meta" style="padding:2px 0 8px">Centres, partenaires, prospects, bénévoles, presse : chaque contact et chaque échange. Visible des seuls administrateurs.</p>'
+      +chips
+      +'<div style="display:flex;gap:8px;margin-bottom:8px"><input class="field" id="crmQ" placeholder="Rechercher un nom, une ville, un e-mail" value="'+escapeH(_crm.f.q)+'" oninput="_crm.f.q=this.value;_crm.max=40;crmListe()" style="flex:1">'
+      +'<select class="field" id="crmSt" onchange="_crm.f.statut=this.value;_crm.max=40;crmListe()" style="width:42%">'+crmOpts(CRM_STATUTS,_crm.f.statut,'Tous statuts')+'</select></div>'
+      +'<div class="row-btns" style="margin-bottom:8px"><button class="btn btn-primary btn-sm" onclick="crmOuvrir(null)">Nouveau contact</button><button class="btn btn-ghost btn-sm" onclick="crmExport()">Exporter (CSV)</button></div>'
+      +'<div id="crmDetail"></div><div id="crmListe"></div>';
+    crmListe();
+  }
+  function crmFiltre(k,v){ if(k==='type'){ _crm.f.type=v; _crm.f.relance=false; } else { _crm.f.relance=v; if(v) _crm.f.type=''; } _crm.max=40; renderCrm(); }
+  function crmFiltres(){
+    var q=(_crm.f.q||'').toLowerCase().trim(), today=crmToday();
+    return _crm.list.filter(function(c){
+      if(_crm.f.type && c.typologie!==_crm.f.type) return false;
+      if(_crm.f.statut && c.statut!==_crm.f.statut) return false;
+      if(_crm.f.relance && !(c.echeance && c.echeance<=today && ['refus','inactif'].indexOf(c.statut)<0)) return false;
+      if(q){ var t=[c.organisation,c.prenom,c.nom,c.email,c.ville,c.dept,c.fonction,c.notes].join(' ').toLowerCase(); if(t.indexOf(q)<0) return false; }
+      return true;
+    });
+  }
+  function crmListe(){
+    var el=document.getElementById('crmListe'); if(!el) return;
+    var F=crmFiltres(), today=crmToday();
+    if(!F.length){ el.innerHTML='<p class="meta">Aucun contact pour ce filtre.</p>'; return; }
+    el.innerHTML='<div class="card" style="padding:6px 16px">'+F.slice(0,_crm.max).map(function(c){
+      var retard=c.echeance && c.echeance<=today && ['refus','inactif'].indexOf(c.statut)<0;
+      var ok=['partenaire','en_discussion'].indexOf(c.statut)>=0, ko=['refus','injoignable','sans_reponse'].indexOf(c.statut)>=0;
+      return '<div class="centre" style="cursor:pointer" onclick="crmOuvrir(\''+c.id+'\')"><div style="flex:1;min-width:0">'
+        +'<h4>'+escapeH(crmNom(c))+'</h4>'
+        +'<div class="meta">'+escapeH(crmLab(CRM_TYPES,c.typologie))+(c.dept?' · '+escapeH(c.dept):'')+(c.ville?' · '+escapeH(c.ville):'')
+        +'<span class="adm-tag '+(ok?'ok':(ko?'ko':''))+'" style="'+(ok||ko?'':'background:#eef1ee;color:#55635b')+'">'+escapeH(crmLab(CRM_STATUTS,c.statut))+'</span></div>'
+        +(c.prochaine_action?'<div class="meta" style="margin-top:4px'+(retard?';color:#b23c22;font-weight:700':'')+'">'+(c.echeance?crmDateFr(c.echeance)+' : ':'')+escapeH(c.prochaine_action)+'</div>':'')
+        +'</div></div>';
+    }).join('')+'</div>'+(F.length>_crm.max?'<button class="btn btn-ghost" onclick="_crm.max+=40;crmListe()">Voir plus ('+(F.length-_crm.max)+')</button>':'');
+  }
+  function crmOuvrir(id){
+    var box=document.getElementById('crmDetail'); if(!box) return;
+    var c=null; _crm.list.forEach(function(x){ if(x.id===id) c=x; });
+    c=c||{typologie:_crm.f.type||'curieux',statut:'a_contacter',suivi_par:'Vincent'};
+    _crm.open=c.id||null;
+    function f(k,ph,type){ return '<input class="field" id="crm_'+k+'" '+(type?'type="'+type+'" ':'')+'placeholder="'+ph+'" value="'+escapeH(c[k]||'')+'" style="margin-bottom:8px">'; }
+    box.innerHTML='<div class="card"><div class="section-label" style="margin-top:0">'+(c.id?escapeH(crmNom(c)):'Nouveau contact')+'</div>'
+      +(c.id?'<div class="row-btns" style="margin-bottom:10px">'+(c.email?'<a class="btn btn-primary btn-sm" href="mailto:'+escapeH(c.email)+'">Écrire</a>':'')+(c.tel?'<a class="btn btn-ghost btn-sm" href="tel:'+escapeH(c.tel)+'">Appeler</a>':'')+(c.site?'<a class="btn btn-ghost btn-sm" href="'+escapeH(c.site)+'" target="_blank" rel="noopener">Site</a>':'')+'</div>':'')
+      +'<div style="display:flex;gap:8px"><select class="field" id="crm_typologie" style="margin-bottom:8px">'+crmOpts(CRM_TYPES,c.typologie)+'</select>'
+      +'<select class="field" id="crm_statut" style="margin-bottom:8px">'+crmOpts(CRM_STATUTS,c.statut)+'</select></div>'
+      +f('organisation','Structure (association, centre, entreprise, média)')
+      +'<div style="display:flex;gap:8px">'+f('prenom','Prénom')+f('nom','Nom')+'</div>'
+      +f('fonction','Fonction ou rôle')
+      +f('email','E-mail','email')+f('tel','Téléphone','tel')+f('site','Site (https://...)')
+      +'<div style="display:flex;gap:8px">'+f('dept','Département')+f('ville','Ville')+'</div>'
+      +f('prochaine_action','Prochaine action')
+      +'<div style="display:flex;gap:8px">'+f('echeance','Échéance','date')+'<select class="field" id="crm_suivi_par" style="margin-bottom:8px">'+crmOpts([['Vincent','Suivi par Vincent'],['Anne','Suivi par Anne']],c.suivi_par||'Vincent')+'</select></div>'
+      +'<textarea class="field" id="crm_notes" placeholder="Notes" rows="3" style="margin-bottom:8px">'+escapeH(c.notes||'')+'</textarea>'
+      +'<div class="row-btns"><button class="btn btn-primary btn-sm" onclick="crmEnregistrer()">Enregistrer</button><button class="btn btn-ghost btn-sm" onclick="document.getElementById(\'crmDetail\').innerHTML=\'\'">Fermer</button></div>'
+      +'<div id="crmMsg" class="meta" style="margin-top:6px"></div>'
+      +(c.id?'<div class="section-label">Journal des échanges</div>'
+        +'<div style="display:flex;gap:8px"><select class="field" id="crmI_canal" style="margin-bottom:8px">'+crmOpts(CRM_CANAUX,'email')+'</select><select class="field" id="crmI_sens" style="margin-bottom:8px"><option value="sortant">Envoyé par nous</option><option value="entrant">Reçu</option></select></div>'
+        +'<input class="field" id="crmI_objet" placeholder="Objet" style="margin-bottom:8px"><textarea class="field" id="crmI_resume" placeholder="Ce qui a été dit, en quelques mots" rows="2" style="margin-bottom:8px"></textarea>'
+        +'<button class="btn btn-ghost btn-sm" onclick="crmAjoutEchange()">Ajouter cet échange</button><div id="crmJournal" style="margin-top:10px"><p class="meta">Chargement...</p></div>':'')
+      +'</div>';
+    box.scrollIntoView({behavior:'smooth',block:'start'});
+    if(c.id) crmJournal(c.id);
+  }
+  function crmJournal(id){
+    var el=document.getElementById('crmJournal'); if(!el||!db) return;
+    db.from('crm_interactions').select('*').eq('contact_id',id).order('date',{ascending:false}).then(function(r){
+      var L=r.data||[]; if(!L.length){ el.innerHTML='<p class="meta">Aucun échange enregistré.</p>'; return; }
+      el.innerHTML=L.map(function(i){ return '<div style="border-left:3px solid '+(i.sens==='entrant'?'#1F9E67':'#EF6C4D')+';padding:4px 0 4px 10px;margin-bottom:8px">'
+        +'<div class="meta"><b>'+crmDateFr(i.date)+'</b> · '+escapeH(crmLab(CRM_CANAUX,i.canal))+' · '+(i.sens==='entrant'?'reçu':'envoyé')+(i.par?' · '+escapeH(i.par):'')+'</div>'
+        +(i.objet?'<div style="font-weight:700;font-size:14px">'+escapeH(i.objet)+'</div>':'')+(i.resume?'<div class="meta">'+escapeH(i.resume)+'</div>':'')+'</div>'; }).join('');
+    });
+  }
+  function crmEnregistrer(){
+    var m=document.getElementById('crmMsg'); if(!db) return;
+    var o={}; ['typologie','statut','organisation','prenom','nom','fonction','email','tel','site','dept','ville','prochaine_action','echeance','suivi_par','notes'].forEach(function(k){ var v=val('crm_'+k).trim(); o[k]=v||null; });
+    o.typologie=o.typologie||'curieux'; o.statut=o.statut||'a_contacter';
+    if(!o.organisation && !o.nom && !o.prenom){ if(m) m.textContent='Indique au moins une structure ou un nom.'; return; }
+    var p=_crm.open ? db.from('crm_contacts').update(o).eq('id',_crm.open).select() : db.from('crm_contacts').insert(o).select();
+    p.then(function(r){
+      if(r.error){ if(m) m.textContent='Erreur : '+r.error.message; return; }
+      var c=(r.data||[])[0]; if(m) m.textContent='Enregistré.';
+      if(c){ var found=false; _crm.list=_crm.list.map(function(x){ if(x.id===c.id){ found=true; return c; } return x; }); if(!found) _crm.list.unshift(c); _crm.open=c.id; }
+      crmListe(); if(c && !document.getElementById('crmJournal')) crmOuvrir(c.id);
+    });
+  }
+  function crmAjoutEchange(){
+    if(!db||!_crm.open) return;
+    var o={contact_id:_crm.open, canal:val('crmI_canal')||'email', sens:val('crmI_sens')||'sortant', objet:val('crmI_objet').trim()||null, resume:val('crmI_resume').trim()||null, par:(currentUser&&currentUser.email&&/anne/i.test(currentUser.email))?'Anne':'Vincent'};
+    if(!o.objet && !o.resume) return;
+    db.from('crm_interactions').insert(o).then(function(r){
+      if(r.error){ alert('Erreur : '+r.error.message); return; }
+      document.getElementById('crmI_objet').value=''; document.getElementById('crmI_resume').value=''; crmJournal(_crm.open);
+    });
+  }
+  function crmExport(){
+    var cols=['typologie','statut','organisation','prenom','nom','fonction','email','tel','site','dept','ville','prochaine_action','echeance','suivi_par','notes'];
+    var rows=[cols].concat(crmFiltres().map(function(c){ return cols.map(function(k){ var v=k==='typologie'?crmLab(CRM_TYPES,c[k]):(k==='statut'?crmLab(CRM_STATUTS,c[k]):(c[k]||'')); return '"'+String(v).replace(/"/g,'""')+'"'; }); }));
+    var csv='﻿'+rows.map(function(r){ return r.join(';'); }).join('\n');
+    var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})); a.download='coup-de-patte-contacts.csv'; a.click();
   }
   function loadAdminStats(){
     var box=document.getElementById('admStats'); if(!box) return;
