@@ -52,6 +52,7 @@
 
 - Index : https://coupdepatte.eu/centres/
 - [Aisne (02)](https://coupdepatte.eu/centres/02-aisne/)
+- [Alpes-de-Haute-Provence (04)](https://coupdepatte.eu/centres/04-alpes-de-haute-provence/)
 - [Hautes-Alpes (05)](https://coupdepatte.eu/centres/05-hautes-alpes/)
 - [Alpes-Maritimes (06)](https://coupdepatte.eu/centres/06-alpes-maritimes/)
 - [Ardennes (08)](https://coupdepatte.eu/centres/08-ardennes/)
@@ -95,6 +96,7 @@
 - [Yvelines (78)](https://coupdepatte.eu/centres/78-yvelines/)
 - [Deux-Sèvres (79)](https://coupdepatte.eu/centres/79-deux-sevres/)
 - [Tarn (81)](https://coupdepatte.eu/centres/81-tarn/)
+- [Var (83)](https://coupdepatte.eu/centres/83-var/)
 - [Vaucluse (84)](https://coupdepatte.eu/centres/84-vaucluse/)
 - [Vienne (86)](https://coupdepatte.eu/centres/86-vienne/)
 - [Haute-Vienne (87)](https://coupdepatte.eu/centres/87-haute-vienne/)
