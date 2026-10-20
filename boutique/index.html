@@ -46,6 +46,10 @@ label{font-size:13px;font-weight:700;color:var(--doux)}
 select{font:inherit;font-size:16px;padding:10px 12px;border-radius:12px;border:1px solid var(--bord);background:var(--blanc);color:var(--texte);width:100%}
 .btn{margin-top:auto;display:block;width:100%;border:none;border-radius:14px;padding:14px;font:inherit;font-weight:800;font-size:16px;background:var(--vert);color:#fff;cursor:pointer;min-height:48px}
 .btn[disabled]{opacity:.55;cursor:default}
+.modeles{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 4px}
+.modele{font:inherit;font-size:13.5px;font-weight:800;padding:8px 12px;min-height:38px;border-radius:999px;border:1.5px solid var(--bord);background:var(--blanc);color:var(--texte);cursor:pointer}
+.modele[aria-pressed="true"]{border-color:var(--vert);background:var(--vert-pale);color:var(--vert-fonce)}
+@media (prefers-color-scheme:dark){.modele[aria-pressed="true"]{color:#8fd8b4}}
 .msg{min-height:20px;margin:12px 0 0;font-weight:700}
 .msg.err{color:var(--erreur)}
 .rassure{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:26px 0 8px}
@@ -88,12 +92,17 @@ footer p{margin:4px 0}
   var DEFAUT = [
     {id:'tshirt-plume', nom:'T-shirt La plume', description:'La plume blanche, petite et haut sur la poitrine, sur coton vert. Coupe unisexe.', image:IMG+'tshirt.jpg', tailles:['S','M','L','XL','XXL'], prix_cts:null},
     {id:'sweat-oiseaux', nom:'Sweat Oiseaux de nos jardins', description:'Rouge-gorge, mésange, hirondelle et martinet, centrés sur le torse. Molleton écru.', image:IMG+'sweat.jpg', tailles:['S','M','L','XL','XXL'], prix_cts:null},
-    {id:'tote-ilovebirds', nom:'Tote bag I love birds', description:'Coton naturel, pour les courses, les marchés et les sorties nature.', image:IMG+'tote.jpg', tailles:[], prix_cts:null},
+    {id:'tote-ilovebirds', nom:'Tote bag I love birds', description:'Coton biologique naturel, pour les courses, les marchés et les sorties nature. Cinq modèles : un par oiseau, ou les quatre ensemble.', image:IMG+'tote-hirondelle.jpg', tailles:[], prix_cts:null, variantes:[
+      {id:'hirondelle', nom:'Hirondelle', image:IMG+'tote-hirondelle.jpg'},
+      {id:'rouge-gorge', nom:'Rouge-gorge', image:IMG+'tote-rouge-gorge.jpg'},
+      {id:'mesange', nom:'Mésange bleue', image:IMG+'tote-mesange.jpg'},
+      {id:'martinet', nom:'Martinet noir', image:IMG+'tote-martinet.jpg'},
+      {id:'quatre-oiseaux', nom:'Les quatre oiseaux', image:IMG+'tote-quatre-oiseaux.jpg'}]},
     {id:'mug-plume', nom:'Mug La plume', description:'Céramique blanche, la plume du logo dans sa pastille verte.', image:IMG+'mug.jpg', tailles:[], prix_cts:null},
     {id:'porte-cles', nom:'Porte-clés', description:'Acrylique, un petit cadeau qui fait connaître l\'association.', image:IMG+'porte-cles.jpg', tailles:[], prix_cts:null},
     {id:'autocollants', nom:'Autocollants', description:'Vinyle découpé : le slogan, les oiseaux et la plume.', image:IMG+'autocollants.jpg', tailles:[], prix_cts:null}
   ];
-  var produits = DEFAUT, envoi = false;
+  var produits = DEFAUT, envoi = false, choix = {};
   function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
   function img(u){ u=String(u||''); return u.charAt(0)==='/' ? 'https://coupdepatte.eu'+u : u; }
   function prix(c){ if(c==null) return 'Prix bientôt'; var e=(c/100).toFixed(2).replace('.',','); return e.replace(',00','')+' €'; }
@@ -105,15 +114,18 @@ footer p{margin:4px 0}
     document.getElementById('bandeau').innerHTML=b;
     document.getElementById('grille').innerHTML=produits.map(function(p){
       var id=esc(p.id), t=p.tailles||[], actif=OUVERTE && p.prix_cts!=null;
+      var v=p.variantes||[], cv=choix[p.id]||(v[0]&&v[0].id), image=p.image;
+      var mod=v.length?'<label>Modèle</label><div class="modeles" role="group" aria-label="Modèle">'+v.map(function(x){ if(x.id===cv && x.image) image=x.image; return '<button type="button" class="modele" aria-pressed="'+(x.id===cv)+'" onclick="choisir(\''+id+'\',\''+esc(x.id)+'\')">'+esc(x.nom)+'</button>'; }).join('')+'</div>':'';
       var sel=t.length?'<label for="t_'+id+'">Taille</label><select id="t_'+id+'">'+t.map(function(x){ return '<option'+(x==='M'?' selected':'')+'>'+esc(x)+'</option>'; }).join('')+'</select>':'';
-      return '<article class="carte" id="'+id+'"><img src="'+esc(img(p.image))+'" alt="'+esc(p.nom)+'" width="720" height="720" loading="lazy">'
-        +'<div class="corps"><h2>'+esc(p.nom)+'</h2><p>'+esc(p.description)+'</p><div class="prix">'+prix(p.prix_cts)+'</div>'+sel
+      return '<article class="carte" id="'+id+'"><img src="'+esc(img(image))+'" alt="'+esc(p.nom)+'" width="720" height="720" loading="lazy">'
+        +'<div class="corps"><h2>'+esc(p.nom)+'</h2><p>'+esc(p.description)+'</p><div class="prix">'+prix(p.prix_cts)+'</div>'+mod+sel
         +'<button class="btn" type="button"'+(actif?' onclick="commander(\''+id+'\')"':' disabled')+'>'+(actif?'Commander':'Bientôt disponible')+'</button></div></article>';
     }).join('');
   }
+  function choisir(id, v){ choix[id]=v; rendre(); }
   function charger(){
     var x=new XMLHttpRequest();
-    x.open('GET', SUPA+'/rest/v1/boutique_produits?select=id,nom,description,image,tailles,prix_cts,ordre&actif=eq.true&order=ordre');
+    x.open('GET', SUPA+'/rest/v1/boutique_produits?select=id,nom,description,image,tailles,variantes,prix_cts,ordre&actif=eq.true&order=ordre');
     x.setRequestHeader('apikey', CLE);
     x.onload=function(){ try{ var d=JSON.parse(x.responseText); if(x.status===200 && d && d.length){ produits=d; rendre(); } }catch(_){} };
     x.send();
@@ -121,14 +133,16 @@ footer p{margin:4px 0}
   function commander(id){
     var m=document.getElementById('msg');
     if(!OUVERTE || envoi) return;
-    var s=document.getElementById('t_'+id), taille=s?s.value:null;
+    var s=document.getElementById('t_'+id), taille=s?s.value:null, p=null, i;
+    for(i=0;i<produits.length;i++) if(produits[i].id===id) p=produits[i];
+    var v=(p&&p.variantes)||[], variante=v.length?(choix[id]||v[0].id):null;
     envoi=true; m.className='msg'; m.textContent='Préparation du paiement sécurisé...';
     var x=new XMLHttpRequest();
     x.open('POST', SUPA+'/functions/v1/boutique-commande');
     x.setRequestHeader('apikey', CLE); x.setRequestHeader('Authorization', 'Bearer '+CLE); x.setRequestHeader('Content-Type','application/json');
     x.onload=function(){ envoi=false; var d=null; try{ d=JSON.parse(x.responseText); }catch(_){} if(d && d.url){ location.href=d.url; return; } m.className='msg err'; m.textContent='Le paiement n\'a pas pu démarrer. Réessaie dans un instant.'; };
     x.onerror=function(){ envoi=false; m.className='msg err'; m.textContent='Connexion impossible. Vérifie ton réseau.'; };
-    x.send(JSON.stringify({produit:id, taille:taille}));
+    x.send(JSON.stringify({produit:id, taille:taille, variante:variante}));
   }
   rendre(); charger();
 </script>
