@@ -44,5 +44,11 @@
       "destination": "https://coupdepatte.eu/:path*",
       "permanent": true
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/plume/:code([A-Za-z0-9]{8})",
+      "destination": "/plume/index.html"
+    }
   ]
 }
