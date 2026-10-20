@@ -1307,8 +1307,11 @@
     {nom:"Centre de sauvegarde LPO Aquitaine, Domaine de Certes", ville:"Audenge (33)", tel:"0556913381", lat:44.6817, lon:-1.0206},
     {nom:"Centre de sauvegarde LPO Auvergne", ville:"Clermont-Ferrand (63)", tel:"", lat:45.7719, lon:3.0817, site:"https://auvergne-rhone-alpes.lpo.fr/sos-biodiversite/", note:"Ouvert 7j/7. Casiers de depot 24h/24 hors horaires."},
     {nom:"Centre de sauvegarde LPO Bretagne, Ile Grande", ville:"Pleumeur-Bodou (22)", tel:"0296919140", lat:48.8025, lon:-3.5739},
-    {nom:"Centre de sauvegarde LPO Occitanie, site du Tarn", ville:"Labruguiere (81)", tel:"0627582885", lat:43.5406, lon:2.2606, site:"https://tarn.lpo.fr/"},
-    {nom:"Centre regional de sauvegarde LPO PACA", ville:"Buoux (84)", tel:"0465090220", lat:43.822, lon:5.383, site:"https://paca.lpo.fr/soins-animaux/le-centre"}
+    // Tarn et PACA : fiches relues et validees par les centres le 20/10/2026.
+    {nom:"Centre de sauvegarde LPO Occitanie, site du Tarn", ville:"Castres (81)", tel:"0627582885", lat:43.6060, lon:2.2410, site:"https://tarn.lpo.fr/", email:"tarn@lpo.fr", valide:"2026-10-20",
+     accueil:"Uniquement les rapaces diurnes et nocturnes : buses, faucons, éperviers, chouettes, hiboux.", acces:"Terrain privé, non ouvert au public : contacter le centre avant tout déplacement."},
+    {nom:"Centre régional de sauvegarde LPO PACA", ville:"Buoux (84)", tel:"0465090220", lat:43.822, lon:5.383, site:"https://paca.lpo.fr/soins-animaux/conseiller/fiches-conseils", email:"sos.paca@lpo.fr", valide:"2026-10-20",
+     note:"Prend en charge le Vaucluse, les Bouches-du-Rhône, le Var et les Alpes-de-Haute-Provence.", si_absent:"Écris à sos.paca@lpo.fr avec la commune, les circonstances de la découverte et une photo. Boîte consultée 7 jours sur 7."}
   ];
   var CONDUITE_PASSEREAU = "Emplumé et vif au sol, on le laisse et on le met en sécurité tout près, ses parents s'en occupent. Nu ou en duvet, on le remet au nid si possible. Blessé, on appelle un centre de sauvegarde.";
   var CONDUITE_RAPACE = "Rapace: ne pas nourrir, le placer au calme dans un carton aéré et appeler un centre. Attention aux serres et au bec, manipule avec un linge épais.";
@@ -1845,7 +1848,9 @@
       if(r.error || !r.data || !r.data.length) return;   // on garde le repli local
       _centresDb = r.data.map(function(c){
         return {nom:c.nom, ville:(c.ville||'')+(c.dept?' ('+c.dept+')':''), tel:c.tel||'',
-                lat:c.lat, lon:c.lon, site:c.site||'', note:c.note||''};
+                lat:c.lat, lon:c.lon, site:c.site||'', note:c.note||'', email:c.email||'',
+                accueil:c.accueil||'', horaires:c.horaires||'', acces:c.acces||'', si_absent:c.si_absent||'',
+                don:c.don_url||'', valide:c.valide_par_centre||'', presentation:c.presentation||''};
       });
       renderCentres();
       if(document.getElementById('centres') && document.getElementById('centres').classList.contains('active')) initMap(true);
@@ -1866,8 +1871,15 @@
     var loin = (c.d!=null && c.d>100)
       ? '<div class="callout" style="margin:8px 0 0 0;padding:9px 11px;font-size:13px">Ce centre est loin. Appelle-le d\'abord : il t\'orientera peut-etre vers une structure plus proche, ou vers un veterinaire, qui a l\'obligation d\'accueillir un animal sauvage en detresse.</div>'
       : '';
-    var note = c.note ? '<div class="meta" style="margin-top:4px">'+escapeH(c.note)+'</div>' : '';
-    return '<div class="centre"><div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between;gap:8px"><h4>'+escapeH(c.nom)+'</h4>'+d+'</div><div class="meta">'+escapeH(c.ville)+'. Appelle avant de te déplacer.</div>'+note+'<div class="row-btns">'+tel+itin+'</div>'+loin+'</div></div>';
+    // Champs relus par les centres eux-memes (migration v26) : especes accueillies, acces,
+    // horaires, consigne propre si personne ne repond, page de dons.
+    function ligne(lbl, txt){ return txt ? '<div class="meta" style="margin-top:4px"><b>'+lbl+'</b> '+escapeH(txt)+'</div>' : ''; }
+    var note = c.accueil ? ligne('Accueille :', c.accueil) : (c.note ? '<div class="meta" style="margin-top:4px">'+escapeH(c.note)+'</div>' : '');
+    var plus = ligne('Accès :', c.acces) + ligne('Horaires :', c.horaires) + ligne('Si personne ne répond :', c.si_absent);
+    var valide = c.valide ? '<div class="meta" style="margin-top:4px;color:#1F9E67">&#10003; Fiche validée par le centre</div>' : '';
+    var mail = c.email ? '<a class="btn btn-ghost btn-sm" href="mailto:'+escapeH(c.email)+'">Écrire</a>' : '';
+    var don = c.don ? '<div style="margin-top:6px"><a class="meta" style="text-decoration:underline" href="'+escapeH(c.don)+'" target="_blank" rel="noopener">Soutenir ce centre par un don</a></div>' : '';
+    return '<div class="centre"><div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between;gap:8px"><h4>'+escapeH(c.nom)+'</h4>'+d+'</div><div class="meta">'+escapeH(c.ville)+'. Appelle avant de te déplacer.</div>'+valide+note+plus+'<div class="row-btns">'+tel+mail+itin+'</div>'+loin+don+'</div></div>';
   }
   function renderCentres(){
     var html = '<div class="card">'+centresTries().map(centreCard).join('')+'</div>';

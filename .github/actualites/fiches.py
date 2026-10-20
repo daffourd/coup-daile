@@ -80,7 +80,9 @@ def load_especes(root):
 
 
 def load_centres(http, supa, key):
-    code, body = http("GET", supa + "/centres?select=nom,ville,dept,tel,email,site,lat,lon,note,reseau,verifie_le&ouvert=eq.true&order=dept,ville",
+    # select=* : les champs ajoutés par la migration v26 (accueil, horaires, acces, si_absent, don_url,
+    # conseils_url, depts_couverts, presentation, valide_par_centre) sont pris s'ils existent.
+    code, body = http("GET", supa + "/centres?select=*&ouvert=eq.true&order=dept,ville",
                       None, {"apikey": key, "Authorization": "Bearer " + key}, timeout=30)
     if code != 200:
         return None
@@ -190,6 +192,28 @@ def dept_slug(code, slugify):
     return "%s-%s" % (code.lower(), slugify(DEPTS.get(code, code)))
 
 
+SI_ABSENT_GENERAL = ("La LPO oriente au %s. Un vétérinaire doit accueillir un animal sauvage en détresse. "
+                     "Garder un oiseau sauvage chez soi est interdit." % LPO_TEL)
+
+
+def si_absent_dept(centres):
+    """Consigne « si personne ne répond » : celle que le centre nous a donnée, sinon la consigne générale."""
+    propres = []
+    for c in centres:
+        if c.get("si_absent") and c["si_absent"] not in propres:
+            propres.append(c["si_absent"])
+    if not propres:
+        return SI_ABSENT_GENERAL
+    return " ".join(propres) + " Un vétérinaire doit aussi accueillir un animal sauvage en détresse, et garder un oiseau sauvage chez soi est interdit."
+
+
+def _date_fr_simple(iso, ctx):
+    try:
+        return ctx["date_fr"](iso)
+    except Exception:
+        return iso
+
+
 def render_centres_dept(code, centres, ctx):
     esc, SITE, ORG, head, FOOT, slugify = ctx["esc"], ctx["SITE"], ctx["ORG"], ctx["head"], ctx["FOOT"], ctx["slugify"]
     nomd = DEPTS.get(code, code)
@@ -208,6 +232,8 @@ def render_centres_dept(code, centres, ctx):
             it["telephone"] = t_int
         if c.get("site"):
             it["url"] = c["site"]
+        if c.get("email"):
+            it["email"] = c["email"]
         if c.get("lat") and c.get("lon"):
             it["location"] = {"@type": "Place", "geo": {"@type": "GeoCoordinates", "latitude": c["lat"], "longitude": c["lon"]}}
         items.append(it)
@@ -218,7 +244,7 @@ def render_centres_dept(code, centres, ctx):
         {"q": "Que faire avant d'appeler ?",
          "r": "Place l'oiseau dans un carton aéré, au calme, au chaud et dans le noir. Ne lui donne ni à boire ni à manger de force, et ne le manipule pas plus que nécessaire."},
         {"q": "Et si aucun centre ne répond ?",
-         "r": "La LPO oriente au %s. Un vétérinaire doit accueillir un animal sauvage en détresse. Garder un oiseau sauvage chez soi est interdit." % LPO_TEL},
+         "r": si_absent_dept(centres)},
     ]
     ld = {"@context": "https://schema.org", "@graph": [
         ORG,
@@ -243,14 +269,43 @@ def render_centres_dept(code, centres, ctx):
     for c in centres:
         t_aff, t_int = _tel(c.get("tel"))
         lignes = ['<b style="display:block;font-family:Fraunces,Georgia,serif;font-size:19px">%s</b>' % esc(c["nom"]),
-                  '<span>%s (%s)</span>' % (esc(c["ville"]), esc(code))]
+                  '<span>%s</span>' % (esc(c["ville"]) if c.get("_couvre") else "%s (%s)" % (esc(c["ville"]), esc(code)))]
         if t_int:
             lignes.append('<p style="margin:8px 0 0"><a class="btn" href="tel:%s">Appeler le %s</a></p>' % (esc(t_int), esc(t_aff)))
-        if c.get("site"):
-            lignes.append('<p style="margin:8px 0 0"><a href="%s" rel="noopener" target="_blank">Site du centre</a></p>' % esc(c["site"]))
-        if c.get("note"):
+        if c.get("_couvre"):
+            lignes.append('<p style="margin:6px 0 0;font-size:15px"><b>Centre de référence pour ce département.</b></p>')
+        if c.get("valide_par_centre"):
+            lignes.append('<p style="margin:6px 0 0;font-size:14px;color:var(--vert,#1F9E67)">&#10003; Fiche relue et validée par le centre le %s</p>'
+                          % esc(_date_fr_simple(c["valide_par_centre"], ctx)))
+        if c.get("accueil"):
+            lignes.append('<p style="margin:8px 0 0;font-size:15px"><b>Animaux accueillis :</b> %s</p>' % esc(c["accueil"]))
+        elif c.get("note"):
             lignes.append('<p style="margin:8px 0 0;font-size:15px">%s</p>' % esc(c["note"]))
+        if c.get("acces"):
+            lignes.append('<p style="margin:8px 0 0;font-size:15px"><b>Accès :</b> %s</p>' % esc(c["acces"]))
+        if c.get("horaires"):
+            lignes.append('<p style="margin:8px 0 0;font-size:15px"><b>Horaires :</b> %s</p>' % esc(c["horaires"]))
+        if c.get("presentation"):
+            lignes.append('<p style="margin:8px 0 0;font-size:15px">%s</p>' % esc(c["presentation"]))
+        liens = []
+        if c.get("email"):
+            liens.append('<a href="mailto:%s">%s</a>' % (esc(c["email"]), esc(c["email"])))
+        if c.get("site"):
+            liens.append('<a href="%s" rel="noopener" target="_blank">Site du centre</a>' % esc(c["site"]))
+        if c.get("conseils_url") and c.get("conseils_url") != c.get("site"):
+            liens.append('<a href="%s" rel="noopener" target="_blank">Fiches conseils du centre</a>' % esc(c["conseils_url"]))
+        if liens:
+            lignes.append('<p style="margin:8px 0 0">%s</p>' % " · ".join(liens))
+        if c.get("si_absent"):
+            lignes.append('<p style="margin:8px 0 0;font-size:15px"><b>Si personne ne répond :</b> %s</p>' % esc(c["si_absent"]))
+        if c.get("don_url"):
+            lignes.append('<p style="margin:10px 0 0"><a class="btn" style="background:transparent;color:inherit;border:1.5px solid currentColor" '
+                          'href="%s" rel="noopener" target="_blank">Soutenir ce centre par un don</a></p>' % esc(c["don_url"]))
         out.append('<section class="encart" style="border-left-color:var(--corail)">%s</section>' % "".join(lignes))
+    if centres and all((c.get("accueil") or "").lower().startswith("uniquement") for c in centres):
+        out.append('<p class="avert">Ce centre n\'accueille pas toutes les espèces. Pour un autre animal, '
+                   '<a href="/">l\'application Coup de Patte</a> t\'indique le centre le plus proche ; '
+                   'un vétérinaire doit aussi accueillir un animal sauvage en détresse.</p>')
     out.append('<section class="geste"><h2>Le bon geste en attendant</h2><ol>'
                '<li>Place-le dans un carton aéré, avec un linge au fond.</li>'
                '<li>Garde-le au calme, au chaud et dans le noir.</li>'
@@ -319,6 +374,16 @@ def build(ctx):
             d = (c.get("dept") or "").strip().upper()
             if d in DEPTS:
                 par_dept.setdefault(d, []).append(c)
+        # Centres régionaux : un centre peut prendre en charge d'autres départements (ex. LPO PACA pour 13, 83, 04).
+        # Il apparaît alors aussi sur leurs pages, après les centres du département.
+        for c in centres:
+            for d2 in (c.get("depts_couverts") or []):
+                d2 = (d2 or "").strip().upper()
+                if d2 in DEPTS and d2 != (c.get("dept") or "").strip().upper():
+                    x = dict(c)
+                    x["_couvre"] = True
+                    x["ville"] = "%s (%s)" % (c["ville"], (c.get("dept") or "").strip().upper())
+                    par_dept.setdefault(d2, []).append(x)
         par_dept = dict(sorted(par_dept.items(), key=lambda kv: (len(kv[0]), kv[0])))
         for d, cs in par_dept.items():
             write(os.path.join(root, "centres", dept_slug(d, slugify), "index.html"), render_centres_dept(d, cs, ctx))
