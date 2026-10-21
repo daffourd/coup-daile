@@ -214,14 +214,42 @@ def _date_fr_simple(iso, ctx):
         return iso
 
 
-def render_centres_dept(code, centres, ctx):
+ETATS_INACTIFS = {
+    "suspendu": "Centre de sauvegarde suspendu : n'accueille plus d'animaux pour le moment.",
+    "ferme": "Centre fermé : n'accueille plus d'animaux.",
+    "sans_soins": "Pas de centre de soins : cette structure ne prend en charge aucun animal blessé.",
+}
+
+
+def est_actif(c):
+    return (c.get("etat") or "actif") == "actif"
+
+
+def render_inactifs(inactifs, esc):
+    """Encart « À savoir » : structures connues du public mais qui n'accueillent pas d'animaux."""
+    if not inactifs:
+        return ""
+    lignes = ['<b style="display:block;margin-bottom:4px">À savoir</b>']
+    for c in inactifs:
+        msg = ETATS_INACTIFS.get(c.get("etat"), "N'accueille pas d'animaux pour le moment.")
+        detail = (" " + esc(c["note"])) if c.get("note") else ""
+        lignes.append('<p style="margin:6px 0 0;font-size:15px"><b>%s</b> (%s) : %s%s</p>' % (esc(c["nom"]), esc(c["ville"]), esc(msg), detail))
+    return '<section class="encart">%s</section>' % "".join(lignes)
+
+
+def render_centres_dept(code, centres, ctx, inactifs=None):
     esc, SITE, ORG, head, FOOT, slugify = ctx["esc"], ctx["SITE"], ctx["ORG"], ctx["head"], ctx["FOOT"], ctx["slugify"]
+    inactifs = inactifs or []
     nomd = DEPTS.get(code, code)
     url = "%s/centres/%s/" % (SITE, dept_slug(code, slugify))
     n = len(centres)
     titre = "Oiseau blessé, %s (%s) : qui appeler ? Centres de soins faune sauvage | Coup de Patte" % (nomd, code)
     villes = ", ".join(sorted(set(c["ville"] for c in centres)))
-    desc = ("Oiseau ou animal sauvage blessé dans le département %s (%s) ? %d centre%s de soins à appeler (%s), "
+    if not centres:
+        desc = ("Oiseau ou animal sauvage blessé dans le département %s (%s) ? Aucun centre de soins actif n'y est référencé "
+                "pour l'instant : qui appeler et les bons gestes. Coup de Patte.") % (nomd, code)
+    else:
+        desc = ("Oiseau ou animal sauvage blessé dans le département %s (%s) ? %d centre%s de soins à appeler (%s), "
             "les bons gestes avant d'y aller. Liste gratuite Coup de Patte.") % (nomd, code, n, "s" if n > 1 else "", villes)
     items = []
     for c in centres:
@@ -237,9 +265,15 @@ def render_centres_dept(code, centres, ctx):
         if c.get("lat") and c.get("lon"):
             it["location"] = {"@type": "Place", "geo": {"@type": "GeoCoordinates", "latitude": c["lat"], "longitude": c["lon"]}}
         items.append(it)
+    if not centres:
+        r_ou = ("Aucun centre de soins actif n'est référencé dans ce département pour l'instant. L'application Coup de Patte "
+                "t'indique le centre le plus proche de toi ; la LPO oriente au %s, et un vétérinaire doit accueillir un animal "
+                "sauvage en détresse." % LPO_TEL)
+    else:
+        r_ou = None
     faq = [
         {"q": "Où emmener un oiseau blessé dans le département %s (%s) ?" % (nomd, code),
-         "r": "Appelle d'abord l'un de ces centres de soins de la faune sauvage : %s. Ils te diront s'il faut l'apporter et comment le transporter." % "; ".join(
+         "r": r_ou or "Appelle d'abord l'un de ces centres de soins de la faune sauvage : %s. Ils te diront s'il faut l'apporter et comment le transporter." % "; ".join(
              "%s à %s%s" % (c["nom"], c["ville"], (" (" + _tel(c.get("tel"))[0] + ")") if c.get("tel") else "") for c in centres)},
         {"q": "Que faire avant d'appeler ?",
          "r": "Place l'oiseau dans un carton aéré, au calme, au chaud et dans le noir. Ne lui donne ni à boire ni à manger de force, et ne le manipule pas plus que nécessaire."},
@@ -266,6 +300,10 @@ def render_centres_dept(code, centres, ctx):
     out.append('<span class="etiq">%s</span>' % esc(code))
     out.append('<h1>Centres de soins de la faune sauvage : %s</h1>' % esc(nomd))
     out.append('<p class="chapo">Tu as trouvé un oiseau ou un animal sauvage blessé dans le département %s ? Appelle avant de te déplacer : le centre te dira quoi faire et s\'il peut l\'accueillir.</p>' % esc(nomd))
+    if not centres:
+        out.append('<p class="avert">Aucun centre de soins actif n\'est référencé dans ce département pour l\'instant. '
+                   '<a href="/">L\'application Coup de Patte</a> t\'indique le centre le plus proche de toi ; la LPO oriente au %s, '
+                   'et un vétérinaire doit accueillir un animal sauvage en détresse.</p>' % esc(LPO_TEL))
     for c in centres:
         t_aff, t_int = _tel(c.get("tel"))
         lignes = ['<b style="display:block;font-family:Fraunces,Georgia,serif;font-size:19px">%s</b>' % esc(c["nom"]),
@@ -302,6 +340,8 @@ def render_centres_dept(code, centres, ctx):
             lignes.append('<p style="margin:10px 0 0"><a class="btn" style="background:transparent;color:inherit;border:1.5px solid currentColor" '
                           'href="%s" rel="noopener" target="_blank">Soutenir ce centre par un don</a></p>' % esc(c["don_url"]))
         out.append('<section class="encart" style="border-left-color:var(--corail)">%s</section>' % "".join(lignes))
+    if inactifs:
+        out.append(render_inactifs(inactifs, esc))
     if centres and all((c.get("accueil") or "").lower().startswith("uniquement") for c in centres):
         out.append('<p class="avert">Ce centre n\'accueille pas toutes les espèces. Pour un autre animal, '
                    '<a href="/">l\'application Coup de Patte</a> t\'indique le centre le plus proche ; '
@@ -340,7 +380,8 @@ def render_centres_index(par_dept, ctx):
     out.append('<h1>Centres de soins de la faune sauvage par département</h1>')
     out.append('<p class="chapo">%d centres qui accueillent les oiseaux, dans %d départements. Si le tien n\'y figure pas, l\'application te montre le centre le plus proche de toi, et la LPO oriente au %s.</p>' % (total, len(par_dept), LPO_TEL))
     out.append('<ul>%s</ul>' % "".join(
-        '<li><a href="/centres/%s/">%s (%s)</a> : %d centre%s</li>' % (esc(dept_slug(d, slugify)), esc(DEPTS.get(d, d)), esc(d), len(v), "s" if len(v) > 1 else "")
+        '<li><a href="/centres/%s/">%s (%s)</a> : %s</li>' % (esc(dept_slug(d, slugify)), esc(DEPTS.get(d, d)), esc(d),
+                                                            ("%d centre%s" % (len(v), "s" if len(v) > 1 else "")) if v else "aucun centre actif pour l'instant")
         for d, v in par_dept.items()))
     out.append(ctx["encart"])
     out.append('</main>')
@@ -369,7 +410,12 @@ def build(ctx):
 
     centres = load_centres(ctx["http"], ctx["SUPA"], ctx["SUPA_KEY"])
     if centres:
-        par_dept = {}
+        par_dept, inactifs_dept = {}, {}
+        for c in [x for x in centres if not est_actif(x)]:
+            d = (c.get("dept") or "").strip().upper()
+            if d in DEPTS:
+                inactifs_dept.setdefault(d, []).append(c)
+        centres = [x for x in centres if est_actif(x)]
         for c in centres:
             d = (c.get("dept") or "").strip().upper()
             if d in DEPTS:
@@ -384,9 +430,13 @@ def build(ctx):
                     x["_couvre"] = True
                     x["ville"] = "%s (%s)" % (c["ville"], (c.get("dept") or "").strip().upper())
                     par_dept.setdefault(d2, []).append(x)
+        # Un département qui n'a plus que des structures inactives garde sa page (avec l'encart « À savoir »),
+        # pour qu'aucune ancienne page n'oriente encore vers un centre suspendu ou fermé.
+        for d in inactifs_dept:
+            par_dept.setdefault(d, [])
         par_dept = dict(sorted(par_dept.items(), key=lambda kv: (len(kv[0]), kv[0])))
         for d, cs in par_dept.items():
-            write(os.path.join(root, "centres", dept_slug(d, slugify), "index.html"), render_centres_dept(d, cs, ctx))
+            write(os.path.join(root, "centres", dept_slug(d, slugify), "index.html"), render_centres_dept(d, cs, ctx, inactifs_dept.get(d)))
             publiees["centres"].append(("%s/centres/%s/" % (SITE, dept_slug(d, slugify)), DEPTS[d], d, len(cs)))
         write(os.path.join(root, "centres", "index.html"), render_centres_index(par_dept, ctx))
     else:

@@ -1305,7 +1305,7 @@
     // La liste vivante est en base (table centres) et prend le dessus quand le reseau repond.
     {nom:"Centre de sauvegarde LPO Alsace", ville:"Rosenwiller (67)", tel:"0388220735", lat:48.5297, lon:7.4406, site:"https://alsace.lpo.fr/index.php/le-centre-de-soins-de-rosenwiller"},
     {nom:"Centre de sauvegarde LPO Aquitaine, Domaine de Certes", ville:"Audenge (33)", tel:"0556913381", lat:44.6817, lon:-1.0206},
-    {nom:"Centre de sauvegarde LPO Auvergne", ville:"Clermont-Ferrand (63)", tel:"", lat:45.7719, lon:3.0817, site:"https://auvergne-rhone-alpes.lpo.fr/sos-biodiversite/", note:"Ouvert 7j/7. Casiers de depot 24h/24 hors horaires."},
+    {nom:"Centre de sauvegarde LPO Auvergne", ville:"Clermont-Ferrand (63)", tel:"", lat:45.7719, lon:3.0817, site:"https://auvergne-rhone-alpes.lpo.fr/sos-biodiversite/faune-en-detresse/", horaires:"7 j/7 de 8 h à 18 h, week-ends et jours fériés compris.", acces:"Plus de permanence téléphonique : apporte l'animal directement au centre, 2 rue de la Gantière à Clermont-Ferrand (arrêt de tram Margeride).", note:"Mammifères : centre Panse-bêtes."},
     {nom:"Centre de sauvegarde LPO Bretagne, Ile Grande", ville:"Pleumeur-Bodou (22)", tel:"0296919140", lat:48.8025, lon:-3.5739},
     // Tarn et PACA : fiches relues et validees par les centres le 20/10/2026.
     {nom:"Centre de sauvegarde LPO Occitanie, site du Tarn", ville:"Castres (81)", tel:"0627582885", lat:43.6060, lon:2.2410, site:"https://tarn.lpo.fr/", email:"tarn@lpo.fr", valide:"2026-10-20",
@@ -1846,7 +1846,11 @@
     if(!db) return;
     db.from('centres').select('*').eq('ouvert',true).then(function(r){
       if(r.error || !r.data || !r.data.length) return;   // on garde le repli local
-      _centresDb = r.data.map(function(c){
+      // Etat (migration v28) : un centre suspendu, ferme ou sans soins reste en base pour
+      // memoire et sur sa page departementale, mais l'appli n'y envoie jamais personne.
+      var actifs = r.data.filter(function(c){ return !c.etat || c.etat==='actif'; });
+      if(!actifs.length) return;
+      _centresDb = actifs.map(function(c){
         return {nom:c.nom, ville:(c.ville||'')+(c.dept?' ('+c.dept+')':''), tel:c.tel||'',
                 lat:c.lat, lon:c.lon, site:c.site||'', note:c.note||'', email:c.email||'',
                 accueil:c.accueil||'', horaires:c.horaires||'', acces:c.acces||'', si_absent:c.si_absent||'',
@@ -2324,8 +2328,12 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
   // chaque echange (e-mail, appel, rendez-vous). Pense pour Anne et Vincent, sur iPhone.
   var CRM_TYPES=[['centre','Centres de soins'],['partenaire','Partenaires'],['prospect','Prospects'],['financeur','Financeurs'],['benevole','Bénévoles'],['adherent','Adhérents'],['donateur','Donateurs'],['presse','Presse et médias'],['institution','Institutions'],['curieux','Curieux'],['fournisseur','Fournisseurs']];
   var CRM_STATUTS=[['a_contacter','À contacter'],['contacte','Contacté'],['en_discussion','En discussion'],['partenaire','Partenaire actif'],['sans_reponse','Sans réponse'],['refus','Refus'],['injoignable','Injoignable'],['inactif','Inactif']];
+  // Etat de la structure (independant du statut de la relation) : un centre peut etre
+  // partenaire et en pause, ou sans reponse et ferme. Colonne etat (migration v28).
+  var CRM_ETATS=[['actif','Actif'],['en_pause','En pause'],['ferme','Fermé'],['sans_soins','Pas de centre de soins'],['a_verifier','À vérifier']];
+  function crmAEtat(){ return _crm.list.length ? ('etat' in _crm.list[0]) : true; }
   var CRM_CANAUX=[['email','E-mail'],['telephone','Téléphone'],['rdv','Rendez-vous'],['courrier','Courrier'],['reseaux','Réseaux sociaux'],['autre','Autre']];
-  var _crm={list:[], f:{q:'',type:'',statut:'',relance:false}, max:40, open:null};
+  var _crm={list:[], f:{q:'',type:'',statut:'',etat:'',relance:false}, max:40, open:null};
   function crmLab(arr,k){ for(var i=0;i<arr.length;i++){ if(arr[i][0]===k) return arr[i][1]; } return k||''; }
   function crmOpts(arr,sel,vide){ return (vide?'<option value="">'+vide+'</option>':'')+arr.map(function(a){ return '<option value="'+a[0]+'"'+(a[0]===sel?' selected':'')+'>'+escapeH(a[1])+'</option>'; }).join(''); }
   function crmToday(){ var d=new Date(); return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2); }
@@ -2351,6 +2359,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
       +chips
       +'<div style="display:flex;gap:8px;margin-bottom:8px"><input class="field" id="crmQ" placeholder="Rechercher un nom, une ville, un e-mail" value="'+escapeH(_crm.f.q)+'" oninput="_crm.f.q=this.value;_crm.max=40;crmListe()" style="flex:1">'
       +'<select class="field" id="crmSt" onchange="_crm.f.statut=this.value;_crm.max=40;crmListe()" style="width:42%">'+crmOpts(CRM_STATUTS,_crm.f.statut,'Tous statuts')+'</select></div>'
+      +(crmAEtat()?'<div style="margin-bottom:8px"><select class="field" id="crmEt" onchange="_crm.f.etat=this.value;_crm.max=40;crmListe()">'+crmOpts(CRM_ETATS,_crm.f.etat,'Tous états (actif, en pause, fermé...)')+'</select></div>':'')
       +'<div class="row-btns" style="margin-bottom:8px"><button class="btn btn-primary btn-sm" onclick="crmOuvrir(null)">Nouveau contact</button><button class="btn btn-ghost btn-sm" onclick="crmExport()">Exporter (CSV)</button></div>'
       +'<div id="crmDetail"></div><div id="crmListe"></div>';
     crmListe();
@@ -2361,6 +2370,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
     return _crm.list.filter(function(c){
       if(_crm.f.type && c.typologie!==_crm.f.type) return false;
       if(_crm.f.statut && c.statut!==_crm.f.statut) return false;
+      if(_crm.f.etat && (c.etat||'actif')!==_crm.f.etat) return false;
       if(_crm.f.relance && !(c.echeance && c.echeance<=today && ['refus','inactif'].indexOf(c.statut)<0)) return false;
       if(q){ var t=[c.organisation,c.prenom,c.nom,c.email,c.ville,c.dept,c.fonction,c.notes].join(' ').toLowerCase(); if(t.indexOf(q)<0) return false; }
       return true;
@@ -2376,7 +2386,8 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
       return '<div class="centre" style="cursor:pointer" onclick="crmOuvrir(\''+c.id+'\')"><div style="flex:1;min-width:0">'
         +'<h4>'+escapeH(crmNom(c))+'</h4>'
         +'<div class="meta">'+escapeH(crmLab(CRM_TYPES,c.typologie))+(c.dept?' · '+escapeH(c.dept):'')+(c.ville?' · '+escapeH(c.ville):'')
-        +'<span class="adm-tag '+(ok?'ok':(ko?'ko':''))+'" style="'+(ok||ko?'':'background:#eef1ee;color:#55635b')+'">'+escapeH(crmLab(CRM_STATUTS,c.statut))+'</span></div>'
+        +'<span class="adm-tag '+(ok?'ok':(ko?'ko':''))+'" style="'+(ok||ko?'':'background:#eef1ee;color:#55635b')+'">'+escapeH(crmLab(CRM_STATUTS,c.statut))+'</span>'
+        +(c.etat&&c.etat!=='actif'?'<span class="adm-tag ko">'+escapeH(crmLab(CRM_ETATS,c.etat))+'</span>':'')+'</div>'
         +(c.prochaine_action?'<div class="meta" style="margin-top:4px'+(retard?';color:#b23c22;font-weight:700':'')+'">'+(c.echeance?crmDateFr(c.echeance)+' : ':'')+escapeH(c.prochaine_action)+'</div>':'')
         +'</div></div>';
     }).join('')+'</div>'+(F.length>_crm.max?'<button class="btn btn-ghost" onclick="_crm.max+=40;crmListe()">Voir plus ('+(F.length-_crm.max)+')</button>':'');
@@ -2391,6 +2402,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
       +(c.id?'<div class="row-btns" style="margin-bottom:10px">'+(c.email?'<a class="btn btn-primary btn-sm" href="mailto:'+escapeH(c.email)+'">Écrire</a>':'')+(c.tel?'<a class="btn btn-ghost btn-sm" href="tel:'+escapeH(c.tel)+'">Appeler</a>':'')+(c.site?'<a class="btn btn-ghost btn-sm" href="'+escapeH(c.site)+'" target="_blank" rel="noopener">Site</a>':'')+'</div>':'')
       +'<div style="display:flex;gap:8px"><select class="field" id="crm_typologie" style="margin-bottom:8px">'+crmOpts(CRM_TYPES,c.typologie)+'</select>'
       +'<select class="field" id="crm_statut" style="margin-bottom:8px">'+crmOpts(CRM_STATUTS,c.statut)+'</select></div>'
+      +(crmAEtat()?'<label class="meta" style="display:block">État de la structure</label><select class="field" id="crm_etat" style="margin-bottom:8px">'+crmOpts(CRM_ETATS,c.etat||'actif')+'</select>':'')
       +f('organisation','Structure (association, centre, entreprise, média)')
       +'<div style="display:flex;gap:8px">'+f('prenom','Prénom')+f('nom','Nom')+'</div>'
       +f('fonction','Fonction ou rôle')
@@ -2422,6 +2434,7 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
     var m=document.getElementById('crmMsg'); if(!db) return;
     var o={}; ['typologie','statut','organisation','prenom','nom','fonction','email','tel','site','dept','ville','prochaine_action','echeance','suivi_par','notes'].forEach(function(k){ var v=val('crm_'+k).trim(); o[k]=v||null; });
     o.typologie=o.typologie||'curieux'; o.statut=o.statut||'a_contacter';
+    if(crmAEtat() && document.getElementById('crm_etat')) o.etat=val('crm_etat')||'actif';
     if(!o.organisation && !o.nom && !o.prenom){ if(m) m.textContent='Indique au moins une structure ou un nom.'; return; }
     var p=_crm.open ? db.from('crm_contacts').update(o).eq('id',_crm.open).select() : db.from('crm_contacts').insert(o).select();
     p.then(function(r){
@@ -2441,8 +2454,8 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
     });
   }
   function crmExport(){
-    var cols=['typologie','statut','organisation','prenom','nom','fonction','email','tel','site','dept','ville','prochaine_action','echeance','suivi_par','notes'];
-    var rows=[cols].concat(crmFiltres().map(function(c){ return cols.map(function(k){ var v=k==='typologie'?crmLab(CRM_TYPES,c[k]):(k==='statut'?crmLab(CRM_STATUTS,c[k]):(c[k]||'')); return '"'+String(v).replace(/"/g,'""')+'"'; }); }));
+    var cols=['typologie','statut'].concat(crmAEtat()?['etat']:[]).concat(['organisation','prenom','nom','fonction','email','tel','site','dept','ville','prochaine_action','echeance','suivi_par','notes']);
+    var rows=[cols].concat(crmFiltres().map(function(c){ return cols.map(function(k){ var v=k==='typologie'?crmLab(CRM_TYPES,c[k]):(k==='statut'?crmLab(CRM_STATUTS,c[k]):(k==='etat'?crmLab(CRM_ETATS,c[k]||'actif'):(c[k]||''))); return '"'+String(v).replace(/"/g,'""')+'"'; }); }));
     var csv='﻿'+rows.map(function(r){ return r.join(';'); }).join('\n');
     var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})); a.download='coup-de-patte-contacts.csv'; a.click();
   }
@@ -3629,8 +3642,8 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
     var out=[], seen={}, pending=3;
     function add(a){ if(!a||!a.nom) return; var k=String(a.nom).toLowerCase().replace(/\s+/g,' ').trim()+'|'+(a.dept||''); if(seen[k]) return; seen[k]=1; a.fam=assoFamille(a.type); out.push(a); }
     function done(){ pending--; if(pending>0) return; out.sort(function(a,b){ return String(a.dept||'').localeCompare(String(b.dept||'')) || (['centre','lpo','protection','refuge'].indexOf(a.fam)-['centre','lpo','protection','refuge'].indexOf(b.fam)) || String(a.nom).localeCompare(String(b.nom)); }); _assoList=out; cb(out); }
-    db.from('centres').select('nom,ville,dept,tel,email,site,lat,lon,note').eq('ouvert',true).then(function(r){
-      (r.data||[]).forEach(function(c){ add({nom:c.nom, type:'Centre de soins faune sauvage', ville:c.ville, dept:c.dept, tel:c.tel, email:c.email, site:c.site, lat:c.lat, lng:c.lon, description:c.note||'Accueille et soigne les animaux sauvages en détresse, dont les oiseaux. Appelle avant de te déplacer.'}); });
+    db.from('centres').select('*').eq('ouvert',true).then(function(r){
+      (r.data||[]).filter(function(c){ return !c.etat || c.etat==='actif'; }).forEach(function(c){ add({nom:c.nom, type:'Centre de soins faune sauvage', ville:c.ville, dept:c.dept, tel:c.tel, email:c.email, site:c.site, lat:c.lat, lng:c.lon, description:c.note||'Accueille et soigne les animaux sauvages en détresse, dont les oiseaux. Appelle avant de te déplacer.'}); });
       done();
     }, done);
     db.from('associations').select('*').eq('verifiee',true).then(function(r){ (r.data||[]).forEach(function(a){ add(a); }); done(); }, done);
