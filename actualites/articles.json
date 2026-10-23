@@ -1,6 +1,15 @@
 {
- "maj": "2026-10-22",
+ "maj": "2026-10-23",
  "articles": [
+  {
+   "slug": "marseille-appel-de-la-nuit-atlas-biodiversite-nocturne",
+   "titre": "Marseille lance « L'Appel de la Nuit », un atlas pour protéger les animaux de la nuit",
+   "chapo": "Marseille vient de lancer « L'Appel de la Nuit », un atlas de la biodiversité nocturne prévu sur trois ans. Le but : repérer où l'éclairage public gêne chauves-souris, chouettes, hérissons et papillons de nuit, puis tester des solutions sur trois sites pilotes. Une démarche qui peut inspirer d'autres villes, et des gestes que tu peux appliquer chez toi.",
+   "date": "2026-10-23",
+   "rubrique": "Initiative",
+   "url": "/actualites/marseille-appel-de-la-nuit-atlas-biodiversite-nocturne/",
+   "image": "/actualites/img/marseille-appel-de-la-nuit-atlas-biodiversite-nocturne.png"
+  },
   {
    "slug": "oiseau-au-sol-qui-ne-s-envole-pas-que-faire",
    "titre": "Oiseau au sol qui ne s'envole pas : que faire ?",
