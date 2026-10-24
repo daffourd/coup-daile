@@ -101,6 +101,7 @@
 - [Savoie (73)](https://coupdepatte.eu/centres/73-savoie/)
 - [Paris (75)](https://coupdepatte.eu/centres/75-paris/)
 - [Seine-Maritime (76)](https://coupdepatte.eu/centres/76-seine-maritime/)
+- [Seine-et-Marne (77)](https://coupdepatte.eu/centres/77-seine-et-marne/)
 - [Yvelines (78)](https://coupdepatte.eu/centres/78-yvelines/)
 - [Deux-Sèvres (79)](https://coupdepatte.eu/centres/79-deux-sevres/)
 - [Tarn (81)](https://coupdepatte.eu/centres/81-tarn/)
@@ -111,7 +112,9 @@
 - [Yonne (89)](https://coupdepatte.eu/centres/89-yonne/)
 - [Essonne (91)](https://coupdepatte.eu/centres/91-essonne/)
 - [Hauts-de-Seine (92)](https://coupdepatte.eu/centres/92-hauts-de-seine/)
+- [Seine-Saint-Denis (93)](https://coupdepatte.eu/centres/93-seine-saint-denis/)
 - [Val-de-Marne (94)](https://coupdepatte.eu/centres/94-val-de-marne/)
+- [Val-d'Oise (95)](https://coupdepatte.eu/centres/95-val-d-oise/)
 
 ## Fiches espèces (reconnaître l'oiseau, son jeune, le bon geste)
 
