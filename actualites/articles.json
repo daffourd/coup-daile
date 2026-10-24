@@ -1,6 +1,15 @@
 {
- "maj": "2026-10-23",
+ "maj": "2026-10-24",
  "articles": [
+  {
+   "slug": "martinet-au-sol-que-faire",
+   "titre": "Martinet au sol : pourquoi il ne peut pas repartir seul et comment l'aider",
+   "chapo": "Un martinet posé par terre n'est jamais en train de se reposer : avec ses pattes minuscules et ses ailes immenses, il est incapable de redécoller du sol. Le bon réflexe est simple : le mettre à l'abri dans un carton et appeler sans tarder un centre de soins de la faune sauvage.",
+   "date": "2026-10-24",
+   "rubrique": "Portrait d'espèce",
+   "url": "/actualites/martinet-au-sol-que-faire/",
+   "image": "/actualites/img/martinet-au-sol-que-faire.png"
+  },
   {
    "slug": "renard-blesse-ou-malade-en-ville-que-faire",
    "titre": "Renard blessé ou malade en ville : que faire et qui appeler ?",

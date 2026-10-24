@@ -4,8 +4,16 @@
   "titre": "Martinet au sol : pourquoi il ne peut pas repartir seul et comment l'aider",
   "chapo": "Un martinet posé par terre n'est jamais en train de se reposer : avec ses pattes minuscules et ses ailes immenses, il est incapable de redécoller du sol. Le bon réflexe est simple : le mettre à l'abri dans un carton et appeler sans tarder un centre de soins de la faune sauvage.",
   "meta_description": "Martinet trouvé au sol : pourquoi il ne peut pas s'envoler seul, les erreurs à éviter et les gestes qui le sauvent en attendant un centre de soins.",
-  "mots_cles": ["martinet au sol", "martinet trouvé que faire", "jeune martinet tombé", "martinet ne s'envole pas", "sauver un martinet"],
-  "especes": ["Martinet noir"],
+  "mots_cles": [
+    "martinet au sol",
+    "martinet trouvé que faire",
+    "jeune martinet tombé",
+    "martinet ne s'envole pas",
+    "sauver un martinet"
+  ],
+  "especes": [
+    "Martinet noir"
+  ],
   "zone": "France",
   "sections": [
     {
@@ -51,9 +59,29 @@
     }
   ],
   "sources": [
-    {"titre": "LPO, Ligue pour la Protection des Oiseaux", "editeur": "LPO", "url": "https://www.lpo.fr/", "date": ""},
-    {"titre": "Liste des centres de soins pour animaux sauvages en France", "editeur": "Hegalaldia", "url": "https://www.hegalaldia.org/liste-des-centres-de-soins-pour-animaux-sauvages-en-france/", "date": ""}
+    {
+      "titre": "LPO, Ligue pour la Protection des Oiseaux",
+      "editeur": "LPO",
+      "url": "https://www.lpo.fr/",
+      "date": ""
+    },
+    {
+      "titre": "Liste des centres de soins pour animaux sauvages en France",
+      "editeur": "Hegalaldia",
+      "url": "https://www.hegalaldia.org/liste-des-centres-de-soins-pour-animaux-sauvages-en-france/",
+      "date": ""
+    }
   ],
   "social": "Un martinet par terre ne se repose pas : il est incapable de redécoller seul. Surtout, ne le lance pas en l'air et ne lui donne rien à manger. Un carton, du calme, et un appel à un centre de soins : voici comment lui sauver la vie.",
-  "hashtags": ["martinet", "oiseaux", "faunesauvage", "bonsgestes", "biodiversite", "coupdepatte"]
+  "hashtags": [
+    "martinet",
+    "oiseaux",
+    "faunesauvage",
+    "bonsgestes",
+    "biodiversite",
+    "coupdepatte"
+  ],
+  "date": "2026-10-24",
+  "origine": "reserve",
+  "heure": "07:00"
 }
