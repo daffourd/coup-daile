@@ -1,0 +1,77 @@
+{
+  "slug": "oiseau-bague-trouve-que-faire",
+  "date": "2026-10-25",
+  "heure": "16:00",
+  "rubrique": "guide",
+  "origine": "claude",
+  "titre": "Oiseau bagué trouvé : que faire et à qui signaler la bague ?",
+  "chapo": "Une petite bague métallique gravée à la patte d'un oiseau sauvage, c'est une carte d'identité pour la recherche. Note ou photographie le code, la date, le lieu et les circonstances, puis transmets-les au CRBPO du Muséum national d'histoire naturelle. S'il est blessé, le centre de soins s'en charge pour toi.",
+  "meta_description": "Oiseau bagué trouvé vivant, blessé ou mort : quelles informations noter, à qui signaler la bague, et que faire d'une bague fermée ou colorée.",
+  "mots_cles": ["oiseau bagué trouvé que faire", "j'ai trouvé un oiseau bagué", "signaler une bague d'oiseau", "bague Muséum Paris oiseau", "oiseau avec bague à la patte", "CRBPO signalement"],
+  "especes": ["Oiseaux sauvages"],
+  "zone": "France",
+  "sections": [
+    {
+      "titre": "À quoi sert la bague d'un oiseau sauvage",
+      "paragraphes": [
+        "En France, le baguage des oiseaux sauvages est coordonné par le Centre de recherches sur la biologie des populations d'oiseaux, le CRBPO, rattaché au Muséum national d'histoire naturelle. Chaque bague porte un code unique. Quand quelqu'un retrouve l'oiseau, ce code permet de savoir où et quand il a été bagué.",
+        "Selon la LPO, ces retours renseignent sur l'âge des oiseaux, leur mortalité, la structure des populations et leurs routes de migration. Des connaissances qui servent ensuite à mieux les protéger, en France comme à l'étranger. En automne, saison de migration, un oiseau bagué trouvé dans ton jardin peut très bien venir de loin.",
+        "La bague qui intéresse la recherche est une bague métallique légère, en aluminium ou en acier, gravée de lettres et de chiffres. La LPO Sarthe précise qu'elle porte en général la mention Muséum suivie du nom d'une capitale, puis un code. Une bague de couleur peut s'y ajouter."
+      ]
+    },
+    {
+      "titre": "Oiseau vivant, blessé ou mort : les bons réflexes",
+      "paragraphes": [
+        "Si l'oiseau est vivant et en forme, par exemple entré par erreur dans une maison ou simplement étourdi, ne retire jamais sa bague. La LPO Vendée rappelle qu'il doit repartir avec. Photographie le code complet si tu peux le faire sans le stresser, note les informations utiles, puis laisse-le s'envoler.",
+        "Si l'oiseau est blessé ou affaibli, occupe-toi d'abord de lui : mets-le au calme dans un carton aéré, sans le faire boire ni manger, et appelle un centre de soins de la faune sauvage. Selon la LPO PACA, c'est le centre qui transmettra ensuite les données de la bague au CRBPO. L'application Coup de Patte t'aide à trouver le centre le plus proche.",
+        "Si l'oiseau est mort, prudence en cette saison de grippe aviaire. L'OFB demande de ne pas toucher ni ramasser un oiseau sauvage trouvé mort, et de signaler la découverte au service départemental de l'OFB ou à la fédération des chasseurs, idéalement avec une photo et la position GPS. Photographie aussi la bague de près, sans la toucher à mains nues : le code suffit au signalement."
+      ]
+    },
+    {
+      "titre": "Quelles informations noter et où les envoyer",
+      "paragraphes": [
+        "La LPO et le CRBPO demandent les mêmes éléments : toutes les inscriptions de la bague, relues à la loupe si besoin car certaines bagues ne mesurent que 2 mm de diamètre, l'espèce si tu la connais, la date, la commune et si possible le lieu-dit, les circonstances de la découverte et tes coordonnées. Pour un oiseau mort, précise aussi l'état du cadavre.",
+        "Le site du CRBPO propose un formulaire dédié aux bagues métal, qui déclenche un courriel de confirmation. Tu peux aussi écrire au CRBPO, Muséum national d'histoire naturelle, 43 rue Buffon, 75005 Paris. Si les autorités t'indiquent qu'un cadavre isolé peut être manipulé, la LPO précise que la bague peut alors être envoyée avec les informations.",
+        "Un peu de patience ensuite : le CRBPO recherche les données du bagueur, puis t'envoie une fiche de reprise. Elle te dit où et quand l'oiseau a été bagué. Le délai varie selon que le bagueur a déjà transmis ses données ou non."
+      ]
+    },
+    {
+      "titre": "Bague fermée, bague de couleur : les cas particuliers",
+      "paragraphes": [
+        "Une bague fermée, d'une seule pièce, signale le plus souvent un oiseau d'élevage, posée par l'éleveur quand l'oisillon a quelques jours. Le CRBPO ne traite pas ces bagues. Pour un pigeon voyageur, contacte la Fédération colombophile française. Pour un oiseau exotique échappé, la LPO Sarthe cite les associations ornithologiques et le site d'avis de recherche oari.eu.",
+        "Certains oiseaux portent aussi des marques visibles de loin : bagues colorées, marques sur les ailes, colliers chez les cygnes. Elles se lisent aux jumelles, sans approcher l'oiseau. Le CRBPO renvoie vers le site European colour-ring Birding, qui recense les programmes et indique à qui transmettre ton observation."
+      ]
+    }
+  ],
+  "gestes": [
+    "Note ou photographie toutes les inscriptions de la bague, sans jamais la retirer à un oiseau vivant.",
+    "Relève la date, la commune, l'espèce si tu la connais et les circonstances de la découverte.",
+    "Confie un oiseau bagué blessé à un centre de soins de la faune sauvage, qui transmettra la bague.",
+    "Ne touche pas un oiseau trouvé mort et signale-le à l'OFB ou à la fédération des chasseurs de ton département.",
+    "Transmets ensuite les informations au CRBPO via son formulaire en ligne ou par courrier."
+  ],
+  "faq": [
+    {
+      "q": "Faut-il enlever la bague d'un oiseau vivant ?",
+      "r": "Non. Un oiseau vivant doit repartir avec sa bague. Note ou photographie simplement le code avant de le relâcher, ou laisse le centre de soins s'en occuper s'il est blessé."
+    },
+    {
+      "q": "Que veut dire la mention Muséum Paris sur une bague ?",
+      "r": "Elle indique une bague posée dans le cadre d'un programme de recherche coordonné par le CRBPO du Muséum national d'histoire naturelle. C'est à lui qu'il faut signaler l'oiseau."
+    },
+    {
+      "q": "Est-ce que je saurai d'où vient l'oiseau ?",
+      "r": "Oui. Après ton signalement, le CRBPO t'envoie une fiche de reprise qui indique le lieu et la date du baguage. Le délai peut être long selon l'origine du programme."
+    }
+  ],
+  "sources": [
+    {"titre": "Vous trouvez un oiseau bagué ?", "editeur": "CRBPO, Muséum national d'histoire naturelle", "url": "https://crbpo.mnhn.fr/vous-trouvez-un-oiseau-bague/", "date": ""},
+    {"titre": "J'ai trouvé un oiseau bagué : que faire ?", "editeur": "LPO", "url": "https://www.lpo.fr/decouvrir-la-nature/conseils-biodiversite/conseils-biodiversite/accueillir-la-faune-sauvage/j-ai-trouve-un-oiseau-bague-que-faire", "date": ""},
+    {"titre": "Que faire si je trouve un oiseau bagué ?", "editeur": "LPO PACA", "url": "https://paca.lpo.fr/images/mediatheque/fichiers/section_soins_animaux/documentation/que_faire_si_je_trouve_un_oiseau_baguer.pdf", "date": ""},
+    {"titre": "Vous avez trouvé un oiseau bagué, quoi faire ?", "editeur": "LPO Vendée", "url": "https://vendee.lpo.fr/vous-avez-trouve-un-oiseau-bague-quoi-faire/", "date": ""},
+    {"titre": "Oiseau bagué", "editeur": "LPO Sarthe", "url": "https://sarthe.lpo.fr/conseils-pratiques/oiseau-bague/", "date": ""},
+    {"titre": "Ce qu'il faut savoir sur l'influenza aviaire", "editeur": "Office français de la biodiversité", "url": "https://ofb.gouv.fr/ce-quil-faut-savoir-sur-linfluenza-aviaire", "date": ""}
+  ],
+  "social": "Une petite bague gravée à la patte d'un oiseau ? C'est sa carte d'identité pour la recherche. Note le code, la date et le lieu, ne la retire jamais à un oiseau vivant, et transmets tout au Muséum : en retour, tu sauras d'où il vient. Voici comment faire selon la situation.",
+  "hashtags": ["oiseaux", "baguage", "migration", "faunesauvage", "bonsgestes", "coupdepatte"]
+}
