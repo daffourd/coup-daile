@@ -32,6 +32,16 @@ SRC = {
               "https://crbpo.mnhn.fr/vous-trouvez-un-oiseau-bague/article/vous-avez-trouve-un-oiseau-bague-et-vous-voudriez-en-connaitre-un-peu-plus-sur"),
     "ofb_baguage": ("Le baguage, un outil pour suivre les populations d'oiseaux", "OFB",
                     "https://ofb.gouv.fr/doc/le-baguage-un-outil-pour-suivre-les-populations-oiseaux"),
+    "envt_herisson": ("Le Hérisson d'Europe", "Clinique Faune Sauvage, École nationale vétérinaire de Toulouse",
+                      "https://envt.fr/wp-content/uploads/2023/02/herisson.pdf"),
+    "lpo_mediation_herisson": ("Médiation faune sauvage : le Hérisson d'Europe", "LPO",
+                               "https://aveyron.lpo.fr/wp-content/uploads/2019/08/FM_Herisson-dEurope-2019_Web.pdf"),
+    "lpo_paca_mammifere": ("Fiche conseil faune sauvage en détresse : petit mammifère adulte", "Centre de soins LPO PACA",
+                           "https://paca.lpo.fr/images/mediatheque/fichiers/section_soins_animaux/conseils/fiche_conseils_petit_mammifere_adulte.pdf"),
+    "lpo_paca_jeunes": ("Fiche conseil faune sauvage en détresse : jeunes hérisson, loir, écureuil, lapin", "Centre de soins LPO PACA",
+                        "https://www-old.lpo.fr/images/detresse/fiche_conseils_herisson_loir_ecureuil_lapin_jeunes_avec_contacts_paca.pdf"),
+    "arb_na_herisson": ("Hérisson d'Europe : que faire si je le trouve ?", "Biodiversité Nouvelle-Aquitaine, avec le centre de soins LPO Aquitaine",
+                        "https://www.biodiversite-nouvelle-aquitaine.fr/wp-content/uploads/2025/12/fiche-herisson.pdf"),
 }
 
 GUIDES = [
@@ -258,6 +268,72 @@ GUIDES = [
         "sources": ["crbpo", "ofb_baguage"],
         "liens": [("/actualites/oiseau-mort-trouve-que-faire/", "Oiseau mort trouvé : que faire ?"), ("/guides/oiseau-blesse/", "Oiseau blessé : que faire ?")],
     },
+    {
+        "slug": "herisson-trouve",
+        "titre": "Hérisson trouvé en plein jour : que faire et qui appeler ?",
+        "court": "Hérisson trouvé",
+        "h1": "J'ai trouvé un hérisson : que faire ?",
+        "desc": "Hérisson en plein jour, bébé hérisson seul, hérisson blessé ou trouvé en hiver : reconnaître s'il est en détresse, le mettre à l'abri sans lait ni pain, et appeler un centre de soins.",
+        "chapo": "Le hérisson vit la nuit. En croiser un de jour, ou trouver un petit seul, demande une minute d'observation avant d'agir : certains vont très bien, d'autres ont besoin d'un centre de soins rapidement.",
+        "sections": [
+            ("Un hérisson en plein jour : est-ce grave ?", [
+                "Pas toujours. Un hérisson peut sortir de jour pour se nourrir, changer de gîte, ou parce que c'est un jeune qui s'émancipe. Dans ce cas il est actif et vigoureux : il marche normalement et se met en boule quand tu t'approches. Laisse-le tranquille.",
+                "S'il reste immobile, observe-le de loin, sans le déranger, pendant une heure : s'il se déplace normalement, il n'a pas besoin de toi.",
+            ]),
+            ("Les signes qui doivent t'alerter", [
+                "Il a besoin d'aide s'il est blessé, s'il n'arrive plus à se mettre en boule ou à se déplacer, s'il reste couché, s'il se laisse approcher sans réagir, s'il paraît maigre ou respire avec difficulté, ou s'il est tombé dans une piscine.",
+                "Des mouches qui tournent autour de lui, ou leurs œufs sur son corps, imposent d'agir vite : les asticots s'attaquent à l'animal encore vivant.",
+            ]),
+            ("Bébé hérisson trouvé : le laisser ou intervenir ?", [
+                "Des petits dans un nid avec leur mère : ne touche à rien. Si tu as dérangé le nid en jardinant, replace les jeunes dedans, reconstitue le nid si besoin, éloigne-toi et vérifie que la mère revient.",
+                "Des jeunes aux yeux ouverts, déjà couverts de piquants, qui se déplacent seuls : attends de voir si la mère revient. Un jeune seul en plein jour, ou un tout-petit aux yeux fermés, sans ou presque sans piquants, n'est pas dans une situation normale : il faut le prendre en charge et appeler un centre de soins.",
+            ]),
+            ("En automne et en hiver", [
+                "Le hérisson hiberne d'octobre à avril environ. Un hérisson endormi en boule sous un tas de feuilles, dans un garage, un pot de fleurs ou sous une terrasse est en hibernation : c'est normal, laisse-le en paix et ne déplace pas son abri.",
+                "Un hérisson actif dehors en plein gel, ou un petit qui erre à l'approche de l'hiver, est en revanche en difficulté : mets-le en sécurité et appelle rapidement un centre de soins. Le poids qui inquiète varie selon les régions et la rigueur de l'hiver : le centre de soins LPO PACA prend en charge les hérissons de moins de 450 grammes, tandis que la Clinique Faune Sauvage de Toulouse rappelle que, dans le sud de la France, un hérisson en bonne santé même léger peut passer l'hiver. Si tu as une balance de cuisine, pèse-le et donne le poids au centre de ta région.",
+            ]),
+            ("Les bons gestes en attendant le centre de soins", [
+                "Appelle le centre de soins de la faune sauvage le plus proche, si possible avant toute manipulation. L'application Coup de Patte t'indique le plus proche et son numéro. Le plus souvent, c'est à toi d'y conduire l'animal.",
+                "Enfile des gants épais et prends-le avec un linge. Dépose-le dans un carton percé de trous, environ deux fois plus grand que lui, garni de papier journal et d'un tissu polaire où il pourra se cacher. Ajoute une bouillotte ou une bouteille d'eau chaude enveloppée dans un linge, et garde le carton dans une pièce calme, loin des enfants et des animaux.",
+                "Ne lui donne rien à manger ni à boire. Surtout pas de lait ni de pain : ils provoquent des diarrhées mortelles chez le hérisson.",
+            ]),
+            ("Ne le garde pas chez toi", [
+                "Le hérisson d'Europe est une espèce protégée en France depuis 1981. Un particulier n'a pas le droit de le garder en captivité. Ton rôle est de le mettre à l'abri et de le confier à un centre de soins, qui a les compétences et les autorisations.",
+            ]),
+            ("Aider les hérissons de ton jardin", [
+                "Ménage des passages dans tes clôtures et tes murets, garde des tas de branches et de feuilles comme abris, renonce aux insecticides, raticides et autres pesticides, et installe une planche rugueuse et inclinée dans les bassins et piscines pour qu'il puisse en sortir.",
+                "Vérifie les tas de feuilles avant de les brûler ou de tondre, et évite les tondeuses robots la nuit. Inutile de le nourrir : il trouve sa nourriture seul. En période de canicule ou de sécheresse, une coupelle d'eau peut l'aider.",
+            ]),
+        ],
+        "gestes": [
+            "Observe de loin : actif, il se met en boule et marche normalement, laisse-le.",
+            "Blessé, couché, qui ne se met plus en boule, envahi de mouches : il a besoin d'aide.",
+            "Bébés au nid avec leur mère : ne touche à rien.",
+            "Appelle un centre de soins de la faune sauvage, si possible avant de le manipuler.",
+            "Gants épais, carton troué avec journal, polaire et bouillotte, pièce calme.",
+            "Ni à manger ni à boire, jamais de lait ni de pain.",
+        ],
+        "faq": [
+            ("J'ai trouvé un hérisson, que faire ?",
+             "Observe-le d'abord de loin. S'il est actif, marche normalement et se met en boule à ton approche, laisse-le. S'il est blessé, couché, ne se met plus en boule ou se laisse approcher sans réagir, enfile des gants, mets-le dans un carton aéré avec un linge et une bouillotte, au calme, et appelle un centre de soins de la faune sauvage."),
+            ("Hérisson trouvé : qui appeler ?",
+             "Le centre de soins de la faune sauvage le plus proche. L'application gratuite Coup de Patte t'indique lequel et son numéro. Appelle avant de te déplacer : le centre te dira quoi faire et s'il peut l'accueillir."),
+            ("Bébé hérisson trouvé : que faire ?",
+             "S'il est dans son nid avec sa mère, ne touche à rien. S'il a les yeux ouverts et ses piquants et se déplace seul, attends de voir si la mère revient. S'il est seul en plein jour, ou tout petit, aux yeux fermés et presque sans piquants, mets-le au chaud dans un carton avec une bouillotte enveloppée et appelle tout de suite un centre de soins."),
+            ("Est-ce normal de voir un hérisson en plein jour ?",
+             "Parfois : il peut chercher à manger, changer de gîte ou être un jeune qui s'émancipe. Il doit alors être actif et vigoureux. S'il titube, reste immobile, couché ou ne se met pas en boule, il a besoin d'aide."),
+            ("Hérisson trouvé en hiver : que faire ?",
+             "S'il dort en boule dans un abri (tas de feuilles, garage, pot de fleurs), il hiberne : laisse-le et ne déplace pas son abri. S'il est actif dehors en plein gel, ou s'il est petit et erre, mets-le en sécurité et appelle rapidement un centre de soins en lui donnant son poids si tu peux le peser."),
+            ("Que donner à manger ou à boire à un hérisson ?",
+             "Rien tant qu'un centre de soins ne te l'a pas demandé : le nourrir ou le faire boire peut aggraver son état. Jamais de lait ni de pain, qui provoquent des diarrhées mortelles."),
+            ("Hérisson blessé : que faire ?",
+             "Enfile des gants épais, prends-le avec un linge et dépose-le dans un carton aéré garni de journal et d'un tissu, avec une bouillotte enveloppée, dans une pièce calme. Ne tente pas de le soigner et appelle sans attendre un centre de soins de la faune sauvage."),
+            ("Puis-je garder un hérisson chez moi ?",
+             "Non. Le hérisson d'Europe est protégé en France depuis 1981 et un particulier ne peut pas le détenir en captivité. Confie-le à un centre de soins de la faune sauvage."),
+        ],
+        "sources": ["envt_herisson", "lpo_mediation_herisson", "lpo_paca_mammifere", "lpo_paca_jeunes", "arb_na_herisson"],
+        "liens": [("/actualites/herisson-trouve-en-plein-jour-en-automne-que-faire/", "Hérisson en plein jour en automne"), ("/actualites/feuilles-mortes-feux-tonte-herissons-automne/", "Feuilles mortes, feux et tonte : protéger les hérissons"), ("/actualites/heure-d-hiver-route-herissons-renards-chouettes-bon-geste/", "Heure d'hiver : épargner les hérissons sur la route"), ("/centres/", "Centres de soins par département")],
+    },
 ]
 
 
@@ -331,7 +407,7 @@ def render_guides_index(ctx):
     esc, SITE, head, FOOT = ctx["esc"], ctx["SITE"], ctx["head"], ctx["FOOT"]
     url = SITE + "/guides/"
     titre = "Guides d'urgence : secourir un oiseau ou un animal sauvage"
-    desc = "Oisillon tombé du nid, oiseau blessé, martinet au sol, oiseau bagué : les guides gratuits de l'association Coup de Patte pour faire le bon geste en moins d'une minute."
+    desc = "Oisillon tombé du nid, oiseau blessé, martinet au sol, oiseau bagué, hérisson trouvé : les guides gratuits de l'association Coup de Patte pour faire le bon geste en moins d'une minute."
     extra = _ld(ctx, "CollectionPage", titre, desc, url, None, [("Guides", url)])
     out = [head(titre + " | Coup de Patte", desc, url, SITE + "/og-accueil.png", extra)]
     out.append('<main><nav class="fil"><a href="/">Coup de Patte</a> › Guides</nav>')
@@ -343,8 +419,7 @@ def render_guides_index(ctx):
     out.append('</ul>')
     out.append('<h2>Autres situations</h2><ul>'
                '<li><a href="/actualites/pigeon-blesse-en-ville-que-faire/">Pigeon blessé en ville</a></li>'
-               '<li><a href="/actualites/herisson-trouve-en-plein-jour-en-automne-que-faire/">Hérisson trouvé en plein jour</a></li>'
-               '<li><a href="/actualites/mon-chat-a-attrape-un-oiseau-que-faire/">Mon chat a attrapé un oiseau</a></li>'
+                              '<li><a href="/actualites/mon-chat-a-attrape-un-oiseau-que-faire/">Mon chat a attrapé un oiseau</a></li>'
                '<li><a href="/actualites/oiseau-cogne-contre-une-vitre-que-faire/">Oiseau qui a heurté une vitre</a></li>'
                '<li><a href="/actualites/chouette-blessee-au-sol-que-faire/">Chouette blessée au sol</a></li>'
                '<li><a href="/actualites/chauve-souris-dans-la-maison-que-faire/">Chauve-souris dans la maison</a></li>'
@@ -457,7 +532,7 @@ def build(ctx):
         write(os.path.join(root, "guides", g["slug"], "index.html"), render_guide(g, ctx))
         pages.append(("%s/guides/%s/" % (SITE, g["slug"]), g["titre"], g["desc"]))
     write(os.path.join(root, "guides", "index.html"), render_guides_index(ctx))
-    pages.insert(0, (SITE + "/guides/", "Guides d'urgence", "Oiseau blessé, oiseau par terre qui ne s'envole pas, oisillon tombé du nid, martinet au sol, oiseau bagué : les gestes qui sauvent."))
+    pages.insert(0, (SITE + "/guides/", "Guides d'urgence", "Oiseau blessé, oiseau par terre qui ne s'envole pas, oisillon tombé du nid, martinet au sol, oiseau bagué, hérisson trouvé : les gestes qui sauvent."))
     write(os.path.join(root, "association", "index.html"), render_association(ctx))
     pages.append((SITE + "/association/", "L'association Coup de Patte", "Association loi 1901 de Saint-Aunès (Hérault) dédiée au secours de la faune sauvage, éditrice de l'application gratuite coupdepatte.eu. À ne pas confondre avec les refuges homonymes."))
     write(os.path.join(root, "benevole", "index.html"), render_benevole(ctx))
