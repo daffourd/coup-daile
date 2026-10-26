@@ -1,79 +1,229 @@
 [
-  {
-    "date": "2026-10-19",
-    "semaine": 1,
-    "http": {
-      "/": 200,
-      "/sitemap.xml": 200,
-      "/robots.txt": 200,
-      "/llms.txt": 200,
-      "/actualites/": 200,
-      "/especes/": 200,
-      "/centres/": 200,
-      "/actualites/calvados-valorbiquet-centre-de-soins-la-dame-blanche-menace/": 200,
-      "/especes/accenteur-mouchet": 200,
-      "/centres/02-aisne": 200,
-      "/google819d030d9b5ec75f.html": 200
-    },
-    "redirections": {
-      "https://www.coupdepatte.eu/": "308 -> https://coupdepatte.eu/",
-      "https://coup-daile.vercel.app/": "308 -> https://coupdepatte.eu/"
-    },
-    "accueil": {
-      "title": true,
-      "canonique": true,
-      "json_ld": 1,
-      "meta_robots": "index,follow"
-    },
-    "sitemap_urls": 174,
-    "sitemap_detail": {
-      "accueil": 1,
-      "actualites": 20,
-      "especes": 101,
-      "centres": 52
-    },
-    "articles_total": 19,
-    "articles_7_jours": 13,
-    "workflow_actualites": {
-      "dernier_run": "2026-10-19T04:01Z",
-      "conclusion": "success",
-      "indexnow": "IndexNow 200 174 URL",
-      "reseaux_sociaux": "secrets Meta absents, partage ignore"
-    },
-    "site_resultats": 0,
-    "site_types_pages": [],
-    "positions": {
-      "Coup de Patte oiseau": null,
-      "Coup de Patte association oiseaux blessés": null,
-      "oiseau blessé que faire": null,
-      "oisillon tombé du nid que faire": null,
-      "martinet au sol que faire": null,
-      "oiseau bagué que faire": null,
-      "centre de soins faune sauvage Hérault": null,
-      "centre de soins oiseaux Paris": null,
-      "hérisson trouvé en plein jour que faire": null,
-      "pigeon blessé que faire": null
-    },
-    "geo_citations": {
-      "J'ai trouvé un oisillon au sol, que dois-je faire ?": false,
-      "Quelle application pour secourir un oiseau blessé en France ?": false,
-      "Qui appeler pour un oiseau blessé dans l'Hérault ?": false,
-      "Que faire d'un martinet trouvé au sol ?": false,
-      "Que faire si mon chat a attrapé un oiseau ?": false
-    },
-    "geo_nb_citations": 0,
-    "search_console": "non consultee (pas de navigateur dans la session)",
-    "anomalies": [
-      "Aucune page de coupdepatte.eu dans l'index de l'outil de recherche (site: = 0) six jours apres la mise en ligne SEO",
-      "Partage Facebook/Instagram inactif : secrets META_* vides dans le workflow"
-    ],
-    "methode": "WebSearch (index non Google, oriente US) : mesure indicative, pas une position Google France",
-    "controles": [
-      {
-        "heure_utc": "2026-10-19T10:05Z",
-        "resultat": "second passage le meme jour, mesures identiques : codes HTTP 200 partout, 308 OK, sitemap 174 URL, site: = 0, requetes de marque sans coupdepatte.eu",
-        "anomalie_transitoire": "/centres/ et un article ont renvoye 000 (erreur reseau) au premier essai, 200 aux 3 essais suivants"
-      }
-    ]
-  }
+ {
+  "date": "2026-10-19",
+  "semaine": 1,
+  "http": {
+   "/": 200,
+   "/sitemap.xml": 200,
+   "/robots.txt": 200,
+   "/llms.txt": 200,
+   "/actualites/": 200,
+   "/especes/": 200,
+   "/centres/": 200,
+   "/actualites/calvados-valorbiquet-centre-de-soins-la-dame-blanche-menace/": 200,
+   "/especes/accenteur-mouchet": 200,
+   "/centres/02-aisne": 200,
+   "/google819d030d9b5ec75f.html": 200
+  },
+  "redirections": {
+   "https://www.coupdepatte.eu/": "308 -> https://coupdepatte.eu/",
+   "https://coup-daile.vercel.app/": "308 -> https://coupdepatte.eu/"
+  },
+  "accueil": {
+   "title": true,
+   "canonique": true,
+   "json_ld": 1,
+   "meta_robots": "index,follow"
+  },
+  "sitemap_urls": 174,
+  "sitemap_detail": {
+   "accueil": 1,
+   "actualites": 20,
+   "especes": 101,
+   "centres": 52
+  },
+  "articles_total": 19,
+  "articles_7_jours": 13,
+  "workflow_actualites": {
+   "dernier_run": "2026-10-19T04:01Z",
+   "conclusion": "success",
+   "indexnow": "IndexNow 200 174 URL",
+   "reseaux_sociaux": "secrets Meta absents, partage ignore"
+  },
+  "site_resultats": 0,
+  "site_types_pages": [],
+  "positions": {
+   "Coup de Patte oiseau": null,
+   "Coup de Patte association oiseaux blessés": null,
+   "oiseau blessé que faire": null,
+   "oisillon tombé du nid que faire": null,
+   "martinet au sol que faire": null,
+   "oiseau bagué que faire": null,
+   "centre de soins faune sauvage Hérault": null,
+   "centre de soins oiseaux Paris": null,
+   "hérisson trouvé en plein jour que faire": null,
+   "pigeon blessé que faire": null
+  },
+  "geo_citations": {
+   "J'ai trouvé un oisillon au sol, que dois-je faire ?": false,
+   "Quelle application pour secourir un oiseau blessé en France ?": false,
+   "Qui appeler pour un oiseau blessé dans l'Hérault ?": false,
+   "Que faire d'un martinet trouvé au sol ?": false,
+   "Que faire si mon chat a attrapé un oiseau ?": false
+  },
+  "geo_nb_citations": 0,
+  "search_console": "non consultee (pas de navigateur dans la session)",
+  "anomalies": [
+   "Aucune page de coupdepatte.eu dans l'index de l'outil de recherche (site: = 0) six jours apres la mise en ligne SEO",
+   "Partage Facebook/Instagram inactif : secrets META_* vides dans le workflow"
+  ],
+  "methode": "WebSearch (index non Google, oriente US) : mesure indicative, pas une position Google France",
+  "controles": [
+   {
+    "heure_utc": "2026-10-19T10:05Z",
+    "resultat": "second passage le meme jour, mesures identiques : codes HTTP 200 partout, 308 OK, sitemap 174 URL, site: = 0, requetes de marque sans coupdepatte.eu",
+    "anomalie_transitoire": "/centres/ et un article ont renvoye 000 (erreur reseau) au premier essai, 200 aux 3 essais suivants"
+   }
+  ]
+ },
+ {
+  "date": "2026-10-26",
+  "semaine": 2,
+  "http": {
+   "/": 200,
+   "/sitemap.xml": 200,
+   "/robots.txt": 200,
+   "/llms.txt": 200,
+   "/actualites/": 200,
+   "/especes/": 200,
+   "/centres/": 200,
+   "/guides/": 200,
+   "/guides/oiseau-blesse/": 200,
+   "/guides/oiseau-au-sol-ne-vole-pas/": 200,
+   "/association/": 200,
+   "/benevole/": 200,
+   "/soutenir/": 200,
+   "/actualites/pessac-ecuroducs-ecureuils-roux-foret-du-bourgailh/": 200,
+   "/especes/accenteur-mouchet": 200,
+   "/centres/34-herault": 200,
+   "/google819d030d9b5ec75f.html": 200
+  },
+  "redirections": {
+   "https://www.coupdepatte.eu/": "308 -> https://coupdepatte.eu/",
+   "https://coup-daile.vercel.app/": "308 -> https://coupdepatte.eu/"
+  },
+  "accueil": {
+   "title": "Oiseau blessé ou oisillon tombé du nid : que faire ? | Coup de Patte",
+   "canonique": true,
+   "json_ld": 1
+  },
+  "sitemap_urls": 202,
+  "sitemap_urls_apres_publication": 203,
+  "sitemap_detail": {
+   "accueil": 1,
+   "actualites": 34,
+   "especes": 101,
+   "centres": 57,
+   "guides": 6,
+   "association": 1,
+   "benevole": 1,
+   "soutenir": 1
+  },
+  "articles_total": 33,
+  "articles_7_jours": 13,
+  "workflow_actualites": {
+   "dernier_run": "2026-10-26T05:03Z",
+   "conclusion": "success",
+   "indexnow": "IndexNow 200 202 URL",
+   "reseaux_sociaux": "secrets Meta absents, partage ignore"
+  },
+  "site_resultats": 0,
+  "site_types_pages": [],
+  "positions": {
+   "j'ai trouvé un oiseau blessé": null,
+   "oiseau blessé que faire": null,
+   "oiseau blessé qui appeler": null,
+   "comment s'occuper d'un oiseau blessé": null,
+   "j'ai trouvé un oiseau par terre que faire": null,
+   "oiseau dans mon jardin ne s'envole plus": null,
+   "bébé oiseau tombé du nid que faire": null,
+   "oisillon tombé du nid que faire": null,
+   "martinet au sol que faire": null,
+   "oiseau bagué que faire": null,
+   "oiseau blessé Hérault qui appeler": null,
+   "oiseau blessé Paris": null,
+   "bénévole animaux sauvages": null,
+   "association Coup de Patte oiseaux": null
+  },
+  "positions_concurrents_frequents": [
+   "consoglobe.com",
+   "sarthe.lpo.fr (fiches PDF)",
+   "zooplus.fr",
+   "zoomalia.com",
+   "fr.ch (Musée d'histoire naturelle Fribourg)",
+   "forums.futura-sciences.com"
+  ],
+  "marque": "association Coup de Patte oiseaux : homonymes (HelloAsso, refuge 61130, Coup de Patte 25 NAC, jeveuxaider) en tete, coupdepatte.eu absent",
+  "geo_citations": {
+   "J'ai trouvé un oiseau blessé, que faire ?": false,
+   "Un oiseau est dans mon jardin et ne s'envole plus, que faire ?": false,
+   "Qui appeler pour un oiseau blessé dans l'Hérault ?": false,
+   "Comment s'occuper d'un oisillon tombé du nid ?": false,
+   "Mon chat a attrapé un oiseau, que faire ?": false
+  },
+  "geo_nb_citations": 0,
+  "formulations_decouvertes": [
+   "herisson trouvé que faire",
+   "herisson trouvé qui appeler",
+   "herisson trouvé en plein jour",
+   "hérisson trouvé en hiver",
+   "bébé hérisson trouvé que faire",
+   "bebe herisson comment s en occuper",
+   "que faire herisson blessé",
+   "que faire pour sauver un herisson",
+   "oiseau assommé que faire",
+   "oiseau assommé combien de temps",
+   "oiseau assommé baie vitrée que faire",
+   "oiseau aile cassée que faire",
+   "oiseau aile cassée qui appeler",
+   "pigeon aile cassée que faire",
+   "oiseau blessé par un chat que faire",
+   "oiseau blessé comment le nourrir",
+   "oiseau blessé lpo",
+   "oiseau blessé association",
+   "oiseau blessé vétérinaire",
+   "pigeon blessé montpellier",
+   "pigeon blessé sur mon balcon",
+   "pigeon blessé dans mon jardin que faire",
+   "bébé pigeon tombé du nid",
+   "bébé pigeon abandonné que faire",
+   "bebe pigeon comment le nourrir",
+   "chauve souris au sol que faire",
+   "chauve souris au sol en plein jour",
+   "une chauve souris au sol peut elle s envoler",
+   "bebe chauve souris au sol",
+   "chouette au sol que faire",
+   "jeune chouette au sol",
+   "bébé chouette au sol",
+   "comment aider un oiseau qui ne vole plus",
+   "comment s'occuper d'un oiseau assommé",
+   "j ai trouvé un petit oiseau que faire",
+   "oisillon abandonné que faire",
+   "oisillon au sol que faire",
+   "animal sauvage dans mon jardin que faire",
+   "bénévolat animaux autour de moi",
+   "bénévolat animaux montpellier (absent) / paris, lyon, toulouse, marseille"
+  ],
+  "search_console": "non consultee : session cloud planifiee sans navigateur Chrome (profil c4438771 non joignable)",
+  "contenu_publie": {
+   "type": "nouveau guide",
+   "url": "https://coupdepatte.eu/guides/herisson-trouve/",
+   "titre": "Hérisson trouvé en plein jour : que faire et qui appeler ?",
+   "faq": 8,
+   "sources": [
+    "envt.fr Clinique Faune Sauvage ENVT",
+    "LPO Mediation faune sauvage Herisson (aveyron.lpo.fr)",
+    "Centre de soins LPO PACA fiche petit mammifere adulte",
+    "Centre de soins LPO PACA fiche jeunes herisson",
+    "Biodiversite Nouvelle-Aquitaine fiche herisson"
+   ],
+   "verif_200": "200 en moins de 30 s apres push"
+  },
+  "anomalies": [
+   "site: = 0 et aucune requete suivie ne fait apparaitre coupdepatte.eu, 13 jours apres la mise en ligne SEO (mesure WebSearch, index non Google)",
+   "Source LPO Nord (fiche herisson PDF) citee dans l'article du 12/10 redirige desormais vers la page LPO Hauts-de-France : lien mort a remplacer",
+   "Partage Facebook/Instagram toujours inactif : secrets META_* vides"
+  ],
+  "methode": "WebSearch (index non Google, oriente US) : mesure indicative, pas une position Google France"
+ }
 ]
