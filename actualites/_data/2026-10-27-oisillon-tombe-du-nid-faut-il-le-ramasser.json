@@ -4,8 +4,19 @@
   "titre": "Oisillon tombé du nid : faut-il le ramasser ? Les bons réflexes en 3 questions",
   "chapo": "Un oisillon au sol n'est presque jamais abandonné. S'il a des plumes et sautille, ses parents le nourrissent encore tout près. Tout dépend de trois questions simples : a-t-il des plumes, est-il blessé, est-il en danger immédiat ?",
   "meta_description": "Tu as trouvé un oisillon par terre ? Plumes, blessure, danger : 3 questions pour savoir s'il faut le laisser, le remettre au nid ou appeler un centre de soins.",
-  "mots_cles": ["oisillon tombé du nid", "oisillon par terre que faire", "bébé oiseau au sol", "remettre un oisillon au nid", "jeune oiseau ne vole pas"],
-  "especes": ["Merle noir", "Moineau domestique", "Mésange charbonnière", "Passereaux"],
+  "mots_cles": [
+    "oisillon tombé du nid",
+    "oisillon par terre que faire",
+    "bébé oiseau au sol",
+    "remettre un oisillon au nid",
+    "jeune oiseau ne vole pas"
+  ],
+  "especes": [
+    "Merle noir",
+    "Moineau domestique",
+    "Mésange charbonnière",
+    "Passereaux"
+  ],
   "zone": "France",
   "sections": [
     {
@@ -52,10 +63,35 @@
     }
   ],
   "sources": [
-    {"titre": "LPO, Ligue pour la Protection des Oiseaux", "editeur": "LPO", "url": "https://www.lpo.fr/", "date": ""},
-    {"titre": "Office français de la biodiversité", "editeur": "OFB", "url": "https://www.ofb.gouv.fr/", "date": ""},
-    {"titre": "Liste des centres de soins pour animaux sauvages en France", "editeur": "Hegalaldia", "url": "https://www.hegalaldia.org/liste-des-centres-de-soins-pour-animaux-sauvages-en-france/", "date": ""}
+    {
+      "titre": "LPO, Ligue pour la Protection des Oiseaux",
+      "editeur": "LPO",
+      "url": "https://www.lpo.fr/",
+      "date": ""
+    },
+    {
+      "titre": "Office français de la biodiversité",
+      "editeur": "OFB",
+      "url": "https://www.ofb.gouv.fr/",
+      "date": ""
+    },
+    {
+      "titre": "Liste des centres de soins pour animaux sauvages en France",
+      "editeur": "Hegalaldia",
+      "url": "https://www.hegalaldia.org/liste-des-centres-de-soins-pour-animaux-sauvages-en-france/",
+      "date": ""
+    }
   ],
   "social": "Un oisillon au sol n'est presque jamais abandonné. S'il a des plumes et sautille, ses parents le nourrissent tout près : le ramasser, c'est le priver d'eux. Plumes, blessure, danger : trois questions suffisent pour faire le bon geste.",
-  "hashtags": ["oisillon", "oiseaux", "faunesauvage", "bonsgestes", "nature", "coupdepatte"]
+  "hashtags": [
+    "oisillon",
+    "oiseaux",
+    "faunesauvage",
+    "bonsgestes",
+    "nature",
+    "coupdepatte"
+  ],
+  "date": "2026-10-27",
+  "origine": "reserve",
+  "heure": "07:00"
 }
