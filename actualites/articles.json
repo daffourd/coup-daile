@@ -1,6 +1,15 @@
 {
- "maj": "2026-10-27",
+ "maj": "2026-10-28",
  "articles": [
+  {
+   "slug": "chauve-souris-trouvee-au-sol-ou-dans-la-maison",
+   "titre": "Chauve-souris trouvée au sol ou dans la maison : les bons gestes, sans danger",
+   "chapo": "Une chauve-souris posée au sol ou entrée dans une pièce n'est ni dangereuse ni agressive, mais elle ne se manipule jamais à mains nues. Gants épais, boîte en carton et appel à un réseau spécialisé : voici comment l'aider en toute sécurité.",
+   "date": "2026-10-28",
+   "rubrique": "Portrait d'espèce",
+   "url": "/actualites/chauve-souris-trouvee-au-sol-ou-dans-la-maison/",
+   "image": "/actualites/img/chauve-souris-trouvee-au-sol-ou-dans-la-maison.png"
+  },
   {
    "slug": "oisillon-tombe-du-nid-faut-il-le-ramasser",
    "titre": "Oisillon tombé du nid : faut-il le ramasser ? Les bons réflexes en 3 questions",
