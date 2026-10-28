@@ -772,6 +772,13 @@
   .btq-body .btn{margin-top:auto;}
   .btq-entree{display:none;}
   html.btq-on .btq-entree{display:inline;}
+  /* ---------- Questionnaire etude (temporaire) ---------- */
+  .qx{background:var(--ambre-pale);border:1px solid #f0d9a8;border-radius:var(--rayon);padding:14px 44px 14px 16px;margin:14px 0;position:relative;}
+  html[data-theme="dark"] .qx{border-color:#4a3f22;}
+  .qx .k{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:#9a6a12;margin-bottom:4px;}
+  .qx p{font-size:14px;line-height:1.5;margin:0 0 10px;}
+  .qx a.qx-go{display:inline-block;background:#A8620C;color:#fff;font-weight:800;font-size:14px;text-decoration:none;padding:9px 16px;border-radius:999px;}
+  .qx .qx-x{position:absolute;top:8px;right:8px;width:30px;height:30px;border:0;background:transparent;color:var(--texte-doux);font-size:20px;line-height:1;cursor:pointer;border-radius:8px;}
   /* ---------- Passe la plume ---------- */
   .pl-hero{position:relative;border-radius:var(--rayon);padding:22px 20px 20px;color:#fff;background:linear-gradient(150deg,#23A86E 0%,#1F9E67 45%,#167A50 100%);box-shadow:0 14px 28px -14px rgba(22,122,80,.7);margin:2px 0 14px;overflow:hidden;}
   .pl-hero::after{content:"";position:absolute;right:-60px;top:-70px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 70%);pointer-events:none;}
@@ -864,6 +871,7 @@
       <button class="opt" onclick="benAllerFormulaire()" style="border-color:var(--vert)"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg></span><span><b>Je deviens bénévole</b><br><span class="meta" style="font-weight:400">5 questions, moins d'une minute</span></span><span class="chev">&rsaquo;</span></button>
       <button class="opt" onclick="showScreen('benevoles')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5"/><circle cx="17" cy="9" r="2.4"/><path d="M16 15c3 0 5 1.5 5 4"/></svg></span><span><b>Les bénévoles près de chez toi</b><br><span class="meta" style="font-weight:400">Bientôt accessible aux membres</span></span><span class="chev">&rsaquo;</span></button>
       <button class="opt" onclick="_assoMode='annuaire';showScreen('assos')"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></svg></span><span><b>Associations et refuges</b><br><span class="meta" style="font-weight:400">Partout en France, par département</span></span><span class="chev">&rsaquo;</span></button>
+      <div class="qx-slot"></div>
       <div class="section-label">Actualités</div>
       <div id="actusHome"><a class="opt" href="/actualites/"><b>La faune sauvage en ville, chaque jour</b><span class="chev">&rsaquo;</span></a></div>
       <button class="btn btn-ghost" onclick="showScreen('actus')">Toutes les actualités</button>
@@ -922,6 +930,7 @@
       <button class="btn btn-primary" onclick="showScreen('secours')">Trouver un secours</button>
       <div style="height:10px"></div>
       <button class="btn btn-ghost" onclick="showScreen('gestes')">Voir tous les bons gestes</button>
+      <div class="qx-slot"></div>
     </section>
     <section class="screen" id="rB">
       <div class="verdict alerte"><div class="etiq">À prendre en charge</div><h2>Il a besoin d'un centre de soins. Agis avec douceur.</h2></div>
@@ -939,6 +948,7 @@
       <button class="btn btn-corail" onclick="showScreen('secours')">Trouver un secours</button>
       <div style="height:10px"></div>
       <button class="btn btn-ghost" onclick="showScreen('gestes')">Voir tous les bons gestes</button>
+      <div class="qx-slot"></div>
     </section>
     <section class="screen" id="rNid">
       <div class="verdict calme"><div class="etiq">Tout jeune</div><h2>S'il est tombé trop tôt, on le remet au nid.</h2></div>
@@ -953,6 +963,7 @@
       <button class="btn btn-primary" onclick="showScreen('secours')">Trouver un secours</button>
       <div style="height:10px"></div>
       <button class="btn btn-ghost" onclick="showScreen('gestes')">Voir tous les bons gestes</button>
+      <div class="qx-slot"></div>
     </section>
 
     <!-- SECOURS -->
@@ -4031,6 +4042,20 @@ var DEPTS=[["01","Ain",[]],["02","Aisne",[]],["03","Allier",[]],["04","Alpes-de-
   // Arrivee par un lien partage : ouvrir directement le parcours
   window.addEventListener('load', function(){ try{ if(/[?&]pp=/.test(location.search) && !/^#\/\w/.test(location.hash)) showScreen('plume'); }catch(e){} });
 
+
+  /* Questionnaire d'etude de marche : encart discret, masquable, retire automatiquement apres QX_FIN */
+  var QX_URL='https://docs.google.com/forms/d/e/1FAIpQLScnjt50LSoL1bk7Rsw-wI-P_wz0nTm4nzl05MjWiVwqosOr3w/viewform', QX_FIN='2027-01-31';
+  function qxRender(){
+    var off=false; try{ off = localStorage.getItem('cdp-qx-hide')==='1'; }catch(e){}
+    if(off || new Date() > new Date(QX_FIN+'T23:59:59')){ document.querySelectorAll('.qx-slot').forEach(function(el){el.innerHTML='';}); return; }
+    var h='<div class="qx" role="complementary" aria-label="Questionnaire Coup de Patte"><button class="qx-x" type="button" aria-label="Masquer" onclick="qxHide()">&times;</button>'
+      +'<div class="k">Ton avis compte</div>'
+      +'<p>Tu as déjà croisé un oiseau en détresse ? Aide-nous à améliorer Coup de Patte en répondant à notre questionnaire : 5 minutes, et ça compte vraiment.</p>'
+      +'<a class="qx-go" href="'+QX_URL+'" target="_blank" rel="noopener">Je donne mon avis</a></div>';
+    document.querySelectorAll('.qx-slot').forEach(function(el){el.innerHTML=h;});
+  }
+  function qxHide(){ try{ localStorage.setItem('cdp-qx-hide','1'); }catch(e){} qxRender(); }
+  qxRender();
 </script>
 </body>
 </html>

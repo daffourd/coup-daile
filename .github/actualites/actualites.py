@@ -546,6 +546,8 @@ p{margin:0 0 14px}
 .geste ol{padding-left:22px}.geste li{margin:6px 0;font-weight:600}
 .encart{background:var(--blanc);border:1px solid var(--bord);border-left:6px solid var(--vert);border-radius:18px;padding:18px 20px;margin:28px 0}
 .encart h2{font-size:20px;margin-top:0}
+.encart-avis{background:var(--ambre-pale,#FCF1DC);border-left-color:#E39A2E}
+.encart-avis .btn{background:#A8620C}
 .btn{display:inline-block;background:var(--vert);color:#fff;text-decoration:none;font-weight:800;padding:12px 18px;border-radius:999px;margin-top:6px}
 details{background:var(--blanc);border:1px solid var(--bord);border-radius:14px;padding:12px 16px;margin:8px 0}
 summary{font-weight:800;cursor:pointer}
@@ -625,7 +627,21 @@ def encart_html(st):
     else:
         lignes.append("<p>L'application gratuite Coup de Patte te guide en 3 questions pour savoir quoi faire en moins d'une minute, et t'indique le centre de soins de la faune sauvage le plus proche.</p>")
     lignes.append("<p>Elle t'aide aussi à identifier l'espèce, à signaler un oiseau bagué au Muséum et à trouver des bénévoles près de chez toi.</p>")
-    return ('<aside class="encart"><h2>Coup de Patte en action</h2>%s<a class="btn" href="/">Ouvrir l\'application</a></aside>' % "".join(lignes))
+    return ('<aside class="encart"><h2>Coup de Patte en action</h2>%s<a class="btn" href="/">Ouvrir l\'application</a></aside>' % "".join(lignes)) + encart_avis()
+
+
+# Questionnaire d'etude de marche : affiche sur toutes les pages jusqu'a QX_FIN, puis retire seul au build suivant.
+QX_URL = "https://docs.google.com/forms/d/e/1FAIpQLScnjt50LSoL1bk7Rsw-wI-P_wz0nTm4nzl05MjWiVwqosOr3w/viewform"
+QX_FIN = "2027-01-31"
+
+
+def encart_avis():
+    if today_paris().isoformat() > QX_FIN:
+        return ""
+    return ('<aside class="encart encart-avis"><h2>Ton avis compte</h2><p>Tu as déjà croisé un oiseau en détresse ? '
+            'Aide l\'association Coup de Patte à construire un service vraiment utile en répondant à son questionnaire : 5 minutes. '
+            'Chaque réponse nous aide à mieux orienter les secours.</p>'
+            '<a class="btn" href="%s" target="_blank" rel="noopener">Je donne mon avis</a></aside>' % QX_URL)
 
 
 def article_url(a):
