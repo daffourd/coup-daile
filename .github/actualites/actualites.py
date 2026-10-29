@@ -640,7 +640,7 @@ def encart_avis():
         return ""
     return ('<aside class="encart encart-avis"><h2>Ton avis compte</h2><p>Tu as déjà croisé un oiseau en détresse ? '
             'Aide l\'association Coup de Patte à construire un service vraiment utile en répondant à son questionnaire : 5 minutes. '
-            'Chaque réponse nous aide à mieux orienter les secours.</p>'
+            'Chaque réponse nous aide à mieux orienter les secours. En cadeau : notre fiche « Les 5 bons gestes face à un oiseau blessé ».</p>'
             '<a class="btn" href="%s" target="_blank" rel="noopener">Je donne mon avis</a></aside>' % QX_URL)
 
 
