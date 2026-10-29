@@ -4,8 +4,20 @@
   "titre": "Nourrir les oiseaux en hiver : quand commencer, quoi donner et ce qu'il faut éviter",
   "chapo": "Pendant les grands froids, une mangeoire bien tenue aide les oiseaux du jardin et du balcon à passer l'hiver. Encore faut-il donner les bons aliments, au bon moment, et garder une hygiène irréprochable pour ne pas répandre de maladies.",
   "meta_description": "Nourrir les oiseaux en hiver : période conseillée, graines adaptées, aliments interdits comme le pain et le lait, et règles d'hygiène des mangeoires.",
-  "mots_cles": ["nourrir les oiseaux en hiver", "mangeoire oiseaux", "quoi donner aux oiseaux", "pain oiseaux danger", "boule de graisse oiseaux"],
-  "especes": ["Mésange bleue", "Mésange charbonnière", "Rougegorge familier", "Moineau domestique", "Pinson des arbres"],
+  "mots_cles": [
+    "nourrir les oiseaux en hiver",
+    "mangeoire oiseaux",
+    "quoi donner aux oiseaux",
+    "pain oiseaux danger",
+    "boule de graisse oiseaux"
+  ],
+  "especes": [
+    "Mésange bleue",
+    "Mésange charbonnière",
+    "Rougegorge familier",
+    "Moineau domestique",
+    "Pinson des arbres"
+  ],
   "zone": "France",
   "sections": [
     {
@@ -51,9 +63,29 @@
     }
   ],
   "sources": [
-    {"titre": "LPO, Ligue pour la Protection des Oiseaux", "editeur": "LPO", "url": "https://www.lpo.fr/", "date": ""},
-    {"titre": "Vigie-Nature, Muséum national d'Histoire naturelle", "editeur": "MNHN", "url": "https://www.vigienature.fr/", "date": ""}
+    {
+      "titre": "LPO, Ligue pour la Protection des Oiseaux",
+      "editeur": "LPO",
+      "url": "https://www.lpo.fr/",
+      "date": ""
+    },
+    {
+      "titre": "Vigie-Nature, Muséum national d'Histoire naturelle",
+      "editeur": "MNHN",
+      "url": "https://www.vigienature.fr/",
+      "date": ""
+    }
   ],
   "social": "Quand le froid s'installe, une mangeoire bien tenue aide les mésanges, rougegorges et moineaux à passer l'hiver. Graines de tournesol oui, pain et lait non, et une hygiène irréprochable pour ne pas transmettre de maladies. Le guide pour bien faire.",
-  "hashtags": ["oiseaux", "hiver", "mangeoire", "jardin", "biodiversite", "coupdepatte"]
+  "hashtags": [
+    "oiseaux",
+    "hiver",
+    "mangeoire",
+    "jardin",
+    "biodiversite",
+    "coupdepatte"
+  ],
+  "date": "2026-10-29",
+  "origine": "reserve",
+  "heure": "07:00"
 }
