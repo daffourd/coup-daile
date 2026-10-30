@@ -1,6 +1,15 @@
 {
- "maj": "2026-10-29",
+ "maj": "2026-10-30",
  "articles": [
+  {
+   "slug": "oiseau-bague-trouve-que-faire-2",
+   "titre": "Oiseau bagué trouvé : comment signaler la bague au Muséum et pourquoi c'est utile",
+   "chapo": "La petite bague métallique gravée au nom du Muséum est un précieux outil de science. Mort ou vivant, un oiseau bagué raconte son voyage dès que quelqu'un transmet le code. Voici comment le lire, à qui l'envoyer, et les précautions à prendre.",
+   "date": "2026-10-30",
+   "rubrique": "Le bon geste",
+   "url": "/actualites/oiseau-bague-trouve-que-faire-2/",
+   "image": "/actualites/img/oiseau-bague-trouve-que-faire-2.png"
+  },
   {
    "slug": "nourrir-les-oiseaux-en-hiver-sans-leur-nuire",
    "titre": "Nourrir les oiseaux en hiver : quand commencer, quoi donner et ce qu'il faut éviter",
